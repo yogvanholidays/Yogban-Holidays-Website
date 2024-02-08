@@ -3,6 +3,7 @@ import { check, validationResult } from 'express-validator';
 import User from '../models/user';
 import bcrypt from 'bcryptjs'
 import jwt from "jsonwebtoken";
+import verifyToken from '../middleware/auth';
 
 const router = express.Router()
 
@@ -13,7 +14,7 @@ router.post('/login',
     min: 6,
   }),
 ],
-async (req: Request, res: Response) =>{ //-------------------------------1:20:00
+async (req: Request, res: Response) =>{ 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ message: errors.array() });
@@ -45,6 +46,10 @@ async (req: Request, res: Response) =>{ //-------------------------------1:20:00
     console.log(error);
     res.status(500).send('something went wrong')
   }
+})
+
+router.get("/validate-token", verifyToken, (req: Request, res: Response)=>{
+  res.status(200).send({userId:req.userId})
 })
 
 export default router
