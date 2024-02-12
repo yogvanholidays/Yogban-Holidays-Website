@@ -49,7 +49,8 @@ async (req: Request, res: Response) =>{
 })
 
 router.get("/validate-token", verifyToken, (req: Request, res: Response)=>{
-  res.status(200).send({userId:req.userId})
+  // console.log("email: ", req.userEmail)
+  res.status(200).send({userId:req.userId, userEmail:req.userEmail})
 })
 
 router.post("/logout", (req: Request, res: Response) => {
