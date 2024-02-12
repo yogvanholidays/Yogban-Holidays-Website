@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import * as apiClient from "../api-client";
 import ManageHotelForm from "../forms/ManageHotelForm/ManageHotelForm";
 import { useAppContext } from "../contexts/AppContext";
@@ -29,10 +29,29 @@ const EditHotel = () => {
     mutate(hotelFormData);
   };
 
-  return (<div>
-      <h1 className="text-3xl font-bold mb-3">Edit Hotel</h1>
-    <ManageHotelForm hotel={hotel} onSave={handleSave} isLoading={isLoading} />
-  </div>
+  return (
+    <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <h1 className="text-3xl font-bold mb-3">Edit Hotel</h1>
+        <Link
+          to="/my-hotels"
+          className="bg-red-900 text-white p-2 font-bold hover:bg-red-700 text-xl disabled:bg-gray-500"
+        >
+          Back
+        </Link>
+      </div>
+      <ManageHotelForm
+        hotel={hotel}
+        onSave={handleSave}
+        isLoading={isLoading}
+      />
+    </div>
   );
 };
 
