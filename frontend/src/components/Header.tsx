@@ -14,21 +14,19 @@ const Header = () => {
         <span className="flex space-x-2">
           {isLoggedIn ? (
             <>
-              {isAdmin && (
-                <>
                   <Link
                     to="/my-bookings"
                     className="flex items-center text-white px-3 font-bold hover:bg-red-600"
                   >
                     My Bookings
                   </Link>
+              {isAdmin && (
                   <Link
-                    to="/my-hotels"
+                    to="/admin"
                     className="flex items-center text-white px-3 font-bold hover:bg-red-600"
                   >
                     My Hotels
                   </Link>
-                </>
               )}
               <SignOutButton />
             </>

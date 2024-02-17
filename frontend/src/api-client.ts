@@ -1,8 +1,20 @@
-import { HotelSearchResponse, HotelType } from "../../backend/src/shared/types";
+import { HotelSearchResponse, HotelType, UserType } from "../../backend/src/shared/types";
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+
+
+export const fetchCurrentUser = async (): Promise<UserType> => {
+  const response = await fetch(`${API_BASE_URL}/api/users/me`, {
+    credentials: "include",
+  });
+  if (!response.ok) {
+    throw new Error("Error fetching user");
+  }
+  return response.json();
+};
+
 
 export const register = async (formData: RegisterFormData) => {
     const response = await fetch(`${API_BASE_URL}/api/users/register`, {
@@ -165,6 +177,7 @@ export const register = async (formData: RegisterFormData) => {
     if (!response.ok) {
       throw new Error("Error fetching hotels");
     }
+    console.log(response.json)
     return response.json();
   };
   
@@ -176,3 +189,30 @@ export const register = async (formData: RegisterFormData) => {
   
     return response.json();
   };
+
+
+
+
+export const createPaymentIntent = async (hotelId: string, amount: number, currency?: string): Promise<unknown> => {
+  try {
+    console.log("trying payment")
+    const response = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}/bookings/payment-intent`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ amount, currency }),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to create payment intent');
+    }
+
+    const data = await response.json();
+    console.log(data.order)
+    return data.order; // Assuming the response includes the order object
+  } catch (error) {
+    console.error('Error creating payment intent:', error);
+    throw new Error('Failed to create payment intent');
+  }
+};
