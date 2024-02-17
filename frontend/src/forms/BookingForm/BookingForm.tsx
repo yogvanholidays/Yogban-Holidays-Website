@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { UserType } from "../../../../backend/src/shared/types";
 import { useForm } from "react-hook-form";
-import { createPaymentIntent } from "../../api-client"; // Import the createPaymentIntent function
+import { createPaymentIntent, validatePayment } from "../../api-client"; // Import the createPaymentIntent function
+import useRazorpay from "react-razorpay";
 
 type Props = {
   currentUser: UserType;
@@ -10,6 +11,8 @@ type Props = {
 };
 
 const BookingForm = ({ currentUser, hotelId, amount }: Props) => {
+  const [Razorpay] = useRazorpay();
+
   const { handleSubmit, register } = useForm({
     defaultValues: {
       firstName: currentUser.firstName,
@@ -26,6 +29,53 @@ const BookingForm = ({ currentUser, hotelId, amount }: Props) => {
       // Call the createPaymentIntent function to initiate payment
       const intent = await createPaymentIntent(hotelId, amount);
       console.log("Payment Intent:", intent);
+      const options = {
+        key: "rzp_test_SVXNvcCQpqlAcY", // Enter the Key ID generated from the Dashboard
+        amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        currency: "INR",
+        name: "Acme Corp",
+        description: "Test Transaction",
+        image: "https://example.com/your_logo",
+        order_id: intent.id, //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
+        handler: async function (response) {
+          console.log(response);
+          // alert(response.razorpay_payment_id);
+          // alert(response.razorpay_order_id);
+          // alert(response.razorpay_signature);
+          const isSuccessJSON = await validatePayment(
+            response.razorpay_payment_id,
+            response.razorpay_order_id,
+            response.razorpay_signature
+          );
+          console.log(isSuccessJSON)
+        },
+        prefill: {
+          name: "Piyush Garg",
+          email: "youremail@example.com",
+          contact: "9999999999",
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      console.log(options);
+      const rzp1 = new Razorpay(options);
+
+      rzp1.on("payment.failed", function (response) {
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+      });
+
+      rzp1.open();
     } catch (error) {
       console.error("Error creating payment intent:", error);
     } finally {
