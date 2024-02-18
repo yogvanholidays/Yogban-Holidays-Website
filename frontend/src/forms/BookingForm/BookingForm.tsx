@@ -3,6 +3,7 @@ import { UserType } from "../../../../backend/src/shared/types";
 import { useForm } from "react-hook-form";
 import { createPaymentIntent, validatePayment } from "../../api-client"; // Import the createPaymentIntent function
 import useRazorpay from "react-razorpay";
+import { useAppContext } from "../../contexts/AppContext";
 
 type Props = {
   currentUser: UserType;
@@ -12,6 +13,7 @@ type Props = {
 
 const BookingForm = ({ currentUser, hotelId, amount }: Props) => {
   const [Razorpay] = useRazorpay();
+  const { showToast } = useAppContext();
 
   const { handleSubmit, register } = useForm({
     defaultValues: {
@@ -48,6 +50,8 @@ const BookingForm = ({ currentUser, hotelId, amount }: Props) => {
             response.razorpay_signature
           );
           console.log(isSuccessJSON)
+          showToast({ message: "Payment Successful!", type: "SUCCESS" });
+
         },
         prefill: {
           name: "Piyush Garg",
@@ -66,13 +70,15 @@ const BookingForm = ({ currentUser, hotelId, amount }: Props) => {
       const rzp1 = new Razorpay(options);
 
       rzp1.on("payment.failed", function (response) {
-        alert(response.error.code);
-        alert(response.error.description);
-        alert(response.error.source);
-        alert(response.error.step);
-        alert(response.error.reason);
-        alert(response.error.metadata.order_id);
-        alert(response.error.metadata.payment_id);
+        showToast({ message: `Payment Failed! ${response.error.description}`, type: "SUCCESS" });
+
+        // alert(response.error.code);
+        // alert(response.error.description);
+        // alert(response.error.source);
+        // alert(response.error.step);
+        // alert(response.error.reason);
+        // alert(response.error.metadata.order_id);
+        // alert(response.error.metadata.payment_id);
       });
 
       rzp1.open();
