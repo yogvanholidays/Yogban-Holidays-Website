@@ -225,7 +225,9 @@ export const createPaymentIntent = async (
 export const validatePayment = async (
   razorpay_payment_id: string,
   razorpay_order_id: string,
-  razorpay_signature: string
+  razorpay_signature: string,
+  amount:number,
+  userId:string
 ) => {
   try {
     const validateRes = await fetch(
@@ -236,6 +238,7 @@ export const validatePayment = async (
           razorpay_payment_id,
           razorpay_order_id,
           razorpay_signature,
+          amount,userId
         }),
         headers: {
           "Content-Type": "application/json",

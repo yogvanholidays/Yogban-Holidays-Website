@@ -1,9 +1,10 @@
 import express, { Request, Response } from "express";
 import Hotel from "../models/hotel";
-import { HotelSearchResponse } from "../shared/types";
+import { HotelSearchResponse, PaymentIntentResponse } from "../shared/types";
 import { param, validationResult } from "express-validator";
 import Razorpay from "razorpay";
 import crypto from "crypto";
+import Payment from "../models/Payment";
 
 const router = express.Router();
 
@@ -189,9 +190,11 @@ router.post(
     }
   }
 );
+
+
+
 router.post("/order/validate", async (req, res) => {
-  const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
-    req.body;
+  const { razorpay_payment_id, razorpay_order_id, razorpay_signature,amount,userId } = req.body;
 
   const sha = crypto.createHmac(
     "sha256",
@@ -199,16 +202,37 @@ router.post("/order/validate", async (req, res) => {
   );
   sha.update(`${razorpay_order_id}|${razorpay_payment_id}`);
   const digest = sha.digest("hex");
+  
   if (digest !== razorpay_signature) {
-    res.json({
+    res.status(400).json({
       message: "Payment Failed",
     });
     console.log("payment failed");
   } else {
-    res.json({
-      message: "Payment Successful",
-    });
-    console.log("payment successful");
+    // Payment validation successful, now save payment details to MongoDB
+    try {
+      const paymentData: PaymentIntentResponse = {
+        razorpay_payment_id,
+        razorpay_order_id,
+        totalCost: amount,
+        userId:userId
+      };
+      console.log(paymentData)
+
+      // Save payment details to MongoDB
+      const payment = await Payment.create(paymentData);
+
+      res.json({
+        message: "Payment Successful",
+        payment,
+      });
+      console.log("payment successful");
+    } catch (error) {
+      console.error("Error saving payment details:", error);
+      res.status(500).json({
+        message: "Internal Server Error",
+      });
+    }
   }
 });
 

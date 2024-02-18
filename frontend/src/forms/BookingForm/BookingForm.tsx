@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { UserType } from "../../../../backend/src/shared/types";
 import { useForm } from "react-hook-form";
-import { createPaymentIntent, validatePayment } from "../../api-client"; // Import the createPaymentIntent function
+import { createPaymentIntent, fetchCurrentUser, validatePayment } from "../../api-client"; // Import the createPaymentIntent function
 import useRazorpay from "react-razorpay";
 import { useAppContext } from "../../contexts/AppContext";
 
@@ -47,7 +47,8 @@ const BookingForm = ({ currentUser, hotelId, amount }: Props) => {
           const isSuccessJSON = await validatePayment(
             response.razorpay_payment_id,
             response.razorpay_order_id,
-            response.razorpay_signature
+            response.razorpay_signature,
+            amount,currentUser._id
           );
           console.log(isSuccessJSON)
           showToast({ message: "Payment Successful!", type: "SUCCESS" });

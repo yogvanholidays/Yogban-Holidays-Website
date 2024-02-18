@@ -31,3 +31,22 @@ export type UserType = {
   firstName: string;
   lastName: string;
 };
+
+
+export type PaymentIntentResponse = {
+  razorpay_payment_id: string;
+  razorpay_order_id: string;
+  totalCost: number;
+  userId:string;
+};
+export type BookingType = {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  adultCount: number;
+  childCount: number;
+  checkIn: Date;
+  checkOut: Date;
+  totalCost: number;
+};

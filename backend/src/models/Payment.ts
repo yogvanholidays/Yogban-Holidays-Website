@@ -6,7 +6,7 @@ export interface IPayment extends Document {
   razorpay_order_id: string;
   totalCost: number;
   userId: string;
-  bookingId: string;
+  // bookingId: string;
 }
 
 const PaymentSchema = new Schema({
@@ -14,7 +14,7 @@ const PaymentSchema = new Schema({
   razorpay_order_id: { type: String, required: true },
   totalCost: { type: Number, required: true },
   userId: { type: String, required: true },
-  bookingId: { type: String, required: true },
+  // bookingId: { type: String, required: true },
 });
 
 const payment =  mongoose.model<IPayment>('Payment', PaymentSchema);
