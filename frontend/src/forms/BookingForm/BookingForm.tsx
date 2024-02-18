@@ -3,6 +3,7 @@ import { UserType } from "../../../../backend/src/shared/types";
 import { useForm } from "react-hook-form";
 import {
   createPaymentIntent,
+  fetchAllBookings,
   fetchBookings,
   validatePayment,
 } from "../../api-client"; // Import the createPaymentIntent function
@@ -121,6 +122,10 @@ const BookingForm = ({
   //   const data = await fetchBookings(currentUser._id)
   //   console.log(data)
   // }
+  // const getAllBookings = async () => {
+  //   const data = await fetchAllBookings()
+  //   console.log(data)
+  // }
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -171,9 +176,6 @@ const BookingForm = ({
         </div>
       </div>
 
-      <div className="space-y-2">
-        <h3 className="text-xl font-semibold"> Payment Details</h3>
-      </div>
 
       <div className="flex justify-end">
         <button
@@ -181,7 +183,7 @@ const BookingForm = ({
           type="submit"
           className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-md disabled:bg-gray-500"
         >
-          {isLoading ? "Saving..." : "Confirm Booking"}
+          {isLoading ? "Processing..." : "Confirm Booking"}
         </button>
       </div>
     </form>

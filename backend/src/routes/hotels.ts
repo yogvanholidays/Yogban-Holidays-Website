@@ -277,4 +277,23 @@ router.post("/getUserBookings", async (req, res) => {
   }
 });
 
+router.post("/getAllBookings", async (req, res) =>{
+  try {
+    console.log("getting all")
+    // Find all bookings
+    const bookings = await Booking.find();
+    res.json({
+      success: true,
+      data: bookings,
+    });
+  } catch (error) {
+    console.error('Error fetching bookings:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Internal Server Error',
+    });
+  }
+});
+
+
 export default router;

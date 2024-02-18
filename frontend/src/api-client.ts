@@ -303,3 +303,32 @@ export const fetchBookings = async (
     return { message: "Internal Server Error" };
   }
 };
+
+
+export const fetchAllBookings = async () => {
+  try {
+    // Fetch all bookings
+    const response = await fetch(`${API_BASE_URL}/api/hotels/getAllBookings`,{
+      method:"POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    
+    // If the response is not successful, throw an error
+    if (!response.ok) {
+      throw new Error('Error fetching bookings');
+    }
+    
+    // Parse response JSON
+    const data = await response.json();
+    
+    // Return the fetched bookings
+    return { bookings: data.data }; // Adjust data structure if needed
+  } catch (error) {
+    // Handle any errors and return an internal server error response
+    console.error('Error fetching bookings:', error);
+    return { message: 'Internal Server Error' };
+  }
+};
+
