@@ -215,7 +215,6 @@ export const createPaymentIntent = async (
     }
 
     const data = await response.json();
-    console.log(data.order);
     return data.order; // Assuming the response includes the order object
   } catch (error) {
     console.error("Error creating payment intent:", error);
@@ -270,30 +269,37 @@ export const validatePayment = async (
   }
 };
 
-
-export const fetchBookings = async (userId: string): Promise<{ bookings: BookingType[] } | { message: string }> => {
+export const fetchBookings = async (
+  userId: string,
+) => {
+  console.log(userId)
   try {
     // If user ID is not provided, return a bad request response
     if (!userId) {
-      return { message: 'User ID is required' };
+      return { message: "User ID is required" };
     }
 
-    // Fetch bookings associated with the provided user ID
-    const response = await fetch(`${API_BASE_URL}/api/hotels/bookings?userId=${userId}`);
+    const response = await fetch(`${API_BASE_URL}/api/hotels/getUserBookings`, {
+      method: "POST",
+      body: JSON.stringify({userId}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     // If the response is not successful, throw an error
     if (!response.ok) {
-      throw new Error('Error fetching bookings');
+      throw new Error("Error fetching bookings");
     }
 
     // Parse response JSON
     const data = await response.json();
 
     // Return the fetched bookings
-    return { bookings: data.bookings };
+    return data.data; // Adjust data structure if needed
   } catch (error) {
     // Handle any errors and return an internal server error response
-    console.error('Error fetching bookings:', error);
-    return { message: 'Internal Server Error' };
+    console.error("Error fetching bookings:", error);
+    return { message: "Internal Server Error" };
   }
 };

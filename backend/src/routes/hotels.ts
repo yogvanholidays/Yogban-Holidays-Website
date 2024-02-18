@@ -1,6 +1,10 @@
 import express, { Request, Response } from "express";
 import Hotel from "../models/hotel";
-import { BookingType, HotelSearchResponse, PaymentIntentResponse } from "../shared/types";
+import {
+  BookingType,
+  HotelSearchResponse,
+  PaymentIntentResponse,
+} from "../shared/types";
 import { param, validationResult } from "express-validator";
 import Razorpay from "razorpay";
 import crypto from "crypto";
@@ -155,7 +159,6 @@ router.post(
   async (req: Request, res: Response) => {
     const { hotelId } = req.params;
     const { amount, currency = "INR" } = req.body;
-    console.log(hotelId, amount, currency);
     try {
       // Retrieve the hotel based on the provided hotelId
       const hotel = await Hotel.findById(hotelId);
@@ -206,7 +209,7 @@ router.post("/order/validate", async (req, res) => {
     checkIn,
     checkOut,
     adultCount,
-    childCount
+    childCount,
   } = req.body;
 
   const sha = crypto.createHmac(
@@ -220,24 +223,22 @@ router.post("/order/validate", async (req, res) => {
     res.status(400).json({
       message: "Payment Failed",
     });
-    console.log("payment failed");
   } else {
     // Payment validation successful, now save payment details to MongoDB
     try {
       const paymentData: BookingType = {
         userId: userId,
-        firstName:firstName,
-        lastName:lastName,
-        email:email,
-        adultCount:adultCount,
-        childCount:childCount,
-        checkIn:checkIn,
-        checkOut:checkOut,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        adultCount: adultCount,
+        childCount: childCount,
+        checkIn: checkIn,
+        checkOut: checkOut,
         totalCost: amount,
         razorpay_payment_id,
         razorpay_order_id,
       };
-      console.log(paymentData);
 
       // Save payment details to MongoDB
       const payment = await booking.create(paymentData);
@@ -256,25 +257,23 @@ router.post("/order/validate", async (req, res) => {
   }
 });
 
-router.get('/bookings', async (req: Request, res: Response) => {
+router.post("/getUserBookings", async (req, res) => {
+  const {userId} = req.body; // Extract userId from query parameters
+
   try {
-    // Extract user ID from request query parameters
-    const { userId } = req.query;
-
-    // If user ID is not provided, return a bad request response
-    if (!userId) {
-      return res.status(400).json({ message: 'User ID is required' });
-    }
-
-    // Find all bookings associated with the provided user ID
-    const bookings = await Booking.find({ userId: userId });
-
-    // Return the found bookings in the response
-    res.json({ bookings });
+    // Find all bookings for the specified userId
+    const bookings = await Booking.find({ userId });
+    // console.log(bookings);
+    res.json({
+      success: true,
+      data: bookings,
+    });
   } catch (error) {
-    // Handle any errors and return an internal server error response
-    console.error('Error fetching bookings:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    console.error("Error fetching bookings:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
   }
 });
 
