@@ -21,18 +21,36 @@ const MyHotels = () => {
     <div className="space-y-5">
       <span className="flex justify-between">
         <h1 className="text-3xl font-bold">My Hotels</h1>
-        <div style={{display:"flex", gap:"5px"}}>
-          <Link
-            to="/add-hotel"
-            className="flex bg-red-600 text-white text-xl font-bold p-2 hover:bg-red-500"
-          >
-            Add Hotel
-          </Link>
+        <div style={{ display: "flex", gap: "5px" }}>
           <Link
             to="/view-all-bookings"
             className="flex bg-red-600 text-white text-xl font-bold p-2 hover:bg-red-500"
           >
             View All Bookings
+          </Link>
+          <Link
+            to="/upload-destination"
+            className="flex bg-red-600 text-white text-xl font-bold p-2 hover:bg-red-500"
+          >
+            Upload A Destination
+          </Link>{" "}
+          <Link
+            to="/view-destinations"
+            className="flex bg-red-600 text-white text-xl font-bold p-2 hover:bg-red-500"
+          >
+            View Destinations
+          </Link>{" "}
+          <Link
+            to="/delete-hotels"
+            className="flex bg-red-600 text-white text-xl font-bold p-2 hover:bg-red-500"
+          >
+            Delete Hotel
+          </Link>
+          <Link
+            to="/add-hotel"
+            className="flex bg-red-600 text-white text-xl font-bold p-2 hover:bg-red-500"
+          >
+            Add Hotel
           </Link>
         </div>
       </span>

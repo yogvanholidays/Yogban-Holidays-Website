@@ -54,3 +54,8 @@ export type BookingType = {
   hotel:HotelType;
   phoneNumber:string;
 };
+
+export type DestinationType = {
+  name: string;
+  illustrationImageUrl: string;
+}

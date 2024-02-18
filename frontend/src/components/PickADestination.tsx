@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchContext } from "../contexts/SearchContext";
 import { useNavigate } from "react-router-dom";
-import Bhimtal from "../assets/locationIcons/Bhimtal.svg";
-import Conoor from "../assets/locationIcons/Conoor.svg";
-import Gurgaon from "../assets/locationIcons/Gurgaon.svg";
-import Lonavala from "../assets/locationIcons/Lonavala.svg";
-import Mussoorie from "../assets/locationIcons/Mussoorie.svg";
+import * as apiClient from '../api-client';
+
 function PickADestination() {
   const navigate = useNavigate();
   const search = useSearchContext();
+  const [destinations, setDestinations] = useState([]);
 
-  const handleButtonClick = (place: string) => {
+  useEffect(() => {
+    fetchDestinations();
+  }, []);
+
+  const fetchDestinations = async () => {
+    try {
+      const data = await apiClient.getDestinations();
+      setDestinations(data);
+    } catch (error) {
+      console.error("Failed to fetch destinations:", error);
+    }
+  };
+
+  const handleButtonClick = (place) => {
     navigate("/search");
     search.saveSearchValues(
       place,
@@ -20,53 +31,22 @@ function PickADestination() {
       search.childCount
     );
   };
+
   return (
     <div className="space-y-3 mb-12">
       <h1 className="font-bold text-3xl">Pick A Destination</h1>
       <div className="flex flex-wrap gap-x-20">
-        <button
-          className="flex flex-col text-center content-end items-center"
-          style={{ height: "6rem", width: "4rem" }}
-          onClick={() => handleButtonClick("Himachal")}
-        >
-          <img src={Bhimtal} />
-          <span className="font-semibold text-base">Himachal</span>
-        </button>
-        <button
-          className="flex flex-col text-center content-end items-center"
-          style={{ height: "6rem", width: "4rem" }} onClick={() => handleButtonClick("Conoor")}
-        >
-          <img src={Conoor} />
-          <span className="font-semibold text-base">Conoor</span>
-        </button>
-        <button
-          className="flex flex-col text-center content-end items-center"
-          style={{ height: "6rem", width: "4rem" }}  onClick={() => handleButtonClick("Kolkata")}
-        >
-          <img src={Gurgaon} />
-          <span className="font-semibold text-base">Kolkata</span>
-        </button>
-        <button
-          className="flex flex-col text-center content-end items-center"
-          style={{ height: "6rem", width: "4rem" }}  onClick={() => handleButtonClick("Mumbai")}
-        >
-          <img src={Lonavala} />
-          <span className="font-semibold text-base">Mumbai</span>
-        </button>
-        <button
-          className="flex flex-col text-center content-end items-center"
-          style={{ height: "6rem", width: "4rem" }}  onClick={() => handleButtonClick("Rishikesh")}
-        >
-          <img src={Mussoorie} />
-          <span className="font-semibold text-base">Rishikesh</span>
-        </button>
-        <button
-          className="flex flex-col text-center content-end items-center"
-          style={{ height: "6rem", width: "4rem" }}  onClick={() => handleButtonClick("Bhimtal")}
-        >
-          <img src={Bhimtal} />
-          <span className="font-semibold text-base">Bhimtal</span>
-        </button>
+        {destinations.map((destination, index) => (
+          <button
+            key={index}
+            className="flex flex-col text-center content-end items-center"
+            style={{ height: "6rem", width: "4rem" }}
+            onClick={() => handleButtonClick(destination.name)}
+          >
+            <img src={destination.illustrationImageUrl} alt={destination.name} />
+            <span className="font-semibold text-base">{destination.name}</span>
+          </button>
+        ))}
       </div>
     </div>
   );

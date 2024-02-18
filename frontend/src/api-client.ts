@@ -79,8 +79,7 @@ export const addMyHotel = async (hotelFormData: FormData) => {
     method: "POST",
     credentials: "include",
     body: hotelFormData,
-  });
-
+  }); 
   if (!response.ok) {
     throw new Error("Failed to add hotel");
   }
@@ -321,5 +320,70 @@ export const fetchAllBookings = async (): Promise<BookingType[]> => {
   // Return the fetched bookings
   // return { bookings: data.data }; // Adjust data structure if needed
   return data.data;
+};
+
+export const addDestination = async (destinationFormData: FormData) => {
+  const response = await fetch(`${API_BASE_URL}/api/destinations`, {
+    method: "POST",
+    credentials: "include",
+    body: destinationFormData,
+  }); 
+  if (!response.ok) {
+    throw new Error("Failed to add hotel");
+  }
+
+  return response.json();
+};
+
+
+export const getDestinations = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/destinations`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch destinations");
+  }
+
+  return response.json();
+};
+
+export const searchDestinations = async (searchTerm) => {
+  const response = await fetch(`${API_BASE_URL}/api/destinations?searchTerm=${searchTerm}`, {
+    method: "GET",
+    credentials: "include",
+  }); 
+  if (!response.ok) {
+    throw new Error("Failed to search destinations");
+  }
+  return response.json();
+};
+
+export const deleteDestination = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/api/destinations/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+  }); 
+  if (!response.ok) {
+    throw new Error("Failed to delete destination");
+  }
+};
+
+export const searchHotelsToDelete = async (searchTerm) => {
+  const response = await fetch(`${API_BASE_URL}/api/my-hotels?searchTerm=${searchTerm}`, {
+    method: "GET",
+    credentials: "include",
+  }); 
+  if (!response.ok) {
+    throw new Error("Failed to search hotels");
+  }
+  return response.json();
+};
+
+export const deleteHotel = async (id) => {
+  const response = await fetch(`${API_BASE_URL}/api/my-hotels/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+  }); 
+  if (!response.ok) {
+    throw new Error("Failed to delete hotel");
+  }
 };
 

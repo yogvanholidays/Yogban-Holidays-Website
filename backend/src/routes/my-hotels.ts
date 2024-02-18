@@ -129,4 +129,33 @@ async function uploadImages(imageFiles: Express.Multer.File[]) {
   return imageUrls;
 }
 
+router.get("/", async (req, res) => {
+  const { searchTerm } = req.query;
+  try {
+    let hotels;
+    // if (searchTerm) {
+    //   hotels = await Hotel.find({ name: { $regex: searchTerm, $options: "i" } });
+    // } else {
+      hotels = await Hotel.find();
+    // }
+    res.json(hotels);
+  } catch (error) {
+    console.error("Failed to search hotels:", error);
+    res.status(500).json({ message: "Failed to search hotels" });
+  }
+});
+
+// Delete hotel
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Hotel.findByIdAndDelete(id);
+    res.status(204).end();
+  } catch (error) {
+    console.error("Failed to delete hotel:", error);
+    res.status(500).json({ message: "Failed to delete hotel" });
+  }
+});
+
+
 export default router;
