@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
 
@@ -6,63 +7,43 @@ const MyBookings = () => {
     "fetchMyBookings",
     apiClient.fetchBookings
   );
-  
-  // Check if data is still loading
+
   if (isLoading) {
     return <span>Loading...</span>;
   }
-  
-  // Check if there was an error fetching the data
-  if (isError) {
-    return <span>Error fetching bookings</span>;
-  }
-  
-  // Check if bookings data is undefined or empty
-  if (!Array.isArray(bookings) || !bookings || bookings.length === 0) {
+
+  if (!Array.isArray(bookings)  || isError || !bookings || bookings.length === 0) {
     return <span>No bookings found</span>;
   }
-  
-  // Now you can safely access the first booking
-  console.log(bookings)
+
   return (
     <div className="space-y-5">
       <h1 className="text-3xl font-bold">My Bookings</h1>
       {bookings.map((booking) => (
-        <div
-          key={booking._id}
-          className="border border-slate-300 rounded-2xl p-8 gap-5"
-        >
-          {/* <div className="lg:w-full lg:h-[100px]">
-          </div> */}
-          <div className="flex flex-col gap-4 overflow-y-auto max-h-[300px]">
-            <div className="text-2xl font-bold">
-              {booking.name} {/* Assuming name is part of the booking object */}
-              {/* <div className="text-xs font-normal">
-                {booking.city}, {booking.country} 
-              </div> */}
+        <div key={booking._id} className="border border-gray-300 rounded-lg p-4 flex items-center gap-4">
+          <div>
+            <img src={booking.hotel.imageUrls[0]} alt="Hotel" className="w-32 h-32 object-cover rounded-md" />
+          </div>
+          <div className="flex flex-col">
+            <Link to={`/detail/${booking.hotel._id}`} className="text-xl font-bold hover:underline">{booking.hotel.name}</Link>
+            <div className="text-sm">{booking.hotel.type}, {booking.hotel.starRating} Star</div>
+            <div>
+              <span className="font-bold mr-2">Dates: </span>
+              <span>
+                {new Date(booking.checkIn).toDateString()} - {new Date(booking.checkOut).toDateString()}
+              </span>
             </div>
             <div>
-              <div>
-                <span className="font-bold mr-2">Dates: </span>
-                <span>
-                  {new Date(booking.checkIn).toDateString()} -
-                  {new Date(booking.checkOut).toDateString()}
-                </span>
-              </div>
-              <div>
-                <span className="font-bold mr-2">Guests:</span>
-                <span>
-                  {booking.adultCount} adults, {booking.childCount} children
-                </span>
-              </div>
-              <div>
-                <span className="font-bold mr-2">Total Cost:</span>
-                <span>${booking.totalCost}</span> {/* Assuming totalCost is part of the booking object */}
-              </div>
-              <div>
-                <span className="font-bold mr-2">Payment ID:</span>
-                <span>{booking.razorpay_payment_id}</span> {/* Assuming razorpay_payment_id is part of the booking object */}
-              </div>
+              <span className="font-bold mr-2">Guests:</span>
+              <span>{booking.adultCount} adults, {booking.childCount} children</span>
+            </div>
+            <div>
+              <span className="font-bold mr-2">Total Cost:</span>
+              <span>{booking.totalCost}</span>
+            </div>
+            <div>
+              <span className="font-bold mr-2">Payment ID:</span>
+              <span>{booking.razorpay_payment_id}</span>
             </div>
           </div>
         </div>
