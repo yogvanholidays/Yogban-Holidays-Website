@@ -16,36 +16,38 @@ import Detail from "./pages/Detail";
 import Booking from "./pages/Booking";
 import MyBookings from "./pages/MyBookings";
 import AllBookings from "./pages/AllBookings";
+import Homepage from "./pages/Homepage";
 function App() {
   const { isLoggedIn,userEmail } = useAppContext();
   const isAdmin = (userEmail==='yogban@admin.com')
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Layout>Home Page</Layout>} />
-        <Route path="/search" element={<Layout><Search/></Layout>} />
-        <Route path="/register" element={<Layout><Register/></Layout>} />
-        <Route path="/sign-in" element={<Layout><SignIn/></Layout>} />
+        <Route path="/" element={<Layout page="HomePage"><Homepage/></Layout>} />
+        {/* <Route path="/" element={<HomePage/>}/> */}
+        <Route path="/search" element={<Layout page=''><Search/></Layout>} />
+        <Route path="/register" element={<Layout page=''><Register/></Layout>} />
+        <Route path="/sign-in" element={<Layout page=''><SignIn/></Layout>} />
         <Route
           path="/detail/:hotelId"
           element={
-            <Layout>
+            <Layout page=''>
               <Detail />
             </Layout>
           }
         />
         {isLoggedIn && (
           <>
-            <Route path="/hotel/:hotelId/booking" element={<Layout><Booking/></Layout>} />
-            <Route path="/my-bookings" element={<Layout><MyBookings/></Layout>} />
+            <Route path="/hotel/:hotelId/booking" element={<Layout page=''><Booking/></Layout>} />
+            <Route path="/my-bookings" element={<Layout page=''><MyBookings/></Layout>} />
           </>
         )}
         {isLoggedIn && isAdmin && (
           <>
-            <Route path="/add-hotel" element={<Layout><AddHotel/></Layout>} />
-            <Route path="/edit-hotel/:hotelId" element={<Layout><EditHotel/></Layout>} />
-            <Route path="/admin" element={<Layout><MyHotels/></Layout>} />
-            <Route path="/view-all-bookings" element={<Layout><AllBookings/></Layout>} />
+            <Route path="/add-hotel" element={<Layout page=''><AddHotel/></Layout>} />
+            <Route path="/edit-hotel/:hotelId" element={<Layout page=''><EditHotel/></Layout>} />
+            <Route path="/admin" element={<Layout page=''><MyHotels/></Layout>} />
+            <Route path="/view-all-bookings" element={<Layout page=''><AllBookings/></Layout>} />
           </>
         )}
         <Route path="*" element={<Navigate to="/" />} />
