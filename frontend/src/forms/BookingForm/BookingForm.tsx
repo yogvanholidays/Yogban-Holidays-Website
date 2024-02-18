@@ -3,8 +3,6 @@ import { UserType } from "../../../../backend/src/shared/types";
 import { useForm } from "react-hook-form";
 import {
   createPaymentIntent,
-  fetchAllBookings,
-  fetchBookings,
   validatePayment,
 } from "../../api-client"; // Import the createPaymentIntent function
 import useRazorpay from "react-razorpay";
@@ -78,8 +76,8 @@ const BookingForm = ({
           );
           console.log(isSuccessJSON);
           showToast({ message: "Payment Successful!", type: "SUCCESS" });
-          const bookings = await fetchBookings(currentUser._id);
-          console.log(bookings);
+          // const bookings = await fetchBookings(currentUser._id);
+          // console.log(bookings);
         },
         prefill: {
           name: "Piyush Garg",
@@ -119,7 +117,7 @@ const BookingForm = ({
     }
   };
   // const getBookings = async () => {
-  //   const data = await fetchBookings(currentUser._id)
+  //   const data = await fetchBookings()
   //   console.log(data)
   // }
   // const getAllBookings = async () => {

@@ -1,3 +1,4 @@
+import { promises } from "dns";
 import {
   BookingType,
   HotelSearchResponse,
@@ -269,22 +270,14 @@ export const validatePayment = async (
   }
 };
 
-export const fetchBookings = async (
-  userId: string,
-) => {
-  console.log(userId)
+export const fetchBookings = async () => {
   try {
-    // If user ID is not provided, return a bad request response
-    if (!userId) {
-      return { message: "User ID is required" };
-    }
-
     const response = await fetch(`${API_BASE_URL}/api/hotels/getUserBookings`, {
       method: "POST",
-      body: JSON.stringify({userId}),
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
     });
 
     // If the response is not successful, throw an error
@@ -304,31 +297,25 @@ export const fetchBookings = async (
   }
 };
 
+export const fetchAllBookings = async (): Promise<BookingType[]> => {
+  // Fetch all bookings
+  const response = await fetch(`${API_BASE_URL}/api/hotels/getAllBookings`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
 
-export const fetchAllBookings = async () => {
-  try {
-    // Fetch all bookings
-    const response = await fetch(`${API_BASE_URL}/api/hotels/getAllBookings`,{
-      method:"POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    
-    // If the response is not successful, throw an error
-    if (!response.ok) {
-      throw new Error('Error fetching bookings');
-    }
-    
-    // Parse response JSON
-    const data = await response.json();
-    
-    // Return the fetched bookings
-    return { bookings: data.data }; // Adjust data structure if needed
-  } catch (error) {
-    // Handle any errors and return an internal server error response
-    console.error('Error fetching bookings:', error);
-    return { message: 'Internal Server Error' };
+  // If the response is not successful, throw an error
+  if (!response.ok) {
+    throw new Error("Error fetching bookings");
   }
-};
 
+  // Parse response JSON
+  const data = await response.json();
+
+  // Return the fetched bookings
+  // return { bookings: data.data }; // Adjust data structure if needed
+  return data.data;
+};

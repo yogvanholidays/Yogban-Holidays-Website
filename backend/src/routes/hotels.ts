@@ -11,6 +11,7 @@ import crypto from "crypto";
 import Payment from "../models/Payment";
 import booking from "../models/Booking";
 import Booking from "../models/Booking";
+import verifyToken from "../middleware/auth";
 
 const router = express.Router();
 
@@ -257,12 +258,11 @@ router.post("/order/validate", async (req, res) => {
   }
 });
 
-router.post("/getUserBookings", async (req, res) => {
-  const {userId} = req.body; // Extract userId from query parameters
+router.post("/getUserBookings",verifyToken, async (req, res) => {
 
   try {
     // Find all bookings for the specified userId
-    const bookings = await Booking.find({ userId });
+    const bookings = await Booking.find({  userId: req.userId  });
     // console.log(bookings);
     res.json({
       success: true,
@@ -277,23 +277,22 @@ router.post("/getUserBookings", async (req, res) => {
   }
 });
 
-router.post("/getAllBookings", async (req, res) =>{
+router.post("/getAllBookings",verifyToken, async (req, res) => {
   try {
-    console.log("getting all")
     // Find all bookings
+    // console.log(req.userId)
     const bookings = await Booking.find();
     res.json({
       success: true,
       data: bookings,
     });
   } catch (error) {
-    console.error('Error fetching bookings:', error);
+    console.error("Error fetching bookings:", error);
     res.status(500).json({
       success: false,
-      message: 'Internal Server Error',
+      message: "Internal Server Error",
     });
   }
 });
-
 
 export default router;
