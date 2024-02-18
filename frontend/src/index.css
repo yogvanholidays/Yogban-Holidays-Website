@@ -5,3 +5,7 @@
 /* body{
     padding: 10px;
 } */
+
+.datePickerBar{
+    width:-webkit-fill-available;
+}

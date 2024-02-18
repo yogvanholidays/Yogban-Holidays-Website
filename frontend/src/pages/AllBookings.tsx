@@ -10,16 +10,22 @@ const MyBookings = () => {
   const [startDateFilter, setStartDateFilter] = useState(null);
   const [endDateFilter, setEndDateFilter] = useState(null);
 
-  const { data: bookings, isLoading, isError } = useQuery(
-    "fetchMyBookings",
-    apiClient.fetchAllBookings
-  );
+  const {
+    data: bookings,
+    isLoading,
+    isError,
+  } = useQuery("fetchMyBookings", apiClient.fetchAllBookings);
 
-  const filteredBookings = bookings.filter((booking) => {
+  const filteredBookings = bookings?.filter((booking) => {
     // Filter by hotel name
-    const matchesHotelName = booking.hotel.name
-      .toLowerCase()
-      .includes(hotelNameFilter.toLowerCase());
+    const matchesHotelName =
+      booking.hotel.name
+        .toLowerCase()
+        .includes(hotelNameFilter.toLowerCase()) ||
+      booking.firstName.includes(hotelNameFilter.toLowerCase()) ||
+      booking.lastName.includes(hotelNameFilter.toLowerCase()) ||
+      booking.email.includes(hotelNameFilter.toLowerCase()) ||
+      booking.phoneNumber?.includes(hotelNameFilter.toLowerCase());
 
     // Filter by selected dates
     const bookingCheckInDate = new Date(booking.checkIn);
@@ -35,7 +41,12 @@ const MyBookings = () => {
     return <span>Loading...</span>;
   }
 
-  if (!Array.isArray(bookings) || isError || !bookings || bookings.length === 0) {
+  if (
+    !Array.isArray(bookings) ||
+    isError ||
+    !bookings ||
+    bookings.length === 0
+  ) {
     return <span>No bookings found</span>;
   }
 
@@ -55,35 +66,37 @@ const MyBookings = () => {
     <div className="space-y-5 ">
       <h1 className="text-3xl font-bold">All Bookings</h1>
       {/* Filter Section */}
-      <div className="flex gap-4">
+      <div className="flex gap-4 flex-wrap">
         <input
           type="text"
-          placeholder="Filter by Hotel Name"
+          placeholder="Filter by Name, Hotel Name, Email or Phone"
           value={hotelNameFilter}
           onChange={handleHotelNameFilterChange}
-          className="border p-2 rounded"
+          className="border p-2 rounded flex-1"
         />
-        <DatePicker
-          selected={startDateFilter}
-          onChange={handleStartDateFilterChange}
-          startDate={startDateFilter}
-          endDate={endDateFilter}
-          selectsStart
-          placeholderText="Start Date"
-          className="border p-2 rounded"
-        />
-        <DatePicker
-          selected={endDateFilter}
-          onChange={handleEndDateFilterChange}
-          startDate={startDateFilter}
-          endDate={endDateFilter}
-          selectsEnd
-          placeholderText="End Date"
-          className="border p-2 rounded"
-        />
+        <div className="flex gap-4 datePickerBar">
+          <DatePicker
+            selected={startDateFilter}
+            onChange={handleStartDateFilterChange}
+            startDate={startDateFilter}
+            endDate={endDateFilter}
+            selectsStart
+            placeholderText="Start Date"
+            className="border p-2 rounded flex-1 datePickerBar"
+          />
+          <DatePicker
+            selected={endDateFilter}
+            onChange={handleEndDateFilterChange}
+            startDate={startDateFilter}
+            endDate={endDateFilter}
+            selectsEnd
+            placeholderText="End Date"
+            className="border p-2 rounded flex-1 datePickerBar"
+          />
+        </div>
       </div>
 
-      {filteredBookings.map((booking) => (
+      {filteredBookings?.map((booking) => (
         <div
           key={booking.razorpay_payment_id}
           className="flex flex-wrap border border-gray-300 rounded-lg p-4 relative items-center gap-4"
@@ -92,7 +105,7 @@ const MyBookings = () => {
             <img
               src={booking.hotel.imageUrls[0]}
               alt="Hotel"
-              className="w-60 object-cover rounded-md"
+              className="w-60 object-cover rounded-md flex-1"
             />
           </div>
           <div className="flex flex-col">

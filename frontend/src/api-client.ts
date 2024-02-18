@@ -290,7 +290,7 @@ export const fetchBookings = async () => {
 
     // Parse response JSON
     const data = await response.json();
-
+    data.data?.reverse()
     // Return the fetched bookings
     return data.data; // Adjust data structure if needed
   } catch (error) {
@@ -317,7 +317,7 @@ export const fetchAllBookings = async (): Promise<BookingType[]> => {
 
   // Parse response JSON
   const data = await response.json();
-
+  data.data?.reverse()
   // Return the fetched bookings
   // return { bookings: data.data }; // Adjust data structure if needed
   return data.data;
