@@ -174,12 +174,12 @@ export const searchHotels = async (
 
   return response.json();
 };
-export const fetchHotels = async (): Promise<HotelType[]> => {
+export const Latest = async () => {
   const response = await fetch(`${API_BASE_URL}/api/hotels`);
   if (!response.ok) {
     throw new Error("Error fetching hotels");
   }
-  console.log(response.json);
+  // console.log(response.json);
   return response.json();
 };
 
@@ -322,3 +322,4 @@ export const fetchAllBookings = async (): Promise<BookingType[]> => {
   // return { bookings: data.data }; // Adjust data structure if needed
   return data.data;
 };
+

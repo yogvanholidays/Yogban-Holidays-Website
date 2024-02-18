@@ -33,8 +33,8 @@ const Header = ({ bgHandle }: Props) => {
       <div
         className={
           isHomePage
-            ? isScrolled?"bg-red-900 max-w-full container flex justify-between py-4": "max-w-full container flex justify-between py-4"
-            : "container mx-auto flex justify-between pb-5 pt-4"
+            ? isScrolled?"bg-red-900 max-w-full container flex flex-wrap justify-between py-4": "container max-w-full flex flex-wrap justify-between py-4"
+            : "container mx-auto flex flex-wrap justify-between pb-5 pt-4"
         }
         style={
           isHomePage
@@ -43,6 +43,7 @@ const Header = ({ bgHandle }: Props) => {
                 top: 0,
                 zIndex: 999,
                 transition: "all 0.3s ease-in-out",
+                width:'100%'
               }
             : {}
         }
@@ -80,7 +81,7 @@ const Header = ({ bgHandle }: Props) => {
         </span>
       </div>
       {isHomePage ? (
-        <Carousel className="w-screen" style={{ height: "35rem" }}>
+        <Carousel className="w-auto" style={{ height: "35rem" }}>
           <Carousel.Item>
             <div>
               <img

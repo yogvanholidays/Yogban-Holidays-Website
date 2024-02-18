@@ -61,8 +61,10 @@ router.get("/search", async (req: Request, res: Response) => {
 
 router.get("/", async (req: Request, res: Response) => {
   try {
-    const hotels = await Hotel.find().sort("-lastUpdated");
-    res.json(hotels);
+    const latestHotels = await Hotel.find().sort("-lastUpdated");
+    const bestRatedHotels = await Hotel.find().sort("-starRating");
+    res.json({ latestHotels: latestHotels, bestRatedHotels: bestRatedHotels });
+    // console.log(hotels)
   } catch (error) {
     console.log("error", error);
     res.status(500).json({ message: "Error fetching hotels" });
@@ -145,16 +147,6 @@ const constructSearchQuery = (queryParams: any) => {
   return constructedQuery;
 };
 
-router.get("/allhotels", async (req: Request, res: Response) => {
-  try {
-    const hotels = await Hotel.find();
-    res.json(hotels);
-  } catch (error) {
-    console.log("error", error);
-    res.status(500).json({ message: "Error fetching all hotels" });
-  }
-});
-
 router.post(
   "/:hotelId/bookings/payment-intent",
   async (req: Request, res: Response) => {
@@ -212,7 +204,7 @@ router.post("/order/validate", async (req, res) => {
     adultCount,
     childCount,
     hotel,
-    phoneNumber
+    phoneNumber,
   } = req.body;
 
   const sha = crypto.createHmac(
@@ -241,8 +233,8 @@ router.post("/order/validate", async (req, res) => {
         totalCost: amount,
         razorpay_payment_id,
         razorpay_order_id,
-        hotel:hotel,
-        phoneNumber:phoneNumber,
+        hotel: hotel,
+        phoneNumber: phoneNumber,
       };
 
       // Save payment details to MongoDB
@@ -262,11 +254,10 @@ router.post("/order/validate", async (req, res) => {
   }
 });
 
-router.post("/getUserBookings",verifyToken, async (req, res) => {
-
+router.post("/getUserBookings", verifyToken, async (req, res) => {
   try {
     // Find all bookings for the specified userId
-    const bookings = await Booking.find({  userId: req.userId  });
+    const bookings = await Booking.find({ userId: req.userId });
     // console.log(bookings);
     res.json({
       success: true,
@@ -281,7 +272,7 @@ router.post("/getUserBookings",verifyToken, async (req, res) => {
   }
 });
 
-router.post("/getAllBookings",verifyToken, async (req, res) => {
+router.post("/getAllBookings", verifyToken, async (req, res) => {
   try {
     // Find all bookings
     // console.log(req.userId)
