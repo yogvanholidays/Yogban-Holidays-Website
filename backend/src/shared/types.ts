@@ -49,4 +49,6 @@ export type BookingType = {
   checkIn: Date;
   checkOut: Date;
   totalCost: number;
+  razorpay_payment_id: string;
+  razorpay_order_id: string;
 };

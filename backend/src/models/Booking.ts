@@ -11,6 +11,8 @@ export interface IBooking extends Document {
   checkIn: Date;
   checkOut: Date;
   totalCost: number;
+  razorpay_payment_id: string;
+  razorpay_order_id: string;
 }
 
 const BookingSchema = new Schema({
@@ -23,6 +25,8 @@ const BookingSchema = new Schema({
   checkIn: { type: Date, required: true },
   checkOut: { type: Date, required: true },
   totalCost: { type: Number, required: true },
+  razorpay_payment_id: { type: String, required: true },
+  razorpay_order_id: { type: String, required: true },
 });
 
 const booking =  mongoose.model<IBooking>('Booking', BookingSchema);

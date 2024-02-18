@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { UserType } from "../../../../backend/src/shared/types";
 import { useForm } from "react-hook-form";
-import { createPaymentIntent, fetchCurrentUser, validatePayment } from "../../api-client"; // Import the createPaymentIntent function
+import {
+  createPaymentIntent,
+  validatePayment,
+} from "../../api-client"; // Import the createPaymentIntent function
 import useRazorpay from "react-razorpay";
 import { useAppContext } from "../../contexts/AppContext";
 
@@ -9,9 +12,21 @@ type Props = {
   currentUser: UserType;
   hotelId: string; // Add hotelId to Props type
   amount: number; // Add amount to Props type
+  checkIn: Date;
+  checkOut: Date;
+  adultCount: number;
+  childCount: number;
 };
 
-const BookingForm = ({ currentUser, hotelId, amount }: Props) => {
+const BookingForm = ({
+  currentUser,
+  hotelId,
+  amount,
+  checkIn,
+  checkOut,
+  adultCount,
+  childCount,
+}: Props) => {
   const [Razorpay] = useRazorpay();
   const { showToast } = useAppContext();
 
@@ -24,8 +39,9 @@ const BookingForm = ({ currentUser, hotelId, amount }: Props) => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-
   const onSubmit = async () => {
+    // const userBookings = await fetchBookings(currentUser._id);
+    // console.log(userBookings);
     setIsLoading(true);
     try {
       // Call the createPaymentIntent function to initiate payment
@@ -48,9 +64,17 @@ const BookingForm = ({ currentUser, hotelId, amount }: Props) => {
             response.razorpay_payment_id,
             response.razorpay_order_id,
             response.razorpay_signature,
-            amount,currentUser._id
+            amount,
+            currentUser._id,
+            currentUser.firstName,
+            currentUser.lastName,
+            currentUser.email,
+            checkIn,
+            checkOut,
+            adultCount,
+            childCount
           );
-          console.log(isSuccessJSON)
+          console.log(isSuccessJSON);
           showToast({ message: "Payment Successful!", type: "SUCCESS" });
 
         },
@@ -71,7 +95,10 @@ const BookingForm = ({ currentUser, hotelId, amount }: Props) => {
       const rzp1 = new Razorpay(options);
 
       rzp1.on("payment.failed", function (response) {
-        showToast({ message: `Payment Failed! ${response.error.description}`, type: "SUCCESS" });
+        showToast({
+          message: `Payment Failed! ${response.error.description}`,
+          type: "SUCCESS",
+        });
 
         // alert(response.error.code);
         // alert(response.error.description);

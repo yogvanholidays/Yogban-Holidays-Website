@@ -1,10 +1,12 @@
 import express, { Request, Response } from "express";
 import Hotel from "../models/hotel";
-import { HotelSearchResponse, PaymentIntentResponse } from "../shared/types";
+import { BookingType, HotelSearchResponse, PaymentIntentResponse } from "../shared/types";
 import { param, validationResult } from "express-validator";
 import Razorpay from "razorpay";
 import crypto from "crypto";
 import Payment from "../models/Payment";
+import booking from "../models/Booking";
+import Booking from "../models/Booking";
 
 const router = express.Router();
 
@@ -191,10 +193,21 @@ router.post(
   }
 );
 
-
-
 router.post("/order/validate", async (req, res) => {
-  const { razorpay_payment_id, razorpay_order_id, razorpay_signature,amount,userId } = req.body;
+  const {
+    razorpay_payment_id,
+    razorpay_order_id,
+    razorpay_signature,
+    amount,
+    userId,
+    firstName,
+    lastName,
+    email,
+    checkIn,
+    checkOut,
+    adultCount,
+    childCount
+  } = req.body;
 
   const sha = crypto.createHmac(
     "sha256",
@@ -202,7 +215,7 @@ router.post("/order/validate", async (req, res) => {
   );
   sha.update(`${razorpay_order_id}|${razorpay_payment_id}`);
   const digest = sha.digest("hex");
-  
+
   if (digest !== razorpay_signature) {
     res.status(400).json({
       message: "Payment Failed",
@@ -211,16 +224,23 @@ router.post("/order/validate", async (req, res) => {
   } else {
     // Payment validation successful, now save payment details to MongoDB
     try {
-      const paymentData: PaymentIntentResponse = {
+      const paymentData: BookingType = {
+        userId: userId,
+        firstName:firstName,
+        lastName:lastName,
+        email:email,
+        adultCount:adultCount,
+        childCount:childCount,
+        checkIn:checkIn,
+        checkOut:checkOut,
+        totalCost: amount,
         razorpay_payment_id,
         razorpay_order_id,
-        totalCost: amount,
-        userId:userId
       };
-      console.log(paymentData)
+      console.log(paymentData);
 
       // Save payment details to MongoDB
-      const payment = await Payment.create(paymentData);
+      const payment = await booking.create(paymentData);
 
       res.json({
         message: "Payment Successful",
@@ -233,6 +253,28 @@ router.post("/order/validate", async (req, res) => {
         message: "Internal Server Error",
       });
     }
+  }
+});
+
+router.get('/bookings', async (req: Request, res: Response) => {
+  try {
+    // Extract user ID from request query parameters
+    const { userId } = req.query;
+
+    // If user ID is not provided, return a bad request response
+    if (!userId) {
+      return res.status(400).json({ message: 'User ID is required' });
+    }
+
+    // Find all bookings associated with the provided user ID
+    const bookings = await Booking.find({ userId: userId });
+
+    // Return the found bookings in the response
+    res.json({ bookings });
+  } catch (error) {
+    // Handle any errors and return an internal server error response
+    console.error('Error fetching bookings:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 

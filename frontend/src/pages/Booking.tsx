@@ -47,7 +47,15 @@ function Booking() {
         numberOfNights={numberOfNights}
         hotel={hotel}
       />
-      <BookingForm currentUser={currentUser} hotelId={hotel._id} amount={hotel.pricePerNight*numberOfNights} />
+      <BookingForm
+        currentUser={currentUser}
+        hotelId={hotel._id}
+        amount={hotel.pricePerNight * numberOfNights}
+        checkIn={search.checkIn}
+        checkOut={search.checkOut}
+        adultCount={search.adultCount}
+        childCount={search.childCount}
+      />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import {
+  BookingType,
   HotelSearchResponse,
   HotelType,
   UserType,
@@ -226,8 +227,15 @@ export const validatePayment = async (
   razorpay_payment_id: string,
   razorpay_order_id: string,
   razorpay_signature: string,
-  amount:number,
-  userId:string
+  amount: number,
+  userId: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  checkIn: Date,
+  checkOut: Date,
+  adultCount: number,
+  childCount: number
 ) => {
   try {
     const validateRes = await fetch(
@@ -238,7 +246,15 @@ export const validatePayment = async (
           razorpay_payment_id,
           razorpay_order_id,
           razorpay_signature,
-          amount,userId
+          amount,
+          userId,
+          firstName,
+          lastName,
+          email,
+          checkIn,
+          checkOut,
+          adultCount,
+          childCount,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -251,5 +267,33 @@ export const validatePayment = async (
   } catch (error) {
     console.error("Error creating payment signature:", error);
     throw new Error("Failed to create payment signature");
+  }
+};
+
+
+export const fetchBookings = async (userId: string): Promise<{ bookings: BookingType[] } | { message: string }> => {
+  try {
+    // If user ID is not provided, return a bad request response
+    if (!userId) {
+      return { message: 'User ID is required' };
+    }
+
+    // Fetch bookings associated with the provided user ID
+    const response = await fetch(`${API_BASE_URL}/api/hotels/bookings?userId=${userId}`);
+
+    // If the response is not successful, throw an error
+    if (!response.ok) {
+      throw new Error('Error fetching bookings');
+    }
+
+    // Parse response JSON
+    const data = await response.json();
+
+    // Return the fetched bookings
+    return { bookings: data.bookings };
+  } catch (error) {
+    // Handle any errors and return an internal server error response
+    console.error('Error fetching bookings:', error);
+    return { message: 'Internal Server Error' };
   }
 };
