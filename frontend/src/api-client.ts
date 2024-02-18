@@ -235,7 +235,8 @@ export const validatePayment = async (
   checkOut: Date,
   adultCount: number,
   childCount: number,
-  hotel: HotelType
+  hotel: HotelType,
+  phoneNumber:string
 ) => {
   try {
     const validateRes = await fetch(
@@ -255,7 +256,8 @@ export const validatePayment = async (
           checkOut,
           adultCount,
           childCount,
-          hotel
+          hotel,
+          phoneNumber
         }),
         headers: {
           "Content-Type": "application/json",

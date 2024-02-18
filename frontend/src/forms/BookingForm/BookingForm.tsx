@@ -34,13 +34,15 @@ const BookingForm = ({
       firstName: currentUser.firstName,
       lastName: currentUser.lastName,
       email: currentUser.email,
+      phoneNumber: "", // Initialize phone number field
     },
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  const onSubmit = async () => {
+  const onSubmit = async (data) => {
     // const userBookings = await fetchBookings(currentUser._id);
     // console.log(userBookings);
+    // console.log(data.phoneNumber)
     setIsLoading(true);
     try {
       // Call the createPaymentIntent function to initiate payment
@@ -72,7 +74,8 @@ const BookingForm = ({
             checkOut,
             adultCount,
             childCount,
-            hotel
+            hotel,
+            data.phoneNumber
           );
           console.log(isSuccessJSON);
           showToast({ message: "Payment Successful!", type: "SUCCESS" });
@@ -159,6 +162,14 @@ const BookingForm = ({
             readOnly
             disabled
             {...register("email")}
+          />
+        </label>
+        <label className="text-gray-700 text-sm font-bold flex-1">
+          Phone Number
+          <input
+            className="mt-1 border rounded w-full py-2 px-3 text-gray-700 bg-gray-200 font-normal"
+            type="tel"
+            {...register("phoneNumber", { required: true })} // Add register for phone number field
           />
         </label>
       </div>

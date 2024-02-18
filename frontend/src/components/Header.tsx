@@ -25,7 +25,7 @@ const Header = () => {
                     to="/admin"
                     className="flex items-center text-white px-3 font-bold hover:bg-red-600"
                   >
-                    My Hotels
+                    Admin
                   </Link>
               )}
               <SignOutButton />

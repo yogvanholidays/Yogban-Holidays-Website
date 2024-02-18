@@ -211,7 +211,8 @@ router.post("/order/validate", async (req, res) => {
     checkOut,
     adultCount,
     childCount,
-    hotel
+    hotel,
+    phoneNumber
   } = req.body;
 
   const sha = crypto.createHmac(
@@ -240,7 +241,8 @@ router.post("/order/validate", async (req, res) => {
         totalCost: amount,
         razorpay_payment_id,
         razorpay_order_id,
-        hotel:hotel
+        hotel:hotel,
+        phoneNumber:phoneNumber,
       };
 
       // Save payment details to MongoDB

@@ -28,6 +28,10 @@ const MyBookings = () => {
             <Link to={`/detail/${booking.hotel._id}`} className="text-xl font-bold hover:underline">{booking.hotel.name}</Link>
             <div className="text-sm">{booking.hotel.type}, {booking.hotel.starRating} Star</div>
             <div>
+              <span className="font-bold mr-2">Booked By:</span>
+              <span>{booking.firstName} {booking.lastName} ({booking.email},{booking.phoneNumber})</span>
+            </div>
+            <div>
               <span className="font-bold mr-2">Dates: </span>
               <span>
                 {new Date(booking.checkIn).toDateString()} - {new Date(booking.checkOut).toDateString()}
@@ -53,3 +57,4 @@ const MyBookings = () => {
 };
 
 export default MyBookings;
+

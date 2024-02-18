@@ -14,7 +14,8 @@ export interface IBooking extends Document {
   totalCost: number;
   razorpay_payment_id: string;
   razorpay_order_id: string;
-  hotel:any
+  hotel:any;
+  phoneNumber:string;
 }
 
 const BookingSchema = new Schema({
@@ -30,6 +31,7 @@ const BookingSchema = new Schema({
   razorpay_payment_id: { type: String, required: true },
   razorpay_order_id: { type: String, required: true },
   hotel: { type: Schema.Types.Mixed, required: true }, 
+  phoneNumber: { type: String, required: true },
 });
 
 const booking =  mongoose.model<IBooking>('Booking', BookingSchema);

@@ -52,4 +52,5 @@ export type BookingType = {
   razorpay_payment_id: string;
   razorpay_order_id: string;
   hotel:HotelType;
+  phoneNumber:string;
 };
