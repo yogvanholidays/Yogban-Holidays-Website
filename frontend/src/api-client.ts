@@ -1,4 +1,3 @@
-import { promises } from "dns";
 import {
   BookingType,
   HotelSearchResponse,
@@ -235,7 +234,8 @@ export const validatePayment = async (
   checkIn: Date,
   checkOut: Date,
   adultCount: number,
-  childCount: number
+  childCount: number,
+  hotel: HotelType
 ) => {
   try {
     const validateRes = await fetch(
@@ -255,6 +255,7 @@ export const validatePayment = async (
           checkOut,
           adultCount,
           childCount,
+          hotel
         }),
         headers: {
           "Content-Type": "application/json",

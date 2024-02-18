@@ -36,7 +36,6 @@ function Booking() {
   if (!hotel || !currentUser) {
     return null; // Return null while waiting for data to load
   }
-
   return (
     <div className="grid md:grid-cols-[1fr_2fr]">
       <BookingDetailsSummary
@@ -46,8 +45,9 @@ function Booking() {
         childCount={search.childCount}
         numberOfNights={numberOfNights}
         hotel={hotel}
-      />
+        />
       <BookingForm
+        hotel={hotel}
         currentUser={currentUser}
         hotelId={hotel._id}
         amount={hotel.pricePerNight * numberOfNights}

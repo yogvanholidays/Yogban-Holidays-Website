@@ -51,4 +51,5 @@ export type BookingType = {
   totalCost: number;
   razorpay_payment_id: string;
   razorpay_order_id: string;
+  hotel:HotelType;
 };

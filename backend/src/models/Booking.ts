@@ -1,5 +1,6 @@
 // models/Booking.ts
 import mongoose, { Document, Schema } from 'mongoose';
+import { HotelType } from '../shared/types';
 
 export interface IBooking extends Document {
   userId: string;
@@ -13,6 +14,7 @@ export interface IBooking extends Document {
   totalCost: number;
   razorpay_payment_id: string;
   razorpay_order_id: string;
+  hotel:any
 }
 
 const BookingSchema = new Schema({
@@ -27,6 +29,7 @@ const BookingSchema = new Schema({
   totalCost: { type: Number, required: true },
   razorpay_payment_id: { type: String, required: true },
   razorpay_order_id: { type: String, required: true },
+  hotel: { type: Schema.Types.Mixed, required: true }, 
 });
 
 const booking =  mongoose.model<IBooking>('Booking', BookingSchema);

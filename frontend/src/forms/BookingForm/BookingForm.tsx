@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { UserType } from "../../../../backend/src/shared/types";
+import { HotelType, UserType } from "../../../../backend/src/shared/types";
 import { useForm } from "react-hook-form";
-import {
-  createPaymentIntent,
-  validatePayment,
-} from "../../api-client"; // Import the createPaymentIntent function
+import { createPaymentIntent, validatePayment } from "../../api-client"; // Import the createPaymentIntent function
 import useRazorpay from "react-razorpay";
 import { useAppContext } from "../../contexts/AppContext";
 
 type Props = {
+  hotel: HotelType;
   currentUser: UserType;
   hotelId: string; // Add hotelId to Props type
   amount: number; // Add amount to Props type
@@ -19,6 +17,7 @@ type Props = {
 };
 
 const BookingForm = ({
+  hotel,
   currentUser,
   hotelId,
   amount,
@@ -72,7 +71,8 @@ const BookingForm = ({
             checkIn,
             checkOut,
             adultCount,
-            childCount
+            childCount,
+            hotel
           );
           console.log(isSuccessJSON);
           showToast({ message: "Payment Successful!", type: "SUCCESS" });
@@ -173,7 +173,6 @@ const BookingForm = ({
           <div className="text-xs">Includes taxes and charges</div>
         </div>
       </div>
-
 
       <div className="flex justify-end">
         <button
