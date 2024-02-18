@@ -15,6 +15,7 @@ import Search from "./pages/Search";
 import Detail from "./pages/Detail";
 import Booking from "./pages/Booking";
 import MyBookings from "./pages/MyBookings";
+import AllBookings from "./pages/AllBookings";
 function App() {
   const { isLoggedIn,userEmail } = useAppContext();
   const isAdmin = (userEmail==='yogban@admin.com')
@@ -44,6 +45,7 @@ function App() {
             <Route path="/add-hotel" element={<Layout><AddHotel/></Layout>} />
             <Route path="/edit-hotel/:hotelId" element={<Layout><EditHotel/></Layout>} />
             <Route path="/admin" element={<Layout><MyHotels/></Layout>} />
+            <Route path="/view-all-bookings" element={<Layout><AllBookings/></Layout>} />
           </>
         )}
         <Route path="*" element={<Navigate to="/" />} />
