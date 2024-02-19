@@ -1,9 +1,14 @@
-import React, { useState } from "react";
-import { HotelType, UserType } from "../../../../backend/src/shared/types";
+import React, { useEffect, useState } from "react";
+import { CouponType, HotelType, UserType } from "../../../../backend/src/shared/types";
 import { useForm } from "react-hook-form";
-import { createPaymentIntent, validatePayment } from "../../api-client"; // Import the createPaymentIntent function
+import {
+  createPaymentIntent,
+  fetchAllCoupons,
+  validatePayment,
+} from "../../api-client"; // Import the createPaymentIntent function
 import useRazorpay from "react-razorpay";
 import { useAppContext } from "../../contexts/AppContext";
+import { Link } from "react-router-dom";
 
 type Props = {
   hotel: HotelType;
@@ -14,6 +19,7 @@ type Props = {
   checkOut: Date;
   adultCount: number;
   childCount: number;
+  numberOfNights: number;
 };
 
 const BookingForm = ({
@@ -25,28 +31,106 @@ const BookingForm = ({
   checkOut,
   adultCount,
   childCount,
+  numberOfNights,
 }: Props) => {
   const [Razorpay] = useRazorpay();
   const { showToast } = useAppContext();
+  const [coupons, setCoupons] = useState<CouponType[]>([]);
+  const [finalAmount, setFinalAmount] = useState(amount);
+  const [couponValid, setCouponValid] = useState(true);
+  const [enteredCoupon, setEnteredCoupon] = useState<string>('');
+  const ogAmount = amount;
+  useEffect(() => {
+
+    if(finalAmount===0){
+      setCouponValid(false)
+      showToast({ message: "Something Went Wrong, Kindly Refresh The Page", type: "ERROR" });
+    }
+
+    const fetchCoupons = async () => {
+      try {
+        const data = await fetchAllCoupons();
+        setCoupons(data);
+      } catch (error) {
+        console.error("Error fetching coupons:", error);
+      }
+    };
+
+    fetchCoupons();
+  }, []);
+
+
+
+  const handleCouponChange = (e) => {
+    const couponCode = e.target.value;
+    setEnteredCoupon(couponCode)
+    if (!couponCode) {
+      // If coupon code is empty, enable confirm booking button
+      setCouponValid(true);
+      return;
+    }
+  
+    const coupon = coupons.find((coupon) => coupon.couponCode === couponCode);
+  
+    if (coupon) {
+      // Check if the coupon is expired
+      if (coupon.expiryDate && new Date(coupon.expiryDate) < new Date()) {
+        setCouponValid(false);
+        setFinalAmount(ogAmount); // Reset final amount to original amount
+        showToast({ message: "Coupon Expired!!", type: "ERROR" });
+        
+        return;
+      }
+      
+      // Check if the number of nights eligibility is not matched
+      if (coupon.minNights && numberOfNights < coupon.minNights) {
+        showToast({ message: `You have to stay for atleast ${coupon.minNights} nights to apply this coupon`, type: "ERROR" });
+        setCouponValid(false);
+        setFinalAmount(ogAmount); // Reset final amount to original amount
+        return;
+      }
+  
+      const { couponType, amount } = coupon;
+      let discount = 0;
+  
+      if (couponType === "Percentage") {
+        discount = (finalAmount * amount) / 100;
+      } else if (couponType === "Direct Money Off") {
+        discount = amount;
+      }
+  
+      let newAmount = finalAmount - discount;
+  
+      // Ensure final amount is always greater than 1
+      if (newAmount <= 1) {
+        newAmount = 1;
+      }
+  
+      setFinalAmount(newAmount);
+      setCouponValid(true);
+    } else {
+      // If coupon code is invalid, disable confirm booking button
+      setCouponValid(false);
+      setFinalAmount(ogAmount)
+    }
+  };
+  
 
   const { handleSubmit, register } = useForm({
     defaultValues: {
       firstName: currentUser.firstName,
       lastName: currentUser.lastName,
       email: currentUser.email,
-      phoneNumber: "", // Initialize phone number field
+      phoneNumber: "",
     },
   });
 
   const [isLoading, setIsLoading] = useState(false);
   const onSubmit = async (data) => {
-    // const userBookings = await fetchBookings(currentUser._id);
-    // console.log(userBookings);
-    // console.log(data.phoneNumber)
     setIsLoading(true);
     try {
       // Call the createPaymentIntent function to initiate payment
-      const intent = await createPaymentIntent(hotelId, amount);
+      const intent = await createPaymentIntent(hotelId, finalAmount);
       console.log("Payment Intent:", intent);
       const options = {
         key: "rzp_test_SVXNvcCQpqlAcY", // Enter the Key ID generated from the Dashboard
@@ -58,9 +142,7 @@ const BookingForm = ({
         order_id: intent.id, //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
         handler: async function (response) {
           console.log(response);
-          // alert(response.razorpay_payment_id);
-          // alert(response.razorpay_order_id);
-          // alert(response.razorpay_signature);
+
           const isSuccessJSON = await validatePayment(
             response.razorpay_payment_id,
             response.razorpay_order_id,
@@ -79,8 +161,6 @@ const BookingForm = ({
           );
           console.log(isSuccessJSON);
           showToast({ message: "Payment Successful!", type: "SUCCESS" });
-          // const bookings = await fetchBookings(currentUser._id);
-          // console.log(bookings);
         },
         prefill: {
           name: "Piyush Garg",
@@ -100,16 +180,8 @@ const BookingForm = ({
       rzp1.on("payment.failed", function (response) {
         showToast({
           message: `Payment Failed! ${response.error.description}`,
-          type: "SUCCESS",
+          type: "ERROR",
         });
-
-        // alert(response.error.code);
-        // alert(response.error.description);
-        // alert(response.error.source);
-        // alert(response.error.step);
-        // alert(response.error.reason);
-        // alert(response.error.metadata.order_id);
-        // alert(response.error.metadata.payment_id);
       });
 
       rzp1.open();
@@ -179,21 +251,41 @@ const BookingForm = ({
 
         <div className="bg-blue-200 p-4 rounded-md">
           <div className="font-semibold text-lg">
-            Total Cost: {amount} INR {/* Use the passed amount here */}
+            Total Cost: {finalAmount} INR
           </div>
           <div className="text-xs">Includes taxes and charges</div>
         </div>
-      </div>
-
+        <div className="flex gap-2">
+          <input
+            type="text"
+            placeholder="Enter coupon code"
+            onChange={handleCouponChange}
+            className={(enteredCoupon==='')?"mt-1 border rounded w-full py-2 px-3 text-gray-700 bg-gray-200 font-normal":
+          (couponValid?
+            "mt-1 border rounded w-full py-2 px-3 text-black bg-green-200 font-normal"
+            :
+            "mt-1 border rounded w-full py-2 px-3 text-black bg-red-200 font-normal"
+          )
+          }
+          />
+          {/* <Link
+            to="/#coupons"
+            className="text-white bg-black rounded px-4 flex text-nowrap text-center items-center"
+          >
+            <span>View All Coupons</span>
+          </Link> */}
       <div className="flex justify-end">
         <button
-          disabled={isLoading}
+          disabled={isLoading || !couponValid || !numberOfNights}
           type="submit"
-          className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-md disabled:bg-gray-500"
+          className="text-white bg-gray-900 rounded px-4 flex text-nowrap text-center items-center hover:bg-gray-800 text-md disabled:bg-gray-500"
         >
           {isLoading ? "Processing..." : "Confirm Booking"}
         </button>
       </div>
+        </div>
+      </div>
+
     </form>
   );
 };

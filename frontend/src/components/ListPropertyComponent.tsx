@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function ListPropertyComponent() {
   return (
-    <div>
+    <section className="space-y-3 mb-12">
       <h1 className="text-3xl font-bold">List Your Property</h1>
       <div className="flex flex-wrap">
         <div className="flex-grow font-medium text-lg">
@@ -16,7 +16,7 @@ function ListPropertyComponent() {
           <Link to="/list-your-property" className="flex-grow-0 p-6 bg-red-700 text-white rounded-md">List Your Property</Link>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

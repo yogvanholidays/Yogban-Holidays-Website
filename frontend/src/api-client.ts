@@ -1,5 +1,6 @@
 import {
   BookingType,
+  CouponType,
   HotelSearchResponse,
   HotelType,
   ListPropertyRequestType,
@@ -430,4 +431,44 @@ export const getListPropertyRequests = async () => {
   } catch (error) {
     throw new Error(error.message);
   }
+};
+
+
+export const createCoupon = async (
+  couponData: CouponType
+) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/coupons`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(couponData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to create coupon");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error(error.message || "Failed to create coupon");
+  }
+};
+
+export const fetchAllCoupons = async ()=> {
+  const response = await fetch(`${API_BASE_URL}/api/coupons`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Error fetching coupons");
+  }
+
+  const data = await response.json();
+  console.log(data)
+  return data;
 };

@@ -22,6 +22,7 @@ import SearchAndDeleteDestinations from "./pages/SearchAndDeleteDestinations";
 import SearchAndDeleteHotels from "./pages/DeleteHotel";
 import ListYourProperty from "./pages/ListYourProperty";
 import ListPropertyRequestsPage from "./pages/ListPropertyRequestsPage";
+import CreateCoupon from "./pages/CreateCoupon";
 function App() {
   const { isLoggedIn,userEmail } = useAppContext();
   const isAdmin = (userEmail==='yogban@admin.com')
@@ -51,6 +52,7 @@ function App() {
         {isLoggedIn && isAdmin && (
           <>
             <Route path="/add-hotel" element={<Layout page=''><AddHotel/></Layout>} />
+            <Route path="/add-coupon" element={<Layout page=''><CreateCoupon/></Layout>} />
             <Route path="/edit-hotel/:hotelId" element={<Layout page=''><EditHotel/></Layout>} />
             <Route path="/admin" element={<Layout page=''><MyHotels/></Layout>} />
             <Route path="/upload-destination" element={<Layout page=''><UploadDestination/></Layout>} />

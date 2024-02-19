@@ -8,6 +8,12 @@ function AdminControls() {
 
       <div className="flex gap-5 w-full flex-wrap">
         <Link
+          to="/add-coupon"
+          className="flex flex-1 bg-red-600 text-white text-lg rounded font-semibold p-2 hover:bg-red-500 text-center justify-center"
+        >
+          Publish Coupon
+        </Link>{" "}
+        <Link
           to="/upload-destination"
           className="flex flex-1 bg-red-600 text-white text-lg rounded font-semibold p-2 hover:bg-red-500 text-center justify-center"
         >

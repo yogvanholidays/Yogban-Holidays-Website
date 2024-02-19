@@ -55,6 +55,7 @@ function Booking() {
         checkOut={search.checkOut}
         adultCount={search.adultCount}
         childCount={search.childCount}
+        numberOfNights={numberOfNights}
       />
     </div>
   );

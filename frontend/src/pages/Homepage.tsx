@@ -3,6 +3,7 @@ import LatestAddedComponent from '../components/LatestAddedComponent'
 import BestRatedComponent from '../components/BestRatedComponent'
 import PickADestination from '../components/PickADestination'
 import ListPropertyComponent from '../components/ListPropertyComponent'
+import CouponsList from '../components/CouponsList'
 
 
 function Homepage() {
@@ -13,6 +14,7 @@ function Homepage() {
         <BestRatedComponent/>
         <LatestAddedComponent/>
         <ListPropertyComponent/>
+        <CouponsList/>
     </div>
   )
 }

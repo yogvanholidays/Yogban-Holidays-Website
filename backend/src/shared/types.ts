@@ -73,3 +73,14 @@ export type ListPropertyRequestType = {
   photosLink: string;
   propertyDescription: string;
 }
+
+export type CouponType = {
+  couponType: string;
+  amount: number;
+  couponCode: string;
+  couponMessage: string;
+  minNights: number;
+  expiryDate: string | null;
+  neverExpires: boolean;
+  creationDate: string;
+}
