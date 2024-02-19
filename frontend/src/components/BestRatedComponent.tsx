@@ -20,6 +20,7 @@ const hotels = hotelList?.bestRatedHotels
     }
 
   return (
+    
     <div className="space-y-3 mb-12">
       <h2 className="text-3xl font-bold">Best Rated</h2>
       <p>Best rated hotels only for you</p>

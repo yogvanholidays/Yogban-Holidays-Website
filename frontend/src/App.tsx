@@ -20,6 +20,7 @@ import Homepage from "./pages/Homepage";
 import UploadDestination from "./pages/UploadDestination";
 import SearchAndDeleteDestinations from "./pages/SearchAndDeleteDestinations";
 import SearchAndDeleteHotels from "./pages/DeleteHotel";
+import ListYourProperty from "./pages/ListYourProperty";
 function App() {
   const { isLoggedIn,userEmail } = useAppContext();
   const isAdmin = (userEmail==='yogban@admin.com')
@@ -43,6 +44,7 @@ function App() {
           <>
             <Route path="/hotel/:hotelId/booking" element={<Layout page=''><Booking/></Layout>} />
             <Route path="/my-bookings" element={<Layout page=''><MyBookings/></Layout>} />
+            <Route path="/list-your-property" element={<Layout page=''><ListYourProperty/></Layout>} />
           </>
         )}
         {isLoggedIn && isAdmin && (

@@ -59,3 +59,17 @@ export type DestinationType = {
   name: string;
   illustrationImageUrl: string;
 }
+
+export type ListPropertyRequestType = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  mobile: string;
+  propertyName:string
+  propertyLocation: string;
+  propertyType: string;
+  rooms: string;
+  hearAbout: string;
+  photosLink: string;
+  propertyDescription: string;
+}

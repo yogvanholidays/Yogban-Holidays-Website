@@ -2,6 +2,7 @@ import {
   BookingType,
   HotelSearchResponse,
   HotelType,
+  ListPropertyRequestType,
   UserType,
 } from "../../backend/src/shared/types";
 import { RegisterFormData } from "./pages/Register";
@@ -79,7 +80,7 @@ export const addMyHotel = async (hotelFormData: FormData) => {
     method: "POST",
     credentials: "include",
     body: hotelFormData,
-  }); 
+  });
   if (!response.ok) {
     throw new Error("Failed to add hotel");
   }
@@ -235,7 +236,7 @@ export const validatePayment = async (
   adultCount: number,
   childCount: number,
   hotel: HotelType,
-  phoneNumber:string
+  phoneNumber: string
 ) => {
   try {
     const validateRes = await fetch(
@@ -256,7 +257,7 @@ export const validatePayment = async (
           adultCount,
           childCount,
           hotel,
-          phoneNumber
+          phoneNumber,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -289,7 +290,7 @@ export const fetchBookings = async () => {
 
     // Parse response JSON
     const data = await response.json();
-    data.data?.reverse()
+    data.data?.reverse();
     // Return the fetched bookings
     return data.data; // Adjust data structure if needed
   } catch (error) {
@@ -316,7 +317,7 @@ export const fetchAllBookings = async (): Promise<BookingType[]> => {
 
   // Parse response JSON
   const data = await response.json();
-  data.data?.reverse()
+  data.data?.reverse();
   // Return the fetched bookings
   // return { bookings: data.data }; // Adjust data structure if needed
   return data.data;
@@ -327,14 +328,13 @@ export const addDestination = async (destinationFormData: FormData) => {
     method: "POST",
     credentials: "include",
     body: destinationFormData,
-  }); 
+  });
   if (!response.ok) {
     throw new Error("Failed to add hotel");
   }
 
   return response.json();
 };
-
 
 export const getDestinations = async () => {
   const response = await fetch(`${API_BASE_URL}/api/destinations`);
@@ -346,10 +346,13 @@ export const getDestinations = async () => {
 };
 
 export const searchDestinations = async (searchTerm) => {
-  const response = await fetch(`${API_BASE_URL}/api/destinations?searchTerm=${searchTerm}`, {
-    method: "GET",
-    credentials: "include",
-  }); 
+  const response = await fetch(
+    `${API_BASE_URL}/api/destinations?searchTerm=${searchTerm}`,
+    {
+      method: "GET",
+      credentials: "include",
+    }
+  );
   if (!response.ok) {
     throw new Error("Failed to search destinations");
   }
@@ -360,17 +363,20 @@ export const deleteDestination = async (id) => {
   const response = await fetch(`${API_BASE_URL}/api/destinations/${id}`, {
     method: "DELETE",
     credentials: "include",
-  }); 
+  });
   if (!response.ok) {
     throw new Error("Failed to delete destination");
   }
 };
 
 export const searchHotelsToDelete = async (searchTerm) => {
-  const response = await fetch(`${API_BASE_URL}/api/my-hotels?searchTerm=${searchTerm}`, {
-    method: "GET",
-    credentials: "include",
-  }); 
+  const response = await fetch(
+    `${API_BASE_URL}/api/my-hotels?searchTerm=${searchTerm}`,
+    {
+      method: "GET",
+      credentials: "include",
+    }
+  );
   if (!response.ok) {
     throw new Error("Failed to search hotels");
   }
@@ -381,9 +387,30 @@ export const deleteHotel = async (id) => {
   const response = await fetch(`${API_BASE_URL}/api/my-hotels/${id}`, {
     method: "DELETE",
     credentials: "include",
-  }); 
+  });
   if (!response.ok) {
     throw new Error("Failed to delete hotel");
   }
 };
 
+export const addListPropertyRequest = async (data: ListPropertyRequestType) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/properties`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to add list property request");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to add list property request:", error);
+    throw error;
+  }
+};
