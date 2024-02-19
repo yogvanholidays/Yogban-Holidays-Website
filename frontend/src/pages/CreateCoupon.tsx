@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
 import * as apiClient from "../api-client";
 
 const CreateCoupon = () => {
@@ -10,35 +11,35 @@ const CreateCoupon = () => {
   const [expiryDate, setExpiryDate] = useState("");
   const [neverExpires, setNeverExpires] = useState(false);
 
-  const handleCouponTypeChange = (e) => {
+  const handleCouponTypeChange = (e:any) => {
     setCouponType(e.target.value);
   };
 
-  const handleAmountChange = (e) => {
+  const handleAmountChange = (e:any) => {
     setAmount(e.target.value);
   };
 
-  const handleCouponCodeChange = (e) => {
+  const handleCouponCodeChange = (e:any) => {
     setCouponCode(e.target.value);
   };
 
-  const handleCouponMessageChange = (e) => {
+  const handleCouponMessageChange = (e:any) => {
     setCouponMessage(e.target.value);
   };
 
-  const handleMinNightsChange = (e) => {
+  const handleMinNightsChange = (e:any) => {
     setMinNights(e.target.value);
   };
 
-  const handleExpiryDateChange = (e) => {
+  const handleExpiryDateChange = (e:any) => {
     setExpiryDate(e.target.value);
   };
 
-  const handleNeverExpiresChange = (e) => {
+  const handleNeverExpiresChange = (e:any) => {
     setNeverExpires(e.target.checked);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
     try {
       const amountNumber = parseInt(amount);

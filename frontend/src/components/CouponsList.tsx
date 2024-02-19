@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchAllCoupons } from "../api-client";
 import { CouponType } from "../../../backend/src/shared/types";
 

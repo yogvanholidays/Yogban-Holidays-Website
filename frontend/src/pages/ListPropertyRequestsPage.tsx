@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import * as apiClient from '../api-client';
+import { ListPropertyRequestType } from "../../../backend/src/shared/types";
 
 const PropertyRequestsPage = () => {
-  const [propertyRequests, setPropertyRequests] = useState([]);
+  const [propertyRequests, setPropertyRequests] = useState<ListPropertyRequestType[]>([]);
 
   useEffect(() => {
     const fetchPropertyRequests = async () => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import * as apiClient from "../api-client";
 import { BookingType } from "../../../backend/src/shared/types";
 import { Link } from "react-router-dom";

@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState } from "react";
 import { useSearchContext } from "../contexts/SearchContext";
 import { useNavigate } from "react-router-dom";
 import * as apiClient from '../api-client';
+import { DestinationType } from "../../../backend/src/shared/types";
 
 function PickADestination() {
   const navigate = useNavigate();
   const search = useSearchContext();
-  const [destinations, setDestinations] = useState([]);
+  const [destinations, setDestinations] = useState<DestinationType[]>([]);
 
   useEffect(() => {
     fetchDestinations();
@@ -24,7 +26,7 @@ function PickADestination() {
     return <></>
   }
 
-  const handleButtonClick = (place) => {
+  const handleButtonClick = (place:any) => {
     navigate("/search");
     search.saveSearchValues(
       place,

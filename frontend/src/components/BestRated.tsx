@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { HotelType } from "../../../backend/src/shared/types";
 import { isMobile } from "react-device-detect";
-import { BiSolidStar } from "react-icons/bi";
-import { AiFillStar } from "react-icons/ai";
 import { BsFillStarFill } from "react-icons/bs";
 type Props = {
   hotel: HotelType;

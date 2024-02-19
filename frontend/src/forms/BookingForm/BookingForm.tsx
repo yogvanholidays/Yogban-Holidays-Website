@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useState } from "react";
 import { CouponType, HotelType, UserType } from "../../../../backend/src/shared/types";
 import { useForm } from "react-hook-form";
 import {
@@ -8,7 +9,8 @@ import {
 } from "../../api-client"; // Import the createPaymentIntent function
 import useRazorpay from "react-razorpay";
 import { useAppContext } from "../../contexts/AppContext";
-import { Link } from "react-router-dom";
+
+
 
 type Props = {
   hotel: HotelType;
@@ -57,11 +59,11 @@ const BookingForm = ({
     };
 
     fetchCoupons();
-  }, []);
+  }, [finalAmount, showToast]);
 
 
 
-  const handleCouponChange = (e) => {
+  const handleCouponChange = (e:any) => {
     const couponCode = e.target.value;
     setEnteredCoupon(couponCode)
     if (!couponCode) {
@@ -126,28 +128,28 @@ const BookingForm = ({
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  const onSubmit = async (data) => {
+  const onSubmit = async (data:any) => {
     setIsLoading(true);
     try {
       // Call the createPaymentIntent function to initiate payment
-      const intent = await createPaymentIntent(hotelId, finalAmount);
+      const intent:any = await createPaymentIntent(hotelId, finalAmount);
       console.log("Payment Intent:", intent);
       const options = {
         key: "rzp_test_SVXNvcCQpqlAcY", // Enter the Key ID generated from the Dashboard
-        amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        amount:finalAmount.toString(), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         currency: "INR",
         name: "Acme Corp",
         description: "Test Transaction",
         image: "https://example.com/your_logo",
         order_id: intent.id, //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
-        handler: async function (response) {
+        handler: async function (response: { razorpay_payment_id: string; razorpay_order_id: string; razorpay_signature: string; }) {
           console.log(response);
 
           const isSuccessJSON = await validatePayment(
             response.razorpay_payment_id,
             response.razorpay_order_id,
             response.razorpay_signature,
-            amount,
+            finalAmount,
             currentUser._id,
             currentUser.firstName,
             currentUser.lastName,
@@ -177,7 +179,7 @@ const BookingForm = ({
 
       const rzp1 = new Razorpay(options);
 
-      rzp1.on("payment.failed", function (response) {
+      rzp1.on("payment.failed", function (response: { error: { description: any; }; }) {
         showToast({
           message: `Payment Failed! ${response.error.description}`,
           type: "ERROR",

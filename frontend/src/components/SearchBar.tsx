@@ -37,8 +37,8 @@ const SearchBar = ({handler}: Props) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className={isHomePage ? "-mt-14 p-3 bg-orange-400 rounded shadow-md grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4":
-      "-mt-8 p-3 bg-orange-400 rounded shadow-md grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4"
+      className={isHomePage ? "-mt-14 p-3 bg-orange-400 rounded shadow-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4":
+      "-mt-8 p-3 bg-orange-400 rounded shadow-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4"
     } 
     style={{transition: "all 0.3s ease-in-out"}}
     >

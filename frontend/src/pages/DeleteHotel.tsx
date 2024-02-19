@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState, useEffect } from "react";
 import * as apiClient from '../api-client';
+import { HotelType } from "../../../backend/src/shared/types";
 
 const SearchAndDeleteHotels = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [hotels, setHotels] = useState([]);
+  const [hotels, setHotels] = useState<HotelType[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ const SearchAndDeleteHotels = () => {
     setLoading(false);
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: any) => {
     try {
       await apiClient.deleteHotel(id);
       // Remove the deleted hotel from the list

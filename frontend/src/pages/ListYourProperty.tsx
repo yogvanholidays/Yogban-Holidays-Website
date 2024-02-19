@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
 import * as apiClient from "../api-client";
 import { hotelTypes } from "../config/hotel-options-config";
 
@@ -17,7 +18,7 @@ const ListYourProperty = () => {
     propertyDescription: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -25,7 +26,7 @@ const ListYourProperty = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
       const response = await apiClient.addListPropertyRequest(formData);

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import * as apiClient from '../api-client';
+import { DestinationType } from "../../../backend/src/shared/types";
 
 const SearchAndDeleteDestinations = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [destinations, setDestinations] = useState([]);
+  const [destinations, setDestinations] = useState<DestinationType[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const SearchAndDeleteDestinations = () => {
     setLoading(false);
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: string) => {
     try {
       await apiClient.deleteDestination(id);
       // Remove the deleted destination from the list

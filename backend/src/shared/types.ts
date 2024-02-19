@@ -56,11 +56,13 @@ export type BookingType = {
 };
 
 export type DestinationType = {
+  [x: string]: any;
   name: string;
   illustrationImageUrl: string;
 }
 
 export type ListPropertyRequestType = {
+  [x: string]:any;
   firstName: string;
   lastName: string;
   email: string;

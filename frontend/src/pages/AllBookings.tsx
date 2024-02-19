@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import DatePicker from "react-datepicker"; // Import DatePicker
@@ -7,8 +8,8 @@ import * as apiClient from "../api-client";
 
 const MyBookings = () => {
   const [hotelNameFilter, setHotelNameFilter] = useState("");
-  const [startDateFilter, setStartDateFilter] = useState(null);
-  const [endDateFilter, setEndDateFilter] = useState(null);
+  const [startDateFilter, setStartDateFilter] = useState<Date>();
+  const [endDateFilter, setEndDateFilter] = useState<Date>();
 
   const {
     data: bookings,
@@ -50,15 +51,15 @@ const MyBookings = () => {
     return <span>No bookings found</span>;
   }
 
-  const handleHotelNameFilterChange = (e) => {
+  const handleHotelNameFilterChange = (e:any) => {
     setHotelNameFilter(e.target.value);
   };
 
-  const handleStartDateFilterChange = (date) => {
+  const handleStartDateFilterChange = (date:Date) => {
     setStartDateFilter(date);
   };
 
-  const handleEndDateFilterChange = (date) => {
+  const handleEndDateFilterChange = (date:Date) => {
     setEndDateFilter(date);
   };
 

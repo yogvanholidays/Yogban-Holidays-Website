@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   BookingType,
   CouponType,
@@ -346,7 +347,7 @@ export const getDestinations = async () => {
   return response.json();
 };
 
-export const searchDestinations = async (searchTerm) => {
+export const searchDestinations = async (searchTerm:string) => {
   const response = await fetch(
     `${API_BASE_URL}/api/destinations?searchTerm=${searchTerm}`,
     {
@@ -360,7 +361,7 @@ export const searchDestinations = async (searchTerm) => {
   return response.json();
 };
 
-export const deleteDestination = async (id) => {
+export const deleteDestination = async (id:string) => {
   const response = await fetch(`${API_BASE_URL}/api/destinations/${id}`, {
     method: "DELETE",
     credentials: "include",
@@ -370,7 +371,7 @@ export const deleteDestination = async (id) => {
   }
 };
 
-export const searchHotelsToDelete = async (searchTerm) => {
+export const searchHotelsToDelete = async (searchTerm:string) => {
   const response = await fetch(
     `${API_BASE_URL}/api/my-hotels?searchTerm=${searchTerm}`,
     {
@@ -384,7 +385,7 @@ export const searchHotelsToDelete = async (searchTerm) => {
   return response.json();
 };
 
-export const deleteHotel = async (id) => {
+export const deleteHotel = async (id:string) => {
   const response = await fetch(`${API_BASE_URL}/api/my-hotels/${id}`, {
     method: "DELETE",
     credentials: "include",
@@ -428,7 +429,7 @@ export const getListPropertyRequests = async () => {
     }
 
     return response.json();
-  } catch (error) {
+  } catch (error:any) {
     throw new Error(error.message);
   }
 };
@@ -453,7 +454,7 @@ export const createCoupon = async (
 
     const data = await response.json();
     return data;
-  } catch (error) {
+  } catch (error:any) {
     throw new Error(error.message || "Failed to create coupon");
   }
 };
