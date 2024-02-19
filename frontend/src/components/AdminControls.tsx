@@ -6,7 +6,7 @@ function AdminControls() {
     <div>
       <h1 className="text-3xl font-bold mb-3">Admin Controls</h1>
 
-      <div className="flex gap-5 w-full">
+      <div className="flex gap-5 w-full flex-wrap">
         <Link
           to="/upload-destination"
           className="flex flex-1 bg-red-600 text-white text-lg rounded font-semibold p-2 hover:bg-red-500 text-center justify-center"

@@ -17,6 +17,7 @@ const MyHotels = () => {
     }
   );
 
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
 
   const hotelsPerPage = 5;
@@ -28,17 +29,15 @@ const MyHotels = () => {
     setCurrentPage(selected);
   };
 
-  if (!hotelData || !Array.isArray(hotelData)) {
-    return (
-      <>
-        <AdminControls />
-        <ArrivingToday />
-        <span>No Hotels found</span>;
-      </>
-    );
-  }
+  const filteredHotels = hotelData?.filter((hotel) =>
+  hotel.name.toLowerCase().includes(searchQuery.toLowerCase())||
+  hotel.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  hotel.country.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  hotel.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  hotel._id.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
-  const currentHotels = hotelData.slice(offset, offset + hotelsPerPage);
+  const currentHotels = filteredHotels?.slice(offset, offset + hotelsPerPage);
 
   return (
     <div className="space-y-5">
@@ -46,9 +45,16 @@ const MyHotels = () => {
       <ArrivingToday />
       <span className="flex justify-between">
         <h1 className="text-3xl font-bold">My Hotels</h1>
+        <input
+          type="text"
+          className="border border-gray-300 rounded-md p-2 w-2/6"
+          placeholder="Search by hotel name or city or id"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
       </span>
       <div className="grid grid-cols-1 gap-8">
-        {currentHotels.map((hotel) => (
+        {currentHotels?.map((hotel) => (
           <div
             key={hotel.name}
             data-testid="hotel-card"
@@ -56,23 +62,23 @@ const MyHotels = () => {
           >
             <h2 className="text-2xl font-bold">{hotel.name}</h2>
             <div className="whitespace-pre-line">{hotel.description}</div>
-            <div className="grid grid-cols-5 gap-2">
-              <div className="border border-slate-300 rounded-sm p-3 flex items-center">
+            <div className="flex gap-2 flex-wrap">
+              <div className="border border-slate-300 rounded-sm p-3 flex items-center flex-grow">
                 <BsMap className="mr-1" />
                 {hotel.city}, {hotel.country}
               </div>
-              <div className="border border-slate-300 rounded-sm p-3 flex items-center">
+              <div className="border border-slate-300 rounded-sm p-3 flex items-center flex-grow">
                 <BsBuilding className="mr-1" />
                 {hotel.type}
               </div>
-              <div className="border border-slate-300 rounded-sm p-3 flex items-center">
+              <div className="border border-slate-300 rounded-sm p-3 flex items-center flex-grow">
                 <BiMoney className="mr-1" />₹{hotel.pricePerNight} per night
               </div>
-              <div className="border border-slate-300 rounded-sm p-3 flex items-center">
+              <div className="border border-slate-300 rounded-sm p-3 flex items-center flex-grow">
                 <BiHotel className="mr-1" />
                 {hotel.adultCount} adults, {hotel.childCount} children
               </div>
-              <div className="border border-slate-300 rounded-sm p-3 flex items-center">
+              <div className="border border-slate-300 rounded-sm p-3 flex items-center flex-grow">
                 <BiStar className="mr-1" />
                 {hotel.starRating} Star Rating
               </div>
