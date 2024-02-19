@@ -1,10 +1,12 @@
-import { useQuery } from "react-query";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
 import { BsBuilding, BsMap } from "react-icons/bs";
 import { BiHotel, BiMoney, BiStar } from "react-icons/bi";
 import ArrivingToday from "../components/ArrivingToday";
 import AdminControls from "../components/AdminControls";
+import ReactPaginate from "react-paginate";
 
 const MyHotels = () => {
   const { data: hotelData } = useQuery(
@@ -15,27 +17,38 @@ const MyHotels = () => {
     }
   );
 
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const hotelsPerPage = 5;
+  const offset = currentPage * hotelsPerPage;
+
+  const pageCount = Math.ceil((hotelData?.length || 0) / hotelsPerPage);
+
+  const handlePageChange = ({ selected }: { selected: number }) => {
+    setCurrentPage(selected);
+  };
+
   if (!hotelData || !Array.isArray(hotelData)) {
-    return <>
-    <AdminControls/>
-    <ArrivingToday/>
-    <span>No Hotels found</span>;
-    </>
+    return (
+      <>
+        <AdminControls />
+        <ArrivingToday />
+        <span>No Hotels found</span>;
+      </>
+    );
   }
 
-
-
+  const currentHotels = hotelData.slice(offset, offset + hotelsPerPage);
 
   return (
     <div className="space-y-5">
-      <AdminControls/>
-      <ArrivingToday/>
+      <AdminControls />
+      <ArrivingToday />
       <span className="flex justify-between">
         <h1 className="text-3xl font-bold">My Hotels</h1>
-
       </span>
       <div className="grid grid-cols-1 gap-8">
-        {hotelData.map((hotel) => (
+        {currentHotels.map((hotel) => (
           <div
             key={hotel.name}
             data-testid="hotel-card"
@@ -74,6 +87,23 @@ const MyHotels = () => {
             </span>
           </div>
         ))}
+      </div>
+      <div className="flex justify-center mt-4 ">
+      <ReactPaginate
+          previousLabel={"← Previous"}
+          nextLabel={"Next →"}
+          pageCount={pageCount}
+          onPageChange={handlePageChange}
+          containerClassName={"pagination flex items-center space-x-4 text-red-600"}
+          activeClassName={"active"}
+          previousClassName={"px-3 py-1 border border-gray-950 rounded"}
+          nextClassName={"px-3 py-1 border border-gray-950 rounded"}
+          breakClassName={"px-3 py-1 border border-gray-950 rounded"}
+          pageClassName={"px-3 py-1 bg-red-100 rounded"}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          disabledClassName={"text-gray-500 pointer-events-none"}
+        />
       </div>
     </div>
   );
