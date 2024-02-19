@@ -414,3 +414,20 @@ export const addListPropertyRequest = async (data: ListPropertyRequestType) => {
     throw error;
   }
 };
+
+
+export const getListPropertyRequests = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/properties`, {
+      method: "GET",
+      credentials: "include",
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch list property requests");
+    }
+
+    return response.json();
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

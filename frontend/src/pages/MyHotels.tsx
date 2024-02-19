@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import * as apiClient from "../api-client";
 import { BsBuilding, BsMap } from "react-icons/bs";
 import { BiHotel, BiMoney, BiStar } from "react-icons/bi";
+import ArrivingToday from "../components/ArrivingToday";
+import AdminControls from "../components/AdminControls";
 
 const MyHotels = () => {
   const { data: hotelData } = useQuery(
@@ -13,46 +15,24 @@ const MyHotels = () => {
     }
   );
 
-  if (!hotelData) {
-    return <span>No Hotels found</span>;
+  if (!hotelData || !Array.isArray(hotelData)) {
+    return <>
+    <AdminControls/>
+    <ArrivingToday/>
+    <span>No Hotels found</span>;
+    </>
   }
+
+
+
 
   return (
     <div className="space-y-5">
+      <AdminControls/>
+      <ArrivingToday/>
       <span className="flex justify-between">
         <h1 className="text-3xl font-bold">My Hotels</h1>
-        <div style={{ display: "flex", gap: "5px" }}>
-          <Link
-            to="/view-all-bookings"
-            className="flex bg-red-600 text-white text-xl font-bold p-2 hover:bg-red-500"
-          >
-            View All Bookings
-          </Link>
-          <Link
-            to="/upload-destination"
-            className="flex bg-red-600 text-white text-xl font-bold p-2 hover:bg-red-500"
-          >
-            Upload A Destination
-          </Link>{" "}
-          <Link
-            to="/view-destinations"
-            className="flex bg-red-600 text-white text-xl font-bold p-2 hover:bg-red-500"
-          >
-            View Destinations
-          </Link>{" "}
-          <Link
-            to="/delete-hotels"
-            className="flex bg-red-600 text-white text-xl font-bold p-2 hover:bg-red-500"
-          >
-            Delete Hotel
-          </Link>
-          <Link
-            to="/add-hotel"
-            className="flex bg-red-600 text-white text-xl font-bold p-2 hover:bg-red-500"
-          >
-            Add Hotel
-          </Link>
-        </div>
+
       </span>
       <div className="grid grid-cols-1 gap-8">
         {hotelData.map((hotel) => (
