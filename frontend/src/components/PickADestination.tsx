@@ -20,6 +20,9 @@ function PickADestination() {
       console.error("Failed to fetch destinations:", error);
     }
   };
+  if(!destinations){
+    return <></>
+  }
 
   const handleButtonClick = (place) => {
     navigate("/search");
