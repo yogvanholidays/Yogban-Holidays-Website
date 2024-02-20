@@ -23,6 +23,7 @@ import SearchAndDeleteHotels from "./pages/DeleteHotel";
 import ListYourProperty from "./pages/ListYourProperty";
 import ListPropertyRequestsPage from "./pages/ListPropertyRequestsPage";
 import CreateCoupon from "./pages/CreateCoupon";
+import CreateBlog from "./pages/CreateBlog";
 function App() {
   const { isLoggedIn,userEmail } = useAppContext();
   const isAdmin = (userEmail==='yogban@admin.com')
@@ -60,6 +61,7 @@ function App() {
             <Route path="/delete-hotels" element={<Layout page=''><SearchAndDeleteHotels/></Layout>} />
             <Route path="/view-all-bookings" element={<Layout page=''><AllBookings/></Layout>} />
             <Route path="/view-all-requests" element={<Layout page=''><ListPropertyRequestsPage/></Layout>} />
+            <Route path="/create-blog" element={<Layout page=''><CreateBlog/></Layout>} />
           </>
         )}
         <Route path="*" element={<Navigate to="/" />} />

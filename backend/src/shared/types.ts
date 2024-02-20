@@ -32,12 +32,11 @@ export type UserType = {
   lastName: string;
 };
 
-
 export type PaymentIntentResponse = {
   razorpay_payment_id: string;
   razorpay_order_id: string;
   totalCost: number;
-  userId:string;
+  userId: string;
 };
 export type BookingType = {
   userId: string;
@@ -51,30 +50,30 @@ export type BookingType = {
   totalCost: number;
   razorpay_payment_id: string;
   razorpay_order_id: string;
-  hotel:HotelType;
-  phoneNumber:string;
+  hotel: HotelType;
+  phoneNumber: string;
 };
 
 export type DestinationType = {
   [x: string]: any;
   name: string;
   illustrationImageUrl: string;
-}
+};
 
 export type ListPropertyRequestType = {
-  [x: string]:any;
+  [x: string]: any;
   firstName: string;
   lastName: string;
   email: string;
   mobile: string;
-  propertyName:string
+  propertyName: string;
   propertyLocation: string;
   propertyType: string;
   rooms: string;
   hearAbout: string;
   photosLink: string;
   propertyDescription: string;
-}
+};
 
 export type CouponType = {
   couponType: string;
@@ -85,4 +84,12 @@ export type CouponType = {
   expiryDate: string | null;
   neverExpires: boolean;
   creationDate: string;
-}
+};
+
+export type BlogType = {
+  title: string;
+  thumbnailImageUrl: string;
+  content: string;
+  author: string;
+  publishDate: string;
+};

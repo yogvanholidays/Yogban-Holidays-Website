@@ -473,3 +473,27 @@ export const fetchAllCoupons = async ()=> {
   console.log(data)
   return data;
 };
+
+
+
+export const createBlog = async (destinationFormData: FormData) => {
+  const response = await fetch(`${API_BASE_URL}/api/blogs`, {
+    method: "POST",
+    credentials: "include",
+    body: destinationFormData,
+  });
+  if (!response.ok) {
+    throw new Error("Failed to add blog");
+  }
+
+  return response.json();
+};
+
+export const getBlogs = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/blogs`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch blogs");
+  }
+
+  return response.json();
+};
