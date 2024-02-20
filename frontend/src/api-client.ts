@@ -497,3 +497,12 @@ export const getAllBlogs = async () => {
 
   return response.json();
 };
+
+
+export const getBlogById = async (id: string): Promise<any> => {
+  const response = await fetch(`${API_BASE_URL}/api/blogs/${id}`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch blog details");
+  }
+  return response.json();
+};

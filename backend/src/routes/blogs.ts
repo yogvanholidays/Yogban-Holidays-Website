@@ -18,9 +18,6 @@ const upload = multer({
 router.post(
   "/",
   verifyToken,
-  // [
-  //   body("title").notEmpty().withMessage("title is required"),
-  // ],
   upload.single("thumbnailImage"),
   async (req: Request, res: Response) => {
     try {
@@ -53,7 +50,7 @@ router.post(
 );
 router.get("/", async (req: Request, res: Response) => {
   try {
-    const blogs = await Blog.find();
+    const blogs = await Blog.find().sort("-publishDate");
     res.status(200).json(blogs);
   } catch (error) {
     console.error("Error fetching blogs:", error);
@@ -67,5 +64,18 @@ async function uploadImage(image: Express.Multer.File) {
   return res.url;
 }
 
+
+router.get("/:id", async (req: Request, res: Response) => {
+  try {
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+    res.status(200).json(blog);
+  } catch (error) {
+    console.error("Error fetching blog:", error);
+    res.status(500).json({ message: "Failed to fetch blog" });
+  }
+});
 
 export default router;

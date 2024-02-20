@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as apiClient from "../api-client";
 import { BlogType } from "../../../backend/src/shared/types";
 import { Link } from "react-router-dom";
 
 function PickABlog() {
-  //   const navigate = useNavigate();
+    const navigate = useNavigate();
   const [blogs, setBlogs] = useState<BlogType[]>([]);
 
   useEffect(() => {
@@ -29,6 +29,8 @@ function PickABlog() {
   const handleButtonClick = (blog: any) => {
     // Handle the navigation or any other action when a blog is clicked
     console.log("Clicked on blog:", blog);
+    navigate(`/blogs/${blog._id}`)
+    
   };
 
   return (

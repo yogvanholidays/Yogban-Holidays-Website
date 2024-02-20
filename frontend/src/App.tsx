@@ -25,6 +25,7 @@ import ListPropertyRequestsPage from "./pages/ListPropertyRequestsPage";
 import CreateCoupon from "./pages/CreateCoupon";
 import CreateBlog from "./pages/CreateBlog";
 import BlogsPage from "./pages/BlogsPage";
+import BlogDetailsPage from "./pages/BlogDetailsPage";
 function App() {
   const { isLoggedIn,userEmail } = useAppContext();
   const isAdmin = (userEmail==='yogban@admin.com')
@@ -44,6 +45,9 @@ function App() {
             </Layout>
           }
         />
+            <Route path="/blogs" element={<Layout page=''><BlogsPage/></Layout>} />
+            <Route path="/blogs/:id" element={<Layout page=''><BlogDetailsPage/></Layout>} />
+
         {isLoggedIn && (
           <>
             <Route path="/hotel/:hotelId/booking" element={<Layout page=''><Booking/></Layout>} />
@@ -63,7 +67,6 @@ function App() {
             <Route path="/view-all-bookings" element={<Layout page=''><AllBookings/></Layout>} />
             <Route path="/view-all-requests" element={<Layout page=''><ListPropertyRequestsPage/></Layout>} />
             <Route path="/create-blog" element={<Layout page=''><CreateBlog/></Layout>} />
-            <Route path="/blogs" element={<Layout page=''><BlogsPage/></Layout>} />
           </>
         )}
         <Route path="*" element={<Navigate to="/" />} />

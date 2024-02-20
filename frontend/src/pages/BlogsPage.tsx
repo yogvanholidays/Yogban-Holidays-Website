@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import * as apiClient from '../api-client';
 import { BlogType } from "../../../backend/src/shared/types";
+import { useNavigate } from "react-router-dom";
 
 const BlogsPage = () => {
+    const navigate = useNavigate();
+
   const [blogs, setBlogs] = useState<BlogType[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -28,8 +32,8 @@ const BlogsPage = () => {
     setCurrentPage(selected);
   };
 
-    function handleButtonClick(blog: BlogType): void {
-        console.log(blog)
+    function handleButtonClick(blog: any): void {
+        navigate(`/blogs/${blog._id}`)
     }
 
   return (
