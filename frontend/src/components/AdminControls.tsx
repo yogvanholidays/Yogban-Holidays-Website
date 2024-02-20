@@ -7,10 +7,10 @@ function AdminControls() {
 
       <div className="flex gap-5 w-full flex-wrap">
         <Link
-          to="/create-blog"
+          to="/review-blogs"
           className="flex flex-1 bg-red-600 text-white text-lg rounded font-semibold p-2 hover:bg-red-500 text-center justify-center"
         >
-          Create Blog
+          Review Blogs
         </Link>{" "}
         <Link
           to="/add-coupon"

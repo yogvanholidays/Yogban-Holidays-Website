@@ -78,4 +78,33 @@ router.get("/:id", async (req: Request, res: Response) => {
   }
 });
 
+// Search blogs
+router.get("/", async (req, res) => {
+  const { searchTerm } = req.query;
+  try {
+      let blogs;
+      if (searchTerm) {
+          blogs = await Blog.find({ title: { $regex: searchTerm, $options: "i" } });
+      } else {
+          blogs = await Blog.find();
+      }
+      res.json(blogs);
+  } catch (error) {
+      console.error("Failed to search blogs:", error);
+      res.status(500).json({ message: "Failed to search blogs" });
+  }
+});
+
+// Delete blog
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+      await Blog.findByIdAndDelete(id);
+      res.status(204).end();
+  } catch (error) {
+      console.error("Failed to delete blog:", error);
+      res.status(500).json({ message: "Failed to delete blog" });
+  }
+});
+
 export default router;

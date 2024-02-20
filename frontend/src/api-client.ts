@@ -506,3 +506,28 @@ export const getBlogById = async (id: string): Promise<any> => {
   }
   return response.json();
 };
+
+
+export const searchBlogs = async (searchTerm:string) => {
+  const response = await fetch(
+    `${API_BASE_URL}/api/blogs?searchTerm=${searchTerm}`,
+    {
+      method: "GET",
+      credentials: "include",
+    }
+  );
+  if (!response.ok) {
+    throw new Error("Failed to search blogs");
+  }
+  return response.json();
+};
+
+export const deleteBlog = async (id:string) => {
+  const response = await fetch(`${API_BASE_URL}/api/blogs/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+  if (!response.ok) {
+    throw new Error("Failed to delete blog");
+  }
+};

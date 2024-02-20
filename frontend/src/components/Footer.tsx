@@ -12,7 +12,7 @@ const Footer = () =>{
                     <p className="cursor-pointer">Terms of Service</p>
                 </span>
             </div>
-            <span className="text-white text-xs tracking-tight flex gap-4 mt-4 -mb-8">
+            <span className="text-white text-sm tracking-tight flex gap-4 mt-4 -mb-8">
                     <p className="cursor-pointer">developed by Batloop</p>
                 </span>
         </div>

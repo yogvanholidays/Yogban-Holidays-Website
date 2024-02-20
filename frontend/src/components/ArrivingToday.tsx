@@ -35,71 +35,67 @@ const ArrivingToday = () => {
           View All Bookings
         </Link>
       </div>
-      <div className="flex overflow-x-scroll gap-2">
-        {arrivingGuests.map((booking) => (
-          <div
-            key={booking.razorpay_payment_id}
-            className="flex flex-wrap border border-gray-300 rounded-lg p-4 relative items-center gap-4 w-96"
-          >
-            <div className="flex flex-col">
-              <Link
-                to={`/detail/${booking.hotel._id}`}
-                className="text-xl font-bold hover:underline"
-              >
-                {booking.hotel.name}
-              </Link>
-              <div>
-                <span className="font-bold mr-2">Booked By:</span>
-                <span>
-                  {booking.firstName} {booking.lastName}
-                </span>
+      <div className="overflow-x-auto max-w-screen-xl mx-auto mb-12">
+        <div className="flex flex-nowrap gap-4">
+          {arrivingGuests.map((booking) => (
+            <div
+              key={booking.razorpay_payment_id}
+              className="flex-shrink-0 w-96 border border-gray-300 rounded-lg p-4 relative items-center gap-4"
+            >
+              <div className="flex flex-col">
+                <Link
+                  to={`/detail/${booking.hotel._id}`}
+                  className="text-xl font-bold hover:underline"
+                >
+                  {booking.hotel.name}
+                </Link>
+                <div>
+                  <span className="font-bold mr-2">Booked By:</span>
+                  <span>
+                    {booking.firstName} {booking.lastName}
+                  </span>
+                </div>
+                <div>
+                  <span className="font-bold mr-2">Phone Number: </span>
+                  <span className="mr-2">{booking.phoneNumber}</span>
+                </div>
+                <div>
+                  <span className="font-bold mr-2">Email: </span>
+                  <span className="mr-2">{booking.email}</span>
+                </div>
+                <div>
+                  <span className="font-bold mr-2">Dates: </span>
+                  <span>
+                    {new Date(booking.checkIn).toDateString()} -{" "}
+                    {new Date(booking.checkOut).toDateString()}
+                  </span>
+                </div>
+                <div>
+                  <span className="font-bold mr-2">Guests:</span>
+                  <span>
+                    {booking.adultCount} adults, {booking.childCount} children
+                  </span>
+                </div>
+                <div>
+                  <span className="font-bold mr-2">Total Cost:</span>
+                  <span>{booking.totalCost}</span>
+                </div>
+                <div>
+                  <span className="font-bold mr-2">Payment ID:</span>
+                  <span>{booking.razorpay_payment_id}</span>
+                </div>
               </div>
-              <div>
-                <span className="font-bold mr-2">Phone Number: </span>
-                <span className="mr-2">{booking.phoneNumber}</span>
-              </div>
-              <div>
-                <span className="font-bold mr-2">Email: </span>
-                <span className="mr-2">{booking.email}</span>
-              </div>
-              <div>
-                <span className="font-bold mr-2">Dates: </span>
-                <span>
-                  {new Date(booking.checkIn).toDateString()} -{" "}
-                  {new Date(booking.checkOut).toDateString()}
-                </span>
-              </div>
-              <div>
-                <span className="font-bold mr-2">Guests:</span>
-                <span>
-                  {booking.adultCount} adults, {booking.childCount} children
-                </span>
-              </div>
-              <div>
-                <span className="font-bold mr-2">Total Cost:</span>
-                <span>{booking.totalCost}</span>
-              </div>
-              <div>
-                <span className="font-bold mr-2">Payment ID:</span>
-                <span>{booking.razorpay_payment_id}</span>
-              </div>
+              {booking.phoneNumber && (
+                <a
+                  href={`tel:${booking.phoneNumber}`}
+                  className="bg-red-500 text-white px-4 py-2 rounded m-2 absolute bottom-0 right-0"
+                >
+                  Call
+                </a>
+              )}
             </div>
-            {booking.phoneNumber && (
-              <a
-                href={`tel:${booking.phoneNumber}`}
-                className="bg-red-500 text-white px-4 py-2 rounded m-2"
-              >
-                Call
-              </a>
-            )}
-          </div>
-        ))}
-        <Link
-          to="/view-all-bookings"
-          className="flex flex-wrap border border-gray-300 rounded-lg p-4 relative items-center gap-4 w-96 text-center font-bold text-xl justify-center"
-        >
-          View All Bookings
-        </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

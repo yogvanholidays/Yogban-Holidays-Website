@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import * as apiClient from '../api-client';
 import { DestinationType } from "../../../backend/src/shared/types";
@@ -8,16 +9,16 @@ const SearchAndDeleteDestinations = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    searchDestinations();
+    fetchDestinations();
   }, []);
 
-  const searchDestinations = async () => {
+  const fetchDestinations = async () => {
     setLoading(true);
     try {
-      const data = await apiClient.searchDestinations(searchTerm);
+      const data = await apiClient.getDestinations();
       setDestinations(data);
     } catch (error) {
-      console.error("Failed to search destinations:", error);
+      console.error("Failed to fetch destinations:", error);
     }
     setLoading(false);
   };
@@ -32,6 +33,12 @@ const SearchAndDeleteDestinations = () => {
     }
   };
 
+  const filteredDestinations = destinations.filter(destination => {
+    const { name } = destination;
+    const lowerSearchTerm = searchTerm.toLowerCase();
+    return name.toLowerCase().includes(lowerSearchTerm);
+  });
+
   return (
     <div>
       <h2 className="font-bold text-2xl">Destinations</h2>
@@ -42,10 +49,10 @@ const SearchAndDeleteDestinations = () => {
         placeholder="Search by name..."
         className="border p-2 rounded-md m-2"
       />
-      <button onClick={searchDestinations} className="p-2 rounded-md bg-red-400 text-white">Search</button>
+      <button onClick={fetchDestinations} className="p-2 rounded-md bg-red-400 text-white">Reload</button>
       {loading && <p>Loading...</p>}
-      <div className="flex flex-col flex-wrap">
-        {destinations.map(destination => (
+      <div className="flex flex-wrap">
+        {filteredDestinations.map(destination => (
           <div key={destination._id} className="m-2 border rounded-md p-2 flex w-min text-center items-center">
             <span className="font-bold text-xl m-2">{destination.name}</span>
             <button onClick={() => handleDelete(destination._id)} className="p-2 ml-24 rounded-md bg-red-400 text-white">Delete</button>
