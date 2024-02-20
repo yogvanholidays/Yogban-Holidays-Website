@@ -531,3 +531,13 @@ export const deleteBlog = async (id:string) => {
     throw new Error("Failed to delete blog");
   }
 };
+
+export const deleteCoupon = async (id:string) => {
+  const response = await fetch(`${API_BASE_URL}/api/coupons/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+  if (!response.ok) {
+    throw new Error("Failed to delete coupon");
+  }
+};

@@ -45,7 +45,7 @@ const UploadDestination = () => {
             id="destinationName"
             value={destinationName}
             onChange={(e) => setDestinationName(e.target.value)}
-            className="mt-1 block w-full border-gray-300 p-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            className="mt-1 block w-full border-gray-300 p-2 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
         <div className="mb-4">
@@ -53,12 +53,12 @@ const UploadDestination = () => {
           <input
             type="file"
             id="illustrationImage"
-            accept="image/png, image/jpeg"
+            accept="image/png, image/jpeg, image/svg+xml"
             onChange={handleImageChange}
-            className="mt-1 block w-full border-gray-300 p-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            className="mt-1 block w-full border-gray-300 p-2 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
-        <button type="submit" className="block bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Upload Destination</button>
+        <button type="submit" className="block bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600">Upload Destination</button>
       </form>
     </div>
   );

@@ -27,6 +27,7 @@ import CreateBlog from "./pages/CreateBlog";
 import BlogsPage from "./pages/BlogsPage";
 import BlogDetailsPage from "./pages/BlogDetailsPage";
 import SearchAndDeleteBlogs from "./pages/SearchAndDeleteBlogs";
+import ReviewCouponsPage from "./pages/ReviewCouponsPage";
 function App() {
   const { isLoggedIn,userEmail } = useAppContext();
   const isAdmin = (userEmail==='yogban@admin.com')
@@ -71,6 +72,7 @@ function App() {
             <Route path="/review-blogs" element={<Layout page=''><SearchAndDeleteBlogs/></Layout>} />
           </>
         )}
+        <Route path="/review-coupons" element={<Layout page=''><ReviewCouponsPage/></Layout>} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

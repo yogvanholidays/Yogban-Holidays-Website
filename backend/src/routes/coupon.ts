@@ -49,4 +49,15 @@ router.get("/", async (req: Request, res: Response) => {
   }
 });
 
+router.delete("/:id", verifyToken, async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    await Coupon.findByIdAndDelete(id);
+    res.status(204).end();
+  } catch (error) {
+    console.error("Failed to delete coupon:", error);
+    res.status(500).json({ message: "Failed to delete coupon" });
+  }
+});
+
 export default router;

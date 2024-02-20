@@ -76,6 +76,7 @@ export type ListPropertyRequestType = {
 };
 
 export type CouponType = {
+  [x: string]: any;
   couponType: string;
   amount: number;
   couponCode: string;

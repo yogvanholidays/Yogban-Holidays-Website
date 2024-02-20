@@ -13,22 +13,16 @@ function AdminControls() {
           Review Blogs
         </Link>{" "}
         <Link
-          to="/add-coupon"
+          to="/review-coupons"
           className="flex flex-1 bg-red-600 text-white text-lg rounded font-semibold p-2 hover:bg-red-500 text-center justify-center"
         >
-          Publish Coupon
-        </Link>{" "}
-        <Link
-          to="/upload-destination"
-          className="flex flex-1 bg-red-600 text-white text-lg rounded font-semibold p-2 hover:bg-red-500 text-center justify-center"
-        >
-          Upload A Destination
+          Review Coupons
         </Link>{" "}
         <Link
           to="/view-destinations"
           className="flex flex-1 bg-red-600 text-white text-lg rounded font-semibold p-2 hover:bg-red-500 text-center justify-center"
         >
-          View Destinations
+          Review Destinations
         </Link>{" "}
         <Link
           to="/view-all-requests"
