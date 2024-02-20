@@ -489,7 +489,7 @@ export const createBlog = async (destinationFormData: FormData) => {
   return response.json();
 };
 
-export const getBlogs = async () => {
+export const getAllBlogs = async () => {
   const response = await fetch(`${API_BASE_URL}/api/blogs`);
   if (!response.ok) {
     throw new Error("Failed to fetch blogs");
