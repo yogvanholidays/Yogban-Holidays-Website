@@ -28,6 +28,8 @@ import BlogsPage from "./pages/BlogsPage";
 import BlogDetailsPage from "./pages/BlogDetailsPage";
 import SearchAndDeleteBlogs from "./pages/SearchAndDeleteBlogs";
 import ReviewCouponsPage from "./pages/ReviewCouponsPage";
+
+
 function App() {
   const { isLoggedIn,userEmail } = useAppContext();
   const isAdmin = (userEmail==='yogban@admin.com')
@@ -59,13 +61,13 @@ function App() {
         )}
         {isLoggedIn && isAdmin && (
           <>
-            <Route path="/add-hotel" element={<Layout page=''><AddHotel/></Layout>} />
+          <Route path="/add-property" element={<Layout page=''><AddHotel/></Layout>} />
             <Route path="/add-coupon" element={<Layout page=''><CreateCoupon/></Layout>} />
             <Route path="/edit-hotel/:hotelId" element={<Layout page=''><EditHotel/></Layout>} />
             <Route path="/admin" element={<Layout page=''><MyHotels/></Layout>} />
             <Route path="/upload-destination" element={<Layout page=''><UploadDestination/></Layout>} />
             <Route path="/view-destinations" element={<Layout page=''><SearchAndDeleteDestinations/></Layout>} />
-            <Route path="/delete-hotels" element={<Layout page=''><SearchAndDeleteHotels/></Layout>} />
+            <Route path="/review-properties" element={<Layout page=''><SearchAndDeleteHotels/></Layout>} />
             <Route path="/view-all-bookings" element={<Layout page=''><AllBookings/></Layout>} />
             <Route path="/view-all-requests" element={<Layout page=''><ListPropertyRequestsPage/></Layout>} />
             <Route path="/create-blog" element={<Layout page=''><CreateBlog/></Layout>} />

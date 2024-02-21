@@ -43,16 +43,20 @@ const MyHotels = () => {
     <div className="space-y-5">
       <AdminControls />
       <ArrivingToday />
-      <span className="flex justify-between">
-        <h1 className="text-3xl font-bold">My Hotels</h1>
+      <div className="flex justify-between portrait:flex-col gap-2">
+        <h1 className="text-3xl font-bold min-w-fit">My Hotels</h1>
+        <div className="flex min-w-fit portrait:w-full landscape:w-1/2 gap-2">
+
         <input
           type="text"
-          className="border border-gray-300 rounded-md p-2 w-2/6"
+          className="border border-gray-300 rounded-md p-2 w-full"
           placeholder="Search by hotel name or city or id"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </span>
+          />
+          <Link to='/review-properties' className="text-white bg-red-500 p-2 rounded-md min-w-fit">View All</Link>
+          </div>
+      </div>
       <div className="grid grid-cols-1 gap-8">
         {currentHotels?.map((hotel) => (
           <div

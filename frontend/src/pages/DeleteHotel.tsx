@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
+import ReactPaginate from "react-paginate";
 import * as apiClient from '../api-client';
 import { HotelType } from "../../../backend/src/shared/types";
 import { hotelFacilities, hotelTypes } from "../config/hotel-options-config";
-
+import { Link } from "react-router-dom";
 
 const SearchAndDeleteHotels = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,10 +13,11 @@ const SearchAndDeleteHotels = () => {
   const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
   const [hotels, setHotels] = useState<HotelType[]>([]);
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     searchHotels();
-  }, [searchTerm, selectedType, selectedFacilities]);
+  }, [searchTerm, selectedType, selectedFacilities, currentPage]);
 
   const searchHotels = async () => {
     setLoading(true);
@@ -52,10 +54,23 @@ const SearchAndDeleteHotels = () => {
     }
   };
 
+  // Pagination
+  const hotelsPerPage = 12;
+  const offset = currentPage * hotelsPerPage;
+  const pageCount = Math.ceil(hotels.length / hotelsPerPage);
+  const paginatedHotels = hotels.slice(offset, offset + hotelsPerPage);
+
+  const handlePageChange = ({ selected }: { selected: number }) => {
+    setCurrentPage(selected);
+  };
+
   return (
     <div>
-      <h2 className="font-bold text-2xl">Properties</h2>
-      <div className="flex">
+      <div className="flex justify-between items-center">
+      <h2 className="font-bold text-2xl">All Properties</h2>
+      <Link to='/' className="p-2 rounded-md bg-red-400 text-white h-full min-w-fit"> Add New</Link>
+      </div>
+      <div className="flex portrait:flex-col">
         <input
           type="text"
           value={searchTerm}
@@ -73,7 +88,6 @@ const SearchAndDeleteHotels = () => {
             <option key={type} value={type}>{type}</option>
           ))}
         </select>
-      </div>
       <div className="flex flex-wrap">
         {hotelFacilities.map(facility => (
           <div key={facility} className="m-2">
@@ -88,17 +102,35 @@ const SearchAndDeleteHotels = () => {
           </div>
         ))}
       </div>
-      <button onClick={searchHotels} className="p-2 rounded-md bg-red-400 text-white">Search</button>
+      </div>
+      <button onClick={searchHotels} className="p-2 rounded-md bg-red-400 text-white">Refresh Now</button>
       {loading && <p>Loading...</p>}
       <div className="grid grid-cols-3 gap-3 portrait:grid-cols-1">
-        {hotels.map(hotel => (
+        {paginatedHotels.map(hotel => (
           <div key={hotel._id} className="border rounded-md p-2 flex flex-col justify-end w-full">
-            <span className="font-bold text-xl m-2">{hotel.name}</span>
+            <Link className="font-bold text-xl m-2" to={`/edit-hotel/${hotel._id}`}>{hotel.name}</Link>
             <span className="font-bold text-sm m-2">{hotel.city}, {hotel.country}</span>
             <button onClick={() => handleDelete(hotel._id)} className="p-2 rounded-md bg-red-400 text-white" style={{ width: "100%" }}>Delete</button>
           </div>
         ))}
       </div>
+      <div className="flex items-center justify-center mt-4">
+      <ReactPaginate
+        previousLabel={"← Previous"}
+        nextLabel={"Next →"}
+        pageCount={pageCount}
+        onPageChange={handlePageChange}
+        containerClassName={"pagination flex items-center space-x-4 text-red-600"}
+        activeClassName={"active"}
+        previousClassName={"px-3 py-1 border border-gray-950 rounded"}
+        nextClassName={"px-3 py-1 border border-gray-950 rounded"}
+        breakClassName={"px-3 py-1 border border-gray-950 rounded"}
+        pageClassName={"px-3 py-1 bg-red-100 rounded"}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        disabledClassName={"text-gray-500 pointer-events-none"}
+      />
+    </div>
     </div>
   );
 };
