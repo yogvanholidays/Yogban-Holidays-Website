@@ -33,7 +33,7 @@ import CarouselImagesPage from "./pages/CarouselImagesPage";
 
 function App() {
   const { isLoggedIn,userEmail } = useAppContext();
-  const isAdmin = (userEmail==='yogban@admin.com')
+  const isAdmin = (userEmail==='yogvan@admin.com')
   return (
     <Router>
       <Routes>

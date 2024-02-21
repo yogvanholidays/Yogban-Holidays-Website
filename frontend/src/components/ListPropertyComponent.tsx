@@ -7,7 +7,7 @@ function ListPropertyComponent() {
       <div className="flex flex-wrap">
         <div className="flex-grow font-medium text-lg">
         <p>
-          Maximise the Success of Your Holiday Home with Yogban Holidays:
+          Maximise the Success of Your Holiday Home with Yogvan Holidays:
           <br />A Partnership of Trust
         </p>
         </div>

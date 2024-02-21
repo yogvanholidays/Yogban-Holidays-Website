@@ -13,7 +13,7 @@ interface Props {
 
 const Header = ({ bgHandle }: Props) => {
   const { isLoggedIn, userEmail } = useAppContext();
-  const isAdmin = userEmail === "yogban@admin.com";
+  const isAdmin = userEmail === "yogvan@admin.com";
   const isHomePage = bgHandle === "HomePage";
   const [isScrolled, setIsScrolled] = useState(false);
   const [images, setImages] = useState<CarouselImageType[]>([{imageUrl: "https://via.placeholder.com/800x400"}]);
@@ -65,7 +65,7 @@ const Header = ({ bgHandle }: Props) => {
         }
       >
         <span className="text-3xl text-white font-bold tracking-tight">
-          <Link to="/">YogbanHolidays.com</Link>
+          <Link to="/">YogvanHolidays.com</Link>
         </span>
         <span className="flex space-x-2">
           {isLoggedIn ? (
