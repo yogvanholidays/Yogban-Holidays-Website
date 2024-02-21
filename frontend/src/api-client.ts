@@ -541,3 +541,56 @@ export const deleteCoupon = async (id:string) => {
     throw new Error("Failed to delete coupon");
   }
 };
+
+
+export const uploadCarouselImage = async (image: File) => {
+  const formData = new FormData();
+  formData.append("carouselImage", image);
+  console.log(formData)
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/carousel`, {
+      method: "POST",
+      body: formData,
+      credentials:'include'
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to upload carousel image");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error uploading carousel image:", error);
+    throw error;
+  }
+};
+
+export const fetchCarouselImages = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/carousel`);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch carousel images");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching carousel images:", error);
+    throw error;
+  }
+};
+
+export const deleteCarouselImage = async (id: string) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/carousel/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete carousel image");
+    }
+  } catch (error) {
+    console.error("Error deleting carousel image:", error);
+    throw error;
+  }
+};

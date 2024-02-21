@@ -13,6 +13,7 @@ import blogs from './routes/blogs'
 import cookieParser from "cookie-parser"
 import path from 'path';
 import { v2 as cloudinary } from 'cloudinary';
+import carousel from './routes/carousel';
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -47,6 +48,7 @@ app.use(cors({
   app.use("/api/properties", properties)
   app.use("/api/coupons", coupons)
   app.use("/api/blogs", blogs)
+  app.use("/api/carousel", carousel)
 
   app.get("*", (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));

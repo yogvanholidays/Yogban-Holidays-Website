@@ -94,3 +94,8 @@ export type BlogType = {
   author: string;
   publishDate: string;
 };
+
+export type CarouselImageType = {
+  [x: string]: string;
+  imageUrl: string;
+};

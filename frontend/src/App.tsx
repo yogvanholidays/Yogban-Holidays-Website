@@ -28,6 +28,7 @@ import BlogsPage from "./pages/BlogsPage";
 import BlogDetailsPage from "./pages/BlogDetailsPage";
 import SearchAndDeleteBlogs from "./pages/SearchAndDeleteBlogs";
 import ReviewCouponsPage from "./pages/ReviewCouponsPage";
+import CarouselImagesPage from "./pages/CarouselImagesPage";
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
         />
             <Route path="/blogs" element={<Layout page=''><BlogsPage/></Layout>} />
             <Route path="/blogs/:id" element={<Layout page=''><BlogDetailsPage/></Layout>} />
+            <Route path="/carousel" element={<Layout page=''><CarouselImagesPage/></Layout>} />
 
         {isLoggedIn && (
           <>
