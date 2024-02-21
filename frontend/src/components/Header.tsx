@@ -4,6 +4,8 @@ import SignOutButton from "./SignOutButton";
 import { Carousel } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
+import { fetchCarouselImages } from "../api-client";
+import { CarouselImageType } from "../../../backend/src/shared/types";
 
 interface Props {
   bgHandle: string;
@@ -14,6 +16,8 @@ const Header = ({ bgHandle }: Props) => {
   const isAdmin = userEmail === "yogban@admin.com";
   const isHomePage = bgHandle === "HomePage";
   const [isScrolled, setIsScrolled] = useState(false);
+  const [images, setImages] = useState<CarouselImageType[]>([{imageUrl: "https://via.placeholder.com/800x400"}]);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.pageYOffset;
@@ -24,6 +28,18 @@ const Header = ({ bgHandle }: Props) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const carouselImages = await fetchCarouselImages();
+        setImages(carouselImages);
+      } catch (error) {
+        console.error('Error fetching carousel images:', error);
+      }
+    };
+
+    fetchImages();
   }, []);
   return (
     <div
@@ -82,36 +98,17 @@ const Header = ({ bgHandle }: Props) => {
       </div>
       {isHomePage ? (
         <Carousel className="w-auto" style={{ height: "35rem" }}>
-          <Carousel.Item>
-            <div>
-              <img
-                className="d-block w-screen object-cover"
-                src="https://via.placeholder.com/800x400"
-                alt="Second slide"
-                style={{ height: "35rem" }}
-              />
-            </div>
-            {/* <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </Carousel.Caption> */}
-          </Carousel.Item>
-          <Carousel.Item>
-            <div>
-              <img
-                className="d-block w-screen object-cover"
-                src="https://via.placeholder.com/800x400"
-                alt="Second slide"
-                style={{ height: "35rem" }}
-              />
-            </div>
-            {/* <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </Carousel.Caption> */}
-          </Carousel.Item>
-          {/* Add more Carousel.Items as needed */}
-        </Carousel>
+      {images.map((image, index) => (
+        <Carousel.Item key={index}>
+          <img
+            className="d-block w-screen object-cover"
+            src={image.imageUrl || 'https://via.placeholder.com/800x400'}
+            alt={`Carousel image ${index}`}
+            style={{ height: "35rem" }}
+          />
+        </Carousel.Item>
+      ))}
+    </Carousel>
       ) : (
         <div className="container mx-auto flex flex-col gap-2">
           <h1 className="text-5xl text-white font-bold">Find Your Next Stay</h1>

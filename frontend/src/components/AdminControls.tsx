@@ -36,6 +36,12 @@ function AdminControls() {
         >
           Add Hotel
         </Link>
+        <Link
+          to="/carousel"
+          className="flex flex-1 bg-red-600 text-white text-lg rounded font-semibold p-2 hover:bg-red-500 text-center justify-center items-center"
+        >
+          Carousel Image Gallery
+        </Link>
       </div>
     </div>
   );

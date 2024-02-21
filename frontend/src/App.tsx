@@ -52,7 +52,6 @@ function App() {
         />
             <Route path="/blogs" element={<Layout page=''><BlogsPage/></Layout>} />
             <Route path="/blogs/:id" element={<Layout page=''><BlogDetailsPage/></Layout>} />
-            <Route path="/carousel" element={<Layout page=''><CarouselImagesPage/></Layout>} />
 
         {isLoggedIn && (
           <>
@@ -74,6 +73,7 @@ function App() {
             <Route path="/view-all-requests" element={<Layout page=''><ListPropertyRequestsPage/></Layout>} />
             <Route path="/create-blog" element={<Layout page=''><CreateBlog/></Layout>} />
             <Route path="/review-blogs" element={<Layout page=''><SearchAndDeleteBlogs/></Layout>} />
+          <Route path="/carousel" element={<Layout page=''><CarouselImagesPage/></Layout>} />
           </>
         )}
         <Route path="/review-coupons" element={<Layout page=''><ReviewCouponsPage/></Layout>} />
