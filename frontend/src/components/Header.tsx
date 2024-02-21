@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { fetchCarouselImages } from "../api-client";
 import { CarouselImageType } from "../../../backend/src/shared/types";
+import yogbanLogo from '../assets/Yogvan.png';
 
 interface Props {
   bgHandle: string;
@@ -43,14 +44,19 @@ const Header = ({ bgHandle }: Props) => {
   }, []);
   return (
     <div
-      className={isHomePage ? "pb-3 bg-transparent" : "bg-red-900 py-6 pb-16"}
+      className={isHomePage ? "pb-3 bg-transparent" : "bg-yogvan pb-16"}
       style={{transition: "all 0.3s ease-in-out",}}
     >
+      {/* {
+      !isScrolled && (
+        <div className="w-full absolute bg-gradient-to-b from-white to-transparent h-44 z-20"></div>
+      )
+    } */}
       <div
         className={
           isHomePage
-            ? isScrolled?"bg-red-900 max-w-full container flex flex-wrap justify-between py-4": "container max-w-full flex flex-wrap justify-between py-4"
-            : "container mx-auto flex flex-wrap justify-between pb-5 pt-4"
+            ? isScrolled?"bg-white max-w-full container flex flex-wrap justify-between py-2 z-30 transition-all duration-1000": "bg-gradient-to-b from-white to-transparent container max-w-full flex flex-wrap justify-between py-4 z-30 transition-all duration-1000"
+            : "container mx-auto flex flex-wrap justify-between pb-5 pt-4 z-30"
         }
         style={
           isHomePage
@@ -64,22 +70,22 @@ const Header = ({ bgHandle }: Props) => {
             : {}
         }
       >
-        <span className="text-3xl text-white font-bold tracking-tight">
-          <Link to="/">YogvanHolidays.com</Link>
+        <span className="text-3xl text-black font-bold tracking-tight">
+          <Link to="/"><span className="flex text-center items-center gap-3"><img src={yogbanLogo} style={{height:'80px'}} alt="" />YogvanHolidays.com</span></Link>
         </span>
-        <span className="flex space-x-2">
+        <span className="flex space-x-2 items-center">
           {isLoggedIn ? (
             <>
               <Link
                 to="/my-bookings"
-                className="flex items-center text-white px-3 font-bold hover:bg-red-600"
+                className="flex items-center text-black px-3 font-bold hover:bg-gray-300 rounded-lg h-fit py-2 bg-gray-100 transition-all duration-300"
               >
                 My Bookings
               </Link>
               {isAdmin && (
                 <Link
                   to="/admin"
-                  className="flex items-center text-white px-3 font-bold hover:bg-red-600"
+                  className="flex items-center text-black px-3 font-bold hover:bg-gray-300 rounded-lg h-fit py-2 bg-gray-100 transition-all duration-300"
                 >
                   Admin
                 </Link>
@@ -89,7 +95,7 @@ const Header = ({ bgHandle }: Props) => {
           ) : (
             <Link
               to="/sign-in"
-              className="flex items-center bg-white text-red-600 px-3 font-bold hover:bg-gray-100"
+              className="flex items-center text-red-600 px-3 font-bold hover:bg-gray-300 rounded-lg h-fit py-2 bg-gray-100 transition-all duration-300"
             >
               Sign In
             </Link>
@@ -111,8 +117,8 @@ const Header = ({ bgHandle }: Props) => {
     </Carousel>
       ) : (
         <div className="container mx-auto flex flex-col gap-2">
-          <h1 className="text-5xl text-white font-bold">Find Your Next Stay</h1>
-          <p className="text-2xl text-white">
+          <h1 className="text-5xl text-black font-bold">Find Your Next Stay</h1>
+          <p className="text-2xl text-black">
             Search low prices on hotels for your dream vacations
           </p>
         </div>
