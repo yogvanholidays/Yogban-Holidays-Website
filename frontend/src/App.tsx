@@ -2,7 +2,6 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate,
 } from "react-router-dom";
 import Layout from "./layouts/Layout";
 import Register from "./pages/Register";
@@ -34,6 +33,7 @@ import TermsAndConditions from "./pages/TermsAndConditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import GuestPolicy from "./pages/GuestPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
+import NotFoundPage from "./pages/NotFoundPage";
 
 
 function App() {
@@ -81,7 +81,7 @@ function App() {
           <Route path="/review-coupons" element={<Layout hiddenSearchBar="hide" page=''><ReviewCouponsPage/></Layout>} />
           </>
         )}
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Layout hiddenSearchBar="" page=''><NotFoundPage/></Layout>} />
       </Routes>
     </Router>
   );
