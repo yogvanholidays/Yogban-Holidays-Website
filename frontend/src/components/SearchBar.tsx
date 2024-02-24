@@ -22,7 +22,7 @@ const SearchBar = ({handler}: Props) => {
   const [adultCount, setAdultCount] = useState<number>(search.adultCount);
   const [childCount, setChildCount] = useState<number>(search.childCount);
   const [destinations, setDestinations] = useState<DestinationType[]>([]);
-  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     fetchDestinations();
@@ -38,11 +38,11 @@ const SearchBar = ({handler}: Props) => {
   };
 
   const handleDestinationClick = () => {
-    setShowPopup(!showPopup);
+    setShowPopup(true);
   };
 
-  const handleDestinationSelect = (name: string) => {
-    setDestination(name);
+  const handleDestinationSelect = (selectedDestination: string) => {
+    setDestination(selectedDestination);
     setShowPopup(false);
   };
 
@@ -94,31 +94,33 @@ const SearchBar = ({handler}: Props) => {
     >
       <div className="relative w-full">
         <div className="flex flex-row items-center flex-1 w-full bg-white p-3 rounded border-2 border-gray-300">
-          <MdTravelExplore size={25} className="mr-2" />
+        <MdTravelExplore size={25} className="mr-2" />
           <input
             placeholder="Where are you going?"
             className="text-md w-full focus:outline-none"
             value={destination}
+            onChange={(event) => setDestination(event.target.value)}
             onClick={handleDestinationClick}
-            readOnly
           />
         </div>
         {showPopup && (
-          <div className="absolute z-10 mt-1 py-1 w-full bg-white border border-gray-300 rounded shadow-lg">
-            <ul>
-              {destinations.map((dest) => (
-                <li
-                  key={dest.name}
-                  className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleDestinationSelect(dest.name)}
-                >
-                  {dest.name}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ul className="absolute top-full left-0 z-10 bg-white border border-gray-300 rounded-md mt-1 w-full">
+            {destinations.map((dest) => (
+              <li
+                key={dest.name}
+                className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                onClick={() => handleDestinationSelect(dest.name)}
+              >
+                {dest.name}
+              </li>
+            ))}
+          </ul>
         )}
       </div>
+
+
+
+      
 
       <div className="flex bg-white p-2.5 gap-2 rounded border-2 h-full border-gray-300 ">
         <label className="items-center flex">

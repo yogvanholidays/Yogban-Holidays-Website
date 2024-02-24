@@ -7,7 +7,7 @@ export interface DestinationType extends Document {
 
 const DestinationSchema: Schema = new Schema({
   name: { type: String, required: true },
-  illustrationImageUrl: { type: String, required: true },
+  illustrationImageUrl: { type: String, required: false },
 });
 
 const Destination = mongoose.model<DestinationType>('Destination', DestinationSchema);

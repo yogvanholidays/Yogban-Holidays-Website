@@ -22,14 +22,17 @@ router.post(
     body("name").notEmpty().withMessage("Name is required"),
     // Add more validation rules as needed
   ],
-  upload.single("illustrationImage"), // Assuming you upload a single image for illustration
+  upload.single("illustrationImage"),
   async (req: Request, res: Response) => {
     try {
-      const illustrationImage = req.file as Express.Multer.File;
-      const newName: string = req.body.name; // Assuming you pass the name in the request body
+      let illustrationImageUrl = "";
+      if (req.file) {
+        // If illustration image is provided, upload it to cloudinary
+        const illustrationImage = req.file as Express.Multer.File;
+        illustrationImageUrl = await uploadImage(illustrationImage);
+      }
 
-      // Upload illustration image to cloudinary
-      const illustrationImageUrl = await uploadImage(illustrationImage);
+      const newName: string = req.body.name; // Assuming you pass the name in the request body
 
       // Create a new Destination object
       const newDestination = new Destination({
@@ -48,6 +51,10 @@ router.post(
     }
   }
 );
+
+
+
+
 router.get("/", async (req: Request, res: Response) => {
   try {
     const destinations = await Destination.find();

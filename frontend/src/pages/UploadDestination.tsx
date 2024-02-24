@@ -8,14 +8,16 @@ const UploadDestination = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!destinationName || !illustrationImage) {
-      alert("Please fill in all fields");
+    if (!destinationName) {
+      alert("Please fill in the destination name");
       return;
     }
 
     const formData = new FormData();
     formData.append("name", destinationName);
-    formData.append("illustrationImage", illustrationImage);
+    if (illustrationImage) {
+      formData.append("illustrationImage", illustrationImage);
+    }
 
     try {
       const response = await apiClient.addDestination(formData);
