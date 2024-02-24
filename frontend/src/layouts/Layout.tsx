@@ -16,7 +16,7 @@ const Layout = ({ children, page, hiddenSearchBar }: Props) => {
       <Header bgHandle={page} />
       {!searchBarHiden && (
         <div
-          className="mx-auto max-w-[85vw] portrait:max-w-[95vw] portrait:w-[90vw] portrait:-mt-10 landscape:-mt-20 landscape:mb-10" //remove last part to revert searchbar new positioning
+          className="mx-auto max-w-[85vw] portrait:max-w-[95vw] portrait:w-[90vw] portrait:-mt-5"// landscape:-mt-20 landscape:mb-10" //remove last part to revert searchbar new positioning
           style={{ zIndex: 99 }}
         >
           <SearchBar handler={page} />

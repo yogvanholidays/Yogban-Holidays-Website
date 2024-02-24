@@ -13,7 +13,9 @@ const Footer = () => {
           <div className="flex flex-col items-center lg:items-start">
             <div className="flex items-center gap-2 mt-4">
               <FaMapMarkerAlt />
-              <p className="text-sm lg:text-base">Tapovan Kunj Complex, Rishikesh, Uttarakhand 249137 India.</p>
+              <p className="text-sm lg:text-base">
+                Tapovan Kunj Complex, Rishikesh, Uttarakhand 249137 India.
+              </p>
             </div>
             <div className="flex items-center gap-2 mt-2">
               <FaPhone />
@@ -21,23 +23,35 @@ const Footer = () => {
             </div>
             <div className="flex items-center gap-2 mt-2">
               <FaEnvelope />
-              <p className="text-sm lg:text-base">mail: yogvanholidays@gmail.com</p>
+              <p className="text-sm lg:text-base">
+                mail: yogvanholidays@gmail.com
+              </p>
             </div>
           </div>
         </div>
         {/* Additional info */}
         <div className="text-white font-bold tracking-tight mt-4 text-center lg:text-right lg:mt-0">
           <div className="flex flex-col items-center lg:items-end">
-            <Link to="/" className="mb-2 lg:mb-0">Terms of Use</Link>
-            <Link to="/" className="mb-2 lg:mb-0">Privacy Policy</Link>
-            <Link to="/" className="mb-2 lg:mb-0">Guest Policies (House Rules)</Link>
-            <Link to="/" className="mb-2 lg:mb-0">Refund and Cancellation Policy</Link>
+            <Link to="/terms-and-contions" className="mb-2 lg:mb-0">
+              Terms of Use
+            </Link>
+            <Link to="/privacy-policy" className="mb-2 lg:mb-0">
+              Privacy Policy
+            </Link>
+            <Link to="/guest-policy" className="mb-2 lg:mb-0">
+              Guest Policies (House Rules)
+            </Link>
+            <Link to="/refund-policy" className="mb-2 lg:mb-0">
+              Refund and Cancellation Policy
+            </Link>
           </div>
         </div>
       </div>
       {/* Bottom */}
-      <div className="bg-black w-full text-white text-center py-4">
-        <p className="text-xs lg:text-sm">© Yogvanholidays 2021. All Rights Reserved. Designed by BatLoop</p>
+      <div className="bg-black w-full text-white text-center py-2">
+        <p className="text-xs lg:text-sm">
+          © Yogvanholidays 2021. All Rights Reserved. Designed by BatLoop
+        </p>
       </div>
     </div>
   );
