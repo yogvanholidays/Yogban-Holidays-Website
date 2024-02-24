@@ -11,11 +11,12 @@ interface Props {
   handler: string;
 }
 
-const SearchBar = ({ handler }: Props) => {
+const SearchBar = ({ handler}: Props) => {
   const navigate = useNavigate();
   const search = useSearchContext();
   const isHomePage = handler === "HomePage";
 
+  
   const [destination, setDestination] = useState<string>(search.destination);
   const [checkIn, setCheckIn] = useState<Date>(search.checkIn);
   const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
@@ -105,8 +106,8 @@ const SearchBar = ({ handler }: Props) => {
       onReset={handleReset}
       className={
         isHomePage
-          ? "-mt-14 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl z-40 shadow-slate-400"
-          : "-mt-8 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl z-40 shadow-slate-400"
+          ? "-mt-14 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl shadow-slate-400 landscape:shadow-none" //remove last part to revert searchbar positioning
+          : "-mt-8 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl shadow-slate-400 landscape:shadow-none" //remove last part to revert searchbar positioning
       }
       style={{ transition: "all 0.3s ease-in-out" }}
     >

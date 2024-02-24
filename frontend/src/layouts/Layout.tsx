@@ -6,18 +6,25 @@ import SearchBar from "../components/SearchBar";
 interface Props {
   children: React.ReactNode;
   page: string;
+  hiddenSearchBar: string;
 }
 
-const Layout = ({ children, page }: Props) => {
+const Layout = ({ children, page, hiddenSearchBar }: Props) => {
+  const searchBarHiden = hiddenSearchBar === "hide";
   return (
     <div className="flex flex-col min-h-screen">
       <Header bgHandle={page} />
-      <div className="mx-auto" style={{ zIndex: 99, maxWidth: "85vw" }}>
-        <SearchBar handler={page} />
-      </div>
+      {!searchBarHiden && (
+        <div
+          className="mx-auto max-w-[85vw] portrait:max-w-[95vw] portrait:w-[90vw] portrait:-mt-10 landscape:-mt-20 landscape:mb-10" //remove last part to revert searchbar new positioning
+          style={{ zIndex: 99 }}
+        >
+          <SearchBar handler={page} />
+        </div>
+      )}
 
       <div className="container mx-auto py-10 flex-1">{children}</div>
-      <GoToTopButton/>
+      <GoToTopButton />
       <Footer />
     </div>
   );
