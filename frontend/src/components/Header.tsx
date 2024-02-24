@@ -49,13 +49,13 @@ const Header = ({ bgHandle }: Props) => {
     >
       {/* {
       !isScrolled && (
-        <div className="w-full absolute bg-gradient-to-b from-white to-transparent h-44 z-20"></div>
+        <div className="w-full absolute bg-white h-44 z-20"></div>
       )
     } */}
       <div
         className={
           isHomePage
-            ? isScrolled?"bg-white max-w-full container flex flex-wrap justify-between py-2 z-30 transition-all duration-1000": "bg-gradient-to-b from-white to-transparent container max-w-full flex flex-wrap justify-between py-4 z-30 transition-all duration-1000"
+            ? isScrolled?"bg-white max-w-full container flex flex-wrap justify-between py-2 z-30 transition-all duration-1000": "bg-white container max-w-full flex flex-wrap justify-between py-2 z-30 transition-all duration-1000"
             : "container mx-auto flex flex-wrap justify-between pb-5 pt-4 z-30"
         }
         style={
@@ -71,7 +71,7 @@ const Header = ({ bgHandle }: Props) => {
         }
       >
         <span className="text-3xl text-black font-bold tracking-tight">
-          <Link to="/"><span className="flex text-center items-center gap-3"><img src={yogbanLogo} style={{height:'80px'}} alt="" />YogvanHolidays.com</span></Link>
+          <Link to="/"><span className="flex text-center items-center gap-3"><img src={yogbanLogo} style={{height:'80px'}} alt="" /></span></Link>
         </span>
         <span className="flex space-x-2 items-center">
           {isLoggedIn ? (
@@ -103,14 +103,14 @@ const Header = ({ bgHandle }: Props) => {
         </span>
       </div>
       {isHomePage ? (
-        <Carousel className="w-auto" style={{ height: "35rem" }}>
+        <Carousel className="w-auto" style={{ height: "45rem" }}>
       {images.map((image, index) => (
         <Carousel.Item key={index}>
           <img
             className="d-block w-screen object-cover"
             src={image.imageUrl || 'https://via.placeholder.com/800x400'}
             alt={`Carousel image ${index}`}
-            style={{ height: "35rem" }}
+            style={{ height: "45rem" }}
           />
         </Carousel.Item>
       ))}

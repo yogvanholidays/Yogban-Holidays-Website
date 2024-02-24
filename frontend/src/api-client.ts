@@ -546,7 +546,6 @@ export const deleteCoupon = async (id:string) => {
 export const uploadCarouselImage = async (image: File) => {
   const formData = new FormData();
   formData.append("carouselImage", image);
-  console.log(formData)
   try {
     const response = await fetch(`${API_BASE_URL}/api/carousel`, {
       method: "POST",
