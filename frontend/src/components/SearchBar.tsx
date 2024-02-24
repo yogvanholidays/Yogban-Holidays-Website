@@ -6,12 +6,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
 import { DestinationType } from "../../../backend/src/shared/types";
 import { getDestinations } from "../api-client";
-interface Props{
-  handler:string;
+
+interface Props {
+  handler: string;
 }
 
-
-const SearchBar = ({handler}: Props) => {
+const SearchBar = ({ handler }: Props) => {
   const navigate = useNavigate();
   const search = useSearchContext();
   const isHomePage = handler === "HomePage";
@@ -23,10 +23,19 @@ const SearchBar = ({handler}: Props) => {
   const [childCount, setChildCount] = useState<number>(search.childCount);
   const [destinations, setDestinations] = useState<DestinationType[]>([]);
   const [showPopup, setShowPopup] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     fetchDestinations();
+    document.addEventListener("click", handleDocumentClick); // Add event listener on mount
+    return () => {
+      document.removeEventListener("click", handleDocumentClick); // Remove event listener on unmount
+    };
   }, []);
+
+  useEffect(() => {
+    setInputValue(destination);
+  }, [destination]);
 
   const fetchDestinations = async () => {
     try {
@@ -35,6 +44,12 @@ const SearchBar = ({handler}: Props) => {
     } catch (error) {
       console.error("Failed to fetch destinations:", error);
     }
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    setInputValue(inputValue);
+    setShowPopup(true);
   };
 
   const handleDestinationClick = () => {
@@ -46,8 +61,15 @@ const SearchBar = ({handler}: Props) => {
     setShowPopup(false);
   };
 
+  const handleDocumentClick = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+    if (!target.closest(".popup-container")) {
+      setShowPopup(false);
+    }
+  };
+
   const handleReset = () => {
-    setDestination('');
+    setDestination("");
     setCheckIn(new Date());
     setCheckOut(new Date(new Date().getTime() + 86400000));
     setAdultCount(1);
@@ -56,73 +78,77 @@ const SearchBar = ({handler}: Props) => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    search.saveSearchValues(
-      destination,
-      checkIn,
-      checkOut,
-      adultCount,
-      childCount
-    );
+    search.saveSearchValues(destination, checkIn, checkOut, adultCount, childCount);
     navigate("/search");
   };
 
   const minDate = new Date();
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
-  // Function to handle change in check-in date
+
   const handleCheckInChange = (date: Date | null) => {
     setCheckIn(date as Date);
-    // Automatically set the check-out date to one day after check-in date
     if (date) {
       const nextDay = new Date(date);
       nextDay.setDate(nextDay.getDate() + 1);
       setCheckOut(nextDay);
     }
   };
+
   const handleCheckOutChange = (date: Date | null) => {
     setCheckOut(date as Date);
   };
+
   return (
     <form
       onSubmit={handleSubmit}
       onReset={handleReset}
-
-      className={isHomePage ? "-mt-14 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl shadow-slate-400":
-      "-mt-8 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl shadow-slate-400"
-    } 
-    style={{transition: "all 0.3s ease-in-out"}}
+      className={
+        isHomePage
+          ? "-mt-14 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl shadow-slate-400"
+          : "-mt-8 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl shadow-slate-400"
+      }
+      style={{ transition: "all 0.3s ease-in-out" }}
     >
       <div className="relative w-full">
         <div className="flex flex-row items-center flex-1 w-full bg-white p-3 rounded border-2 border-gray-300">
-        <MdTravelExplore size={25} className="mr-2" />
+          <MdTravelExplore size={25} className="mr-2" />
           <input
             placeholder="Where are you going?"
             className="text-md w-full focus:outline-none"
-            value={destination}
-            onChange={(event) => setDestination(event.target.value)}
+            value={inputValue}
+            onChange={handleInputChange}
             onClick={handleDestinationClick}
           />
         </div>
         {showPopup && (
-          <ul className="absolute top-full left-0 z-10 bg-white border border-gray-300 rounded-md mt-1 w-full">
-            {destinations.map((dest) => (
-              <li
-                key={dest.name}
-                className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                onClick={() => handleDestinationSelect(dest.name)}
-              >
-                {dest.name}
-              </li>
-            ))}
+          <ul className="popup-container absolute top-full left-0 z-10 bg-white border border-gray-300 rounded-md mt-1 w-full">
+            {destinations
+              .filter((dest) => dest.name.toLowerCase().includes(inputValue.toLowerCase()))
+              .map((dest) => (
+                <li
+                  key={dest.name}
+                  className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                  onClick={() => handleDestinationSelect(dest.name)}
+                >
+                  {dest.name}
+                </li>
+              ))}
           </ul>
         )}
       </div>
 
 
 
+
+
+
+
+
+
       
 
-      <div className="flex bg-white p-2.5 gap-2 rounded border-2 h-full border-gray-300 ">
+      <div className="flex bg-white p-2.5 gap-2 rounded border-2 h-full border-gray-300">
         <label className="items-center flex">
           Adults:
           <input
@@ -178,7 +204,10 @@ const SearchBar = ({handler}: Props) => {
         <button className="w-2/3 bg-blue-600 text-white h-full p-3 font-bold text-xl hover:bg-blue-500 rounded-lg">
           Search
         </button>
-        <button type="reset" className="w-1/3 bg-red-600 text-white h-full p-3 font-bold text-xl hover:bg-red-500 rounded-lg">
+        <button
+          type="reset"
+          className="w-1/3 bg-red-600 text-white h-full p-3 font-bold text-xl hover:bg-red-500 rounded-lg"
+        >
           Clear
         </button>
       </div>
