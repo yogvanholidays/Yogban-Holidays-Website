@@ -105,21 +105,21 @@ const SearchBar = ({ handler }: Props) => {
       onReset={handleReset}
       className={
         isHomePage
-          ? "-mt-14 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl shadow-slate-400"
-          : "-mt-8 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl shadow-slate-400"
+          ? "-mt-14 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl z-40 shadow-slate-400"
+          : "-mt-8 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl z-40 shadow-slate-400"
       }
       style={{ transition: "all 0.3s ease-in-out" }}
     >
       <div className="relative w-full">
-        <div className="flex flex-row items-center flex-1 w-full bg-white p-3 rounded border-2 border-gray-300">
+        <div className="flex flex-row items-center flex-1 w-full bg-white p-3 rounded border-2 border-gray-300 ">
           <MdTravelExplore size={25} className="mr-2" />
           <input
             placeholder="Where are you going?"
-            className="text-md w-full focus:outline-none"
+            className="text-md w-full focus:outline-none popup-container"
             value={inputValue}
             onChange={handleInputChange}
             onClick={handleDestinationClick}
-          />
+            />
         </div>
         {showPopup && (
           <ul className="popup-container absolute top-full left-0 z-10 bg-white border border-gray-300 rounded-md mt-1 w-full">

@@ -8,7 +8,7 @@ import StarRatingFilter from "../components/StarRatingFilter";
 import HotelTypesFilter from "../components/HotelTypesFilter";
 import FacilitiesFilter from "../components/FacilitiesFilter";
 import PriceFilter from "../components/PriceFilter";
-
+import { isMobile } from "react-device-detect";
 const Search = () => {
   const search = useSearchContext();
   const [page, setPage] = useState<number>(1);
@@ -17,7 +17,11 @@ const Search = () => {
   const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
   const [selectedPrice, setSelectedPrice] = useState<number | undefined>();
   const [sortOption, setSortOption] = useState<string>("");
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
+  const handleToggleFilters = () => {
+    setIsFiltersOpen((prevState) => !prevState);
+  };
   const searchParams = {
     destination: search.destination,
     checkIn: search.checkIn.toISOString(),
@@ -35,6 +39,7 @@ const Search = () => {
   const { data: hotelData } = useQuery(["searchHotels", searchParams], () =>
     apiClient.searchHotels(searchParams)
   );
+
   const handleStarsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const starRating = event.target.value;
 
@@ -68,50 +73,62 @@ const Search = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
-      <div className="rounded-lg border border-slate-300 p-5 h-fit sticky top-10">
-        <div className="space-y-5">
-          <h3 className="text-lg font-semibold border-b border-slate-300 pb-5">
-            Filter by:
-          </h3>
-          <StarRatingFilter
-            selectedStars={selectedStars}
-            onChange={handleStarsChange}
-          />
-          <HotelTypesFilter
-            selectedHotelTypes={selectedHotelTypes}
-            onChange={handleHotelTypeChange}
-          />
-          <FacilitiesFilter
-            selectedFacilities={selectedFacilities}
-            onChange={handleFacilityChange}
-          />
-          <PriceFilter
-            selectedPrice={selectedPrice}
-            onChange={(value?: number) => setSelectedPrice(value)}
-          />
+    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-[250px,1fr] xl:grid-cols-[250px,1fr]">
+      {!isMobile && (
+        <div className="md:col-span-1 lg:col-span-1 xl:col-span-1 rounded-lg border border-slate-300 p-5 h-fit sticky top-10 portrait:relative">
+          <div className="space-y-5">
+            <h3 className="text-lg font-semibold border-b border-slate-300 pb-5">
+              Filter by:
+            </h3>
+            <StarRatingFilter
+              selectedStars={selectedStars}
+              onChange={handleStarsChange}
+            />
+            <HotelTypesFilter
+              selectedHotelTypes={selectedHotelTypes}
+              onChange={handleHotelTypeChange}
+            />
+            <FacilitiesFilter
+              selectedFacilities={selectedFacilities}
+              onChange={handleFacilityChange}
+            />
+            <PriceFilter
+              selectedPrice={selectedPrice}
+              onChange={(value?: number) => setSelectedPrice(value)}
+            />
+          </div>
         </div>
-      </div>
-      <div className="flex flex-col gap-5">
-        <div className="flex justify-between items-center">
+      )}
+
+      <div className="col-span-1 flex flex-col gap-5">
+        <div className="flex justify-between items-center portrait:flex-col portrait:gap-2">
           <span className="text-xl font-bold">
             {hotelData?.pagination.total} Hotels found
             {search.destination ? ` in ${search.destination}` : ""}
           </span>
-          <select
-            value={sortOption}
-            onChange={(event) => setSortOption(event.target.value)}
-            className="p-2 border rounded-md"
-          >
-            <option value="">Sort By</option>
-            <option value="starRating">Star Rating</option>
-            <option value="pricePerNightAsc">
-              Price Per Night (low to high)
-            </option>
-            <option value="pricePerNightDesc">
-              Price Per Night (high to low)
-            </option>
-          </select>
+          <div className="portrait:flex portrait:gap-2">
+            <select
+              value={sortOption}
+              onChange={(event) => setSortOption(event.target.value)}
+              className="p-2 border rounded-md"
+            >
+              <option value="">Sort By</option>
+              <option value="starRating">Star Rating</option>
+              <option value="pricePerNightAsc">
+                Price Per Night (low to high)
+              </option>
+              <option value="pricePerNightDesc">
+                Price Per Night (high to low)
+              </option>
+            </select>
+
+            {isMobile && (<button
+              onClick={handleToggleFilters}
+              className="bg-blue-500 text-white px-4 py-2 rounded-md"
+            >
+              Filters
+            </button>)}
+          </div>
         </div>
         {hotelData?.data.map((hotel) => (
           <SearchResultsCard hotel={hotel} key={hotel._id} />
@@ -124,6 +141,36 @@ const Search = () => {
           />
         </div>
       </div>
+      {/* Popup for filters */}
+      {isFiltersOpen && isMobile && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-[9999]">
+          <div className="bg-white rounded-lg p-5">
+            <StarRatingFilter
+              selectedStars={selectedStars}
+              onChange={handleStarsChange}
+            />
+            <HotelTypesFilter
+              selectedHotelTypes={selectedHotelTypes}
+              onChange={handleHotelTypeChange}
+            />
+            <FacilitiesFilter
+              selectedFacilities={selectedFacilities}
+              onChange={handleFacilityChange}
+            />
+            <PriceFilter
+              selectedPrice={selectedPrice}
+              onChange={(value?: number) => setSelectedPrice(value)}
+            />
+            {/* Close button */}
+            <button
+              onClick={handleToggleFilters}
+              className="bg-gray-300 text-black px-4 py-2 mt-5 rounded-md"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

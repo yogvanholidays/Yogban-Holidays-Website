@@ -51,7 +51,7 @@ const UploadDestination = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="illustrationImage" className="block font-medium text-gray-700">Illustration Image:</label>
+          <label htmlFor="illustrationImage" className="block font-medium text-gray-700">Add Illustration image to feature it on Homepage</label>
           <input
             type="file"
             id="illustrationImage"

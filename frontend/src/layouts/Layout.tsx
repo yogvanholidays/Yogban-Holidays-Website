@@ -1,4 +1,5 @@
 import Footer from "../components/Footer";
+import GoToTopButton from "../components/GoToTopButton";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
 
@@ -16,6 +17,7 @@ const Layout = ({ children, page }: Props) => {
       </div>
 
       <div className="container mx-auto py-10 flex-1">{children}</div>
+      <GoToTopButton/>
       <Footer />
     </div>
   );
