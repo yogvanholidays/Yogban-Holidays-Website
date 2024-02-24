@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
-import SignOutButton from "./SignOutButton";
+// import SignOutButton from "./SignOutButton";
 import { Carousel } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { fetchCarouselImages } from "../api-client";
 import { CarouselImageType } from "../../../backend/src/shared/types";
 import yogbanLogo from "../assets/Yogvan.png";
+import PopupMenu from "./PopupMenu";
 
 interface Props {
   bgHandle: string;
@@ -35,7 +36,6 @@ const Header = ({ bgHandle }: Props) => {
       try {
         const carouselImages = await fetchCarouselImages();
         setImages(carouselImages);
-        console.log(carouselImages);
       } catch (error) {
         console.error("Error fetching carousel images:", error);
       }
@@ -83,7 +83,8 @@ const Header = ({ bgHandle }: Props) => {
         <span className="flex space-x-2 items-center">
           {isLoggedIn ? (
             <>
-              <Link
+            <PopupMenu isAdmin={isAdmin}/>
+              {/* <Link
                 to="/my-bookings"
                 className="flex items-center text-black px-3 font-bold hover:bg-gray-300 rounded-lg h-fit py-2 bg-gray-100 transition-all duration-300"
               >
@@ -97,7 +98,7 @@ const Header = ({ bgHandle }: Props) => {
                   Admin
                 </Link>
               )}
-              <SignOutButton />
+              <SignOutButton /> */}
             </>
           ) : (
             <Link
