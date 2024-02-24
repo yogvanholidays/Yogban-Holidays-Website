@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useSearchContext } from "../contexts/SearchContext";
 import { useNavigate } from "react-router-dom";
-import * as apiClient from '../api-client';
+import * as apiClient from "../api-client";
 import { DestinationType } from "../../../backend/src/shared/types";
 
 function PickADestination() {
@@ -22,11 +22,12 @@ function PickADestination() {
       console.error("Failed to fetch destinations:", error);
     }
   };
-  if(!destinations){
-    return <></>
+  
+  if (!destinations) {
+    return <></>;
   }
 
-  const handleButtonClick = (place:any) => {
+  const handleButtonClick = (place: any) => {
     navigate("/search");
     search.saveSearchValues(
       place,
@@ -48,7 +49,10 @@ function PickADestination() {
             style={{ height: "6rem", width: "4rem" }}
             onClick={() => handleButtonClick(destination.name)}
           >
-            <img src={destination.illustrationImageUrl} alt={destination.name} />
+            <img
+              src={destination.illustrationImageUrl}
+              alt={destination.name}
+            />
             <span className="font-semibold text-base">{destination.name}</span>
           </button>
         ))}

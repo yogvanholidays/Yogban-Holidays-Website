@@ -4,6 +4,7 @@ import PickADestination from '../components/PickADestination'
 // import ListPropertyComponent from '../components/ListPropertyComponent'
 import CouponsList from '../components/CouponsList'
 import BlogComponent from '../components/BlogComponent'
+import GoToTopButton from '../components/GoToTopButton'
 
 
 function Homepage() {
@@ -16,6 +17,7 @@ function Homepage() {
         {/* <ListPropertyComponent/> */}
         <CouponsList/>
         <BlogComponent/>
+        <GoToTopButton/>
     </div>
   )
 }

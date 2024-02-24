@@ -1,12 +1,16 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useSearchContext } from "../contexts/SearchContext";
 import { MdTravelExplore } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
+import { DestinationType } from "../../../backend/src/shared/types";
+import { getDestinations } from "../api-client";
 interface Props{
   handler:string;
 }
+
+
 const SearchBar = ({handler}: Props) => {
   const navigate = useNavigate();
   const search = useSearchContext();
@@ -17,6 +21,30 @@ const SearchBar = ({handler}: Props) => {
   const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
   const [adultCount, setAdultCount] = useState<number>(search.adultCount);
   const [childCount, setChildCount] = useState<number>(search.childCount);
+  const [destinations, setDestinations] = useState<DestinationType[]>([]);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+
+  useEffect(() => {
+    fetchDestinations();
+  }, []);
+
+  const fetchDestinations = async () => {
+    try {
+      const data = await getDestinations();
+      setDestinations(data);
+    } catch (error) {
+      console.error("Failed to fetch destinations:", error);
+    }
+  };
+
+  const handleDestinationClick = () => {
+    setShowPopup(!showPopup);
+  };
+
+  const handleDestinationSelect = (name: string) => {
+    setDestination(name);
+    setShowPopup(false);
+  };
 
   const handleReset = () => {
     setDestination('');
@@ -64,17 +92,35 @@ const SearchBar = ({handler}: Props) => {
     } 
     style={{transition: "all 0.3s ease-in-out"}}
     >
-      <div className="flex flex-row items-center flex-1 bg-white p-3 rounded border-2 border-gray-300">
-        <MdTravelExplore size={25} className="mr-2" />
-        <input
-          placeholder="Where are you going?"
-          className="text-md w-full focus:outline-none"
-          value={destination}
-          onChange={(event) => setDestination(event.target.value)}
-        />
+      <div className="relative w-full">
+        <div className="flex flex-row items-center flex-1 w-full bg-white p-3 rounded border-2 border-gray-300">
+          <MdTravelExplore size={25} className="mr-2" />
+          <input
+            placeholder="Where are you going?"
+            className="text-md w-full focus:outline-none"
+            value={destination}
+            onClick={handleDestinationClick}
+            readOnly
+          />
+        </div>
+        {showPopup && (
+          <div className="absolute z-10 mt-1 py-1 w-full bg-white border border-gray-300 rounded shadow-lg">
+            <ul>
+              {destinations.map((dest) => (
+                <li
+                  key={dest.name}
+                  className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                  onClick={() => handleDestinationSelect(dest.name)}
+                >
+                  {dest.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
-      <div className="flex bg-white p-2.5 gap-2 rounded border-2 border-gray-300 ">
+      <div className="flex bg-white p-2.5 gap-2 rounded border-2 h-full border-gray-300 ">
         <label className="items-center flex">
           Adults:
           <input
