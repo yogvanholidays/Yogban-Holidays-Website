@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { fetchCarouselImages } from "../api-client";
 import { CarouselImageType } from "../../../backend/src/shared/types";
-import yogbanLogo from '../assets/Yogvan.png';
+import yogbanLogo from "../assets/Yogvan.png";
 
 interface Props {
   bgHandle: string;
@@ -17,7 +17,7 @@ const Header = ({ bgHandle }: Props) => {
   const isAdmin = userEmail === "yogvan@admin.com";
   const isHomePage = bgHandle === "HomePage";
   const [isScrolled, setIsScrolled] = useState(false);
-  const [images, setImages] = useState<CarouselImageType[]>([{imageUrl: "https://via.placeholder.com/800x400"}]);
+  const [images, setImages] = useState<CarouselImageType[]>([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,8 +35,9 @@ const Header = ({ bgHandle }: Props) => {
       try {
         const carouselImages = await fetchCarouselImages();
         setImages(carouselImages);
+        console.log(carouselImages);
       } catch (error) {
-        console.error('Error fetching carousel images:', error);
+        console.error("Error fetching carousel images:", error);
       }
     };
 
@@ -45,7 +46,7 @@ const Header = ({ bgHandle }: Props) => {
   return (
     <div
       className={isHomePage ? "pb-3 bg-transparent" : "bg-yogvan pb-16"}
-      style={{transition: "all 0.3s ease-in-out",}}
+      style={{ transition: "all 0.3s ease-in-out" }}
     >
       {/* {
       !isScrolled && (
@@ -55,7 +56,9 @@ const Header = ({ bgHandle }: Props) => {
       <div
         className={
           isHomePage
-            ? isScrolled?"bg-white max-w-full container flex flex-wrap justify-between py-2 z-30 transition-all duration-1000": "bg-white container max-w-full flex flex-wrap justify-between py-2 z-30 transition-all duration-1000"
+            ? isScrolled
+              ? "bg-white max-w-full container flex flex-wrap justify-between py-2 z-30 transition-all duration-1000"
+              : "bg-white container max-w-full flex flex-wrap justify-between py-2 z-30 transition-all duration-1000"
             : "container mx-auto flex flex-wrap justify-between pb-5 pt-4 z-30"
         }
         style={
@@ -65,13 +68,17 @@ const Header = ({ bgHandle }: Props) => {
                 top: 0,
                 zIndex: 999,
                 transition: "all 0.3s ease-in-out",
-                width:'100%'
+                width: "100%",
               }
             : {}
         }
       >
         <span className="text-3xl text-black font-bold tracking-tight">
-          <Link to="/"><span className="flex text-center items-center gap-3"><img src={yogbanLogo} style={{height:'80px'}} alt="" /></span></Link>
+          <Link to="/">
+            <span className="flex text-center items-center gap-3">
+              <img src={yogbanLogo} style={{ height: "80px" }} alt="" />
+            </span>
+          </Link>
         </span>
         <span className="flex space-x-2 items-center">
           {isLoggedIn ? (
@@ -104,17 +111,33 @@ const Header = ({ bgHandle }: Props) => {
       </div>
       {isHomePage ? (
         <Carousel className="w-auto" style={{ height: "45rem" }}>
-      {images.map((image, index) => (
-        <Carousel.Item key={index}>
-          <img
-            className="d-block w-screen object-cover"
-            src={image.imageUrl || 'https://via.placeholder.com/800x400'}
-            alt={`Carousel image ${index}`}
-            style={{ height: "45rem" }}
-          />
-        </Carousel.Item>
-      ))}
-    </Carousel>
+          {images.map((image, index) => (
+            <Carousel.Item key={index}>
+              <div
+                className="d-block w-screen object-cover relative"
+                style={{
+                  height: "45rem",
+                  backgroundImage: `url(${
+                    image.imageUrl || "https://via.placeholder.com/800x400"
+                  })`,
+                  backgroundSize: "cover",
+                }}
+              >
+                <div className="absolute inset-0 flex flex-col justify-center items-center">
+                  <h3 className="text-white text-6xl pt-serif-bold portrait:text-2xl"  style={{ textShadow: "0px 0px 30px rgba(0, 0, 0, 0.9)" }}>
+                    {image.featuredText}
+                  </h3>
+                  <Link
+                    to={image.ButtonLink}
+                    className="bg-black bg-opacity-50 border-2 text-white px-6 py-3 portrait:mt-1 landscape:mt-4 rounded-md text-xl exploreButtonCarousel transition-all duration-200"
+                  >
+                    Explore
+                  </Link>
+                </div>
+              </div>
+            </Carousel.Item>
+          ))}
+        </Carousel>
       ) : (
         <div className="container mx-auto flex flex-col gap-2">
           <h1 className="text-5xl text-black font-bold">Find Your Next Stay</h1>

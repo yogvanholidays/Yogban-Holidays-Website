@@ -543,14 +543,12 @@ export const deleteCoupon = async (id:string) => {
 };
 
 
-export const uploadCarouselImage = async (image: File) => {
-  const formData = new FormData();
-  formData.append("carouselImage", image);
+export const uploadCarouselImage = async (carouselFormData: FormData) => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/carousel`, {
       method: "POST",
-      body: formData,
-      credentials:'include'
+      credentials: "include",
+      body: carouselFormData,
     });
 
     if (!response.ok) {

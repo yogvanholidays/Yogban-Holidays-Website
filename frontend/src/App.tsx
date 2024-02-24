@@ -29,6 +29,7 @@ import BlogDetailsPage from "./pages/BlogDetailsPage";
 import SearchAndDeleteBlogs from "./pages/SearchAndDeleteBlogs";
 import ReviewCouponsPage from "./pages/ReviewCouponsPage";
 import CarouselImagesPage from "./pages/CarouselImagesPage";
+import UploadFeatured from "./pages/UploadFeatured";
 
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
             <Route path="/create-blog" element={<Layout page=''><CreateBlog/></Layout>} />
             <Route path="/review-blogs" element={<Layout page=''><SearchAndDeleteBlogs/></Layout>} />
           <Route path="/carousel" element={<Layout page=''><CarouselImagesPage/></Layout>} />
+          <Route path="/upload-featured" element={<Layout page=''><UploadFeatured/></Layout>} />
           </>
         )}
         <Route path="/review-coupons" element={<Layout page=''><ReviewCouponsPage/></Layout>} />

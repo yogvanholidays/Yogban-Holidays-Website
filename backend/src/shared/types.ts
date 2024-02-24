@@ -98,4 +98,6 @@ export type BlogType = {
 export type CarouselImageType = {
   [x: string]: string;
   imageUrl: string;
+  featuredText:string;
+  ButtonLink:string;
 };

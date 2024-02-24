@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import * as apiClient from "../api-client";
 import { CarouselImageType } from "../../../backend/src/shared/types";
+import { Link } from "react-router-dom";
 
 const ImageGalleryPage = () => {
   const [images, setImages] = useState<CarouselImageType[]>([]);
@@ -30,38 +31,19 @@ const ImageGalleryPage = () => {
     }
   };
 
-  const handleImageUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const file = event.target.files && event.target.files[0];
-    if (file) {
-      try {
-        await apiClient.uploadCarouselImage(file);
-        fetchImages();
-      } catch (error) {
-        console.error("Failed to upload image:", error);
-      }
-    }
-  };
+
 
   return (
     <div className="container mx-auto p-8">
       <div className="flex justify-between flex-wrap">
         <h2 className="font-bold text-2xl mb-4">Carousel Image Gallery</h2>
         <div className="mb-4">
-          <label
-            htmlFor="upload"
+          <Link
+            to='/upload-featured'
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
           >
-            Upload Image
-          </label>
-          <input
-            id="upload"
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={handleImageUpload}
-          />
+            Upload Featured
+          </Link>
         </div>
       </div>
       {loading && <p>Loading...</p>}

@@ -15,26 +15,35 @@ const upload = multer({
 });
 
 // Upload carousel image
-router.post("/", verifyToken, upload.single("carouselImage"), async (req: Request, res: Response) => {
-  try {
-    const carouselImage = req.file as Express.Multer.File;
+router.post(
+  "/",
+  verifyToken,
+  upload.single("carouselImage"),
+  async (req: Request, res: Response) => {
+    try {
+      const carouselImage = req.file as Express.Multer.File;
+      const featuredText: string = req.body.featuredText;
+      const ButtonLink: string = req.body.ButtonLink;
 
-    // Upload image to cloudinary
-    const imageUrl = await uploadImage(carouselImage);
+      // Upload image to cloudinary
+      const imageUrl = await uploadImage(carouselImage);
 
-    const newCarouselImage = new CarouselImage({
-      imageUrl: imageUrl,
-    });
+      const newCarouselImage = new CarouselImage({
+        imageUrl: imageUrl,
+        featuredText:featuredText,
+        ButtonLink:ButtonLink,
+      });
 
-    // Save the new carousel image to the database
-    await newCarouselImage.save();
+      // Save the new carousel image to the database
+      await newCarouselImage.save();
 
-    res.status(201).send(newCarouselImage);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Something went wrong" });
+      res.status(201).send(newCarouselImage);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Something went wrong" });
+    }
   }
-});
+);
 
 // Fetch all carousel images
 router.get("/", async (req: Request, res: Response) => {
