@@ -101,3 +101,6 @@ export type CarouselImageType = {
   featuredText:string;
   ButtonLink:string;
 };
+export type RatingType = {
+  rating:string;
+};

@@ -10,6 +10,7 @@ import hotelRoutes from './routes/hotels'
 import properties from './routes/properties'
 import coupons from './routes/coupon'
 import blogs from './routes/blogs'
+import rating from './routes/rating'
 import cookieParser from "cookie-parser"
 import path from 'path';
 import { v2 as cloudinary } from 'cloudinary';
@@ -49,6 +50,7 @@ app.use(cors({
   app.use("/api/coupons", coupons)
   app.use("/api/blogs", blogs)
   app.use("/api/carousel", carousel)
+  app.use("/api/rating", rating)
 
   app.get("*", (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));

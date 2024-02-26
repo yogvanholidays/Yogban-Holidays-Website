@@ -5,6 +5,7 @@ import {
   HotelSearchResponse,
   HotelType,
   ListPropertyRequestType,
+  RatingType,
   UserType,
 } from "../../backend/src/shared/types";
 import { RegisterFormData } from "./pages/Register";
@@ -589,5 +590,53 @@ export const deleteCarouselImage = async (id: string) => {
   } catch (error) {
     console.error("Error deleting carousel image:", error);
     throw error;
+  }
+};
+
+
+export const uploadOrUpdateRating = async (rating: number): Promise<void> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/rating`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ rating }),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to upload or update rating');
+    }
+  } catch (error:any) {
+    throw new Error(error.message);
+  }
+};
+
+export const fetchRating = async (): Promise<RatingType | null> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/rating`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch rating');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error:any) {
+    throw new Error(error.message);
+  }
+};
+
+export const updateRating = async (rating: number): Promise<void> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/rating`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ rating }),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to update rating');
+    }
+  } catch (error:any) {
+    throw new Error(error.message);
   }
 };
