@@ -5,7 +5,6 @@ import {
   HotelSearchResponse,
   HotelType,
   ListPropertyRequestType,
-  RatingType,
   UserType,
 } from "../../backend/src/shared/types";
 import { RegisterFormData } from "./pages/Register";
@@ -594,7 +593,7 @@ export const deleteCarouselImage = async (id: string) => {
 };
 
 
-export const uploadOrUpdateRating = async (rating: number): Promise<void> => {
+export const uploadOrUpdateRating = async (rating: string) => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/rating`, {
       method: 'POST',
@@ -611,7 +610,7 @@ export const uploadOrUpdateRating = async (rating: number): Promise<void> => {
   }
 };
 
-export const fetchRating = async (): Promise<RatingType | null> => {
+export const fetchRating = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/rating`);
     if (!response.ok) {
@@ -624,7 +623,7 @@ export const fetchRating = async (): Promise<RatingType | null> => {
   }
 };
 
-export const updateRating = async (rating: number): Promise<void> => {
+export const updateRating = async (rating: string) => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/rating`, {
       method: 'PUT',
