@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
 // import SignOutButton from "./SignOutButton";
 import { Carousel } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
-import { fetchCarouselImages } from "../api-client";
+import { fetchCarouselImages, fetchRating } from "../api-client";
 import { CarouselImageType } from "../../../backend/src/shared/types";
 import yogbanLogo from "../assets/Yogvan.png";
 import PopupMenu from "./PopupMenu";
@@ -48,6 +49,24 @@ const Header = ({ bgHandle }: Props) => {
 
     fetchImages();
   }, []);
+
+  const [rating, setRating] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const getRating = async () => {
+      setIsLoading(true);
+      try {
+        const data = await fetchRating();
+        setRating(data.rating);
+      } catch (error:any) {
+        console.error('Error fetching rating:', error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getRating();
+  }, []);
   return (
     <div
       className={isHomePage ? "pb-3 bg-transparent" : "bg-yogvan pb-16"}
@@ -88,7 +107,12 @@ const Header = ({ bgHandle }: Props) => {
         <span className="flex cursor-pointer items-center" onClick={handlePopupToggle}>
           <img src="/leftWheat.png" alt="prize1" className="h-[4rem] portrait:h-[3.5rem]" />
           <span className="flex flex-col items-center mx-1">
-            <span className="text-4xl font-extrabold">4.0</span>
+            {/* <span className="text-4xl font-extrabold">4.0</span> */}
+            {isLoading ? (
+        <span className="text-4xl font-extrabold">...</span>
+      ) : (
+        <span className="text-4xl font-extrabold">{rating}</span>
+      )}
             <span className="text-sm">View Reviews</span>
           </span>
           <img src="/rightWheat.png" alt="prize2" className="h-[4rem] portrait:h-[3.5rem]" />
