@@ -76,7 +76,7 @@ const ReviewCouponsPage = () => {
             Never Expires
           </label>
         </div>
-        <Link to='/add-coupon' className="p-2 rounded-md bg-red-400 text-white min-w-fit  text-center justify-center self-center portrait:w-full">Add Coupon</Link>
+        <Link to='/add-coupon' className="p-2 rounded-md bg-black text-white min-w-fit  text-center justify-center self-center portrait:w-full">Add Coupon</Link>
       </div>
       {loading && <p>Loading...</p>}
       <div className="flex flex-col">

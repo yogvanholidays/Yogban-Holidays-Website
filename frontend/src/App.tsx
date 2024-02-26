@@ -34,7 +34,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import GuestPolicy from "./pages/GuestPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
 import NotFoundPage from "./pages/NotFoundPage";
-import RatingPage from "./pages/RatingPage";
+import RatingPage from "./components/RatingComponent";
 
 
 function App() {
@@ -80,9 +80,9 @@ function App() {
           <Route path="/carousel" element={<Layout hiddenSearchBar="hide" page=''><CarouselImagesPage/></Layout>} />
           <Route path="/upload-featured" element={<Layout hiddenSearchBar="hide" page=''><UploadFeatured/></Layout>} />
           <Route path="/review-coupons" element={<Layout hiddenSearchBar="hide" page=''><ReviewCouponsPage/></Layout>} />
+          <Route path="/review-rating" element={<Layout hiddenSearchBar="hide" page=''><RatingPage/></Layout>} />
           </>
         )}
-        <Route path="/review-rating" element={<Layout hiddenSearchBar="hide" page=''><RatingPage/></Layout>} />
         <Route path="*" element={<Layout hiddenSearchBar="" page=''><NotFoundPage/></Layout>} />
       </Routes>
     </Router>

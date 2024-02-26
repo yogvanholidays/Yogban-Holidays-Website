@@ -156,7 +156,7 @@ const MyBookings = () => {
           {booking.phoneNumber && (
             <a
               href={`tel:${booking.phoneNumber}`}
-              className="absolute bottom-0 right-0 bg-red-500 text-white px-4 py-2 rounded m-2"
+              className="absolute bottom-0 right-0 transition-all duration-200 hover:bg-yogvan-dark bg-yogvan text-white px-4 py-2 rounded m-2"
             >
               Call
             </a>

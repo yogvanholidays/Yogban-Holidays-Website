@@ -68,7 +68,7 @@ const SearchAndDeleteHotels = () => {
     <div>
       <div className="flex justify-between items-center">
       <h2 className="font-bold text-2xl">All Properties</h2>
-      <Link to='/' className="p-2 rounded-md bg-red-400 text-white h-full min-w-fit"> Add New</Link>
+      <Link to='/add-property' className="p-2 rounded-md bg-black text-white h-full min-w-fit"> Add New</Link>
       </div>
       <div className="flex portrait:flex-col">
         <input
@@ -103,7 +103,7 @@ const SearchAndDeleteHotels = () => {
         ))}
       </div>
       </div>
-      <button onClick={searchHotels} className="p-2 rounded-md bg-red-400 text-white">Refresh Now</button>
+      <button onClick={searchHotels} className="p-2 rounded-md bg-black text-white">Refresh Now</button>
       {loading && <p>Loading...</p>}
       <div className="grid grid-cols-3 gap-3 portrait:grid-cols-1">
         {paginatedHotels.map(hotel => (

@@ -116,7 +116,7 @@ const Header = ({ bgHandle }: Props) => {
           ) : (
             <Link
               to="/sign-in"
-              className="flex items-center text-red-600 px-3 font-bold hover:bg-gray-300 rounded-lg h-fit py-2 bg-gray-100 transition-all duration-300"
+              className="flex items-center text-black px-3 font-bold hover:bg-gray-300 rounded-lg h-fit py-2 bg-gray-100 transition-all duration-300"
             >
               Sign In
             </Link>
@@ -173,22 +173,22 @@ const Header = ({ bgHandle }: Props) => {
             <div className="grid grid-cols-2 gap-5 portrait:grid-cols-1">
               <div className="mb-1">
                 <a href="https://www.booking.com/hotel/in/yogvan-hill-view-apartment.en-gb.html?label=gen173nr-1BCAsobEIaeW9ndmFuLWhpbGwtdmlldy1hcGFydG1lbnRIM1gEaGyIAQGYAQm4ARjIAQzYAQHoAQGIAgGoAgS4Aqi65q4GwAIB0gIkMmVkMmY1NTgtYTQ5Ni00NmMwLWE0YmUtMzlkNjVjYzAzMTgw2AIF4AIB&sid=2ea154ba0084267aa4734d1943b95882&dist=0&keep_landing=1&sb_price_type=total&type=total&activeTab=photosGallery">
-                  <img src="booking.png" alt="airbnb" className="w-full" />
+                  <img src="https://res.cloudinary.com/dmwytfweq/image/upload/v1708969207/Booking-Logo_nik3ck.png" alt="airbnb" className="w-full" />
                 </a>
               </div>
               <div className="mb-1">
                 <a href="https://www.booking.com/hotel/in/yogvan-hill-view-workation-apartment-wifi-kitchen5.en-gb.html?label=gen173nr-1BCAsobEIyeW9ndmFuLWhpbGwtdmlldy13b3JrYXRpb24tYXBhcnRtZW50LXdpZmkta2l0Y2hlbjVIM1gEaGyIAQGYAQm4ARjIAQzYAQHoAQGIAgGoAgS4Ap7J5q4GwAIB0gIkMjUxOTVmMGYtYThlNC00NzlmLTk0MjUtOTgzNjViZjdlZWZj2AIF4AIB&sid=2ea154ba0084267aa4734d1943b95882&dist=0&keep_landing=1&sb_price_type=total&type=total&activeTab=photosGallery">
-                  <img src="booking.png" alt="airbnb" className="w-full" />
+                  <img src="https://res.cloudinary.com/dmwytfweq/image/upload/v1708969207/Booking-Logo_nik3ck.png" alt="airbnb" className="w-full" />
                 </a>
               </div>
               <div className="mb-1">
                 <a href="http://airbnb.co.in/p/yogvanrishikesh">
-                  <img src="airbnb.png" alt="airbnb" className="w-full" />
+                  <img src="https://res.cloudinary.com/dmwytfweq/image/upload/v1708969208/Airbnb_Logo_B%C3%A9lo.svg_yrb9mg.png" alt="airbnb" className="w-full" />
                 </a>
               </div>
               <div>
                 <a href="https://www.makemytrip.com/hotels/hotel-details/?checkin=02262024&checkout=02272024&locusId=CTXRI&locusType=city&city=CTXRI&country=IN&searchText=Yogvan%20Hill%20View%201BHK%20Apartment%20Tapovan%20Rishikesh&roomStayQualifier=4e0e&_uCurrency=INR&reference=hotel&hotelId=202108271135307140&rf=directSearch&lat=30.13252&lng=78.32141&homeStay=true&type=hotel&rsc=1e4e0e">
-                  <img src="mmt.svg" alt="airbnb" className="w-full" />
+                  <img src="https://res.cloudinary.com/dmwytfweq/image/upload/v1708969207/mmt_logo_llaezn.svg" alt="airbnb" className="w-full" />
                 </a>
               </div>
             </div>

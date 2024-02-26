@@ -165,7 +165,7 @@ const CreateCoupon = () => {
         </div>
         <button
           type="submit"
-          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+          className="transition-all duration-200 hover:bg-yogvan-dark bg-yogvan text-white px-4 py-2 rounded"
         >
           Create Coupon
         </button>

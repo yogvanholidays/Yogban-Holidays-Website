@@ -104,7 +104,7 @@ const CreateBlog = () => {
             className="mt-1 block w-full border-gray-300 p-4 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
-        <button type="submit" className="block bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Create Blog</button>
+        <button type="submit" className="block bg-black text-white py-2 px-4 rounded-md">Create Blog</button>
       </form>
     </div>
   );

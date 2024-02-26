@@ -25,12 +25,12 @@ const ArrivingToday = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-0">
       <div className="flex flex-row text-center items-center justify-between">
         <h1 className="text-2xl font-bold mb-4">Arriving Today</h1>
         <Link
           to="/view-all-bookings"
-          className="flex bg-red-600 text-white text-xl font-bold p-2 hover:bg-red-500"
+          className="flex  text-white text-xl font-bold py-2 px-3 bg-black rounded"
         >
           View All Bookings
         </Link>
@@ -88,13 +88,16 @@ const ArrivingToday = () => {
               {booking.phoneNumber && (
                 <a
                   href={`tel:${booking.phoneNumber}`}
-                  className="bg-red-500 text-white px-4 py-2 rounded m-2 absolute bottom-0 right-0"
+                  className="transition-all duration-200 hover:bg-yogvan-dark bg-yogvan text-white px-4 py-2 rounded m-2 absolute bottom-0 right-0"
                 >
                   Call
                 </a>
               )}
             </div>
           ))}
+          {arrivingGuests.length===0 && (
+            <span className="text-lg font-medium">No Guests Today</span>
+          )}
         </div>
       </div>
     </div>

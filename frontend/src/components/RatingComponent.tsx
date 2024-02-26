@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
-import { uploadOrUpdateRating, fetchRating, updateRating } from '../api-client';
+import { uploadOrUpdateRating, fetchRating } from '../api-client';
 
 const RatingComponent = () => {
   const [rating, setRating] = useState('');
@@ -33,35 +33,35 @@ const RatingComponent = () => {
     }
   };
 
-  const handleUpdateRating = async () => {
-    setIsLoading(true);
-    try {
-      await updateRating(rating);
-      console.log('Rating updated successfully');
-    } catch (error:any) {
-      console.error('Error updating rating:', error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const handleUpdateRating = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     await updateRating(rating);
+  //     console.log('Rating updated successfully');
+  //   } catch (error:any) {
+  //     console.error('Error updating rating:', error.message);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   return (
-    <div>
-      <h1>Rating Page</h1>
+    <div className='my-4'>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <>
-          <label htmlFor="rating">Rating:</label>
+        <div className='flex flex-wrap gap-3'>
+          <label htmlFor="rating" className='text-2xl font-bold'>Header Rating:</label>
           <input
             type="text"
             id="rating"
             value={rating}
             onChange={(e) => setRating(e.target.value)}
+            className='bg-gray-300 p-2 rounded-md'
           />
-          <button onClick={handleUploadOrUpdateRating}>Upload/Update Rating</button>
-          <button onClick={handleUpdateRating}>Update Rating</button>
-        </>
+          <button onClick={handleUploadOrUpdateRating} className='font-bold text-white bg-black px-4 py-2 rounded-md'>Upload/Update Rating</button>
+          {/* <button onClick={handleUpdateRating}>Update Rating</button> */}
+        </div>
       )}
     </div>
   );

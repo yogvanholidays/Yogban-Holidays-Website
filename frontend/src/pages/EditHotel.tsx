@@ -36,12 +36,12 @@ const EditHotel = () => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
-        }}
+        }} className="mb-3"
       >
-        <h1 className="text-3xl font-bold mb-3">Edit Property</h1>
+        <h1 className="text-3xl font-bold ">Edit Property</h1>
         <Link
-          to="/my-hotels"
-          className="bg-red-900 text-white p-2 font-bold hover:bg-red-700 text-xl disabled:bg-gray-500"
+          to="/admin"
+          className="bg-black text-white p-2 font-bold rounded-md text-xl disabled:bg-gray-500"
         >
           Back
         </Link>

@@ -22,10 +22,10 @@ const AddHotel = () => {
 
   return (
     <div>
-      <div style={{display:"flex", flexDirection:"row",justifyContent:"space-between"}}>
+      <div style={{display:"flex", flexDirection:"row",justifyContent:"space-between"}} className="mb-3">
 
-      <h1 className="text-3xl font-bold mb-3">Add Hotel</h1>
-      <Link to="/" className="bg-red-900 text-white p-2 font-bold hover:bg-red-700 text-xl disabled:bg-gray-500">Back</Link>
+      <h1 className="text-3xl font-bold">Add Hotel</h1>
+      <Link to="/" className=" text-white px-4 rounded-md text-center  py-2 font-bold transition-all duration-200 hover:bg-yogvan-dark bg-yogvan text-xl disabled:bg-gray-500">Back</Link>
       </div>
 
       <ManageHotelForm onSave={handleSave} isLoading={isLoading} />;

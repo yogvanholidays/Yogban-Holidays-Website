@@ -54,7 +54,7 @@ const MyHotels = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <Link to='/review-properties' className="text-white bg-red-500 p-2 rounded-md min-w-fit">View All</Link>
+          <Link to='/review-properties' className="text-white transition-all duration-200 hover:bg-yogvan-dark bg-yogvan p-2 rounded-md min-w-fit">View All</Link>
           </div>
       </div>
       <div className="grid grid-cols-1 gap-8">
@@ -90,7 +90,7 @@ const MyHotels = () => {
             <span className="flex justify-end">
               <Link
                 to={`/edit-hotel/${hotel._id}`}
-                className="flex bg-red-600 text-white text-xl font-bold p-2 hover:bg-red-500"
+                className="flex text-white text-xl font-bold py-2 px-3 rounded-md bg-black "
               >
                 View Details
               </Link>

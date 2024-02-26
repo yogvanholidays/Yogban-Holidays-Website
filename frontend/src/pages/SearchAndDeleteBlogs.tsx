@@ -68,7 +68,7 @@ const SearchAndDeleteBlogs = () => {
         placeholder="Search by title or author..."
         className="border p-2 rounded-md h-full w-full"
         />
-        <Link to='/create-blog' className="p-2 rounded-md bg-red-400 text-white min-w-fit">Create Blog</Link>
+        <Link to='/create-blog' className="p-2 rounded-md bg-black text-white min-w-fit">Create Blog</Link>
         </div>
       {loading && <p>Loading...</p>}
       <div className="grid grid-cols-3 gap-4 portrait:grid-cols-1 ">

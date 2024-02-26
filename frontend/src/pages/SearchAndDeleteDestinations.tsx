@@ -55,7 +55,7 @@ const SearchAndDeleteDestinations = () => {
         />
         <Link
           to="/upload-destination"
-          className="p-2 rounded-md bg-red-400 text-white min-w-fit"
+          className="p-2 rounded-md bg-black text-white min-w-fit"
         >
           Add Destination
         </Link>

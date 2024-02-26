@@ -12,7 +12,7 @@ function ListPropertyComponent() {
         </p>
         </div>
         <div>
-          <Link to="/list-your-property" className="flex-grow-0 p-6 bg-red-700 text-white rounded-md">List Your Property</Link>
+          <Link to="/list-your-property" className="flex-grow-0 p-6 transition-all duration-200 hover:bg-yogvan-dark bg-yogvan text-white rounded-md">List Your Property</Link>
         </div>
       </div>
     </section>

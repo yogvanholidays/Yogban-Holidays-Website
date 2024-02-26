@@ -40,7 +40,7 @@ const ImageGalleryPage = () => {
         <div className="mb-4">
           <Link
             to='/upload-featured'
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
+            className="hover:bg-gray-700 bg-gray-900  text-white font-bold py-2 px-4 rounded cursor-pointer"
           >
             Upload Featured
           </Link>

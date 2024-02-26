@@ -65,7 +65,7 @@ function PickABlog() {
               className="flex flex-col text-center content-end items-center p-4 justify-center"
               style={{ flex: "0 0 auto", width: "25rem" }} // Set a fixed width for each button
             >
-                <div className="w-48 h-48 rounded-full  border-gray-400 border-2 bg-gray-200 flex flex-col text-center items-center justify-center">
+                <div className="w-1/2 h-1/2 rounded-full  border-gray-400 border-2 bg-gray-200 flex flex-col text-center items-center justify-center">
                     <span className="text-2xl font-semibold">View More</span>
                 </div>
 
