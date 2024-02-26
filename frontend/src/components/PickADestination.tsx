@@ -39,7 +39,7 @@ function PickADestination() {
   };
 
   return (
-    <div className="space-y-3 mb-12">
+    <div className="space-y-3 mb-12 select-none">
       <h1 className="font-bold text-3xl">Pick A Destination</h1>
       <div className="flex flex-wrap gap-x-20">
         {destinations.map((destination, index) => (

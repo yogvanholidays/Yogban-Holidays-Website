@@ -81,9 +81,9 @@ const Header = ({ bgHandle }: Props) => {
         className={
           isHomePage
             ? isScrolled
-              ? "bg-white max-w-full container flex flex-wrap justify-between py-2 z-30 transition-all duration-1000"
-              : "bg-white container max-w-full flex flex-wrap justify-between py-2 z-30 transition-all duration-1000"
-            : "container mx-auto flex flex-wrap justify-between pb-5 pt-4 z-30"
+              ? "bg-white max-w-full container flex flex-wrap justify-between select-none  py-2 z-30 transition-all duration-1000"
+              : "bg-white container max-w-full flex flex-wrap justify-between select-none  py-2 z-30 transition-all duration-1000"
+            : "container mx-auto flex flex-wrap justify-between select-none  pb-5 pt-4 z-30"
         }
         style={
           isHomePage
@@ -104,7 +104,7 @@ const Header = ({ bgHandle }: Props) => {
             </span>
           </Link>
         </span>
-        <span className="flex cursor-pointer items-center" onClick={handlePopupToggle}>
+        <span className="flex cursor-pointer select-none items-center" onClick={handlePopupToggle}>
           <img src="/leftWheat.png" alt="prize1" className="h-[4rem] portrait:h-[3.5rem]" />
           <span className="flex flex-col items-center mx-1">
             {/* <span className="text-4xl font-extrabold">4.0</span> */}
