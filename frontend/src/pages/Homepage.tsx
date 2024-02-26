@@ -4,6 +4,7 @@ import PickADestination from '../components/PickADestination'
 // import ListPropertyComponent from '../components/ListPropertyComponent'
 import CouponsList from '../components/CouponsList'
 import BlogComponent from '../components/BlogComponent'
+import ReviewHeaderComponent from '../components/ReviewHeaderComponent'
 
 
 function Homepage() {
@@ -16,6 +17,7 @@ function Homepage() {
         {/* <ListPropertyComponent/> */}
         <CouponsList/>
         <BlogComponent/>
+        <ReviewHeaderComponent/>
     </div>
   )
 }

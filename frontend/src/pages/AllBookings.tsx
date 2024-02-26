@@ -70,7 +70,7 @@ const MyBookings = () => {
       <div className="flex gap-4 flex-wrap">
         <input
           type="text"
-          placeholder="Filter by Name, Hotel Name, Email or Phone"
+          placeholder="Filter by Name, Property Name, Email or Phone"
           value={hotelNameFilter}
           onChange={handleHotelNameFilterChange}
           className="border p-2 rounded flex-1"
@@ -105,7 +105,7 @@ const MyBookings = () => {
           <div>
             <img
               src={booking.hotel.imageUrls[0]}
-              alt="Hotel"
+              alt="property"
               className="w-60 object-cover rounded-md flex-1"
             />
           </div>

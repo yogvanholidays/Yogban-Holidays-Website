@@ -44,7 +44,7 @@ const MyHotels = () => {
       <AdminControls />
       <ArrivingToday />
       <div className="flex justify-between portrait:flex-col gap-2">
-        <h1 className="text-3xl font-bold min-w-fit">My Hotels</h1>
+        <h1 className="text-3xl font-bold min-w-fit">My Properties</h1>
         <div className="flex min-w-fit portrait:w-full landscape:w-1/2 gap-2">
 
         <input

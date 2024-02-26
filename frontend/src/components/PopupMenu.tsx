@@ -15,7 +15,7 @@ const PopupMenu = ({ isAdmin }: Props) => {
   };
 
   return (
-    <div className="relative inline-block">
+    <div className="relative inline-block portrait:mx-6">
       <button
         onClick={togglePopup}
         className="flex items-centerrounded-full text-3xl"

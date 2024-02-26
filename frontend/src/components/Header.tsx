@@ -19,6 +19,11 @@ const Header = ({ bgHandle }: Props) => {
   const isHomePage = bgHandle === "HomePage";
   const [isScrolled, setIsScrolled] = useState(false);
   const [images, setImages] = useState<CarouselImageType[]>([]);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handlePopupToggle = () => {
+    setShowPopup(!showPopup);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,10 +85,18 @@ const Header = ({ bgHandle }: Props) => {
             </span>
           </Link>
         </span>
+        <span className="flex cursor-pointer items-center" onClick={handlePopupToggle}>
+          <img src="/leftWheat.png" alt="prize1" className="h-[4rem] portrait:h-[3.5rem]" />
+          <span className="flex flex-col items-center mx-1">
+            <span className="text-4xl font-extrabold">4.0</span>
+            <span className="text-sm">View Reviews</span>
+          </span>
+          <img src="/rightWheat.png" alt="prize2" className="h-[4rem] portrait:h-[3.5rem]" />
+        </span>
         <span className="flex space-x-2 items-center">
           {isLoggedIn ? (
             <>
-            <PopupMenu isAdmin={isAdmin}/>
+              <PopupMenu isAdmin={isAdmin} />
               {/* <Link
                 to="/my-bookings"
                 className="flex items-center text-black px-3 font-bold hover:bg-gray-300 rounded-lg h-fit py-2 bg-gray-100 transition-all duration-300"
@@ -121,16 +134,19 @@ const Header = ({ bgHandle }: Props) => {
                     image.imageUrl || "https://via.placeholder.com/800x400"
                   })`,
                   backgroundSize: "cover",
-                  backgroundPosition:"center"
+                  backgroundPosition: "center",
                 }}
               >
                 <div className="absolute inset-0 flex flex-col justify-center items-center">
-                  <h3 className="text-white text-6xl pt-serif-bold portrait:text-2xl"  style={{ textShadow: "0px 0px 30px rgba(0, 0, 0, 0.9)" }}>
+                  <h3
+                    className="text-white text-6xl pt-serif-bold portrait:text-2xl"
+                    style={{ textShadow: "0px 0px 30px rgba(0, 0, 0, 0.9)" }}
+                  >
                     {image.featuredText}
                   </h3>
                   <Link
                     to={image.ButtonLink}
-                    className="bg-black bg-opacity-50 border-2 text-white px-6 py-3 portrait:mt-1 landscape:mt-4 rounded-md text-xl exploreButtonCarousel transition-all duration-200"
+                    className="border-2 text-white px-6 py-3 portrait:mt-1 landscape:mt-4 rounded-md text-xl exploreButtonCarousel transition-all duration-200"
                   >
                     Explore
                   </Link>
@@ -145,6 +161,44 @@ const Header = ({ bgHandle }: Props) => {
           <p className="text-2xl text-black">
             Search low prices on hotels for your dream vacations
           </p>
+        </div>
+      )}
+
+      {showPopup && (
+        <div className="fixed top-0 left-0 z-[999] w-full h-full bg-black bg-opacity-50 flex justify-center items-center ">
+          <div className="bg-white p-8 rounded-lg shadow-lg portrait:w-[70vw] landscape:w-[20rem]">
+            <div className="mb-4">
+              <h1 className="text-2xl font-bold">View Guest Reviews</h1>
+            </div>
+            <div className="grid grid-cols-2 gap-5 portrait:grid-cols-1">
+              <div className="mb-1">
+                <a href="https://www.booking.com/hotel/in/yogvan-hill-view-apartment.en-gb.html?label=gen173nr-1BCAsobEIaeW9ndmFuLWhpbGwtdmlldy1hcGFydG1lbnRIM1gEaGyIAQGYAQm4ARjIAQzYAQHoAQGIAgGoAgS4Aqi65q4GwAIB0gIkMmVkMmY1NTgtYTQ5Ni00NmMwLWE0YmUtMzlkNjVjYzAzMTgw2AIF4AIB&sid=2ea154ba0084267aa4734d1943b95882&dist=0&keep_landing=1&sb_price_type=total&type=total&activeTab=photosGallery">
+                  <img src="booking.png" alt="airbnb" className="w-full" />
+                </a>
+              </div>
+              <div className="mb-1">
+                <a href="https://www.booking.com/hotel/in/yogvan-hill-view-workation-apartment-wifi-kitchen5.en-gb.html?label=gen173nr-1BCAsobEIyeW9ndmFuLWhpbGwtdmlldy13b3JrYXRpb24tYXBhcnRtZW50LXdpZmkta2l0Y2hlbjVIM1gEaGyIAQGYAQm4ARjIAQzYAQHoAQGIAgGoAgS4Ap7J5q4GwAIB0gIkMjUxOTVmMGYtYThlNC00NzlmLTk0MjUtOTgzNjViZjdlZWZj2AIF4AIB&sid=2ea154ba0084267aa4734d1943b95882&dist=0&keep_landing=1&sb_price_type=total&type=total&activeTab=photosGallery">
+                  <img src="booking.png" alt="airbnb" className="w-full" />
+                </a>
+              </div>
+              <div className="mb-1">
+                <a href="http://airbnb.co.in/p/yogvanrishikesh">
+                  <img src="airbnb.png" alt="airbnb" className="w-full" />
+                </a>
+              </div>
+              <div>
+                <a href="https://www.makemytrip.com/hotels/hotel-details/?checkin=02262024&checkout=02272024&locusId=CTXRI&locusType=city&city=CTXRI&country=IN&searchText=Yogvan%20Hill%20View%201BHK%20Apartment%20Tapovan%20Rishikesh&roomStayQualifier=4e0e&_uCurrency=INR&reference=hotel&hotelId=202108271135307140&rf=directSearch&lat=30.13252&lng=78.32141&homeStay=true&type=hotel&rsc=1e4e0e">
+                  <img src="mmt.svg" alt="airbnb" className="w-full" />
+                </a>
+              </div>
+            </div>
+            <button
+              onClick={() => setShowPopup(false)}
+              className="py-2 px-4 bg-gray-200 hover:bg-gray-300 rounded-md mt-4"
+            >
+              Close
+            </button>
+          </div>
         </div>
       )}
     </div>

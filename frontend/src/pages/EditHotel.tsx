@@ -38,7 +38,7 @@ const EditHotel = () => {
           justifyContent: "space-between",
         }}
       >
-        <h1 className="text-3xl font-bold mb-3">Edit Hotel</h1>
+        <h1 className="text-3xl font-bold mb-3">Edit Property</h1>
         <Link
           to="/my-hotels"
           className="bg-red-900 text-white p-2 font-bold hover:bg-red-700 text-xl disabled:bg-gray-500"

@@ -138,9 +138,9 @@ const BookingForm = ({
         key: "rzp_test_SVXNvcCQpqlAcY", // Enter the Key ID generated from the Dashboard
         amount:finalAmount.toString(), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         currency: "INR",
-        name: "Acme Corp",
-        description: "Test Transaction",
-        image: "https://example.com/your_logo",
+        name: "Yogvan Holidays",
+        description: "Booking For Stay",
+        image: "https://res.cloudinary.com/dmwytfweq/image/upload/v1708961114/Yogvan_Final_Logo_awnzca.png",
         order_id: intent.id, //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
         handler: async function (response: { razorpay_payment_id: string; razorpay_order_id: string; razorpay_signature: string; }) {
           console.log(response);
@@ -165,7 +165,7 @@ const BookingForm = ({
           showToast({ message: "Payment Successful!", type: "SUCCESS" });
         },
         prefill: {
-          name: "Piyush Garg",
+          name: "Name Surname",
           email: "youremail@example.com",
           contact: "9999999999",
         },
@@ -173,7 +173,7 @@ const BookingForm = ({
           address: "Razorpay Corporate Office",
         },
         theme: {
-          color: "#3399cc",
+          color: "#a87532",
         },
       };
 

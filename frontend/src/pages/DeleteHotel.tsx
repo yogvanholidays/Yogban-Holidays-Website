@@ -32,7 +32,7 @@ const SearchAndDeleteHotels = () => {
       });
       setHotels(filteredHotels);
     } catch (error) {
-      console.error("Failed to search hotels:", error);
+      console.error("Failed to search Properties:", error);
     }
     setLoading(false);
   };
@@ -42,7 +42,7 @@ const SearchAndDeleteHotels = () => {
       await apiClient.deleteHotel(id);
       setHotels(hotels.filter(hotel => hotel._id !== id));
     } catch (error) {
-      console.error("Failed to delete Hotel:", error);
+      console.error("Failed to delete Property:", error);
     }
   };
 

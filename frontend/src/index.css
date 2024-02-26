@@ -39,3 +39,8 @@
     opacity: 100;
     transform: scale(1.05);
   }
+  .exploreButtonCarousel{
+    background: #000000ac;
+    transform: scale(1.05);
+  }
+
