@@ -25,24 +25,24 @@ function ReviewHeaderComponent() {
       <div>
         <h3 className="text-3xl font-bold mb-4">View User Reviews on</h3>
         <div className="flex portrait:flex-col landscape:flex-row flex-wrap">
-          <div className="landscape:w-1/2">
+          <div className="landscape:w-1/2 flex items-center content-center">
             <span className="flex pointer-events-none select-none items-center content-center">
               <img
                 src="/leftWheat.png"
                 alt="prize1"
-                className="h-[12rem] portrait:h-[3.5rem]"
+                className="landscape:h-[12rem] portrait:h-[8rem]"
               />
               <span className="flex flex-col items-center mx-1 content-center">
                 {isLoading ? (
-                  <span className="text-9xl font-extrabold">...</span>
+                  <span className="text-9xl portrait:text-8xl font-extrabold">...</span>
                 ) : (
-                  <span className="text-9xl font-extrabold mb-10 -mx-8">{rating}</span>
+                  <span className="text-9xl portrait:text-8xl font-extrabold mb-10 -mx-8">{rating}</span>
                 )}
               </span>
               <img
                 src="/rightWheat.png"
                 alt="prize2"
-                className="h-[12rem] portrait:h-[3.5rem]"
+                className="landscape:h-[12rem] portrait:h-[8rem]"
               />
             </span>
           </div>
