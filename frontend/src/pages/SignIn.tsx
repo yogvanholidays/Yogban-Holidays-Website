@@ -43,7 +43,7 @@ const SignIn = () => {
         Email
         <input
           type="email"
-          className="border rounded w-full p-2 font-normal"
+          className="border-[1.5px] border-gray-300 rounded w-full p-2 font-normal"
           {...register("email", { required: "This field is required" })}
         />
         {errors.email && (
@@ -54,7 +54,7 @@ const SignIn = () => {
         Password
         <input
           type="password"
-          className="border rounded w-full p-2 font-normal"
+          className="border-[1.5px] border-gray-300 rounded w-full p-2 font-normal"
           {...register("password", {
             required: "This field is required",
             minLength: {
