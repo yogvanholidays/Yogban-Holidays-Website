@@ -103,7 +103,7 @@ const Search = () => {
       <div className="col-span-1 flex flex-col gap-5">
         <div className="flex justify-between items-center portrait:flex-col portrait:gap-2">
           <span className="text-xl font-bold">
-            {hotelData?.pagination.total} Hotels found
+            {hotelData?.pagination.total} Destinations found
             {search.destination ? ` in ${search.destination}` : ""}
           </span>
           <div className="portrait:flex portrait:gap-2">

@@ -9,6 +9,7 @@ import {
 } from "../../api-client"; // Import the createPaymentIntent function
 import useRazorpay from "react-razorpay";
 import { useAppContext } from "../../contexts/AppContext";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -42,6 +43,8 @@ const BookingForm = ({
   const [couponValid, setCouponValid] = useState(true);
   const [enteredCoupon, setEnteredCoupon] = useState<string>('');
   const ogAmount = amount;
+  const navigate = useNavigate();
+
   useEffect(() => {
 
     if(finalAmount===0){
@@ -145,7 +148,7 @@ const BookingForm = ({
         handler: async function (response: { razorpay_payment_id: string; razorpay_order_id: string; razorpay_signature: string; }) {
           console.log(response);
 
-          const isSuccessJSON = await validatePayment(
+          await validatePayment(
             response.razorpay_payment_id,
             response.razorpay_order_id,
             response.razorpay_signature,
@@ -161,8 +164,8 @@ const BookingForm = ({
             hotel,
             data.phoneNumber
           );
-          console.log(isSuccessJSON);
           showToast({ message: "Payment Successful!", type: "SUCCESS" });
+          navigate('/my-bookings')
         },
         prefill: {
           name: "Name Surname",

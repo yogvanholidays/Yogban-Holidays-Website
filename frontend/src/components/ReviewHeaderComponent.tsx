@@ -54,12 +54,6 @@ function ReviewHeaderComponent() {
               <img src="booking.png" alt="airbnb" className="h-16" />
             </a>
             <a
-              href="https://www.booking.com/hotel/in/yogvan-hill-view-workation-apartment-wifi-kitchen5.en-gb.html?label=gen173nr-1BCAsobEIyeW9ndmFuLWhpbGwtdmlldy13b3JrYXRpb24tYXBhcnRtZW50LXdpZmkta2l0Y2hlbjVIM1gEaGyIAQGYAQm4ARjIAQzYAQHoAQGIAgGoAgS4Ap7J5q4GwAIB0gIkMjUxOTVmMGYtYThlNC00NzlmLTk0MjUtOTgzNjViZjdlZWZj2AIF4AIB&sid=2ea154ba0084267aa4734d1943b95882&dist=0&keep_landing=1&sb_price_type=total&type=total&activeTab=photosGallery"
-              className="items-center content-center justify-center flex"
-            >
-              <img src="booking.png" alt="airbnb" className="h-16" />
-            </a>
-            <a
               href="http://airbnb.co.in/p/yogvanrishikesh"
               className="items-center content-center justify-center flex"
             >
@@ -70,6 +64,12 @@ function ReviewHeaderComponent() {
               className="items-center content-center justify-center flex"
             >
               <img src="mmt.svg" alt="airbnb" className="h-16" />
+            </a>
+            <a
+              href="https://www.booking.com/hotel/in/yogvan-hill-view-workation-apartment-wifi-kitchen5.en-gb.html?label=gen173nr-1BCAsobEIyeW9ndmFuLWhpbGwtdmlldy13b3JrYXRpb24tYXBhcnRtZW50LXdpZmkta2l0Y2hlbjVIM1gEaGyIAQGYAQm4ARjIAQzYAQHoAQGIAgGoAgS4Ap7J5q4GwAIB0gIkMjUxOTVmMGYtYThlNC00NzlmLTk0MjUtOTgzNjViZjdlZWZj2AIF4AIB&sid=2ea154ba0084267aa4734d1943b95882&dist=0&keep_landing=1&sb_price_type=total&type=total&activeTab=photosGallery"
+              className="items-center content-center justify-center flex"
+            >
+              <img src="booking.png" alt="airbnb" className="h-16" />
             </a>
           </div>
         </div>
