@@ -13,6 +13,7 @@ export type HotelType = {
   starRating: number;
   imageUrls: string[];
   lastUpdated: Date;
+  reviews:any;
 };
 
 export type HotelSearchResponse = {

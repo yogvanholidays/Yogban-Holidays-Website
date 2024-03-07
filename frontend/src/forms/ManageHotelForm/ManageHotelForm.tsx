@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormProvider, useForm } from "react-hook-form";
 import DetailsSection from "./DetailsSection";
 import TypeSection from "./TypeSection";
@@ -6,7 +7,7 @@ import GuestsSection from "./GuestsSection";
 import ImagesSection from "./ImagesSection";
 import { useEffect } from "react";
 import { HotelType } from "../../../../backend/src/shared/types";
-
+import { reviews, usernames } from "../../../../backend/src/shared/reviews";
 export type HotelFormData = {
   name: string;
   city: string;
@@ -20,6 +21,7 @@ export type HotelFormData = {
   imageUrls: string[];
   adultCount: number;
   childCount: number;
+  reviews:any
 };
 
 type Props = {
@@ -27,16 +29,46 @@ type Props = {
   onSave: (hotelFormData: FormData) => void;
   isLoading: boolean;
 };
+async function generateRandomReview(reviews:any, usernames:any) {
+  const randomReviewIndex = Math.floor(Math.random() * reviews.length);
+  const randomReview = reviews[randomReviewIndex];
+  const randomUsernameIndex = Math.floor(Math.random() * usernames.length);
+  const randomUsername = usernames[randomUsernameIndex];
+  const randomStar = Math.random() < 0.1 ? 3 : Math.floor(Math.random() * 3) + 3;
+  return {
+      review: randomReview,
+      name: randomUsername,
+      rating: randomStar
+  };
+}
+
+async function generateRandomReviews(reviews:any, usernames:any) {
+  const numReviews = Math.floor(Math.random() * 3) + 8;
+  const randomReviews = [];
+
+  for (let i = 0; i < numReviews; i++) {
+      const review = await generateRandomReview(reviews, usernames);
+      randomReviews.push(review);
+  }
+
+  return randomReviews;
+}
+
+// Example usage
+
 
 const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
   const formMethods = useForm<HotelFormData>();
   const { handleSubmit, reset } = formMethods;
-
+  
   useEffect(() => {
     reset(hotel);
   }, [hotel, reset]);
+  
+  const onSubmit = handleSubmit(async (formDataJson: HotelFormData) => {
+    const randomReviews = await generateRandomReviews(reviews, usernames);
+    formDataJson.reviews = randomReviews;
 
-  const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
     const formData = new FormData();
     if (hotel) {
       formData.append("hotelId", hotel._id);
@@ -64,7 +96,6 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
     Array.from(formDataJson.imageFiles).forEach((imageFile) => {
       formData.append(`imageFiles`, imageFile);
     });
-
     onSave(formData);
   });
 

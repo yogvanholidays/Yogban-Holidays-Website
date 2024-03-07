@@ -5,6 +5,7 @@ import Hotel from "../models/hotel";
 import verifyToken from "../middleware/auth";
 import { body } from "express-validator";
 import { HotelType } from "../shared/types";
+import { reviews, usernames } from "../shared/reviews";
 
 const router = express.Router();
 
@@ -15,6 +16,31 @@ const upload = multer({
     fileSize: 5 * 1024 * 1024, // 5MB
   },
 });
+
+async function generateRandomReview(reviews: any, usernames: any) {
+  const randomReviewIndex = Math.floor(Math.random() * reviews.length);
+  const randomReview = reviews[randomReviewIndex];
+  const randomUsernameIndex = Math.floor(Math.random() * usernames.length);
+  const randomUsername = usernames[randomUsernameIndex];
+  const randomStar =
+    Math.random() < 0.1 ? 3 : Math.floor(Math.random() * 3) + 3;
+  return {
+    review: randomReview,
+    name: randomUsername,
+    rating: randomStar,
+  };
+}
+
+async function generateRandomReviews(reviews: any, usernames: any) {
+  const numReviews = Math.floor(Math.random() * 3) + 8;
+  const randomReviews = [];
+
+  for (let i = 0; i < numReviews; i++) {
+    const review = await generateRandomReview(reviews, usernames);
+    randomReviews.push(review);
+  }
+  return randomReviews;
+}
 
 router.post(
   "/",
@@ -38,13 +64,18 @@ router.post(
   async (req: Request, res: Response) => {
     try {
       const imageFiles = req.files as Express.Multer.File[];
-      const newHotel: HotelType = req.body;
-
+      const newHotel = req.body;
+      // const reviews = .reviews;
+      console.log(req.body);
       const imageUrls = await uploadImages(imageFiles);
-
+      const randomReviews = await generateRandomReviews(reviews, usernames);
+      newHotel.reviews= randomReviews;
       newHotel.imageUrls = imageUrls;
       newHotel.lastUpdated = new Date();
       newHotel.userId = req.userId;
+      // if (reviews) {
+      //   newHotel.reviews = reviews;
+      // }
 
       const hotel = new Hotel(newHotel);
       await hotel.save();
@@ -136,7 +167,7 @@ router.get("/", async (req, res) => {
     // if (searchTerm) {
     //   hotels = await Hotel.find({ name: { $regex: searchTerm, $options: "i" } });
     // } else {
-      hotels = await Hotel.find();
+    hotels = await Hotel.find();
     // }
     res.json(hotels);
   } catch (error) {
@@ -156,6 +187,5 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ message: "Failed to delete hotel" });
   }
 });
-
 
 export default router;

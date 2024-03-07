@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { HotelType } from "../shared/types";
 
 
@@ -17,6 +17,7 @@ const hotelSchema = new mongoose.Schema<HotelType>({
   starRating: { type: Number, required: true, min: 1, max: 5 },
   imageUrls: [{ type: String, required: true }],
   lastUpdated: { type: Date, required: true },
+  reviews: { type: Schema.Types.Mixed, required: false },
 });
 
 const Hotel = mongoose.model<HotelType>("Hotel", hotelSchema);
