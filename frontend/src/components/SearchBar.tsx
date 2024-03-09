@@ -203,14 +203,14 @@ const SearchBar = ({ handler}: Props) => {
         />
       </div>
       <div className="flex gap-3">
-        <button className="w-2/3 bg-blue-600 text-white h-full p-3 font-bold text-xl hover:bg-blue-500 rounded-lg">
+        <button className="w-full bg-yogvan text-white h-full p-3 font-bold text-xl  rounded-lg">
           Search
         </button>
         <button
           type="reset"
-          className="w-1/3 bg-red-600 text-white h-full p-3 font-bold text-xl hover:bg-red-500 rounded-lg"
+          className="w-1/3 hidden bg-transparent text-gray-500 h-full p-3 poppins-regular text-xl hover:bg-red-500 rounded-lg"
         >
-          Clear
+          X
         </button>
       </div>
     </form>

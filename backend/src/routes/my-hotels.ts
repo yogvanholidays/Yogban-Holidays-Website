@@ -5,7 +5,7 @@ import Hotel from "../models/hotel";
 import verifyToken from "../middleware/auth";
 import { body } from "express-validator";
 import { HotelType } from "../shared/types";
-import { reviews, usernames } from "../shared/reviews";
+import { platform, reviews, usernames } from "../shared/reviews";
 
 const router = express.Router();
 
@@ -22,25 +22,61 @@ async function generateRandomReview(reviews: any, usernames: any) {
   const randomReview = reviews[randomReviewIndex];
   const randomUsernameIndex = Math.floor(Math.random() * usernames.length);
   const randomUsername = usernames[randomUsernameIndex];
+  const randomPlatform = platform[Math.floor(Math.random()*platform.length)]
   const randomStar =
     Math.random() < 0.1 ? 3 : Math.floor(Math.random() * 3) + 3;
   return {
     review: randomReview,
     name: randomUsername,
     rating: randomStar,
+    platform:randomPlatform,
   };
 }
 
-async function generateRandomReviews(reviews: any, usernames: any) {
+async function generateRandomReviews(reviews:any, usernames:any) {
   const numReviews = Math.floor(Math.random() * 3) + 8;
+  interface PlatformReviewCounts {
+    [key: string]: number;
+  }
+  
+  const platformReviewCounts: PlatformReviewCounts = {
+    Google: 0,
+    airbnb: 0,
+    makemytrip: 0
+  };
+  
+
   const randomReviews = [];
 
+  // Calculate how many reviews to generate for each platform
+  const reviewsPerPlatform = Math.floor(numReviews / Object.keys(platformReviewCounts).length);
+
   for (let i = 0; i < numReviews; i++) {
+    let platform;
+    
+    // Determine the platform for the review
+    if (platformReviewCounts.Google < reviewsPerPlatform) {
+      platform = "Google";
+    } else if (platformReviewCounts.airbnb < reviewsPerPlatform) {
+      platform = "airbnb";
+    } else {
+      platform = "makemytrip";
+    }
+
     const review = await generateRandomReview(reviews, usernames);
+
+    // Add the platform to the review
+    review.platform = platform;
+
     randomReviews.push(review);
+
+    // Increment the review count for the platform
+    platformReviewCounts[platform]++;
   }
+
   return randomReviews;
 }
+
 
 router.post(
   "/",
@@ -66,7 +102,6 @@ router.post(
       const imageFiles = req.files as Express.Multer.File[];
       const newHotel = req.body;
       // const reviews = .reviews;
-      console.log(req.body);
       const imageUrls = await uploadImages(imageFiles);
       const randomReviews = await generateRandomReviews(reviews, usernames);
       newHotel.reviews= randomReviews;

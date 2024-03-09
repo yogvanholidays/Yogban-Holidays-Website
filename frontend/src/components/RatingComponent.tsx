@@ -51,7 +51,7 @@ const RatingComponent = () => {
         <p>Loading...</p>
       ) : (
         <div className='flex flex-wrap gap-3'>
-          <label htmlFor="rating" className='text-2xl font-bold'>Header Rating:</label>
+          <label htmlFor="rating" className='text-2xl font-bold'>Homepage Rating:</label>
           <input
             type="text"
             id="rating"

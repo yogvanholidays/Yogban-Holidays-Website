@@ -42,7 +42,7 @@ const hotels = hotelList?.bestRatedHotels
               to={`/search`}
               className="relative cursor-pointer overflow-hidden rounded-md"
             >
-              <div className="h-[300px] bg-gray-500 flex items-center text-center justify-center content-center">
+              <div className="h-[300px] bg-gray-500 flex items-center text-center justify-center content-center" style={{}}>
                 <span className="font font-medium text-xl">View More</span>
               </div>
             </Link>

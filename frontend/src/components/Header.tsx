@@ -5,9 +5,9 @@ import { useAppContext } from "../contexts/AppContext";
 import { Carousel } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
-import { fetchCarouselImages, fetchRating } from "../api-client";
+import { fetchCarouselImages } from "../api-client";
 import { CarouselImageType } from "../../../backend/src/shared/types";
-import yogbanLogo from "../assets/Yogvan.png";
+// import yogbanLogo from "../assets/Yogvan.png";
 import PopupMenu from "./PopupMenu";
 
 interface Props {
@@ -50,26 +50,9 @@ const Header = ({ bgHandle }: Props) => {
     fetchImages();
   }, []);
 
-  const [rating, setRating] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const getRating = async () => {
-      setIsLoading(true);
-      try {
-        const data = await fetchRating();
-        setRating(data.rating);
-      } catch (error:any) {
-        console.error('Error fetching rating:', error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getRating();
-  }, []);
   return (
     <div
-      className={isHomePage ? "pb-3 bg-transparent" : "bg-yogvan pb-16"}
+      className={isHomePage ? "pb-3 bg-transparent" : "bg-white"}
       style={{ transition: "all 0.3s ease-in-out" }}
     >
       {/* {
@@ -99,23 +82,24 @@ const Header = ({ bgHandle }: Props) => {
       >
         <span className="text-3xl text-black font-bold tracking-tight">
           <Link to="/">
-            <span className="flex text-center items-center gap-3">
-              <img src={yogbanLogo} style={{ height: "80px" }} alt="" />
+            <span className="flex text-center flex-col items-center gap-3">
+              <img src='yog.png' style={{ height: "80px" }} alt="" />
             </span>
           </Link>
         </span>
-        <span className="flex cursor-pointer select-none items-center" onClick={handlePopupToggle}>
-          <img src="/leftWheat.png" alt="prize1" className="h-[4rem] portrait:h-[3.5rem]" />
+        <span
+          className="flex cursor-pointer select-none items-center"
+          onClick={handlePopupToggle}
+        >
           <span className="flex flex-col items-center mx-1">
             {/* <span className="text-4xl font-extrabold">4.0</span> */}
-            {isLoading ? (
-        <span className="text-4xl font-extrabold">...</span>
-      ) : (
-        <span className="text-4xl font-extrabold">{rating}</span>
-      )}
-            <span className="text-sm">View Reviews</span>
+
+            {/* ) : ( */}
+              <span className="text-xl portrait:text-sm  italic px-4 py-2 portrait:px-2 portrait:py-1 rounded-full border ">Guest's Experiences...</span>
+            {/* )} */}
+            {/* <span className="text-sm">for guest experience</span> */}
           </span>
-          <img src="/rightWheat.png" alt="prize2" className="h-[4rem] portrait:h-[3.5rem]" />
+
         </span>
         <span className="flex space-x-2 items-center">
           {isLoggedIn ? (
@@ -179,13 +163,13 @@ const Header = ({ bgHandle }: Props) => {
             </Carousel.Item>
           ))}
         </Carousel>
-      ) : (
-        <div className="container mx-auto flex flex-col gap-2">
-          <h1 className="text-5xl text-black font-bold">Find Your Next Stay</h1>
-          <p className="text-2xl text-black">
-            Search low prices on hotels for your dream vacations
-          </p>
-        </div>
+      ) : (<></>
+        // <div className="container mx-auto flex flex-col gap-2">
+        //   <h1 className="text-5xl text-black font-bold">Find Your Next Stay</h1>
+        //   <p className="text-2xl text-black">
+        //     Search low prices on hotels for your dream vacations
+        //   </p>
+        // </div>
       )}
 
       {showPopup && (
@@ -195,24 +179,40 @@ const Header = ({ bgHandle }: Props) => {
               <h1 className="text-2xl font-bold">View Guest Reviews</h1>
             </div>
             <div className="grid grid-cols-2 gap-5 portrait:grid-cols-1">
-              <div className="mb-1">
+              {/* <div className="mb-1">
                 <a href="https://www.booking.com/hotel/in/yogvan-hill-view-apartment.en-gb.html?label=gen173nr-1BCAsobEIaeW9ndmFuLWhpbGwtdmlldy1hcGFydG1lbnRIM1gEaGyIAQGYAQm4ARjIAQzYAQHoAQGIAgGoAgS4Aqi65q4GwAIB0gIkMmVkMmY1NTgtYTQ5Ni00NmMwLWE0YmUtMzlkNjVjYzAzMTgw2AIF4AIB&sid=2ea154ba0084267aa4734d1943b95882&dist=0&keep_landing=1&sb_price_type=total&type=total&activeTab=photosGallery">
-                  <img src="https://res.cloudinary.com/dmwytfweq/image/upload/v1708969207/Booking-Logo_nik3ck.png" alt="airbnb" className="w-full" />
+                  <img
+                    src="https://res.cloudinary.com/dmwytfweq/image/upload/v1708969207/Booking-Logo_nik3ck.png"
+                    alt="airbnb"
+                    className="w-full"
+                  />
                 </a>
-              </div>
+              </div> */}
               <div className="mb-1">
                 <a href="https://www.booking.com/hotel/in/yogvan-hill-view-workation-apartment-wifi-kitchen5.en-gb.html?label=gen173nr-1BCAsobEIyeW9ndmFuLWhpbGwtdmlldy13b3JrYXRpb24tYXBhcnRtZW50LXdpZmkta2l0Y2hlbjVIM1gEaGyIAQGYAQm4ARjIAQzYAQHoAQGIAgGoAgS4Ap7J5q4GwAIB0gIkMjUxOTVmMGYtYThlNC00NzlmLTk0MjUtOTgzNjViZjdlZWZj2AIF4AIB&sid=2ea154ba0084267aa4734d1943b95882&dist=0&keep_landing=1&sb_price_type=total&type=total&activeTab=photosGallery">
-                  <img src="https://res.cloudinary.com/dmwytfweq/image/upload/v1708969207/Booking-Logo_nik3ck.png" alt="airbnb" className="w-full" />
+                  <img
+                    src="https://res.cloudinary.com/dmwytfweq/image/upload/v1708969207/Booking-Logo_nik3ck.png"
+                    alt="airbnb"
+                    className="w-full"
+                  />
                 </a>
               </div>
               <div className="mb-1">
                 <a href="http://airbnb.co.in/p/yogvanrishikesh">
-                  <img src="https://res.cloudinary.com/dmwytfweq/image/upload/v1708969208/Airbnb_Logo_B%C3%A9lo.svg_yrb9mg.png" alt="airbnb" className="w-full" />
+                  <img
+                    src="https://res.cloudinary.com/dmwytfweq/image/upload/v1708969208/Airbnb_Logo_B%C3%A9lo.svg_yrb9mg.png"
+                    alt="airbnb"
+                    className="w-full"
+                  />
                 </a>
               </div>
               <div>
                 <a href="https://www.makemytrip.com/hotels/hotel-details/?checkin=02262024&checkout=02272024&locusId=CTXRI&locusType=city&city=CTXRI&country=IN&searchText=Yogvan%20Hill%20View%201BHK%20Apartment%20Tapovan%20Rishikesh&roomStayQualifier=4e0e&_uCurrency=INR&reference=hotel&hotelId=202108271135307140&rf=directSearch&lat=30.13252&lng=78.32141&homeStay=true&type=hotel&rsc=1e4e0e">
-                  <img src="https://res.cloudinary.com/dmwytfweq/image/upload/v1708969207/mmt_logo_llaezn.svg" alt="airbnb" className="w-full" />
+                  <img
+                    src="https://res.cloudinary.com/dmwytfweq/image/upload/v1708969207/mmt_logo_llaezn.svg"
+                    alt="airbnb"
+                    className="w-full"
+                  />
                 </a>
               </div>
             </div>
