@@ -23,7 +23,7 @@ const PopupMenu = ({ isAdmin }: Props) => {
         <FaUserCircle />
       </button>
       {isOpen && (
-        <div className="absolute right-0 z-10 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg min-w-max">
+        <div className="absolute right-0 z-[999] mt-2 bg-white border border-gray-300 rounded-lg shadow-lg min-w-max">
           <ul className="divide-y divide-gray-200">
             {isAdmin && (
               <li>

@@ -107,8 +107,8 @@ const SearchBar = ({ handler}: Props) => {
       className={
         isHomePage
         // ? "-mt-32 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 "// landscape:shadow-none" //remove last part to revert searchbar positioning
-          ? "-mt-14 p-3 bg-gray-100 rounded-md grid grid-cols-1 z-[100] lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl shadow-slate-400"// landscape:shadow-none" //remove last part to revert searchbar positioning
-          : "-mt-8 p-3 bg-gray-100 rounded-md grid grid-cols-1 z-[100] lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl shadow-slate-400"// landscape:shadow-none" //remove last part to revert searchbar positioning
+          ? "-mt-14 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl shadow-slate-400"// landscape:shadow-none" //remove last part to revert searchbar positioning
+          : "-mt-8 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl shadow-slate-400"// landscape:shadow-none" //remove last part to revert searchbar positioning
       }
       style={{ transition: "all 0.3s ease-in-out" }}
     >
