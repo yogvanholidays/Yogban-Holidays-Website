@@ -83,7 +83,7 @@ const Header = ({ bgHandle }: Props) => {
         <span className="text-3xl text-black font-bold tracking-tight">
           <Link to="/">
             <span className="flex text-center flex-col items-center gap-3">
-              <img src='yog.png' style={{ height: "80px" }} alt="" />
+              <img src='https://res.cloudinary.com/dmwytfweq/image/upload/v1710054138/yog_b27kzl.png' style={{ height: "80px" }} alt="" />
             </span>
           </Link>
         </span>
