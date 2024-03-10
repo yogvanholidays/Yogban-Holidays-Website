@@ -64,9 +64,9 @@ const Header = ({ bgHandle }: Props) => {
         className={
           isHomePage
             ? isScrolled
-              ? "bg-white max-w-full container flex flex-wrap justify-between select-none  py-2 z-30 transition-all duration-1000"
-              : "bg-white container max-w-full flex flex-wrap justify-between select-none  py-2 z-30 transition-all duration-1000"
-            : "container mx-auto flex flex-wrap justify-between select-none  pb-5 pt-4 z-30"
+              ? "bg-white max-w-full container flex  justify-between select-none  py-2 z-30 transition-all duration-1000"
+              : "bg-white container max-w-full flex  justify-between select-none  py-2 z-30 transition-all duration-1000"
+            : "container mx-auto flex  justify-between select-none  pb-5 pt-4 z-30"
         }
         style={
           isHomePage
@@ -95,7 +95,7 @@ const Header = ({ bgHandle }: Props) => {
             {/* <span className="text-4xl font-extrabold">4.0</span> */}
 
             {/* ) : ( */}
-              <span className="text-xl portrait:text-sm  italic px-4 py-2 portrait:px-2 portrait:py-1 rounded-full border ">Guest's Experiences...</span>
+              <span className="text-xl portrait:text-sm  italic landscape:px-4 landscape:py-2 portrait:px-2 portrait:py-1 rounded-full border ">Guest's Experiences...</span>
             {/* )} */}
             {/* <span className="text-sm">for guest experience</span> */}
           </span>
