@@ -39,7 +39,7 @@ const BlogsPage = () => {
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Blogs</h1>
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-3 portrait:grid-cols-1 gap-6">
         {blogs.slice(offset, offset + blogsPerPage).map((blog, index) => (
           <button
             key={index}
