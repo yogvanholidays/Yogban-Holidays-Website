@@ -173,7 +173,7 @@ const Header = ({ bgHandle }: Props) => {
       )}
 
       {showPopup && (
-        <div className="fixed top-0 left-0 z-[999] w-full h-full bg-black bg-opacity-50 flex justify-center items-center ">
+        <div className="fixed top-0 left-0 z-[999999999] w-full h-full bg-black bg-opacity-50 flex justify-center items-center ">
           <div className="bg-white p-8 rounded-lg shadow-lg portrait:w-[70vw] landscape:w-[20rem]">
             <div className="mb-4">
               <h1 className="text-2xl font-bold">View Guest Reviews</h1>
