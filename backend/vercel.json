@@ -7,9 +7,16 @@
       }
   ],
   "routes": [
-      {
-          "src": "/(.*)",
-          "dest": "index.js"
-      }
-  ]
+      { "src": "/api/auth(.*)", "dest": "./routes/auth.js" },
+      { "src": "/api/users(.*)", "dest": "./routes/users.js" },
+      { "src": "/api/my-hotels(.*)", "dest": "./routes/my-hotels.js" },
+      { "src": "/api/hotels(.*)", "dest": "./routes/hotels.js" },
+      { "src": "/api/destinations(.*)", "dest": "./routes/destinations.js" },
+      { "src": "/api/properties(.*)", "dest": "./routes/properties.js" },
+      { "src": "/api/coupons(.*)", "dest": "./routes/coupon.js" },
+      { "src": "/api/blogs(.*)", "dest": "./routes/blogs.js" },
+      { "src": "/api/carousel(.*)", "dest": "./routes/carousel.js" },
+      { "src": "/api/rating(.*)", "dest": "./routes/rating.js" },
+      { "src": "/(.*)", "dest": "index.js" }
+    ]
 }
