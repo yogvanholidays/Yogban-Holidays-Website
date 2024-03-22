@@ -54,9 +54,9 @@ app.use("/api/rating", rating_1.default);
 app.get("*", (req, res) => {
     res.sendFile(path_1.default.join(__dirname, "./dist/index.html"));
 });
-// app.get('/', (req, res) => {
-//     res.send('GET request to the homepage');
-// });
+app.get('/test', (req, res) => {
+    res.send('GET request to the homepage');
+});
 app.listen(PORT, () => {
     console.log(`server running on http://localhost:${PORT}`);
 });
