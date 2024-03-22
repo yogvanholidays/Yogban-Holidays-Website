@@ -5,10 +5,17 @@
   "main": "./src/index.ts",
   "scripts": {
     "dev": "nodemon",
-    "build": "npm install && npx tsc",
+    "build": "rimraf dist && tsc",
+    "ts.check": "tsc --project tsconfig.json",
+    "add-build": "git add dist",
     "e2e": "cross-env DOTENV_CONFIG_PATH=.env.e2e nodemon",
     "start": "node ./dist/index.js"
   },
+    "pre-commit": [
+      "ts.check",
+      "build",
+      "add-build"
+  ],
   "author": "Subhadip Saha",
   "license": "ISC",
   "dependencies": {
@@ -35,6 +42,8 @@
     "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20.11.16",
     "nodemon": "^3.0.3",
+    "pre-commit": "^1.2.2",
+    "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
