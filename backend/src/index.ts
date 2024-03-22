@@ -56,7 +56,9 @@ app.use(cors({
   app.get("*", (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
   });
-
+app.get('/api/test', (req, res) => {
+  res.send('GET request to the homepage')
+})
 app.listen(PORT, ()=>{
     console.log(`server running on http://localhost:${PORT}`)
 })
