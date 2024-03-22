@@ -48,12 +48,12 @@ app.use("/api/coupons", coupon_1.default);
 app.use("/api/blogs", blogs_1.default);
 app.use("/api/carousel", carousel_1.default);
 app.use("/api/rating", rating_1.default);
-// app.get("*", (req, res) => {
-//     res.sendFile(path_1.default.join(__dirname, "../../frontend/dist/index.html"));
-// });
-app.get('/', (req, res) => {
-    res.send('GET request to the homepage');
+app.get("*", (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, "../../frontend/dist/index.html"));
 });
+// app.get('/', (req, res) => {
+//     res.send('GET request to the homepage');
+// });
 app.listen(PORT, () => {
     console.log(`server running on http://localhost:${PORT}`);
 });
