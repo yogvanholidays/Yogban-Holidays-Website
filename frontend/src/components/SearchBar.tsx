@@ -74,6 +74,7 @@ const SearchBar = ({ handler }: Props) => {
     const inputValue = event.target.value;
     setInputValue(inputValue);
     setShowPopup(true);
+    setDestination(inputValue);
   };
 
   const handleDestinationClick = () => {

@@ -50,6 +50,7 @@ const SearchBar = ({ handler }: Props) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
     setInputValue(inputValue);
+    setDestination(inputValue);
     setShowPopup(true);
   };
 
