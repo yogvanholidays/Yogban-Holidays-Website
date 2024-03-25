@@ -23,7 +23,7 @@ const hotels = hotelList?.bestRatedHotels
     
     <div className="space-y-3 mb-12">
       <h2 className="text-3xl font-bold">Best Rated</h2>
-      <p>Best rated destinations only for you</p>
+      <p>Best rated accommodations only for you</p>
       <div className="grid gap-4">
         <div className="grid md:grid-cols-2 grid-cols-2 gap-4">
           {topRowHotels.map((hotel) => (

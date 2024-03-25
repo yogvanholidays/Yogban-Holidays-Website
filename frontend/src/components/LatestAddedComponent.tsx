@@ -21,8 +21,8 @@ const Home = () => {
 
   return (
     <section className="space-y-3 mb-12">
-      <h2 className="text-3xl font-bold">Latest Added</h2>
-      <p>Most recent desinations added by our hosts</p>
+      <h2 className="text-3xl font-bold">Most Booked</h2>
+      <p>Most booked accommodations by visitors</p>
       <div className="grid gap-4">
 
         <div className="grid md:grid-cols-5 grid-cols-2 gap-4">
