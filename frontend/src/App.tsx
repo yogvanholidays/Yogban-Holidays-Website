@@ -35,6 +35,7 @@ import GuestPolicy from "./pages/GuestPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
 import NotFoundPage from "./pages/NotFoundPage";
 import RatingPage from "./components/RatingComponent";
+import { isMobile } from "react-device-detect";
 
 
 function App() {
@@ -45,23 +46,23 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout hiddenSearchBar="" page="HomePage"><Homepage/></Layout>} />
         {/* <Route path="/" element={<HomePage/>}/> */}
-        <Route path="/search" element={<Layout hiddenSearchBar="" page=''><Search/></Layout>} />
+        <Route path="/search" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><Search/></Layout>} />
         <Route path="/register" element={<Layout hiddenSearchBar="hide" page=''><Register/></Layout>} />
         <Route path="/sign-in" element={<Layout hiddenSearchBar="hide" page=''><SignIn/></Layout>} />
         <Route path="/detail/:hotelId" element={<Layout hiddenSearchBar="hide" page=''><Detail /></Layout>}/>
-        <Route path="/blogs" element={<Layout hiddenSearchBar="" page=''><BlogsPage/></Layout>} />
-        <Route path="/blogs/:id" element={<Layout hiddenSearchBar="" page=''><BlogDetailsPage/></Layout>} />
-        <Route path="/terms-and-contions" element={<Layout hiddenSearchBar="" page=''><TermsAndConditions/></Layout>} />
-        <Route path="/privacy-policy" element={<Layout hiddenSearchBar="" page=''><PrivacyPolicy/></Layout>} />
-        <Route path="/guest-policy" element={<Layout hiddenSearchBar="" page=''><GuestPolicy/></Layout>} />
-        <Route path="/refund-policy" element={<Layout hiddenSearchBar="" page=''><RefundPolicy/></Layout>} />
+        <Route path="/blogs" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><BlogsPage/></Layout>} />
+        <Route path="/blogs/:id" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><BlogDetailsPage/></Layout>} />
+        <Route path="/terms-and-contions" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><TermsAndConditions/></Layout>} />
+        <Route path="/privacy-policy" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><PrivacyPolicy/></Layout>} />
+        <Route path="/guest-policy" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><GuestPolicy/></Layout>} />
+        <Route path="/refund-policy" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><RefundPolicy/></Layout>} />
 
 
         {isLoggedIn && (
           <>
             <Route path="/hotel/:hotelId/booking" element={<Layout hiddenSearchBar="hide" page=''><Booking/></Layout>} />
-            <Route path="/my-bookings" element={<Layout hiddenSearchBar="" page=''><MyBookings/></Layout>} />
-            <Route path="/list-your-property" element={<Layout hiddenSearchBar="" page=''><ListYourProperty/></Layout>} />
+            <Route path="/my-bookings" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><MyBookings/></Layout>} />
+            <Route path="/list-your-property" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><ListYourProperty/></Layout>} />
           </>
         )}
         {isLoggedIn && isAdmin && (
@@ -83,7 +84,7 @@ function App() {
           <Route path="/review-rating" element={<Layout hiddenSearchBar="hide" page=''><RatingPage/></Layout>} />
           </>
         )}
-        <Route path="*" element={<Layout hiddenSearchBar="" page=''><NotFoundPage/></Layout>} />
+        <Route path="*" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><NotFoundPage/></Layout>} />
       </Routes>
     </Router>
   );

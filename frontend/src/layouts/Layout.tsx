@@ -1,7 +1,8 @@
 import Footer from "../components/Footer";
 import GoToTopButton from "../components/GoToTopButton";
 import Header from "../components/Header";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../components/OldSearchBar";
+// import SearchBar from "../components/SearchBar";
 
 interface Props {
   children: React.ReactNode;

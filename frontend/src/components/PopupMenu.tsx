@@ -19,7 +19,7 @@ const PopupMenu = ({ isAdmin }: Props) => {
     <div className="relative inline-block portrait:mx-6">
       <button
         onClick={togglePopup}
-        className="flex gap-2 items-center rounded-full text-3xl border p-2 rounded-full"
+        className="flex gap-2 items-center text-3xl border p-2 rounded-full"
       >
         <FaUserCircle />
         <div className="text-2xl">

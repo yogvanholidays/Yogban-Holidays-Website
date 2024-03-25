@@ -9,6 +9,7 @@ import { fetchCarouselImages } from "../api-client";
 import { CarouselImageType } from "../../../backend/src/shared/types";
 // import yogbanLogo from "../assets/Yogvan.png";
 import PopupMenu from "./PopupMenu";
+import SearchBar from "./SearchBar";
 
 interface Props {
   bgHandle: string;
@@ -22,9 +23,9 @@ const Header = ({ bgHandle }: Props) => {
   const [images, setImages] = useState<CarouselImageType[]>([]);
   const [showPopup, setShowPopup] = useState(false);
 
-  const handlePopupToggle = () => {
-    setShowPopup(!showPopup);
-  };
+  // const handlePopupToggle = () => {
+  //   setShowPopup(!showPopup);
+  // };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,9 +65,9 @@ const Header = ({ bgHandle }: Props) => {
         className={
           isHomePage
             ? isScrolled
-              ? "bg-white max-w-full container flex  justify-between select-none  py-2 z-30 transition-all duration-1000"
-              : "bg-white container max-w-full flex  justify-between select-none  py-2 z-30 transition-all duration-1000"
-            : "container mx-auto flex  justify-between select-none  pb-5 pt-4 z-30"
+              ? "bg-white max-w-full  lg:px-5 flex  justify-between select-none  py-2 z-30 transition-all "
+              : "bg-white  lg:px-5 max-w-full flex  justify-between select-none  py-2 z-30 transition-all "
+            : " lg:px-5 mx-auto flex  justify-between select-none  pb-5 pt-4 z-30"
         }
         style={
           isHomePage
@@ -74,7 +75,6 @@ const Header = ({ bgHandle }: Props) => {
                 position: "fixed",
                 top: 0,
                 zIndex: 999,
-                transition: "all 0.3s ease-in-out",
                 width: "100%",
               }
             : {}
@@ -83,24 +83,26 @@ const Header = ({ bgHandle }: Props) => {
         <span className="text-3xl text-black font-bold tracking-tight">
           <Link to="/">
             <span className="flex text-center flex-col items-center gap-3">
-              <img src='https://res.cloudinary.com/dmwytfweq/image/upload/v1710054138/yog_b27kzl.png' className="h-16" alt="" />
+              <img
+                src="https://res.cloudinary.com/dmwytfweq/image/upload/v1711390161/YOGVAN_LOGO_NEW_tfd6t3.png"
+                className="h-[4.5rem]"
+                alt=""
+              />
             </span>
           </Link>
         </span>
-        <span
+        {/* <span
           className="flex cursor-pointer select-none items-center"
           onClick={handlePopupToggle}
         >
           <span className="flex flex-col items-center mx-1">
-            {/* <span className="text-4xl font-extrabold">4.0</span> */}
-
-            {/* ) : ( */}
               <span className="text-xl portrait:text-sm  italic landscape:px-4 landscape:py-2 portrait:px-2 portrait:py-1 rounded-full border ">Guest's Experiences...</span>
-            {/* )} */}
-            {/* <span className="text-sm">for guest experience</span> */}
           </span>
-
-        </span>
+          
+        </span> */}
+          <div className="flex items-center content-center">
+            <SearchBar handler={""} />
+          </div>
         <span className="flex space-x-2 items-center">
           {isLoggedIn ? (
             <>
@@ -163,7 +165,8 @@ const Header = ({ bgHandle }: Props) => {
             </Carousel.Item>
           ))}
         </Carousel>
-      ) : (<></>
+      ) : (
+        <></>
         // <div className="container mx-auto flex flex-col gap-2">
         //   <h1 className="text-5xl text-black font-bold">Find Your Next Stay</h1>
         //   <p className="text-2xl text-black">
