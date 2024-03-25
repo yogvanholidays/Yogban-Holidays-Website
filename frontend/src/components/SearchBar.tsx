@@ -107,8 +107,8 @@ const SearchBar = ({ handler}: Props) => {
       className={
         isHomePage
         // ? "-mt-32 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 "// landscape:shadow-none" //remove last part to revert searchbar positioning
-          ? "-mt-14 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl shadow-slate-400"// landscape:shadow-none" //remove last part to revert searchbar positioning
-          : "-mt-4 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 shadow-2xl shadow-slate-400"// landscape:shadow-none" //remove last part to revert searchbar positioning
+          ? "-mt-14 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-5 2xl:grid-cols-5 items-center gap-2 shadow-2xl shadow-slate-400"// landscape:shadow-none" //remove last part to revert searchbar positioning
+          : "-mt-4 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-5 2xl:grid-cols-5 items-center gap-2 shadow-2xl shadow-slate-400"// landscape:shadow-none" //remove last part to revert searchbar positioning
       }
       style={{ transition: "all 0.3s ease-in-out" }}
     >
@@ -184,8 +184,8 @@ const SearchBar = ({ handler}: Props) => {
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="Check-in Date"
-          className="min-w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
-          wrapperClassName="min-w-full"
+          className="lg:w-44 xl:w-full w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
+          wrapperClassName="lg:w-44 xl:w-full w-full"
         />
       </div>
       <div>
@@ -198,8 +198,8 @@ const SearchBar = ({ handler}: Props) => {
           minDate={checkIn ? new Date(checkIn.getTime() + 86400000) : undefined}
           maxDate={maxDate}
           placeholderText="Check-out Date"
-          className="min-w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
-          wrapperClassName="min-w-full"
+          className="lg:w-44 xl:w-full w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
+          wrapperClassName="lg:w-44 xl:w-full w-full"
         />
       </div>
       <div className="flex gap-3">
