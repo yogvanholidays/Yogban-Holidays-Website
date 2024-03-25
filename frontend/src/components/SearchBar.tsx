@@ -184,7 +184,8 @@ const SearchBar = ({ handler }: Props) => {
       </div>
       <button
         className={`${inputValue ? `` : `hidden`}`}
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault()
           setInputValue("");
           setDestination("");
         }}
