@@ -70,11 +70,13 @@ const SearchBar = ({ handler }: Props) => {
     ];
     return months[monthIndex];
   };
+  const inputWidth = `${Math.max(10, inputValue.length * 8)}px`;
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
     setInputValue(inputValue);
     setShowPopup(true);
     setDestination(inputValue);
+
   };
 
   const handleDestinationClick = () => {
@@ -153,15 +155,16 @@ const SearchBar = ({ handler }: Props) => {
       // }
       style={{ transition: "all 0.3s ease-in-out" }}
     >
-      <div className="relative transition-all duration-500 w-32">
-        <div className="flex flex-row items-center flex-1 w-full bg-transparent p-2">
-          <MdTravelExplore size={25} className="mr-2" />
+          <MdTravelExplore size={25} className="ml-2" />
+      <div className="relative transition-all duration-500 min-w-32">
+        <div className="flex flex-row items-center flex-1 min-w-full bg-transparent p-2">
           <input
             placeholder="Destination"
-            className="text-md w-full focus:outline-none popup-container bg-transparent"
+            className="text-md min-w-full focus:outline-none popup-container bg-transparent"
             value={inputValue}
             onChange={handleInputChange}
-            onClick={handleDestinationClick}
+            onClick={handleDestinationClick}        style={{ width: inputWidth }} // Set dynamic width
+
           />
         </div>
         {showPopup && (
