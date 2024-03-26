@@ -40,8 +40,8 @@ const Header = ({ bgHandle }: Props) => {
       <div
         className={
           isHomePage
-            ? "bg-white  lg:px-5 max-w-full flex  justify-between select-none  py-2 z-30 "
-            : " lg:px-5 mx-auto flex  justify-between select-none pb-5 pt-4 z-30"
+            ? "bg-white pr-3 lg:px-5 max-w-full flex  justify-between select-none  py-2 z-30 "
+            : " lg:px-5 mx-auto flex pr-3 justify-between select-none pb-5 pt-4 z-30"
         }
         style={
           isHomePage
@@ -60,7 +60,7 @@ const Header = ({ bgHandle }: Props) => {
             <span className="flex text-center flex-col items-center gap-3">
               <img
                 src="https://res.cloudinary.com/dikox8x6w/image/upload/v1711480621/Yogvan_Final_Logo_g-01_r7ybed.png"
-                className="h-16 my-1"
+                className="h-14 my-1"
                 alt=""
               />
             </span>
