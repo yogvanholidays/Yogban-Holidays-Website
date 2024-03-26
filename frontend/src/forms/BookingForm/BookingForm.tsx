@@ -140,7 +140,6 @@ const BookingForm = ({
     try {
       // Call the createPaymentIntent function to initiate payment
       const intent: any = await createPaymentIntent(hotelId, finalAmount);
-      console.log("Payment Intent:", intent);
       const options = {
         key: "rzp_test_SVXNvcCQpqlAcY", // Enter the Key ID generated from the Dashboard
         amount: finalAmount.toString(), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -155,8 +154,6 @@ const BookingForm = ({
           razorpay_order_id: string;
           razorpay_signature: string;
         }) {
-          console.log(response);
-
           await validatePayment(
             response.razorpay_payment_id,
             response.razorpay_order_id,

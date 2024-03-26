@@ -200,7 +200,6 @@ export const createPaymentIntent = async (
   currency?: string
 ): Promise<unknown> => {
   try {
-    console.log("trying payment");
     const response = await fetch(
       `${API_BASE_URL}/api/hotels/${hotelId}/bookings/payment-intent`,
       {
@@ -470,7 +469,6 @@ export const fetchAllCoupons = async ()=> {
   }
 
   const data = await response.json();
-  console.log(data)
   return data;
 };
 

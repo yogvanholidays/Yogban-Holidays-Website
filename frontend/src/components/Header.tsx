@@ -59,8 +59,8 @@ const Header = ({ bgHandle }: Props) => {
           <Link to="/">
             <span className="flex text-center flex-col items-center gap-3">
               <img
-                src="https://res.cloudinary.com/dmwytfweq/image/upload/v1711390161/YOGVAN_LOGO_NEW_tfd6t3.png"
-                className="h-[4.5rem]"
+                src="https://res.cloudinary.com/dikox8x6w/image/upload/v1711480621/Yogvan_Final_Logo_g-01_r7ybed.png"
+                className="h-16 my-1"
                 alt=""
               />
             </span>

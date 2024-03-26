@@ -28,7 +28,6 @@ function PickABlog() {
 
   const handleButtonClick = (blog: any) => {
     // Handle the navigation or any other action when a blog is clicked
-    console.log("Clicked on blog:", blog);
     navigate(`/blogs/${blog._id}`)
     
   };
