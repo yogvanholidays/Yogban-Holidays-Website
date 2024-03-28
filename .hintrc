@@ -24,6 +24,7 @@
       }
     ],
     "typescript-config/is-valid": "off",
-    "manifest-app-name": "off"
+    "manifest-app-name": "off",
+    "button-type": "off"
   }
 }
