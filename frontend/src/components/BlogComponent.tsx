@@ -75,9 +75,9 @@ function PickABlog() {
       <Link
         to="/blogs"
         className="flex flex-col landscape:hidden w-full text-center content-end items-center p-4 justify-center"
-        style={{ flex: "0 0 auto", width: "25rem" }} // Set a fixed width for each button
+        style={{ flex: "0 0 auto"}} // Set a fixed width for each button
       >
-        <div className="w-full h-16 rounded-full border-gray-400 border-2 bg-gray-200 flex flex-col text-center items-center justify-center">
+        <div className="w-3/4 h-16 rounded-full border-gray-400 border-2 bg-gray-200 flex flex-col text-center items-center justify-center">
           <span className="text-2xl font-semibold">View More</span>
         </div>
       </Link>
