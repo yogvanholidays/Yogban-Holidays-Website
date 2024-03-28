@@ -141,7 +141,7 @@ const BookingForm = ({
       // Call the createPaymentIntent function to initiate payment
       const intent: any = await createPaymentIntent(hotelId, finalAmount);
       const options = {
-        key: "rzp_test_SVXNvcCQpqlAcY", // Enter the Key ID generated from the Dashboard
+        key: "rzp_live_UhJYKtBhxmchiM", // Enter the Key ID generated from the Dashboard
         amount: finalAmount.toString(), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         currency: "INR",
         name: "Yogvan Holidays",
