@@ -1,3 +1,4 @@
+import { FaEnvelope, FaInstagram, FaYoutube } from "react-icons/fa";
 import { Link } from "react-router-dom";
 // import { FaMapMarkerAlt, FaPhone, FaEnvelope } from "react-icons/fa";
 
@@ -37,10 +38,33 @@ const Footer = () => {
               </p> */}
             </div>
             <div className="flex gap-2 ">
-              <span>
+              <span className="flex text-center items-center gap-3">
                 <span>Our Socials </span>
+                <span className="flex gap-2">
+                  <a
+                    href="https://www.youtube.com/channel/UCQ6pzqkZU1N_I4yxZKhQXnQ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaYoutube />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/yogvanholidayhome/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaInstagram />
+                  </a>
+                  <a
+                    href="mailto:yogvanholidays@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaEnvelope />
+                  </a>
+                </span>
               </span>
-              {/* <FaEnvelope />
+              {/* 
               <p className="text-sm lg:text-base">
                 mail: yogvanholidays@gmail.com
               </p> */}

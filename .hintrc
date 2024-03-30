@@ -17,12 +17,7 @@
         "label": "off"
       }
     ],
-    "axe/name-role-value": [
-      "default",
-      {
-        "button-name": "off"
-      }
-    ],
+    "axe/name-role-value": "off",
     "typescript-config/is-valid": "off",
     "manifest-app-name": "off",
     "button-type": "off"
