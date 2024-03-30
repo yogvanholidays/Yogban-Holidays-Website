@@ -10,7 +10,8 @@ import {
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://yogban.vercel.app";
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "https://yogban.vercel.app";
 
 export const fetchCurrentUser = async (): Promise<UserType> => {
   const response = await fetch(`${API_BASE_URL}/api/users/me`, {
@@ -346,7 +347,7 @@ export const getDestinations = async () => {
   return response.json();
 };
 
-export const searchDestinations = async (searchTerm:string) => {
+export const searchDestinations = async (searchTerm: string) => {
   const response = await fetch(
     `${API_BASE_URL}/api/destinations?searchTerm=${searchTerm}`,
     {
@@ -360,7 +361,7 @@ export const searchDestinations = async (searchTerm:string) => {
   return response.json();
 };
 
-export const deleteDestination = async (id:string) => {
+export const deleteDestination = async (id: string) => {
   const response = await fetch(`${API_BASE_URL}/api/destinations/${id}`, {
     method: "DELETE",
     credentials: "include",
@@ -370,7 +371,7 @@ export const deleteDestination = async (id:string) => {
   }
 };
 
-export const searchHotelsToDelete = async (searchTerm:string) => {
+export const searchHotelsToDelete = async (searchTerm: string) => {
   const response = await fetch(
     `${API_BASE_URL}/api/my-hotels?searchTerm=${searchTerm}`,
     {
@@ -384,7 +385,7 @@ export const searchHotelsToDelete = async (searchTerm:string) => {
   return response.json();
 };
 
-export const deleteHotel = async (id:string) => {
+export const deleteHotel = async (id: string) => {
   const response = await fetch(`${API_BASE_URL}/api/my-hotels/${id}`, {
     method: "DELETE",
     credentials: "include",
@@ -416,7 +417,6 @@ export const addListPropertyRequest = async (data: ListPropertyRequestType) => {
   }
 };
 
-
 export const getListPropertyRequests = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/properties`, {
@@ -428,15 +428,12 @@ export const getListPropertyRequests = async () => {
     }
 
     return response.json();
-  } catch (error:any) {
+  } catch (error: any) {
     throw new Error(error.message);
   }
 };
 
-
-export const createCoupon = async (
-  couponData: CouponType
-) => {
+export const createCoupon = async (couponData: CouponType) => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/coupons`, {
       method: "POST",
@@ -453,12 +450,12 @@ export const createCoupon = async (
 
     const data = await response.json();
     return data;
-  } catch (error:any) {
+  } catch (error: any) {
     throw new Error(error.message || "Failed to create coupon");
   }
 };
 
-export const fetchAllCoupons = async ()=> {
+export const fetchAllCoupons = async () => {
   const response = await fetch(`${API_BASE_URL}/api/coupons`, {
     method: "GET",
     credentials: "include",
@@ -471,8 +468,6 @@ export const fetchAllCoupons = async ()=> {
   const data = await response.json();
   return data;
 };
-
-
 
 export const createBlog = async (destinationFormData: FormData) => {
   const response = await fetch(`${API_BASE_URL}/api/blogs`, {
@@ -496,7 +491,6 @@ export const getAllBlogs = async () => {
   return response.json();
 };
 
-
 export const getBlogById = async (id: string): Promise<any> => {
   const response = await fetch(`${API_BASE_URL}/api/blogs/${id}`);
   if (!response.ok) {
@@ -505,8 +499,7 @@ export const getBlogById = async (id: string): Promise<any> => {
   return response.json();
 };
 
-
-export const searchBlogs = async (searchTerm:string) => {
+export const searchBlogs = async (searchTerm: string) => {
   const response = await fetch(
     `${API_BASE_URL}/api/blogs?searchTerm=${searchTerm}`,
     {
@@ -520,7 +513,7 @@ export const searchBlogs = async (searchTerm:string) => {
   return response.json();
 };
 
-export const deleteBlog = async (id:string) => {
+export const deleteBlog = async (id: string) => {
   const response = await fetch(`${API_BASE_URL}/api/blogs/${id}`, {
     method: "DELETE",
     credentials: "include",
@@ -530,7 +523,7 @@ export const deleteBlog = async (id:string) => {
   }
 };
 
-export const deleteCoupon = async (id:string) => {
+export const deleteCoupon = async (id: string) => {
   const response = await fetch(`${API_BASE_URL}/api/coupons/${id}`, {
     method: "DELETE",
     credentials: "include",
@@ -539,7 +532,6 @@ export const deleteCoupon = async (id:string) => {
     throw new Error("Failed to delete coupon");
   }
 };
-
 
 export const uploadCarouselImage = async (carouselFormData: FormData) => {
   try {
@@ -590,20 +582,31 @@ export const deleteCarouselImage = async (id: string) => {
   }
 };
 
-
-export const uploadOrUpdateRating = async (rating: string) => {
+export const uploadOrUpdateRating = async (
+  bookingdotcom: string,
+  airbnb: string,
+  makemytrip: string,
+  googleTravel: string,
+  agoda: string
+) => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/rating`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ rating }),
+      body: JSON.stringify({
+        bookingdotcom,
+        airbnb,
+        makemytrip,
+        googleTravel,
+        agoda,
+      }),
     });
     if (!response.ok) {
-      throw new Error('Failed to upload or update rating');
+      throw new Error("Failed to upload or update rating");
     }
-  } catch (error:any) {
+  } catch (error: any) {
     throw new Error(error.message);
   }
 };
@@ -612,11 +615,11 @@ export const fetchRating = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/rating`);
     if (!response.ok) {
-      throw new Error('Failed to fetch rating');
+      throw new Error("Failed to fetch rating");
     }
     const data = await response.json();
     return data;
-  } catch (error:any) {
+  } catch (error: any) {
     throw new Error(error.message);
   }
 };
@@ -624,16 +627,16 @@ export const fetchRating = async () => {
 export const updateRating = async (rating: string) => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/rating`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ rating }),
     });
     if (!response.ok) {
-      throw new Error('Failed to update rating');
+      throw new Error("Failed to update rating");
     }
-  } catch (error:any) {
+  } catch (error: any) {
     throw new Error(error.message);
   }
 };

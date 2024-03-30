@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import RatingComponent from "./RatingComponent";
+// import RatingComponent from "./RatingComponent";
 
 function AdminControls() {
   return (
@@ -43,8 +43,14 @@ function AdminControls() {
         >
           Carousel Image Gallery
         </Link>
+        <Link
+          to="/review-rating"
+          className="flex flex-1 bg-yogvan text-white text-lg rounded font-semibold p-2 hover:bg-yogvan-dark text-center justify-center transition-all duration-200 items-center"
+        >
+          Update Links
+        </Link>
       </div>
-      <RatingComponent/>
+      {/* <RatingComponent/> */}
     </div>
   );
 }
