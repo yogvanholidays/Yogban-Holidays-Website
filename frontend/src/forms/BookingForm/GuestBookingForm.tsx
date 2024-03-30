@@ -10,6 +10,7 @@ import {
 import useRazorpay from "react-razorpay";
 import { useAppContext } from "../../contexts/AppContext";
 import { Link, useNavigate } from "react-router-dom";
+import jsPDF from 'jspdf';
 
 type Props = {
   hotel: HotelType;
@@ -22,6 +23,66 @@ type Props = {
   numberOfNights: number;
   // isLoggedIn: boolean;
 };
+
+const generateReceipt = (
+  paymentId: any,
+  orderId: any,
+  amount: any,
+  firstName: any,
+  lastName: any,
+  email: any,
+  checkIn: any,
+  checkOut: any,
+  adultCount: any,
+  childCount: any,
+  hotelName: any,
+  hotelLocation: any,
+  phoneNumber: any
+) => {
+  const doc = new jsPDF();
+
+  // Add heading
+  doc.setFontSize(16);
+  doc.text("Receipt", 10, 10);
+
+  // Add person name
+  doc.setFontSize(12);
+  doc.text(`Name: ${firstName} ${lastName}`, 10, 20);
+
+  // Add hotel name
+  doc.text(`Hotel: ${hotelName}`, 10, 30);
+
+  // Add price
+  doc.text(`Price: ${amount} INR`, 10, 40);
+
+  // Add total price
+  doc.text(`Total Price: ${amount} INR`, 10, 50);
+
+  // Add total number of guests
+  const totalGuests = parseInt(adultCount) + parseInt(childCount);
+  doc.text(`Total Guests: ${totalGuests}`, 10, 60);
+
+  // Add total number of nights
+  const checkInDate = new Date(checkIn).toLocaleDateString();
+  const checkOutDate = new Date(checkOut).toLocaleDateString();
+  doc.text(`Check-in: ${checkInDate}`, 10, 70);
+  doc.text(`Check-out: ${checkOutDate}`, 10, 80);
+
+  // Add hotel location
+  doc.text(`Location: ${hotelLocation}`, 10, 90);
+
+  // Add payment details
+  doc.text(`Payment ID: ${paymentId}`, 10, 100);
+  doc.text(`Order ID: ${orderId}`, 10, 110);
+
+  // Add contact details
+  doc.text(`Phone Number: ${phoneNumber}`, 10, 120);
+  doc.text(`Email: ${email}`, 10, 130);
+
+  // Save the PDF
+  doc.save(`Receipt_${paymentId}.pdf`);
+};
+
 
 const GuestBookingForm = ({
   hotel,
@@ -165,8 +226,28 @@ Props) => {
             hotel,
             data.phoneNumber
           );
+
+
+          generateReceipt(
+            response.razorpay_payment_id,
+            response.razorpay_order_id,
+            finalAmount,
+            data.firstName,
+            data.lastName,
+            data.email,
+            checkIn,
+            checkOut,
+            adultCount,
+            childCount,
+            hotel.name, // Assuming 'hotel' is an object with a 'name' property
+            hotel.city, // Assuming 'hotel' is an object with a 'location' property
+            data.phoneNumber
+          );
+          
+
+
           showToast({ message: "Payment Successful!", type: "SUCCESS" });
-          navigate("/my-bookings");
+          navigate("/");
         },
         prefill: {
           name: "Name Surname",
