@@ -37,7 +37,7 @@ function Booking() {
     return null; // Return null while waiting for data to load
   }
   return (
-    <div className="grid md:grid-cols-[1fr_2fr]">
+    <div className="grid md:grid-cols-[1fr_2fr] gap-2">
       <BookingDetailsSummary
         checkIn={search.checkIn}
         checkOut={search.checkOut}

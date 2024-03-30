@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import { useSearchContext } from "../../contexts/SearchContext";
 import { useAppContext } from "../../contexts/AppContext";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 type Props = {
   hotelId: string;
@@ -21,6 +22,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
   const { isLoggedIn } = useAppContext();
   const navigate = useNavigate();
   const location = useLocation();
+  
 
   const {
     watch,
@@ -37,12 +39,31 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
     },
   });
 
-  const checkIn = watch("checkIn");
-  const checkOut = watch("checkOut");
-
+  // const checkIn = watch("checkIn");
+  // const checkOut = watch("checkOut");
+  const [checkIn, setCheckIn] = useState<Date>(watch("checkIn"));
+  const [checkOut, setCheckOut] = useState<Date>(watch("checkOut"));
   const minDate = new Date();
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
+
+  const handleCheckInChange = (date: Date | null) => {
+    setCheckIn(date as Date);
+    setValue("checkIn", date as Date);
+    if (date) {
+      const nextDay = new Date(date);
+      nextDay.setDate(nextDay.getDate() + 1);
+      const newCheckOut = checkOut < nextDay ? nextDay : checkOut;
+      setCheckOut(newCheckOut);
+      setValue("checkOut", newCheckOut as Date);
+
+    }
+  };
+
+  const handleCheckOutChange = (date: Date | null) => {
+    setCheckOut(date as Date);
+    setValue("checkOut", date as Date);
+  };
 
   const onSignInClick = (data: GuestInfoFormData) => {
     search.saveSearchValues(
@@ -79,7 +100,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
             <DatePicker
               required
               selected={checkIn}
-              onChange={(date) => setValue("checkIn", date as Date)}
+              onChange={handleCheckInChange}
               selectsStart
               startDate={checkIn}
               endDate={checkOut}
@@ -94,7 +115,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
             <DatePicker
               required
               selected={checkOut}
-              onChange={(date) => setValue("checkOut", date as Date)}
+              onChange={handleCheckOutChange}
               selectsStart
               startDate={checkIn}
               endDate={checkOut}

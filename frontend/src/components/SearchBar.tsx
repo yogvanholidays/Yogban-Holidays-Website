@@ -197,7 +197,7 @@ const SearchBar = ({ handler }: Props) => {
       </button>
       {/* <div className="h-10 w-0.5 bg-gray-300"></div> */}
       <div
-        className="relative transition-all duration-500 w-28 dateSearchInput"
+        className="relative transition-all duration-500 w-auto dateSearchInput"
         onClick={() => {
           setShowDatePopup(true);
         }}

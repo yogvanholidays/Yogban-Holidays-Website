@@ -21,7 +21,6 @@ const Header = ({ bgHandle }: Props) => {
   const isHomePage = bgHandle === "HomePage";
   const [images, setImages] = useState<CarouselImageType[]>([]);
 
-
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -36,24 +35,34 @@ const Header = ({ bgHandle }: Props) => {
   }, []);
 
   return (
-    <div className={isHomePage ? "pb-3" : ""}>
+    <div className={isHomePage ? "pb-3" : "pb-5"}>
       <div
         className={
-          isHomePage
-            ? "bg-white pr-3 lg:px-5 max-w-full flex  justify-between select-none  py-2 z-30 "
-            : " lg:px-5 mx-auto flex pr-3 justify-between select-none pb-5 pt-4 z-30"
+          "bg-white pr-3 lg:px-5 max-w-full flex  justify-between select-none  py-2 z-30"
         }
-        style={
-          isHomePage
-            ? {
-                position: "fixed",
-                top: 0,
-                zIndex: 999,
-                width: "100%",
-                transition:'padding 0.3s'
-              }
-            : {transition:'padding 0.3s'}
-        }
+        // className={
+        //   isHomePage
+        //     ? "bg-white pr-3 lg:px-5 max-w-full flex  justify-between select-none  py-2 z-30 "
+        //     : " lg:px-5 mx-auto flex pr-3 justify-between select-none pb-5 pt-4 z-30"
+        // }
+        // style={
+        //   isHomePage
+        //     ? {
+        //         position: "fixed",
+        //         top: 0,
+        //         zIndex: 999,
+        //         width: "100%",
+        //         transition:'padding 0.3s'
+        //       }
+        //     : {transition:'padding 0.3s'}
+        // }
+        style={{
+          position: "fixed",
+          top: 0,
+          zIndex: 999,
+          width: "100%",
+          transition: "padding 0.3s",
+        }}
       >
         <span className="text-3xl text-black font-bold tracking-tight">
           <Link to="/">
@@ -75,14 +84,15 @@ const Header = ({ bgHandle }: Props) => {
           </span>
           
         </span> */}
-        <div className="flex items-center content-center">
-          <SearchBar handler={""} />
-        </div>
+        {!isHomePage && (
+          <div className="flex items-center content-center">
+            <SearchBar handler={""} />
+          </div>
+        )}
         <span className="flex space-x-2 items-center">
-          {isLoggedIn ? (
-            <>
-              <PopupMenu isAdmin={isAdmin} />
-              {/* <Link
+          <>
+            <PopupMenu isAdmin={isAdmin} isLoggedIn={isLoggedIn} />
+            {/* <Link
                 to="/my-bookings"
                 className="flex items-center text-black px-3 font-bold hover:bg-gray-300 rounded-lg h-fit py-2 bg-gray-100 duration-300"
               >
@@ -97,6 +107,10 @@ const Header = ({ bgHandle }: Props) => {
                 </Link>
               )}
               <SignOutButton /> */}
+          </>
+          {/* {isLoggedIn ? (
+            <>
+              <PopupMenu isAdmin={isAdmin} isLoggedIn={isLoggedIn} />
             </>
           ) : (
             <Link
@@ -105,7 +119,7 @@ const Header = ({ bgHandle }: Props) => {
             >
               Sign In
             </Link>
-          )}
+          )} */}
         </span>
       </div>
       {isHomePage ? (

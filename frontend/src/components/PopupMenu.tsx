@@ -6,9 +6,10 @@ import { RxHamburgerMenu } from "react-icons/rx";
 
 interface Props {
   isAdmin: boolean;
+  isLoggedIn: boolean;
 }
 
-const PopupMenu = ({ isAdmin }: Props) => {
+const PopupMenu = ({ isAdmin,isLoggedIn }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     document.addEventListener("click", handleDocumentClick); // Add event listener on mount
@@ -39,7 +40,7 @@ const PopupMenu = ({ isAdmin }: Props) => {
       </button>
       {isOpen && (
         <div className="absolute right-0 z-[999] mt-2 bg-white border border-gray-300 rounded-lg shadow-lg min-w-max">
-          <ul className="divide-y divide-gray-200">
+          {isLoggedIn?(<ul className="divide-y divide-gray-200">
             {isAdmin && (
               <li
                 onClick={() => {
@@ -70,7 +71,34 @@ const PopupMenu = ({ isAdmin }: Props) => {
             >
               <SignOutButton />
             </li>
+          </ul>):(
+            <ul className="divide-y divide-gray-200">
+            <li
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
+              <Link
+                to="/sign-in"
+                className="block py-2 px-4 hover:bg-gray-100"
+              >
+                Sign in
+              </Link>
+            </li>
+            <li
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
+              <Link
+                to="/register"
+                className="block py-2 px-4 hover:bg-gray-100"
+              >
+                Register
+              </Link>
+            </li>
           </ul>
+          )}
         </div>
       )}
     </div>
