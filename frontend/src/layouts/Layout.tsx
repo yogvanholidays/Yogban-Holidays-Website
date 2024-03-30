@@ -24,7 +24,7 @@ const Layout = ({ children, page, hiddenSearchBar }: Props) => {
         </div>
       )}
 
-      <div className="container mx-auto py-10 flex-1">{children}</div>
+      <div className="lg:container portrait:px-4 portrait:w-full mx-auto py-10 flex-1">{children}</div>
       <GoToTopButton />
       <Footer />
     </div>

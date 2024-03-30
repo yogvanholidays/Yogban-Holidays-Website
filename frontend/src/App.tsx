@@ -36,6 +36,8 @@ import RefundPolicy from "./pages/RefundPolicy";
 import NotFoundPage from "./pages/NotFoundPage";
 import RatingPage from "./components/RatingComponent";
 import { isMobile } from "react-device-detect";
+import Careers from "./pages/Careers";
+import Faqs from "./pages/FAQs";
 
 
 function App() {
@@ -56,6 +58,8 @@ function App() {
         <Route path="/privacy-policy" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><PrivacyPolicy/></Layout>} />
         <Route path="/guest-policy" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><GuestPolicy/></Layout>} />
         <Route path="/refund-policy" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><RefundPolicy/></Layout>} />
+        <Route path="/careers" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><Careers/></Layout>} />
+        <Route path="/faq" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><Faqs/></Layout>} />
 
 
         {isLoggedIn && (
