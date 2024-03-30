@@ -92,7 +92,9 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
       <h3 className="text-md font-bold">₹{pricePerNight}</h3>
       <form
         onSubmit={
-          isLoggedIn ? handleSubmit(onSubmit) : handleSubmit(onSignInClick)
+          // isLoggedIn ? 
+          handleSubmit(onSubmit)
+          //  : handleSubmit(onSignInClick)
         }
       >
         <div className="grid grid-cols-1 gap-4 items-center">
@@ -162,7 +164,10 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
               </span>
             )}
           </div>
-          {isLoggedIn ? (
+            <button className="bg-black text-white h-full p-2 font-bold hover:bg-gray-800 text-xl">
+              Book Now
+            </button>
+          {/* {isLoggedIn ? (
             <button className="bg-black text-white h-full p-2 font-bold hover:bg-gray-800 text-xl">
               Book Now
             </button>
@@ -170,7 +175,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
             <button className="bg-black text-white h-full p-2 font-bold hover:bg-gray-800 text-xl">
               Sign in to Book
             </button>
-          )}
+          )} */}
         </div>
       </form>
     </div>

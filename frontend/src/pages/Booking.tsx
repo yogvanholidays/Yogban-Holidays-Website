@@ -5,6 +5,9 @@ import BookingForm from "../forms/BookingForm/BookingForm";
 import { useSearchContext } from "../contexts/SearchContext";
 import { useParams } from "react-router";
 import BookingDetailsSummary from "../components/BookingDetailsSummary";
+import GuestBookingForm from "../forms/BookingForm/GuestBookingForm";
+
+
 
 function Booking() {
   const search = useSearchContext();
@@ -22,7 +25,7 @@ function Booking() {
 
   const { data: hotel } = useQuery(
     "fetchHotelByID",
-    () => apiClient.fetchHotelById(hotelId as string),
+    async () => await apiClient.fetchHotelById(hotelId as string),
     {
       enabled: !!hotelId,
     }
@@ -33,8 +36,8 @@ function Booking() {
     apiClient.fetchCurrentUser
   );
 
-  if (!hotel || !currentUser) {
-    return null; // Return null while waiting for data to load
+  if (!hotel) {
+    return <>Server Issue</>;
   }
   return (
     <div className="grid md:grid-cols-[1fr_2fr] gap-2">
@@ -46,18 +49,31 @@ function Booking() {
         numberOfNights={numberOfNights}
         hotel={hotel}
         />
+        {currentUser?
       <BookingForm
-        hotel={hotel}
-        currentUser={currentUser}
-        hotelId={hotel._id}
-        amount={hotel.pricePerNight * numberOfNights}
-        checkIn={search.checkIn}
-        checkOut={search.checkOut}
-        adultCount={search.adultCount}
-        childCount={search.childCount}
-        numberOfNights={numberOfNights}
+      hotel={hotel}
+      currentUser={currentUser}
+      hotelId={hotel._id}
+      amount={hotel.pricePerNight * numberOfNights}
+      checkIn={search.checkIn}
+      checkOut={search.checkOut}
+      adultCount={search.adultCount}
+      childCount={search.childCount}
+      numberOfNights={numberOfNights}
       />
-    </div>
+      :
+      <GuestBookingForm
+      hotel={hotel}
+      hotelId={hotel._id}
+      amount={hotel.pricePerNight * numberOfNights}
+      checkIn={search.checkIn}
+      checkOut={search.checkOut}
+      adultCount={search.adultCount}
+      childCount={search.childCount}
+      numberOfNights={numberOfNights}
+      />
+    }
+      </div>
   );
 }
 

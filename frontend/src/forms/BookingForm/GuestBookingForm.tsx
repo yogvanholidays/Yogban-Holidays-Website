@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
-import {
-  CouponType,
-  HotelType,
-  UserType,
-} from "../../../../backend/src/shared/types";
+import { CouponType, HotelType } from "../../../../backend/src/shared/types";
 import { useForm } from "react-hook-form";
 import {
   createPaymentIntent,
@@ -13,11 +9,10 @@ import {
 } from "../../api-client"; // Import the createPaymentIntent function
 import useRazorpay from "react-razorpay";
 import { useAppContext } from "../../contexts/AppContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 type Props = {
   hotel: HotelType;
-  currentUser: UserType;
   hotelId: string; // Add hotelId to Props type
   amount: number; // Add amount to Props type
   checkIn: Date;
@@ -28,9 +23,8 @@ type Props = {
   // isLoggedIn: boolean;
 };
 
-const BookingForm = ({
+const GuestBookingForm = ({
   hotel,
-  currentUser,
   hotelId,
   amount,
   checkIn,
@@ -38,8 +32,8 @@ const BookingForm = ({
   adultCount,
   childCount,
   numberOfNights,
-  // isLoggedIn,
-}: Props) => {
+}: // isLoggedIn,
+Props) => {
   const [Razorpay] = useRazorpay();
   const { showToast } = useAppContext();
   const [coupons, setCoupons] = useState<CouponType[]>([]);
@@ -128,9 +122,9 @@ const BookingForm = ({
 
   const { handleSubmit, register } = useForm({
     defaultValues: {
-      firstName: currentUser.firstName,
-      lastName: currentUser.lastName,
-      email: currentUser.email,
+      firstName: "",
+      lastName: "",
+      email: "",
       phoneNumber: "",
     },
   });
@@ -142,7 +136,7 @@ const BookingForm = ({
       // Call the createPaymentIntent function to initiate payment
       const intent: any = await createPaymentIntent(hotelId, finalAmount);
       const options = {
-        key: "rzp_live_UhJYKtBhxmchiM", // Enter the Key ID generated from the Dashboard
+        key: "rzp_test_SVXNvcCQpqlAcY", // Enter the Key ID generated from the Dashboard
         amount: finalAmount.toString(), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         currency: "INR",
         name: "Yogvan Holidays",
@@ -160,10 +154,10 @@ const BookingForm = ({
             response.razorpay_order_id,
             response.razorpay_signature,
             finalAmount,
-            currentUser._id,
-            currentUser.firstName,
-            currentUser.lastName,
-            currentUser.email,
+            "guest",
+            data.firstName,
+            data.lastName,
+            data.email,
             checkIn,
             checkOut,
             adultCount,
@@ -219,7 +213,18 @@ const BookingForm = ({
       onSubmit={handleSubmit(onSubmit)}
       className="grid grid-cols-1 gap-5 rounded-lg border border-slate-300 p-5"
     >
-      <span className="text-3xl font-bold">Confirm Your Details</span>
+      <div className="h-fit">
+        <span className="text-3xl portrait:text-2xl font-bold">Enter Your Information</span>
+        <div className="flex text-center items-center gap-2 mt-2">
+          <span>-OR-</span>
+          <Link
+            to="/sign-in"
+            className=" px-3 text-center items-center py-2 bg-yogvan rounded-md"
+          >
+            Sign in to book faster
+          </Link>
+        </div>
+      </div>
       <div className="grid grid-cols-1 gap-6">
         <div className="grid gap-6 grid-cols-2">
           <label className="text-gray-700 text-sm font-bold flex-1">
@@ -227,9 +232,7 @@ const BookingForm = ({
             <input
               className="mt-1 border rounded w-full py-2 px-3 text-gray-700 bg-gray-200 font-normal"
               type="text"
-              readOnly
-              disabled
-              {...register("firstName")}
+              {...register("firstName", { required: true })}
             />
           </label>
           <label className="text-gray-700 text-sm font-bold flex-1">
@@ -237,9 +240,7 @@ const BookingForm = ({
             <input
               className="mt-1 border rounded w-full py-2 px-3 text-gray-700 bg-gray-200 font-normal"
               type="text"
-              readOnly
-              disabled
-              {...register("lastName")}
+              {...register("lastName", { required: true })}
             />
           </label>
         </div>
@@ -248,10 +249,8 @@ const BookingForm = ({
             Email
             <input
               className="mt-1 border rounded w-full py-2 px-3 text-gray-700 bg-gray-200 font-normal"
-              type="text"
-              readOnly
-              disabled
-              {...register("email")}
+              type="email"
+              {...register("email", { required: true })}
             />
           </label>
           <label className="text-gray-700 text-sm font-bold flex-1">
@@ -308,4 +307,4 @@ const BookingForm = ({
   );
 };
 
-export default BookingForm;
+export default GuestBookingForm;

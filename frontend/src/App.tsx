@@ -62,13 +62,18 @@ function App() {
         <Route path="/faq" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><Faqs/></Layout>} />
 
 
+
+        <Route path="/hotel/:hotelId/booking" element={<Layout hiddenSearchBar="hide" page=''><Booking/></Layout>} />
         {isLoggedIn && (
           <>
-            <Route path="/hotel/:hotelId/booking" element={<Layout hiddenSearchBar="hide" page=''><Booking/></Layout>} />
+            {/* <Route path="/hotel/:hotelId/booking" element={<Layout hiddenSearchBar="hide" page=''><Booking/></Layout>} /> */}
             <Route path="/my-bookings" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><MyBookings/></Layout>} />
             <Route path="/list-your-property" element={<Layout hiddenSearchBar={`${!isMobile?`hide`:``}`} page=''><ListYourProperty/></Layout>} />
           </>
         )}
+        
+
+
         {isLoggedIn && isAdmin && (
           <>
           <Route path="/add-property" element={<Layout hiddenSearchBar="hide" page=''><AddHotel/></Layout>} />
