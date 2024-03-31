@@ -16,21 +16,31 @@ const express_1 = __importDefault(require("express"));
 const Rating_1 = __importDefault(require("../models/Rating"));
 const router = express_1.default.Router();
 // Upload rating or update if already exists
-router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { rating } = req.body;
+        const { bookingdotcom, airbnb, makemytrip, googleTravel, agoda } = req.body;
         const existingRating = yield Rating_1.default.findOne();
         if (existingRating) {
             // If a rating already exists, update it
-            existingRating.rating = rating;
+            existingRating.bookingdotcom = bookingdotcom;
+            existingRating.airbnb = airbnb;
+            existingRating.makemytrip = makemytrip;
+            existingRating.googleTravel = googleTravel;
+            existingRating.agoda = agoda;
             yield existingRating.save();
-            res.status(200).send('Rating updated successfully');
+            res.status(200).send("Rating updated successfully");
         }
         else {
             // If no rating exists, create a new one
-            const newRating = new Rating_1.default({ rating });
+            const newRating = new Rating_1.default({
+                bookingdotcom,
+                airbnb,
+                makemytrip,
+                googleTravel,
+                agoda,
+            });
             yield newRating.save();
-            res.status(201).send('Rating uploaded successfully');
+            res.status(201).send("Rating uploaded successfully");
         }
     }
     catch (error) {
@@ -38,14 +48,14 @@ router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 }));
 // Get rating
-router.get('/', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get("/", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const existingRating = yield Rating_1.default.findOne();
         if (existingRating) {
             res.status(200).json(existingRating);
         }
         else {
-            res.status(404).send('Rating not found');
+            res.status(404).send("Rating not found");
         }
     }
     catch (error) {
@@ -53,17 +63,21 @@ router.get('/', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 }));
 // Update existing rating
-router.put('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.put("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { rating } = req.body;
+        const { bookingdotcom, airbnb, makemytrip, googleTravel, agoda } = req.body;
         const existingRating = yield Rating_1.default.findOne();
         if (existingRating) {
-            existingRating.rating = rating;
+            existingRating.bookingdotcom = bookingdotcom;
+            existingRating.airbnb = airbnb;
+            existingRating.makemytrip = makemytrip;
+            existingRating.googleTravel = googleTravel;
+            existingRating.agoda = agoda;
             yield existingRating.save();
-            res.status(200).send('Rating updated successfully');
+            res.status(200).send("Rating updated successfully");
         }
         else {
-            res.status(404).send('Rating not found');
+            res.status(404).send("Rating not found");
         }
     }
     catch (error) {

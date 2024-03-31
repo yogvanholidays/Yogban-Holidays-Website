@@ -25,7 +25,23 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const ratingSchema = new mongoose_1.Schema({
-    rating: {
+    bookingdotcom: {
+        type: String,
+        required: true,
+    },
+    airbnb: {
+        type: String,
+        required: true,
+    },
+    makemytrip: {
+        type: String,
+        required: true,
+    },
+    googleTravel: {
+        type: String,
+        required: true,
+    },
+    agoda: {
         type: String,
         required: true,
     },
