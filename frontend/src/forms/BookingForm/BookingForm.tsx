@@ -14,6 +14,7 @@ import {
 import useRazorpay from "react-razorpay";
 import { useAppContext } from "../../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
+import { generateReceipt } from "../../recieptGenerator";
 
 type Props = {
   hotel: HotelType;
@@ -142,7 +143,7 @@ const BookingForm = ({
       // Call the createPaymentIntent function to initiate payment
       const intent: any = await createPaymentIntent(hotelId, finalAmount);
       const options = {
-        key: "rzp_live_UhJYKtBhxmchiM", // Enter the Key ID generated from the Dashboard
+        key: "rzp_test_SVXNvcCQpqlAcY", // Enter the Key ID generated from the Dashboard
         amount: finalAmount.toString(), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         currency: "INR",
         name: "Yogvan Holidays",
@@ -172,6 +173,21 @@ const BookingForm = ({
             data.phoneNumber
           );
           showToast({ message: "Payment Successful!", type: "SUCCESS" });
+          generateReceipt(
+            response.razorpay_payment_id,
+            response.razorpay_order_id,
+            finalAmount,
+            currentUser.firstName,
+            currentUser.lastName,
+            currentUser.email,
+            checkIn,
+            checkOut,
+            adultCount,
+            childCount,
+            hotel.name, // Assuming 'hotel' is an object with a 'name' property
+            hotel.city, // Assuming 'hotel' is an object with a 'location' property
+            data.phoneNumber,
+          );
           navigate("/my-bookings");
         },
         prefill: {
