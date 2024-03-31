@@ -48,10 +48,7 @@ app.use("/api/coupons", coupon_1.default);
 app.use("/api/blogs", blogs_1.default);
 app.use("/api/carousel", carousel_1.default);
 app.use("/api/rating", rating_1.default);
-app.get("*.js", (req, res, next) => {
-    res.set("Content-Type", "application/javascript");
-    next();
-  });
+
 app.get("*", (req, res) => {
     res.sendFile(path_1.default.join(__dirname, "./dist/index.html"));
 });
