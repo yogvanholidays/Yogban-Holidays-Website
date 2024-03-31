@@ -7,8 +7,6 @@ import { useParams } from "react-router";
 import BookingDetailsSummary from "../components/BookingDetailsSummary";
 import GuestBookingForm from "../forms/BookingForm/GuestBookingForm";
 
-
-
 function Booking() {
   const search = useSearchContext();
   const { hotelId } = useParams();
@@ -37,7 +35,8 @@ function Booking() {
   );
 
   if (!hotel) {
-    return <>Server Issue</>;
+    window.location.reload();
+    return <></>;
   }
   return (
     <div className="grid md:grid-cols-[1fr_2fr] gap-2">
@@ -48,32 +47,32 @@ function Booking() {
         childCount={search.childCount}
         numberOfNights={numberOfNights}
         hotel={hotel}
+      />
+      {currentUser ? (
+        <BookingForm
+          hotel={hotel}
+          currentUser={currentUser}
+          hotelId={hotel._id}
+          amount={hotel.pricePerNight * numberOfNights}
+          checkIn={search.checkIn}
+          checkOut={search.checkOut}
+          adultCount={search.adultCount}
+          childCount={search.childCount}
+          numberOfNights={numberOfNights}
         />
-        {currentUser?
-      <BookingForm
-      hotel={hotel}
-      currentUser={currentUser}
-      hotelId={hotel._id}
-      amount={hotel.pricePerNight * numberOfNights}
-      checkIn={search.checkIn}
-      checkOut={search.checkOut}
-      adultCount={search.adultCount}
-      childCount={search.childCount}
-      numberOfNights={numberOfNights}
-      />
-      :
-      <GuestBookingForm
-      hotel={hotel}
-      hotelId={hotel._id}
-      amount={hotel.pricePerNight * numberOfNights}
-      checkIn={search.checkIn}
-      checkOut={search.checkOut}
-      adultCount={search.adultCount}
-      childCount={search.childCount}
-      numberOfNights={numberOfNights}
-      />
-    }
-      </div>
+      ) : (
+        <GuestBookingForm
+          hotel={hotel}
+          hotelId={hotel._id}
+          amount={hotel.pricePerNight * numberOfNights}
+          checkIn={search.checkIn}
+          checkOut={search.checkOut}
+          adultCount={search.adultCount}
+          childCount={search.childCount}
+          numberOfNights={numberOfNights}
+        />
+      )}
+    </div>
   );
 }
 
