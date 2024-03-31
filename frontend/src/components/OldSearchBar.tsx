@@ -195,7 +195,8 @@ const SearchBar = ({ handler }: Props) => {
           placeholderText="Check-in Date"
           className="lg:w-44 xl:w-full w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
           wrapperClassName="lg:w-44 xl:w-full w-full"
-        />
+          dateFormat={`dd/MM/yyyy`}
+          />
       </div>
       <div>
         <DatePicker
@@ -209,6 +210,7 @@ const SearchBar = ({ handler }: Props) => {
           placeholderText="Check-out Date"
           className="lg:w-44 xl:w-full w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
           wrapperClassName="lg:w-44 xl:w-full w-full"
+          dateFormat={`dd/MM/yyyy`}
         />
       </div>
       <div className="flex gap-3">

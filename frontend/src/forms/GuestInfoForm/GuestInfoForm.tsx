@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import { useSearchContext } from "../../contexts/SearchContext";
-import { useAppContext } from "../../contexts/AppContext";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 type Props = {
@@ -19,9 +18,7 @@ type GuestInfoFormData = {
 
 const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
   const search = useSearchContext();
-  const { isLoggedIn } = useAppContext();
   const navigate = useNavigate();
-  const location = useLocation();
   
 
   const {
@@ -65,16 +62,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
     setValue("checkOut", date as Date);
   };
 
-  const onSignInClick = (data: GuestInfoFormData) => {
-    search.saveSearchValues(
-      "",
-      data.checkIn,
-      data.checkOut,
-      data.adultCount,
-      data.childCount
-    );
-    navigate("/sign-in", { state: { from: location } });
-  };
+
 
   const onSubmit = (data: GuestInfoFormData) => {
     search.saveSearchValues(
@@ -111,6 +99,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
               placeholderText="Check-in Date"
               className="min-w-full bg-white p-2 focus:outline-none"
               wrapperClassName="min-w-full"
+              dateFormat={`dd/MM/yyyy`}
             />
           </div>
           <div>
@@ -126,6 +115,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
               placeholderText="Check-in Date"
               className="min-w-full bg-white p-2 focus:outline-none"
               wrapperClassName="min-w-full"
+              dateFormat={`dd/MM/yyyy`}
             />
           </div>
           <div className="flex bg-white px-2 py-1 gap-2">
