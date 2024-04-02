@@ -10,7 +10,8 @@ import {
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
 
-const API_BASE_URL = "";
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "";
 
 export const fetchCurrentUser = async (): Promise<UserType> => {
   const response = await fetch(`${API_BASE_URL}/api/users/me`, {
@@ -19,7 +20,6 @@ export const fetchCurrentUser = async (): Promise<UserType> => {
   if (!response.ok) {
     throw new Error("Error fetching user");
   }
-  console.log(response.json)
   return response.json();
 };
 
