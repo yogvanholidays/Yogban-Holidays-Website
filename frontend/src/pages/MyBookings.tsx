@@ -2,8 +2,7 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
-import { BiDownArrowAlt } from "react-icons/bi";
-import { generateReceipt } from "../recieptGenerator";
+
 
 const MyBookings = () => {
   const {
@@ -24,23 +23,6 @@ const MyBookings = () => {
   ) {
     return <span>No bookings found</span>;
   }
-  const downloadRecipt = (booking: any) => {
-    generateReceipt(
-      booking.razorpay_payment_id,
-      booking.razorpay_order_id,
-      booking.totalCost,
-      booking.firstName,
-      booking.lastName,
-      booking.email,
-      booking.checkIn,
-      booking.checkOut,
-      booking.adultCount,
-      booking.childCount,
-      booking.hotel.name, // Assuming 'hotel' is an object with a 'name' property
-      booking.hotel.city, // Assuming 'hotel' is an object with a 'location' property
-      booking.phoneNumber
-    );
-  };
 
   return (
     <div className="space-y-5">
@@ -104,14 +86,7 @@ const MyBookings = () => {
               </div>
             </div>
           </div>
-          <div className=" absolute bottom-0 right-0 m-2">
-            <button
-              onClick={() => downloadRecipt(booking)}
-              className="px-2 py-1 bg-yogvan transition-all duration-200 hover:bg-yogvan-dark text-white text-3xl rounded-md"
-            >
-              <BiDownArrowAlt />
-            </button>
-          </div>
+
         </div>
       ))}
     </div>

@@ -10,7 +10,6 @@ import {
 import useRazorpay from "react-razorpay";
 import { useAppContext } from "../../contexts/AppContext";
 import { Link, useNavigate } from "react-router-dom";
-import { generateReceipt } from "../../recieptGenerator";
 type Props = {
   hotel: HotelType;
   hotelId: string; // Add hotelId to Props type
@@ -169,21 +168,6 @@ Props) => {
           );
 
 
-          generateReceipt(
-            response.razorpay_payment_id,
-            response.razorpay_order_id,
-            finalAmount,
-            data.firstName,
-            data.lastName,
-            data.email,
-            checkIn,
-            checkOut,
-            adultCount,
-            childCount,
-            hotel.name, // Assuming 'hotel' is an object with a 'name' property
-            hotel.city, // Assuming 'hotel' is an object with a 'location' property
-            data.phoneNumber,
-          );
           
 
 
