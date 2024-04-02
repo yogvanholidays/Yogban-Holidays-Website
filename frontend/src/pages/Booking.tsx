@@ -35,7 +35,7 @@ function Booking() {
   );
 
   if (!hotel) {
-    window.location.reload();
+    // window.location.reload();
     return <></>;
   }
   return (
