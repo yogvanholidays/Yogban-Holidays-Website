@@ -20,6 +20,8 @@
     "axe/name-role-value": "off",
     "typescript-config/is-valid": "off",
     "manifest-app-name": "off",
-    "button-type": "off"
+    "button-type": "off",
+    "typescript-config/consistent-casing": "off",
+    "typescript-config/strict": "off"
   }
 }
