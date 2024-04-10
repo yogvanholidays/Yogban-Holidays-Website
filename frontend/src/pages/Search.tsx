@@ -77,7 +77,7 @@ const Search = () => {
       {!isMobile && (
         <div className="md:col-span-1 lg:col-span-1 xl:col-span-1 rounded-lg border border-slate-300 p-5 h-fit sticky top-10 portrait:relative">
           <div className="space-y-5">
-            <h3 className="text-lg font-semibold border-b border-slate-300 pb-5">
+            <h3 className="text-lg font-semibold border-b border-slate-300 pb-2">
               Filter by:
             </h3>
             <StarRatingFilter
@@ -144,7 +144,7 @@ const Search = () => {
       {/* Popup for filters */}
       {isFiltersOpen && isMobile && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-[9999]">
-          <div className="bg-white rounded-lg p-5">
+          <div className="bg-white rounded-lg m-2 p-2">
             <StarRatingFilter
               selectedStars={selectedStars}
               onChange={handleStarsChange}

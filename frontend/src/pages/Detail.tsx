@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import * as apiClient from "./../api-client";
 import { AiFillStar } from "react-icons/ai";
 import GuestInfoForm from "../forms/GuestInfoForm/GuestInfoForm";
-import { Carousel } from "react-bootstrap";
+import Carousel from 'react-bootstrap/Carousel';
 import { IoArrowBack } from "react-icons/io5";
 import { useState } from "react";
 
