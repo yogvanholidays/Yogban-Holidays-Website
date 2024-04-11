@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
 import { DestinationType } from "../../../backend/src/shared/types";
 import { getDestinations } from "../api-client";
-import { BiSearch } from "react-icons/bi";
+import { BiMinusCircle, BiPlusCircle, BiSearch } from "react-icons/bi";
 import { BsCalendarFill, BsPersonFill } from "react-icons/bs";
 import { GrClose } from "react-icons/gr";
 
@@ -24,9 +24,6 @@ const SearchBar = ({ handler }: Props) => {
   const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
   const [adultCount, setAdultCount] = useState<number>(search.adultCount);
   const [childCount, setChildCount] = useState<number>(search.childCount);
-  const [guestCount, setGuestCount] = useState<number>(
-    search.childCount + search.adultCount
-  );
   const [destinations, setDestinations] = useState<DestinationType[]>([]);
   const [showPopup, setShowPopup] = useState(false);
   const [showGuestPopup, setShowGuestPopup] = useState(false);
@@ -155,7 +152,7 @@ const SearchBar = ({ handler }: Props) => {
       // }
       style={{ transition: "all 0.3s ease-in-out" }}
     >
-          <MdTravelExplore size={25} className="ml-2" />
+      <MdTravelExplore size={25} className="ml-2" />
       <div className="relative transition-all duration-500 min-w-32">
         <div className="flex flex-row items-center flex-1 min-w-full bg-transparent p-2">
           <input
@@ -163,7 +160,7 @@ const SearchBar = ({ handler }: Props) => {
             className="text-md min-w-full focus:outline-none popup-container bg-transparent"
             value={inputValue}
             onChange={handleInputChange}
-            onClick={handleDestinationClick}        style={{ width: inputWidth }} // Set dynamic width
+            onClick={handleDestinationClick} style={{ width: inputWidth }} // Set dynamic width
 
           />
         </div>
@@ -205,22 +202,21 @@ const SearchBar = ({ handler }: Props) => {
         <label className="flex gap-2 items-center">
           <BsCalendarFill />
           {checkIn.getFullYear() === checkOut.getFullYear()
-            ? `${
-                checkIn.getMonth() === checkOut.getMonth()
-                  ? `${checkIn.getDate()}-${checkOut.getDate()} ${getMonthName(
-                      checkIn.getMonth()
-                    )}`
-                  : `${checkIn.getDate()} ${getMonthName(
-                      checkIn.getMonth()
-                    )} - ${checkOut.getDate()} ${getMonthName(
-                      checkOut.getMonth()
-                    )}`
-              }`
-            : `${checkIn.getDate()} ${getMonthName(
+            ? `${checkIn.getMonth() === checkOut.getMonth()
+              ? `${checkIn.getDate()}-${checkOut.getDate()} ${getMonthName(
                 checkIn.getMonth()
-              )}, ${checkIn.getFullYear()} - ${checkOut.getDate()} ${getMonthName(
+              )}`
+              : `${checkIn.getDate()} ${getMonthName(
+                checkIn.getMonth()
+              )} - ${checkOut.getDate()} ${getMonthName(
                 checkOut.getMonth()
-              )}, ${checkOut.getFullYear()}`}{" "}
+              )}`
+            }`
+            : `${checkIn.getDate()} ${getMonthName(
+              checkIn.getMonth()
+            )}, ${checkIn.getFullYear()} - ${checkOut.getDate()} ${getMonthName(
+              checkOut.getMonth()
+            )}, ${checkOut.getFullYear()}`}{" "}
         </label>
         {showDatePopup && (
           <div className="grid grid-cols-2 gap-2 dateSearchInput w-72 absolute top-10  bg-white p-2.5 rounded-lg shadow-2xl">
@@ -269,38 +265,58 @@ const SearchBar = ({ handler }: Props) => {
       >
         <label className="items-center w-full flex gap-2 text-nowrap">
           <BsPersonFill />
-          {guestCount} {`Guest${guestCount == 1 ? "" : "s"}`}
+          {childCount+adultCount} {`Guest${childCount+adultCount == 1 ? "" : "s"}`}
         </label>
         {showGuestPopup && (
           <div className="flex p-2.5 w-40 flex-col gap-2 shadow-2xl rounded-md bg-white absolute top-12 right-0 guestSearchPopup">
-            <label className="items-center bg-white border rounded-full px-3 py-1.5 flex">
+            <div className="items-center flex justify-between">
               Adults:
-              <input
-                className="w-full p-1 bg-white focus:outline-none font-bold"
-                type="number"
-                min={1}
-                max={20}
-                value={adultCount}
-                onChange={(event) => {
-                  setAdultCount(parseInt(event.target.value));
-                  setGuestCount(parseInt(event.target.value) + childCount);
-                }}
-              />
-            </label>
-            <label className="items-center bg-white border rounded-full px-3 py-1.5 flex">
+              <div className="flex gap-2">
+                <button className={`text-xl text-center ${adultCount === 0 && `text-gray-500`}`} disabled={adultCount === 0} onClick={(event: FormEvent) => {
+                  event.preventDefault(); setAdultCount(adultCount - 1); search.saveSearchValues(
+                    destination,
+                    checkIn,
+                    checkOut,
+                    adultCount,
+                    childCount
+                  );
+                }}><BiMinusCircle /></button>
+                {adultCount}
+                <button className=" text-xl text-center" onClick={(event: FormEvent) => {
+                  event.preventDefault(); setAdultCount(adultCount + 1); search.saveSearchValues(
+                    destination,
+                    checkIn,
+                    checkOut,
+                    adultCount,
+                    childCount
+                  );
+                }}><BiPlusCircle /></button>
+              </div>
+            </div>
+            <div className="items-center flex justify-between">
               Children:
-              <input
-                className="w-full p-1 bg-white focus:outline-none font-bold"
-                type="number"
-                min={0}
-                max={20}
-                value={childCount}
-                onChange={(event) => {
-                  setChildCount(parseInt(event.target.value));
-                  setGuestCount(adultCount + parseInt(event.target.value));
-                }}
-              />
-            </label>
+              <div className="flex gap-2">
+                <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => {
+                  event.preventDefault(); setChildCount(childCount - 1); search.saveSearchValues(
+                    destination,
+                    checkIn,
+                    checkOut,
+                    adultCount,
+                    childCount
+                  );
+                }}><BiMinusCircle /></button>
+                {childCount}
+                <button className=" text-xl text-center" onClick={(event: FormEvent) => {
+                  event.preventDefault(); setChildCount(childCount + 1); search.saveSearchValues(
+                    destination,
+                    checkIn,
+                    checkOut,
+                    adultCount,
+                    childCount
+                  );
+                }}><BiPlusCircle /></button>
+              </div>
+            </div>
           </div>
         )}
       </div>

@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { DestinationType } from "../../../backend/src/shared/types";
 import { getDestinations } from "../api-client";
 import { GrClose } from "react-icons/gr";
+import { BiMinusCircle, BiPlusCircle } from "react-icons/bi";
+import { isMobile } from "react-device-detect";
 
 interface Props {
   handler: string;
@@ -24,6 +26,7 @@ const SearchBar = ({ handler }: Props) => {
   const [childCount, setChildCount] = useState<number>(search.childCount);
   const [destinations, setDestinations] = useState<DestinationType[]>([]);
   const [showPopup, setShowPopup] = useState(false);
+  const [showGuestPop, setShowGuestPop] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
@@ -67,6 +70,9 @@ const SearchBar = ({ handler }: Props) => {
     const target = event.target as HTMLElement;
     if (!target.closest(".popup-container")) {
       setShowPopup(false);
+    }
+    if (!target.closest(".guestpop")) {
+      setShowGuestPop(false);
     }
   };
 
@@ -114,8 +120,8 @@ const SearchBar = ({ handler }: Props) => {
       className={
         isHomePage
           ? // ? "-mt-32 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 "// landscape:shadow-none" //remove last part to revert searchbar positioning
-            "-mt-14 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-5 2xl:grid-cols-5 items-center gap-2 shadow-2xl shadow-slate-400" // landscape:shadow-none" //remove last part to revert searchbar positioning
-          : "-mt-4 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-5 2xl:grid-cols-5 items-center gap-2 shadow-2xl shadow-slate-400" // landscape:shadow-none" //remove last part to revert searchbar positioning
+          "-mt-14 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-5 2xl:grid-cols-5 items-center gap-2 shadow-2xl shadow-slate-400" // landscape:shadow-none" //remove last part to revert searchbar positioning
+          : "mt-16 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-5  items-center gap-2 shadow-2xl shadow-slate-400" // landscape:shadow-none" //remove last part to revert searchbar positioning
       }
       style={{ transition: "all 0.3s ease-in-out" }}
     >
@@ -159,30 +165,87 @@ const SearchBar = ({ handler }: Props) => {
         )}
       </div>
 
-      <div className="flex bg-white p-2.5 gap-2 rounded border-2 h-full border-gray-300">
-        <label className="items-center flex">
-          Adults:
-          <input
-            className="w-full p-1 focus:outline-none font-bold"
-            type="number"
-            min={1}
-            max={20}
-            value={adultCount}
-            onChange={(event) => setAdultCount(parseInt(event.target.value))}
-          />
-        </label>
-        <label className="items-center flex">
-          Children:
-          <input
-            className="w-full p-1 focus:outline-none font-bold"
-            type="number"
-            min={0}
-            max={20}
-            value={childCount}
-            onChange={(event) => setChildCount(parseInt(event.target.value))}
-          />
-        </label>
+      {!isMobile ? <div className="grid grid-cols-1 bg-white p-2.5 gap-3 rounded border-2 h-full border-gray-300 relative guestpop" onClick={() => setShowGuestPop(true)}>
+        <div className="items-center flex justify-between mx-3">
+          No. of Guests:
+          <div className="flex gap-3 font-bold">
+            {adultCount + childCount}
+
+          </div>
+        </div>
+        {showGuestPop && <div className="grid grid-cols-1 text-sm bg-white p-2.5 gap-3 rounded border-2 -bottom-20 w-full border-gray-300 absolute guestpop">
+          <div className="items-center flex justify-between">
+            Adults:
+            <div className="flex gap-3">
+              <button className={`text-xl text-center ${adultCount === 0 && `text-gray-500`}`} disabled={adultCount === 0} onClick={(event: FormEvent) => {
+                event.preventDefault(); setAdultCount(adultCount - 1); search.saveSearchValues(
+                  destination,
+                  checkIn,
+                  checkOut,
+                  adultCount,
+                  childCount
+                );
+              }}><BiMinusCircle /></button>
+              {adultCount}
+              <button className=" text-xl text-center" onClick={(event: FormEvent) => {
+                event.preventDefault(); setAdultCount(adultCount + 1); search.saveSearchValues(
+                  destination,
+                  checkIn,
+                  checkOut,
+                  adultCount,
+                  childCount
+                );
+              }}><BiPlusCircle /></button>
+            </div>
+          </div>
+          <div className="items-center flex justify-between">
+            Children:
+            <div className="flex gap-3">
+              <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => {
+                event.preventDefault(); setChildCount(childCount - 1); search.saveSearchValues(
+                  destination,
+                  checkIn,
+                  checkOut,
+                  adultCount,
+                  childCount
+                );
+              }}><BiMinusCircle /></button>
+              {childCount}
+              <button className=" text-xl text-center" onClick={(event: FormEvent) => {
+                event.preventDefault(); setChildCount(childCount + 1); search.saveSearchValues(
+                  destination,
+                  checkIn,
+                  checkOut,
+                  adultCount,
+                  childCount
+                );
+              }}><BiPlusCircle /></button>
+            </div>
+          </div>
+        </div>}
       </div>
+
+
+
+        :
+        <div className="grid grid-cols-2 text-sm bg-white p-2.5 gap-3 rounded border-2  w-full border-gray-300 ">
+          <div className="items-center flex justify-between">
+            Adults:
+            <div className="flex gap-3">
+              <button className={`text-xl text-center ${adultCount === 0 && `text-gray-500`}`} disabled={adultCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setAdultCount(adultCount - 1) }}><BiMinusCircle /></button>
+              {adultCount}
+              <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setAdultCount(adultCount + 1) }}><BiPlusCircle /></button>
+            </div>
+          </div>
+          <div className="items-center flex justify-between">
+            Children:
+            <div className="flex gap-3">
+              <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount - 1) }}><BiMinusCircle /></button>
+              {childCount}
+              <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount + 1) }}><BiPlusCircle /></button>
+            </div>
+          </div>
+        </div>}
       <div>
         <DatePicker
           selected={checkIn}
@@ -196,7 +259,7 @@ const SearchBar = ({ handler }: Props) => {
           className="lg:w-44 xl:w-full w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
           wrapperClassName="lg:w-44 xl:w-full w-full"
           dateFormat={`dd/MM/yyyy`}
-          />
+        />
       </div>
       <div>
         <DatePicker

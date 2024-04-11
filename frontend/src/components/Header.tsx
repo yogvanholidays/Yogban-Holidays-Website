@@ -28,7 +28,7 @@ const Header = ({ bgHandle }: Props) => {
         setImages(carouselImages);
       } catch (error) {
         console.error("Error fetching carousel images:", error);
-      }
+      } 
     };
 
     fetchImages();
