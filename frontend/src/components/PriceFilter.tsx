@@ -6,7 +6,7 @@ type Props = {
 const PriceFilter = ({ selectedPrice, onChange }: Props) => {
   return (
     <div>
-      <h4 className="text-md font-semibold mb-2">Max Price</h4>
+      <h4 className="text-md mt-1 font-semibold">Max Price</h4>
       <input
         type="range"
         min={500}
@@ -16,7 +16,7 @@ const PriceFilter = ({ selectedPrice, onChange }: Props) => {
         onChange={(event) => onChange(parseInt(event.target.value))}
         className="w-full"
       />
-      <label className="mt-2 text-center block">
+      <label className="text-center mb-1 block">
         {selectedPrice || "Select Max Price"}
       </label>
     </div>

@@ -9,12 +9,14 @@ import HotelTypesFilter from "../components/HotelTypesFilter";
 import FacilitiesFilter from "../components/FacilitiesFilter";
 import PriceFilter from "../components/PriceFilter";
 import { isMobile } from "react-device-detect";
+import AmenitiesFilter from "../components/AmenitiesFilter";
 const Search = () => {
   const search = useSearchContext();
   const [page, setPage] = useState<number>(1);
   const [selectedStars, setSelectedStars] = useState<string[]>([]);
   const [selectedHotelTypes, setSelectedHotelTypes] = useState<string[]>([]);
   const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
+  const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
   const [selectedPrice, setSelectedPrice] = useState<number | undefined>();
   const [sortOption, setSortOption] = useState<string>("");
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
@@ -32,6 +34,7 @@ const Search = () => {
     stars: selectedStars,
     types: selectedHotelTypes,
     facilities: selectedFacilities,
+    amenities: selectedAmenities,
     maxPrice: selectedPrice?.toString(),
     sortOption,
   };
@@ -71,6 +74,15 @@ const Search = () => {
         : prevFacilities.filter((prevFacility) => prevFacility !== facility)
     );
   };
+  const handleAmenityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const amenity = event.target.value;
+
+    setSelectedAmenities((prevAmenities) =>
+      event.target.checked
+        ? [...prevAmenities, amenity]
+        : prevAmenities.filter((prevAmenity) => prevAmenity !== amenity)
+    );
+  };
 
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-[250px,1fr] xl:grid-cols-[250px,1fr]">
@@ -91,6 +103,10 @@ const Search = () => {
             <FacilitiesFilter
               selectedFacilities={selectedFacilities}
               onChange={handleFacilityChange}
+            />
+            <AmenitiesFilter
+              selectedAmenities={selectedAmenities}
+              onChange={handleAmenityChange}
             />
             <PriceFilter
               selectedPrice={selectedPrice}
@@ -144,7 +160,7 @@ const Search = () => {
       {/* Popup for filters */}
       {isFiltersOpen && isMobile && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-[9999]">
-          <div className="bg-white rounded-lg m-2 p-2">
+          <div className="bg-white rounded-lg m-2 p-2 max-h-[95vh] max-w-[95vw] flex flex-col gap-1">
             <StarRatingFilter
               selectedStars={selectedStars}
               onChange={handleStarsChange}
@@ -157,6 +173,10 @@ const Search = () => {
               selectedFacilities={selectedFacilities}
               onChange={handleFacilityChange}
             />
+            <AmenitiesFilter
+              selectedAmenities={selectedAmenities}
+              onChange={handleFacilityChange}
+            />
             <PriceFilter
               selectedPrice={selectedPrice}
               onChange={(value?: number) => setSelectedPrice(value)}
@@ -164,7 +184,7 @@ const Search = () => {
             {/* Close button */}
             <button
               onClick={handleToggleFilters}
-              className="bg-gray-300 text-black px-4 py-2 mt-5 rounded-md"
+              className="bg-gray-300 text-black px-4 py-2 rounded-md"
             >
               Close
             </button>

@@ -111,6 +111,13 @@ const constructSearchQuery = (queryParams) => {
                 : [queryParams.facilities],
         };
     }
+    if (queryParams.amenities) {
+        constructedQuery.amenities = {
+            $all: Array.isArray(queryParams.amenities)
+                ? queryParams.amenities
+                : [queryParams.amenities],
+        };
+    }
     if (queryParams.types) {
         constructedQuery.type = {
             $in: Array.isArray(queryParams.types)

@@ -64,6 +64,8 @@ router.get("/", async (req: Request, res: Response) => {
     res.status(500).json({ message: "Failed to fetch destinations" });
   }
 });
+
+
 async function uploadImage(image: Express.Multer.File) {
   const b64 = Buffer.from(image.buffer).toString("base64");
   let dataURI = "data:" + image.mimetype + ";base64," + b64;

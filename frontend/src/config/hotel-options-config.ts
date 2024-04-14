@@ -15,27 +15,35 @@ export const hotelTypes = [
 ];
 
 export const hotelFacilities = [
-  "Private Living and Dining Space",
+  "Private Living and Dining Space", 
   "OTT Subscribed Smart TV",
   "Private Washing Machine",
   "Free On site Shared Parking Space",
   "24X7 Security Guard",
-  "Elevator",
+  "Elevator", 
   "High Speed Internet WiFi",
   "Power Back up by Inverter",
-  "Support in Check-in & Check-out",
+  "Support in Check-in & Check-out"
+];
+
+export const hotelAmenities = [
   "Bath Towels",
-  "Shampoo and Bath Soap",
+  "Hand Towel",
+  "Linen",
+  "Shampoo",
+  "Bath Soap",
   "Hot Water",
   "Wardrobe",
   "On demand Iron",
   "Hair Dryer",
   "Air-conditioned bedroom",
   "PTC heater in bedroom",
-  "Fully Functional Kitchen",
+  "Functional Kitchen with Cooking Utensils",
   "Water Purifier",
   "Microwave",
   "Toaster",
   "Refrigerator",
   "Chimney",
 ];
+
+

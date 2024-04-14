@@ -8,6 +8,7 @@ import ImagesSection from "./ImagesSection";
 import { useEffect } from "react";
 import { HotelType } from "../../../../backend/src/shared/types";
 import { reviews, usernames } from "../../../../backend/src/shared/reviews";
+import AmenitiesSection from "./AmenitiesSection";
 export type HotelFormData = {
   name: string;
   city: string;
@@ -17,6 +18,7 @@ export type HotelFormData = {
   pricePerNight: number;
   starRating: number;
   facilities: string[];
+  amenities: string[];
   imageFiles: FileList;
   imageUrls: string[];
   adultCount: number;
@@ -86,6 +88,9 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
     formDataJson.facilities.forEach((facility, index) => {
       formData.append(`facilities[${index}]`, facility);
     });
+    formDataJson.amenities.forEach((amenity, index) => {
+      formData.append(`amenities[${index}]`, amenity);
+    });
 
     if (formDataJson.imageUrls) {
       formDataJson.imageUrls.forEach((url, index) => {
@@ -105,6 +110,7 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
         <DetailsSection />
         <TypeSection />
         <FacilitiesSection />
+        <AmenitiesSection />
         <GuestsSection />
         <ImagesSection />
         <span className="flex justify-end">
