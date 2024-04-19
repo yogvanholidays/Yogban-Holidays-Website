@@ -166,47 +166,82 @@ const SearchBar = ({ handler }: Props) => {
           </ul>
         )}
       </div>
-
-      <div>
-        <DatePicker
-          selected={checkIn}
-          onChange={handleCheckInChange}
-          selectsStart
-          startDate={checkIn}
-          endDate={checkOut}
-          minDate={minDate}
-          maxDate={maxDate}
-          placeholderText="Check-in Date"
-          className="lg:w-44 xl:w-full w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
-          wrapperClassName="lg:w-44 xl:w-full w-full"
-          dateFormat={`dd/MM/yyyy`}
-        />
-      </div>
-      <div>
-        <DatePicker
-          selected={checkOut}
-          onChange={handleCheckOutChange}
-          selectsStart
-          startDate={checkIn}
-          endDate={checkOut}
-          minDate={checkIn ? new Date(checkIn.getTime() + 86400000) : undefined}
-          maxDate={maxDate}
-          placeholderText="Check-out Date"
-          className="lg:w-44 xl:w-full w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
-          wrapperClassName="lg:w-44 xl:w-full w-full"
-          dateFormat={`dd/MM/yyyy`}
-        />
-      </div>
+      {!isMobile
+        ?(<>
+        <div>
+          <DatePicker
+            selected={checkIn}
+            onChange={handleCheckInChange}
+            selectsStart
+            startDate={checkIn}
+            endDate={checkOut}
+            minDate={minDate}
+            maxDate={maxDate}
+            placeholderText="Check-in Date"
+            className="lg:w-44 xl:w-full w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
+            wrapperClassName="lg:w-44 xl:w-full w-full"
+            dateFormat={`dd/MM/yyyy`}
+          />
+        </div>
+        <div>
+          <DatePicker
+            selected={checkOut}
+            onChange={handleCheckOutChange}
+            selectsStart
+            startDate={checkIn}
+            endDate={checkOut}
+            minDate={checkIn ? new Date(checkIn.getTime() + 86400000) : undefined}
+            maxDate={maxDate}
+            placeholderText="Check-out Date"
+            className="lg:w-44 xl:w-full w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
+            wrapperClassName="lg:w-44 xl:w-full w-full"
+            dateFormat={`dd/MM/yyyy`}
+          />
+        </div>
+      </>)
+       : (<div className="grid grid-cols-2 gap-2">
+        <div>
+          <DatePicker
+            selected={checkIn}
+            onChange={handleCheckInChange}
+            selectsStart
+            startDate={checkIn}
+            endDate={checkOut}
+            minDate={minDate}
+            maxDate={maxDate}
+            placeholderText="Check-in Date"
+            className="lg:w-44 xl:w-full w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
+            wrapperClassName="lg:w-44 xl:w-full w-full"
+            dateFormat={`dd/MM/yyyy`}
+          />
+        </div>
+        <div>
+          <DatePicker
+            selected={checkOut}
+            onChange={handleCheckOutChange}
+            selectsStart
+            startDate={checkIn}
+            endDate={checkOut}
+            minDate={checkIn ? new Date(checkIn.getTime() + 86400000) : undefined}
+            maxDate={maxDate}
+            placeholderText="Check-out Date"
+            className="lg:w-44 xl:w-full w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
+            wrapperClassName="lg:w-44 xl:w-full w-full"
+            dateFormat={`dd/MM/yyyy`}
+          />
+        </div>
+      </div>)
+      }
       {!isMobile ?
         <div className="grid grid-cols-1 bg-white p-2.5 gap-3 rounded border-2 h-full border-gray-300 relative guestpop" onClick={() => setShowGuestPop(true)}>
           <div className="items-center flex justify-between mx-3">
             No. of Guests:
             <div className="flex gap-3 font-bold">
-              {adultCount + childCount +infantCount}
+              {adultCount + childCount + infantCount}
 
             </div>
           </div>
-          {showGuestPop && <div className="grid grid-cols-1 text-sm bg-white p-2.5 gap-3 rounded border-2 -bottom-20 w-full border-gray-300 absolute guestpop">
+          {showGuestPop && <div className="grid grid-cols-1 text-sm bg-white p-2.5 gap-3 rounded border-2 -bottom-28 w-full border-gray-300 absolute guestpop">
             <div className="items-center flex justify-between">
               Adults:
               <div className="flex gap-3">
@@ -292,25 +327,33 @@ const SearchBar = ({ handler }: Props) => {
 
 
 
-        :
-        <div className="grid grid-cols-2 text-sm bg-white p-2.5 gap-3 rounded border-2  w-full border-gray-300 ">
-          <div className="items-center flex justify-between">
+        : <>
+          <div className="text-base bg-white p-2.5 rounded border-2  w-full border-gray-300 ">            <div className="items-center flex justify-between">
             Adults:
             <div className="flex gap-3">
               <button className={`text-xl text-center ${adultCount === 0 && `text-gray-500`}`} disabled={adultCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setAdultCount(adultCount - 1) }}><BiMinusCircle /></button>
               {adultCount}
               <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setAdultCount(adultCount + 1) }}><BiPlusCircle /></button>
             </div>
-          </div>
-          <div className="items-center flex justify-between">
-            Children:
-            <div className="flex gap-3">
-              <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount - 1) }}><BiMinusCircle /></button>
-              {childCount}
-              <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount + 1) }}><BiPlusCircle /></button>
+          </div></div>
+          <div className="grid grid-cols-2 text-sm bg-white p-2.5 gap-5 rounded border-2  w-full border-gray-300 ">
+            <div className="items-center flex justify-between">
+              Children:
+              <div className="flex gap-3">
+                <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount - 1) }}><BiMinusCircle /></button>
+                {childCount}
+                <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount + 1) }}><BiPlusCircle /></button>
+              </div>
             </div>
-          </div>
-        </div>}
+            <div className="items-center flex justify-between">
+              Infant:
+              <div className="flex gap-3">
+                <button className={`text-xl text-center ${infantCount === 0 && `text-gray-500`}`} disabled={infantCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setInfantCount(infantCount - 1) }}><BiMinusCircle /></button>
+                {infantCount}
+                <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setInfantCount(infantCount + 1) }}><BiPlusCircle /></button>
+              </div>
+            </div>
+          </div></>}
 
       <div className="flex gap-3">
         <button className="w-full bg-yogvan text-white h-full p-3 font-bold text-xl  rounded-lg">

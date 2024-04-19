@@ -10,6 +10,36 @@
     width:-webkit-fill-available;
 }
 
+@keyframes riseUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-rise-up {
+  animation: riseUp 0.8s ease-in-out;
+}
+@keyframes riseUp2 {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-rise-up-2 {
+  animation: riseUp 1.2s ease-in-out;
+}
+
+
 .pt-serif-regular {
     font-family: "PT Serif", serif;
     font-weight: 400;

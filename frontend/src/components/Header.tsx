@@ -136,16 +136,16 @@ const Header = ({ bgHandle }: Props) => {
                   backgroundPosition: "center",
                 }}
               >
-                <div className="absolute inset-0 flex flex-col justify-center items-center">
+                <div className="absolute inset-0 flex flex-col justify-center items-center ">
                   <h3
-                    className="text-white text-6xl pt-serif-bold portrait:text-2xl"
+                    className="text-white text-6xl pt-serif-bold portrait:text-2xl animate-rise-up"
                     style={{ textShadow: "0px 0px 30px rgba(0, 0, 0, 0.9)" }}
                   >
                     {image.featuredText}
                   </h3>
                   <Link
                     to={image.ButtonLink}
-                    className="border-2 text-white px-6 py-3 portrait:mt-1 landscape:mt-4 rounded-md text-xl exploreButtonCarousel duration-200"
+                    className="border-2 text-white px-6 py-3 portrait:mt-1 landscape:mt-4 rounded-md text-xl exploreButtonCarousel duration-200 animate-rise-up-2"
                   >
                     Explore
                   </Link>
