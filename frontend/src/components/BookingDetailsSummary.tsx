@@ -5,6 +5,7 @@ type Props = {
   checkOut: Date;
   adultCount: number;
   childCount: number;
+  infantCount: number;
   numberOfNights: number;
   hotel: HotelType;
 };
@@ -14,13 +15,14 @@ const BookingDetailsSummary = ({
   checkOut,
   adultCount,
   childCount,
+  infantCount,
   numberOfNights,
   hotel,
 }: Props) => {
   return (
     <div className="grid gap-4 rounded-lg border border-slate-300 p-5 h-fit">
       <h2 className="text-xl font-bold">Your Booking Details</h2>
-      <img src={hotel.imageUrls[0]} className=" w-full rounded-md object-cover"/>
+      <img src={hotel.imageUrls[0]} className=" w-full rounded-md object-cover" />
       <div className="border-b py-2">
         Location:
         <div className="font-bold">{`${hotel.name}, ${hotel.city}, ${hotel.country}`}</div>
@@ -43,7 +45,22 @@ const BookingDetailsSummary = ({
       <div>
         Guests{" "}
         <div className="font-bold">
-          {adultCount} adults & {childCount} children
+          <span>
+            {adultCount} adults
+          </span>
+          {
+            childCount > 0 &&
+
+            <span>
+              , {childCount} children
+            </span>
+          }
+          {
+            infantCount > 0 &&
+            <span>
+              , {infantCount} Infant
+            </span>
+          }
         </div>
       </div>
     </div>

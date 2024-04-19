@@ -45,6 +45,7 @@ function Booking() {
         checkOut={search.checkOut}
         adultCount={search.adultCount}
         childCount={search.childCount}
+        infantCount={search.infantCount}
         numberOfNights={numberOfNights}
         hotel={hotel}
       />
@@ -53,22 +54,24 @@ function Booking() {
           hotel={hotel}
           currentUser={currentUser}
           hotelId={hotel._id}
-          amount={hotel.pricePerNight * numberOfNights}
+          amount={(hotel.pricePerNight * numberOfNights* search.adultCount) + (hotel.pricePerNight * numberOfNights * search.childCount * 0.5)}
           checkIn={search.checkIn}
           checkOut={search.checkOut}
           adultCount={search.adultCount}
           childCount={search.childCount}
+          infantCount={search.infantCount}
           numberOfNights={numberOfNights}
-        />
-      ) : (
-        <GuestBookingForm
+          />
+        ) : (
+          <GuestBookingForm
           hotel={hotel}
           hotelId={hotel._id}
-          amount={hotel.pricePerNight * numberOfNights}
+          amount={(hotel.pricePerNight * numberOfNights* search.adultCount) + (hotel.pricePerNight * numberOfNights * search.childCount * 0.5)}
           checkIn={search.checkIn}
           checkOut={search.checkOut}
           adultCount={search.adultCount}
           childCount={search.childCount}
+          infantCount={search.infantCount}
           numberOfNights={numberOfNights}
         />
       )}

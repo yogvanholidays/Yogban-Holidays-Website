@@ -9,6 +9,7 @@ export interface IBooking extends Document {
   email: string;
   adultCount: number;
   childCount: number;
+  infantCount: number;
   checkIn: Date;
   checkOut: Date;
   totalCost: number;
@@ -25,6 +26,7 @@ const BookingSchema = new Schema({
   email: { type: String, required: true },
   adultCount: { type: Number, required: true },
   childCount: { type: Number, required: true },
+  infantCount: { type: Number, required: true },
   checkIn: { type: Date, required: true },
   checkOut: { type: Date, required: true },
   totalCost: { type: Number, required: true },

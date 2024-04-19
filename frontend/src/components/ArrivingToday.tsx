@@ -26,11 +26,11 @@ const ArrivingToday = () => {
 
   return (
     <div className="container mx-auto p-0">
-      <div className="flex flex-row text-center items-center justify-between">
-        <h1 className="text-2xl font-bold mb-4">Arriving Today</h1>
+      <div className="flex flex-row text-center items-center justify-between mb-4">
+        <h1 className="text-2xl font-bold">Arriving Today</h1>
         <Link
           to="/view-all-bookings"
-          className="flex  text-white text-xl font-bold py-2 px-3 bg-black rounded"
+          className="flex  text-white text-md font-bold py-2 px-3 bg-black rounded"
         >
           View All Bookings
         </Link>
@@ -73,7 +73,7 @@ const ArrivingToday = () => {
                 <div>
                   <span className="font-bold mr-2">Guests:</span>
                   <span>
-                    {booking.adultCount} adults, {booking.childCount} children
+                    {booking.adultCount} adults, {booking.childCount} children, {booking.infantCount} infant
                   </span>
                 </div>
                 <div>

@@ -18,6 +18,7 @@ type Props = {
   checkOut: Date;
   adultCount: number;
   childCount: number;
+  infantCount: number;
   numberOfNights: number;
   // isLoggedIn: boolean;
 };
@@ -32,6 +33,7 @@ const GuestBookingForm = ({
   checkOut,
   adultCount,
   childCount,
+  infantCount,
   numberOfNights,
 }: // isLoggedIn,
 Props) => {
@@ -163,6 +165,7 @@ Props) => {
             checkOut,
             adultCount,
             childCount,
+            infantCount,
             hotel,
             data.phoneNumber
           );

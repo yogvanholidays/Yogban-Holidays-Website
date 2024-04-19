@@ -14,6 +14,7 @@ type GuestInfoFormData = {
   checkOut: Date;
   adultCount: number;
   childCount: number;
+  infantCount: number;
 };
 
 const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
@@ -33,6 +34,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
       checkOut: search.checkOut,
       adultCount: search.adultCount,
       childCount: search.childCount,
+      infantCount:search.infantCount
     },
   });
 
@@ -70,7 +72,8 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
       data.checkIn,
       data.checkOut,
       data.adultCount,
-      data.childCount
+      data.childCount,
+      data.infantCount
     );
     navigate(`/hotel/${hotelId}/booking`);
   };
@@ -118,7 +121,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
               dateFormat={`dd/MM/yyyy`}
             />
           </div>
-          <div className="flex bg-white px-2 py-1 gap-2">
+          <div className="flex bg-white px-2 py-1 gap-2 text-sm">
             <label className="items-center flex">
               Adults:
               <input
@@ -144,6 +147,23 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
                 min={0}
                 max={20}
                 {...register("childCount", {
+                  valueAsNumber: true,
+                })}
+              />
+            </label>
+            {errors.adultCount && (
+              <span className="text-red-500 font-semibold text-sm">
+                {errors.adultCount.message}
+              </span>
+            )}
+            <label className="items-center flex">
+              Infant:
+              <input
+                className="w-full p-1 focus:outline-none font-bold"
+                type="number"
+                min={0}
+                max={20}
+                {...register("infantCount", {
                   valueAsNumber: true,
                 })}
               />

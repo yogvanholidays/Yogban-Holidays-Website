@@ -52,7 +52,7 @@ export type BookingType = {
   email: string;
   adultCount: number;
   childCount: number;
-  // infantCount: number;
+  infantCount: number;
   checkIn: Date;
   checkOut: Date;
   totalCost: number;

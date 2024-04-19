@@ -241,6 +241,7 @@ export const validatePayment = async (
   checkOut: Date,
   adultCount: number,
   childCount: number,
+  infantCount: number,
   hotel: HotelType,
   phoneNumber: string
 ) => {
@@ -262,6 +263,7 @@ export const validatePayment = async (
           checkOut,
           adultCount,
           childCount,
+          infantCount,
           hotel,
           phoneNumber,
         }),

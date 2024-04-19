@@ -210,6 +210,7 @@ router.post("/order/validate", async (req, res) => {
     checkOut,
     adultCount,
     childCount,
+    infantCount,
     hotel,
     phoneNumber,
   } = req.body;
@@ -235,6 +236,7 @@ router.post("/order/validate", async (req, res) => {
         email: email,
         adultCount: adultCount,
         childCount: childCount,
+        infantCount: infantCount,
         checkIn: checkIn,
         checkOut: checkOut,
         totalCost: amount,

@@ -24,6 +24,7 @@ const SearchBar = ({ handler }: Props) => {
   const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
   const [adultCount, setAdultCount] = useState<number>(search.adultCount);
   const [childCount, setChildCount] = useState<number>(search.childCount);
+  const [infantCount, setInfantCount] = useState<number>(search.infantCount);
   const [destinations, setDestinations] = useState<DestinationType[]>([]);
   const [showPopup, setShowPopup] = useState(false);
   const [showGuestPopup, setShowGuestPopup] = useState(false);
@@ -113,7 +114,8 @@ const SearchBar = ({ handler }: Props) => {
       checkIn,
       checkOut,
       adultCount,
-      childCount
+      childCount,
+      infantCount
     );
     navigate("/search");
   };
@@ -265,7 +267,7 @@ const SearchBar = ({ handler }: Props) => {
       >
         <label className="items-center w-full flex gap-2 text-nowrap">
           <BsPersonFill />
-          {childCount+adultCount} {`Guest${childCount+adultCount == 1 ? "" : "s"}`}
+          {childCount+adultCount+infantCount} {`Guest${childCount+adultCount+infantCount == 1 ? "" : "s"}`}
         </label>
         {showGuestPopup && (
           <div className="flex p-2.5 w-40 flex-col gap-2 shadow-2xl rounded-md bg-white absolute top-12 right-0 guestSearchPopup">
@@ -278,7 +280,8 @@ const SearchBar = ({ handler }: Props) => {
                     checkIn,
                     checkOut,
                     adultCount,
-                    childCount
+                    childCount,
+                    infantCount
                   );
                 }}><BiMinusCircle /></button>
                 {adultCount}
@@ -288,7 +291,8 @@ const SearchBar = ({ handler }: Props) => {
                     checkIn,
                     checkOut,
                     adultCount,
-                    childCount
+                    childCount,
+                    infantCount
                   );
                 }}><BiPlusCircle /></button>
               </div>
@@ -302,7 +306,8 @@ const SearchBar = ({ handler }: Props) => {
                     checkIn,
                     checkOut,
                     adultCount,
-                    childCount
+                    childCount,
+                    infantCount
                   );
                 }}><BiMinusCircle /></button>
                 {childCount}
@@ -312,7 +317,34 @@ const SearchBar = ({ handler }: Props) => {
                     checkIn,
                     checkOut,
                     adultCount,
-                    childCount
+                    childCount,
+                    infantCount
+                  );
+                }}><BiPlusCircle /></button>
+              </div>
+            </div>
+            <div className="items-center flex justify-between">
+              Infant:
+              <div className="flex gap-2">
+                <button className={`text-xl text-center ${infantCount === 0 && `text-gray-500`}`} disabled={infantCount === 0} onClick={(event: FormEvent) => {
+                  event.preventDefault(); setInfantCount(infantCount - 1); search.saveSearchValues(
+                    destination,
+                    checkIn,
+                    checkOut,
+                    adultCount,
+                    childCount,
+                    infantCount
+                  );
+                }}><BiMinusCircle /></button>
+                {infantCount}
+                <button className=" text-xl text-center" onClick={(event: FormEvent) => {
+                  event.preventDefault(); setInfantCount(infantCount + 1); search.saveSearchValues(
+                    destination,
+                    checkIn,
+                    checkOut,
+                    adultCount,
+                    childCount,
+                    infantCount
                   );
                 }}><BiPlusCircle /></button>
               </div>

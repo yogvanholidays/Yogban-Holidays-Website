@@ -141,7 +141,7 @@ const MyBookings = () => {
             <div>
               <span className="font-bold mr-2">Guests:</span>
               <span>
-                {booking.adultCount} adults, {booking.childCount} children
+                {booking.adultCount} adults, {booking.childCount} children, {booking.infantCount} infant
               </span>
             </div>
             <div>
