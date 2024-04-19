@@ -40,6 +40,11 @@ const hotelSchema = new mongoose_1.default.Schema({
     imageUrls: [{ type: String, required: true }],
     lastUpdated: { type: Date, required: true },
     reviews: { type: mongoose_1.Schema.Types.Mixed, required: false },
+    bookingdotcom: [{ type: String, required: false }],
+    airbnb: [{ type: String, required: false }],
+    makemytrip: [{ type: String, required: false }],
+    googleTravels: [{ type: String, required: false }],
+    agoda: [{ type: String, required: false }],
 });
 const Hotel = mongoose_1.default.model("Hotel", hotelSchema);
 exports.default = Hotel;

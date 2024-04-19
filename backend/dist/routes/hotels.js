@@ -176,7 +176,7 @@ router.post("/:hotelId/bookings/payment-intent", (req, res) => __awaiter(void 0,
     }
 }));
 router.post("/order/validate", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { razorpay_payment_id, razorpay_order_id, razorpay_signature, amount, userId, firstName, lastName, email, checkIn, checkOut, adultCount, childCount, hotel, phoneNumber, } = req.body;
+    const { razorpay_payment_id, razorpay_order_id, razorpay_signature, amount, userId, firstName, lastName, email, checkIn, checkOut, adultCount, childCount, infantCount, hotel, phoneNumber, } = req.body;
     const sha = crypto_1.default.createHmac("sha256", process.env.RAZORPAY_KEY_SECRET || "");
     sha.update(`${razorpay_order_id}|${razorpay_payment_id}`);
     const digest = sha.digest("hex");
@@ -195,6 +195,7 @@ router.post("/order/validate", (req, res) => __awaiter(void 0, void 0, void 0, f
                 email: email,
                 adultCount: adultCount,
                 childCount: childCount,
+                infantCount: infantCount,
                 checkIn: checkIn,
                 checkOut: checkOut,
                 totalCost: amount,

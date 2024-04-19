@@ -32,6 +32,7 @@ const BookingSchema = new mongoose_1.Schema({
     email: { type: String, required: true },
     adultCount: { type: Number, required: true },
     childCount: { type: Number, required: true },
+    infantCount: { type: Number, required: true },
     checkIn: { type: Date, required: true },
     checkOut: { type: Date, required: true },
     totalCost: { type: Number, required: true },

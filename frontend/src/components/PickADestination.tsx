@@ -34,7 +34,8 @@ function PickADestination() {
       search.checkIn,
       search.checkOut,
       search.adultCount,
-      search.childCount
+      search.childCount,
+      search.infantCount
     );
   };
 
