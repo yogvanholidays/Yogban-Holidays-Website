@@ -15,9 +15,9 @@ function Homepage() {
         <BestRatedComponent/>
         <LatestAddedComponent/>
         {/* <ListPropertyComponent/> */}
+        <ReviewHeaderComponent/>
         <CouponsList/>
         <BlogComponent/>
-        <ReviewHeaderComponent/>
     </div>
   )
 }

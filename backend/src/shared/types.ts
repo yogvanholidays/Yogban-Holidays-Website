@@ -15,6 +15,11 @@ export type HotelType = {
   imageUrls: string[];
   lastUpdated: Date;
   reviews:any;
+  bookingdotcom: string;
+  airbnb: string;
+  makemytrip: string;
+  googleTravels: string;
+  agoda: string;
 };
 
 export type HotelSearchResponse = {
@@ -47,6 +52,7 @@ export type BookingType = {
   email: string;
   adultCount: number;
   childCount: number;
+  // infantCount: number;
   checkIn: Date;
   checkOut: Date;
   totalCost: number;

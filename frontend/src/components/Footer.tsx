@@ -12,7 +12,7 @@ const Footer = () => {
         {/* Contact information */}
         <div className="text-white font-bold tracking-tight mt-2  lg:text-left">
           <div className="flex flex-col  lg:items-start">
-            <div className="flex  gap-2 mt-4">
+            <div className="flex  gap-2 mt-2">
               {/* <FaMapMarkerAlt />
               <p className="text-sm lg:text-base">
                 Tapovan Rishikesh, Uttarakhand 249137 India.
@@ -37,8 +37,8 @@ const Footer = () => {
                 mail: yogvanholidays@gmail.com
               </p> */}
             </div>
-            <div className="flex gap-2 ">
-              <span className="flex text-center items-center gap-3">
+            <div className="flex gap-2 landscape:mb-2">
+              <span className="flex text-center items-center gap-3 landscape:mb-2">
                 <span>Our Socials </span>
                 <span className="flex gap-2">
                   <a
@@ -72,8 +72,8 @@ const Footer = () => {
           </div>
         </div>
         {/* Additional info */}
-        <div className="text-white font-bold tracking-tight mt-4  lg:text-right lg:mt-0">
-          <div className="flex flex-col  lg:items-end ">
+        <div className="text-white font-bold tracking-tight mt-2  lg:text-right lg:mt-0">
+          <div className="flex flex-col  lg:items-end justify-center">
             <Link to="/terms-and-contions" className="mb-2 lg:mb-0">
               Terms of Use
             </Link>
@@ -90,11 +90,11 @@ const Footer = () => {
         </div>
       </div>
       {/* Bottom */}
-      <div className="bg-black w-full text-white text-center py-2 mt-3">
+      {/* <div className="bg-black w-full text-white text-center py-2 mt-3">
         <p className="text-xs lg:text-sm">
           © Yogvanholidays 2021. All Rights Reserved. Designed by BatLoop
         </p>
-      </div>
+      </div> */}
     </div>
   );
 };

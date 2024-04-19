@@ -35,12 +35,12 @@ function PickABlog() {
     <div className="mb-12">
       <div className="overflow-x-auto max-w-screen-xl mx-auto ">
         <div className="space-y-3">
-          <h1 className="font-bold text-3xl">Our Blogs</h1>
-          <div className="flex flex-nowrap gap-3  pb-3">
+          <h1 className="font-bold text-3xl sticky top-0">Our Blogs</h1>
+          <div className="flex flex-nowrap gap-3 overflow-x-scroll pb-3">
             {blogs.map((blog, index) => (
               <button
                 key={index}
-                className="flex flex-col text-center content-end items-center p-4 border rounded-md w-96 portrait:w-80"
+                className="flex flex-col text-center content-end items-center p-4 border rounded-md w-full md:w-96"
                 style={{ flex: "0 0 auto" }} // Set a fixed width for each button
                 onClick={() => handleButtonClick(blog)}
               >

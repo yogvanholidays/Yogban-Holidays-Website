@@ -69,6 +69,15 @@ const Detail = () => {
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6">
         <div className="whitespace-pre-line">
           <span className=" text-wrap max-w-20">{hotel.description}</span>
+          <p className="font-semibold text-xl my-2">Amenities:</p>
+          <div className="flex flex-wrap gap-2">
+
+            {hotel.amenities.map((amenity, index) => (
+              <span key={index} className=" bg-gray-800 text-white px-3 py-1.5 rounded-full">
+                {amenity}
+              </span>
+            ))}
+          </div>
         </div>
         <div>
           <GuestInfoForm
@@ -77,6 +86,40 @@ const Detail = () => {
           />
         </div>
       </div>
+      {(hotel.bookingdotcom || hotel.airbnb || hotel.makemytrip || hotel.googleTravels || hotel.agoda) &&
+
+        <div>
+          <p className="font-semibold text-lg my-2">Visit Property at:</p>
+          <div className="flex gap-3">
+
+            {hotel.googleTravels != '' &&
+              <a href={hotel.googleTravels}>
+                <img src="/google-travel.svg" alt="" className="h-10" />
+              </a>
+            }
+            {hotel.airbnb != '' &&
+              <a href={hotel.airbnb}>
+                <img src="/airbnb.svg" alt="" className="h-10" />
+              </a>
+            }
+            {hotel.makemytrip != '' &&
+              <a href={hotel.makemytrip}>
+                <img src="/makemytrip.svg" alt="" className="h-10" />
+              </a>
+            }
+            {hotel.bookingdotcom != '' &&
+              <a href={hotel.bookingdotcom}>
+                <img src="/bookingcom-1.svg" alt="" className="h-10" />
+              </a>
+            }
+            {hotel.agoda != '' &&
+              <a href={hotel.agoda}>
+                <img src="/agoda.png" alt="" className="h-10" />
+              </a>
+            }
+          </div>
+        </div>
+      }
 
       <div className="space-y-4">
         {hotel.reviews && (
@@ -86,43 +129,39 @@ const Detail = () => {
             <div className="flex space-x-2 portrait:text-xs overflow-x-scroll">
               <button
                 onClick={() => setFilter("all")}
-                className={`py-2 px-3 rounded-md min-w-fit scroll-smooth  ${
-                  filter === "all"
-                    ? "bg-gray-800 text-white"
-                    : "bg-gray-100 border-2 text-gray-800"
-                }`}
+                className={`py-2 px-3 rounded-md min-w-fit scroll-smooth  ${filter === "all"
+                  ? "bg-gray-800 text-white"
+                  : "bg-gray-100 border-2 text-gray-800"
+                  }`}
               >
                 All
               </button>
               <button
                 onClick={() => setFilter("Google")}
-                className={`py-2 px-3 rounded-md min-w-fit scroll-smooth  ${
-                  filter === "Google"
-                    ? "bg-gray-800 text-white flex items-center gap-2"
-                    : "bg-gray-100 border-2 text-gray-800 flex items-center gap-1"
-                }`}
+                className={`py-2 px-3 rounded-md min-w-fit scroll-smooth  ${filter === "Google"
+                  ? "bg-gray-800 text-white flex items-center gap-2"
+                  : "bg-gray-100 border-2 text-gray-800 flex items-center gap-1"
+                  }`}
               >
                 <img src="/Google.svg" alt="google maps" className="h-6" />
                 <span>Google</span>
               </button>
               <button
                 onClick={() => setFilter("airbnb")}
-                className={`py-2 px-3 rounded-md min-w-fit scroll-smooth  ${
-                  filter === "airbnb"
-                    ? "bg-gray-800 text-white  flex items-center gap-2"
-                    : "bg-gray-100 border-2 text-gray-800 flex items-center gap-2"
-                }`}
+                className={`py-2 px-3 rounded-md min-w-fit scroll-smooth  ${filter === "airbnb"
+                  ? "bg-gray-800 text-white  flex items-center gap-2"
+                  : "bg-gray-100 border-2 text-gray-800 flex items-center gap-2"
+                  }`}
               >
                 <img src="/airbnb.svg" alt="airbnb" className="h-6" />
                 <span>Airbnb</span>
               </button>
               <button
                 onClick={() => setFilter("makemytrip")}
-                className={`py-2 px-3 rounded-md min-w-fit scroll-smooth  ${
-                  filter === "makemytrip"
-                    ? "bg-gray-800 text-white flex items-center gap-2"
-                    : "bg-gray-100 border-2 text-gray-800 flex items-center gap-2"
-                }`}
+                className={`py-2 px-3 rounded-md min-w-fit scroll-smooth  ${filter === "makemytrip"
+                  ? "bg-gray-800 text-white flex items-center gap-2"
+                  : "bg-gray-100 border-2 text-gray-800 flex items-center gap-2"
+                  }`}
               >
                 <img src="/makemytrip.svg" alt="make my trip" className="h-6" />
                 <span>MakeMyTrip</span>

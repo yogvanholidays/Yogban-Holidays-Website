@@ -29,7 +29,7 @@ const LatestDestinationCard = ({ hotel }: Props) => {
         <span
           className={
             isMobile
-              ? "text-white font-semibold tracking-tight text-xl flex gap-2 flex-wrap"
+              ? "text-white font-semibold tracking-tight text-md flex gap-2 flex-wrap"
               : "text-white font-bold tracking-tight text-2xl flex gap-2 flex-wrap"
           }
         >

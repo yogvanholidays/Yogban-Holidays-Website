@@ -19,6 +19,11 @@ const hotelSchema = new mongoose.Schema<HotelType>({
   imageUrls: [{ type: String, required: true }],
   lastUpdated: { type: Date, required: true },
   reviews: { type: Schema.Types.Mixed, required: false },
+  bookingdotcom: [{ type: String, required: false }],
+  airbnb: [{ type: String, required: false }],
+  makemytrip: [{ type: String, required: false }],
+  googleTravels: [{ type: String, required: false }],
+  agoda: [{ type: String, required: false }],
 });
 
 const Hotel = mongoose.model<HotelType>("Hotel", hotelSchema);

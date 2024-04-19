@@ -165,87 +165,6 @@ const SearchBar = ({ handler }: Props) => {
         )}
       </div>
 
-      {!isMobile ? <div className="grid grid-cols-1 bg-white p-2.5 gap-3 rounded border-2 h-full border-gray-300 relative guestpop" onClick={() => setShowGuestPop(true)}>
-        <div className="items-center flex justify-between mx-3">
-          No. of Guests:
-          <div className="flex gap-3 font-bold">
-            {adultCount + childCount}
-
-          </div>
-        </div>
-        {showGuestPop && <div className="grid grid-cols-1 text-sm bg-white p-2.5 gap-3 rounded border-2 -bottom-20 w-full border-gray-300 absolute guestpop">
-          <div className="items-center flex justify-between">
-            Adults:
-            <div className="flex gap-3">
-              <button className={`text-xl text-center ${adultCount === 0 && `text-gray-500`}`} disabled={adultCount === 0} onClick={(event: FormEvent) => {
-                event.preventDefault(); setAdultCount(adultCount - 1); search.saveSearchValues(
-                  destination,
-                  checkIn,
-                  checkOut,
-                  adultCount,
-                  childCount
-                );
-              }}><BiMinusCircle /></button>
-              {adultCount}
-              <button className=" text-xl text-center" onClick={(event: FormEvent) => {
-                event.preventDefault(); setAdultCount(adultCount + 1); search.saveSearchValues(
-                  destination,
-                  checkIn,
-                  checkOut,
-                  adultCount,
-                  childCount
-                );
-              }}><BiPlusCircle /></button>
-            </div>
-          </div>
-          <div className="items-center flex justify-between">
-            Children:
-            <div className="flex gap-3">
-              <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => {
-                event.preventDefault(); setChildCount(childCount - 1); search.saveSearchValues(
-                  destination,
-                  checkIn,
-                  checkOut,
-                  adultCount,
-                  childCount
-                );
-              }}><BiMinusCircle /></button>
-              {childCount}
-              <button className=" text-xl text-center" onClick={(event: FormEvent) => {
-                event.preventDefault(); setChildCount(childCount + 1); search.saveSearchValues(
-                  destination,
-                  checkIn,
-                  checkOut,
-                  adultCount,
-                  childCount
-                );
-              }}><BiPlusCircle /></button>
-            </div>
-          </div>
-        </div>}
-      </div>
-
-
-
-        :
-        <div className="grid grid-cols-2 text-sm bg-white p-2.5 gap-3 rounded border-2  w-full border-gray-300 ">
-          <div className="items-center flex justify-between">
-            Adults:
-            <div className="flex gap-3">
-              <button className={`text-xl text-center ${adultCount === 0 && `text-gray-500`}`} disabled={adultCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setAdultCount(adultCount - 1) }}><BiMinusCircle /></button>
-              {adultCount}
-              <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setAdultCount(adultCount + 1) }}><BiPlusCircle /></button>
-            </div>
-          </div>
-          <div className="items-center flex justify-between">
-            Children:
-            <div className="flex gap-3">
-              <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount - 1) }}><BiMinusCircle /></button>
-              {childCount}
-              <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount + 1) }}><BiPlusCircle /></button>
-            </div>
-          </div>
-        </div>}
       <div>
         <DatePicker
           selected={checkIn}
@@ -276,6 +195,89 @@ const SearchBar = ({ handler }: Props) => {
           dateFormat={`dd/MM/yyyy`}
         />
       </div>
+      {!isMobile ?
+        <div className="grid grid-cols-1 bg-white p-2.5 gap-3 rounded border-2 h-full border-gray-300 relative guestpop" onClick={() => setShowGuestPop(true)}>
+          <div className="items-center flex justify-between mx-3">
+            No. of Guests:
+            <div className="flex gap-3 font-bold">
+              {adultCount + childCount}
+
+            </div>
+          </div>
+          {showGuestPop && <div className="grid grid-cols-1 text-sm bg-white p-2.5 gap-3 rounded border-2 -bottom-20 w-full border-gray-300 absolute guestpop">
+            <div className="items-center flex justify-between">
+              Adults:
+              <div className="flex gap-3">
+                <button className={`text-xl text-center ${adultCount === 0 && `text-gray-500`}`} disabled={adultCount === 0} onClick={(event: FormEvent) => {
+                  event.preventDefault(); setAdultCount(adultCount - 1); search.saveSearchValues(
+                    destination,
+                    checkIn,
+                    checkOut,
+                    adultCount,
+                    childCount
+                  );
+                }}><BiMinusCircle /></button>
+                {adultCount}
+                <button className=" text-xl text-center" onClick={(event: FormEvent) => {
+                  event.preventDefault(); setAdultCount(adultCount + 1); search.saveSearchValues(
+                    destination,
+                    checkIn,
+                    checkOut,
+                    adultCount,
+                    childCount
+                  );
+                }}><BiPlusCircle /></button>
+              </div>
+            </div>
+            <div className="items-center flex justify-between">
+              Children:
+              <div className="flex gap-3">
+                <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => {
+                  event.preventDefault(); setChildCount(childCount - 1); search.saveSearchValues(
+                    destination,
+                    checkIn,
+                    checkOut,
+                    adultCount,
+                    childCount
+                  );
+                }}><BiMinusCircle /></button>
+                {childCount}
+                <button className=" text-xl text-center" onClick={(event: FormEvent) => {
+                  event.preventDefault(); setChildCount(childCount + 1); search.saveSearchValues(
+                    destination,
+                    checkIn,
+                    checkOut,
+                    adultCount,
+                    childCount
+                  );
+                }}><BiPlusCircle /></button>
+              </div>
+            </div>
+          </div>}
+        </div>
+
+
+
+        :
+        <div className="grid grid-cols-2 text-sm bg-white p-2.5 gap-3 rounded border-2  w-full border-gray-300 ">
+          <div className="items-center flex justify-between">
+            Adults:
+            <div className="flex gap-3">
+              <button className={`text-xl text-center ${adultCount === 0 && `text-gray-500`}`} disabled={adultCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setAdultCount(adultCount - 1) }}><BiMinusCircle /></button>
+              {adultCount}
+              <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setAdultCount(adultCount + 1) }}><BiPlusCircle /></button>
+            </div>
+          </div>
+          <div className="items-center flex justify-between">
+            Children:
+            <div className="flex gap-3">
+              <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount - 1) }}><BiMinusCircle /></button>
+              {childCount}
+              <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount + 1) }}><BiPlusCircle /></button>
+            </div>
+          </div>
+        </div>}
+
       <div className="flex gap-3">
         <button className="w-full bg-yogvan text-white h-full p-3 font-bold text-xl  rounded-lg">
           Search

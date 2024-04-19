@@ -30,13 +30,13 @@ const Coupons = () => {
     return <></>;
   }
   return (
-    <section className="space-y-3 mb-12" id="coupons">
-      <h1 className="text-2xl font-bold mb-4">OFFERS FOR YOU</h1>
+    <section className="space-y-3 my-12" id="coupons">
+      <h1 className="text-2xl font-semibold mb-4 italic">OFFERS FOR YOU</h1>
       <div className="flex overflow-x-scroll space-x-6">
         {coupons.map((coupon, index) => (
           <div
             key={index}
-            className="border border-dashed p-4 rounded-lg flex-shrink-0 w-96"
+            className="border border-dashed p-4 rounded-lg flex-shrink-0 md:w-96 w-full"
           >
             <p className="font-bold text-xl text-wrap mb-2">
               {coupon.couponMessage}

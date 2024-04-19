@@ -6,17 +6,19 @@ import SearchResultsCard from "../components/SearchResultsCard";
 import Pagination from "../components/Pagination";
 import StarRatingFilter from "../components/StarRatingFilter";
 import HotelTypesFilter from "../components/HotelTypesFilter";
-import FacilitiesFilter from "../components/FacilitiesFilter";
+// import FacilitiesFilter from "../components/FacilitiesFilter";
 import PriceFilter from "../components/PriceFilter";
 import { isMobile } from "react-device-detect";
-import AmenitiesFilter from "../components/AmenitiesFilter";
+// import AmenitiesFilter from "../components/AmenitiesFilter";
 const Search = () => {
   const search = useSearchContext();
   const [page, setPage] = useState<number>(1);
   const [selectedStars, setSelectedStars] = useState<string[]>([]);
   const [selectedHotelTypes, setSelectedHotelTypes] = useState<string[]>([]);
-  const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
-  const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
+  // const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
+  // const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
+  const [selectedFacilities, ] = useState<string[]>([]);
+  const [selectedAmenities, ] = useState<string[]>([]);
   const [selectedPrice, setSelectedPrice] = useState<number | undefined>();
   const [sortOption, setSortOption] = useState<string>("");
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
@@ -65,24 +67,24 @@ const Search = () => {
     );
   };
 
-  const handleFacilityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const facility = event.target.value;
+  // const handleFacilityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const facility = event.target.value;
 
-    setSelectedFacilities((prevFacilities) =>
-      event.target.checked
-        ? [...prevFacilities, facility]
-        : prevFacilities.filter((prevFacility) => prevFacility !== facility)
-    );
-  };
-  const handleAmenityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const amenity = event.target.value;
+  //   setSelectedFacilities((prevFacilities) =>
+  //     event.target.checked
+  //       ? [...prevFacilities, facility]
+  //       : prevFacilities.filter((prevFacility) => prevFacility !== facility)
+  //   );
+  // };
+  // const handleAmenityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const amenity = event.target.value;
 
-    setSelectedAmenities((prevAmenities) =>
-      event.target.checked
-        ? [...prevAmenities, amenity]
-        : prevAmenities.filter((prevAmenity) => prevAmenity !== amenity)
-    );
-  };
+  //   setSelectedAmenities((prevAmenities) =>
+  //     event.target.checked
+  //       ? [...prevAmenities, amenity]
+  //       : prevAmenities.filter((prevAmenity) => prevAmenity !== amenity)
+  //   );
+  // };
 
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-[250px,1fr] xl:grid-cols-[250px,1fr]">
@@ -100,14 +102,14 @@ const Search = () => {
               selectedHotelTypes={selectedHotelTypes}
               onChange={handleHotelTypeChange}
             />
-            <FacilitiesFilter
+            {/* <FacilitiesFilter
               selectedFacilities={selectedFacilities}
               onChange={handleFacilityChange}
             />
             <AmenitiesFilter
               selectedAmenities={selectedAmenities}
               onChange={handleAmenityChange}
-            />
+            /> */}
             <PriceFilter
               selectedPrice={selectedPrice}
               onChange={(value?: number) => setSelectedPrice(value)}
@@ -169,14 +171,14 @@ const Search = () => {
               selectedHotelTypes={selectedHotelTypes}
               onChange={handleHotelTypeChange}
             />
-            <FacilitiesFilter
+            {/* <FacilitiesFilter
               selectedFacilities={selectedFacilities}
               onChange={handleFacilityChange}
             />
             <AmenitiesFilter
               selectedAmenities={selectedAmenities}
               onChange={handleFacilityChange}
-            />
+            /> */}
             <PriceFilter
               selectedPrice={selectedPrice}
               onChange={(value?: number) => setSelectedPrice(value)}
