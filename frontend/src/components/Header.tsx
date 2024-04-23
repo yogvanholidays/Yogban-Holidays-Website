@@ -145,7 +145,7 @@ const Header = ({ bgHandle }: Props) => {
                   </h3>
                   <Link
                     to={image.ButtonLink}
-                    className="border-2 text-white px-6 py-3 portrait:mt-1 landscape:mt-4 rounded-md text-xl exploreButtonCarousel duration-200 animate-rise-up-2"
+                    className="border-2 text-white px-6 py-3 portrait:px-4 portrait:py-2 portrait:mt-1 landscape:mt-4 rounded-md text-xl exploreButtonCarousel duration-200 animate-rise-up-2"
                   >
                     Explore
                   </Link>

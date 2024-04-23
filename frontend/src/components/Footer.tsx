@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="bg-yogvan pt-2 flex flex-col items-center">
-      {/* <div className="text-4xl text-white font-bold tracking-tight text-center mb-6">
+    <div className="bg-yogvan pt-2 flex flex-col items-center poppins-regular">
+      {/* <div className="text-4xl text-white font-semibold tracking-tight text-center mb-6">
         <Link to="/">YogvanHolidays.com</Link>
       </div> */}
       <div className="container mx-auto flex flex-col lg:items-center lg:flex-row lg:justify-between">
         {/* Contact information */}
-        <div className="text-white font-bold tracking-tight mt-2  lg:text-left">
+        <div className="text-white font-semibold tracking-tight mt-2  lg:text-left">
           <div className="flex flex-col  lg:items-start">
             <div className="flex  gap-2 mt-2">
               {/* <FaMapMarkerAlt />
@@ -72,7 +72,7 @@ const Footer = () => {
           </div>
         </div>
         {/* Additional info */}
-        <div className="text-white font-bold tracking-tight mt-2  lg:text-right lg:mt-0">
+        <div className="text-white font-semibold tracking-tight mt-2  lg:text-right lg:mt-0">
           <div className="flex flex-col  lg:items-end justify-center">
             <Link to="/terms-and-contions" className="mb-2 lg:mb-0">
               Terms of Use

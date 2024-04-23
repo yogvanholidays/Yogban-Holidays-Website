@@ -35,7 +35,7 @@ function PickABlog() {
     <div className="mb-12">
       <div className="overflow-x-auto max-w-screen-xl mx-auto ">
         <div className="space-y-3">
-          <h1 className="font-bold text-3xl sticky top-0">Our Blogs</h1>
+          <h1 className="font-bold text-3xl sticky top-0 poppins-semibold">Our Blogs</h1>
           <div className="flex flex-nowrap gap-3 overflow-x-scroll pb-3">
             {blogs.map((blog, index) => (
               <button
@@ -77,8 +77,8 @@ function PickABlog() {
         className="flex flex-col landscape:hidden w-full text-center content-end items-center p-4 justify-center"
         style={{ flex: "0 0 auto"}} // Set a fixed width for each button
       >
-        <div className="w-3/4 h-16 rounded-full border-gray-400 border-2 bg-gray-200 flex flex-col text-center items-center justify-center">
-          <span className="text-2xl font-semibold">View More</span>
+        <div className="w-3/5 h-16 rounded-full border-gray-300 border-2 bg-gray-100 flex flex-col text-center items-center justify-center">
+          <span className="text-xl font-semibold poppins-semibold">View More</span>
         </div>
       </Link>
     </div>

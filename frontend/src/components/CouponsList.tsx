@@ -31,7 +31,7 @@ const Coupons = () => {
   }
   return (
     <section className="space-y-3 my-12" id="coupons">
-      <h1 className="text-2xl font-semibold mb-4 italic">OFFERS FOR YOU</h1>
+      <h1 className="text-2xl font-semibold mb-4 italic poppins-semibold-italic">OFFERS FOR YOU</h1>
       <div className="flex overflow-x-scroll space-x-6">
         {coupons.map((coupon, index) => (
           <div

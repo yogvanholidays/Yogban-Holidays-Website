@@ -21,7 +21,7 @@ const Home = () => {
 
   return (
     <section className="space-y-3 mb-12">
-      <h2 className="text-3xl font-bold">Most Booked</h2>
+      <h2 className="text-3xl font-bold poppins-semibold">Most Booked</h2>
       <p>Most booked accommodations by visitors</p>
       <div className="grid gap-4">
 

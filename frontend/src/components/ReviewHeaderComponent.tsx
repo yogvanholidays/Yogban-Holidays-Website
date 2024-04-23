@@ -31,7 +31,7 @@ function ReviewHeaderComponent() {
   return (
     <div>
       <div>
-        <h3 className="text-3xl font-bold mb-4">View User Reviews on</h3>
+        <h3 className="text-2xl lg:text-3xl font-bold mb-4 poppins-semibold">View User Reviews on</h3>
         <div className="grid grid-cols-2 portrait:grid-cols-1  gap-5">
           <div className="flex gap-4 items-center content-center ">
             <a
