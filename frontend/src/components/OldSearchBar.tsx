@@ -148,54 +148,90 @@ const SearchBar = ({ handler }: Props) => {
             <GrClose />
           </button>
         </div>
-        
+
         <div className=" landscape:hidden mb-2 p-2.5 bg-white rounded-2xl shadow-sm ">
-          <h1 className="text-xl ml-2 font-bold poppins-medium mb-2">Where are you going?</h1>
-        <div className="flex flex-row items-center flex-1 w-full bg-white p-3 rounded-xl border-2 border-gray-300 ">
-        <MdTravelExplore size={25} className="mr-2" />
-        <input
-          placeholder="Type... Rishikesh"
-          className="text-md w-full focus:outline-none popup-container"
-          value={inputValue}
-          onChange={handleInputChange}
-          onClick={handleDestinationClick}
-        />
-        <button
-          className={`${inputValue ? `` : `hidden`}`}
-          onClick={(e) => {
-            e.preventDefault();
-            setInputValue("");
-            setDestination("");
-          }}
-        >
-          <GrClose />
-        </button>
-      </div>
-      </div>
+          <h1 className="text-xl ml-2 font-bold poppins-semibold mb-2">Where are you going?</h1>
+          <div className="flex flex-row items-center flex-1 w-full bg-white p-3 rounded-xl border-2 border-gray-300 ">
+            <MdTravelExplore size={25} className="mr-2" />
+            <input
+              placeholder="Type... Rishikesh"
+              className="text-md w-full focus:outline-none popup-container"
+              value={inputValue}
+              onChange={handleInputChange}
+              onClick={handleDestinationClick}
+            />
+            <button
+              className={`${inputValue ? `` : `hidden`}`}
+              onClick={(e) => {
+                e.preventDefault();
+                setInputValue("");
+                setDestination("");
+              }}
+            >
+              <GrClose />
+            </button>
+          </div>
+        </div>
         {showPopup && (
           <div className={`popup-container absolute ${`landscape:top-full landscape:w-full portrait:top-24 portrait:w-full`} left-0 z-10 px-2.5`}>
 
-          <ul className={` bg-white border border-gray-300 rounded-md ${!isMobile?``:`shadow`} `}>
-            {destinations
-              .filter((dest) =>
-                dest.name.toLowerCase().includes(inputValue.toLowerCase())
-              )
-              .map((dest) => (
-                <li
-                key={dest.name}
-                  className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleDestinationSelect(dest.name)}
+            <ul className={` bg-white border border-gray-300 rounded-md ${!isMobile ? `` : `shadow`} `}>
+              {destinations
+                .filter((dest) =>
+                  dest.name.toLowerCase().includes(inputValue.toLowerCase())
+                )
+                .map((dest) => (
+                  <li
+                    key={dest.name}
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                    onClick={() => handleDestinationSelect(dest.name)}
                   >
-                  {dest.name}
-                </li>
-              ))}
-          </ul>
-        </div>
+                    {dest.name}
+                  </li>
+                ))}
+            </ul>
+          </div>
         )}
       </div>
 
-        <>
-          <div className="portrait:hidden">
+      <>
+        <div className="portrait:hidden">
+          <DatePicker
+            selected={checkIn}
+            onChange={handleCheckInChange}
+            selectsStart
+            startDate={checkIn}
+            endDate={checkOut}
+            minDate={minDate}
+            maxDate={maxDate}
+            placeholderText="Check-in Date"
+            className=" xl:w-full w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
+            wrapperClassName=" xl:w-full w-full"
+            dateFormat={`dd/MM/yyyy`}
+          />
+        </div>
+        <div className="portrait:hidden">
+          <DatePicker
+            selected={checkOut}
+            onChange={handleCheckOutChange}
+            selectsStart
+            startDate={checkIn}
+            endDate={checkOut}
+            minDate={checkIn ? new Date(checkIn.getTime() + 86400000) : undefined}
+            maxDate={maxDate}
+            placeholderText="Check-out Date"
+            className=" xl:w-full w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
+            wrapperClassName=" xl:w-full w-full"
+            dateFormat={`dd/MM/yyyy`}
+          />
+        </div>
+      </>
+
+
+      <div className=" landscape:hidden my-2 p-2.5 bg-white rounded-2xl shadow-sm ">
+        <h1 className="text-2xl ml-2 font-bold poppins-semibold mb-2">When</h1>
+        <div className="grid grid-cols-2 gap-2">
+          <div>
             <DatePicker
               selected={checkIn}
               onChange={handleCheckInChange}
@@ -205,12 +241,12 @@ const SearchBar = ({ handler }: Props) => {
               minDate={minDate}
               maxDate={maxDate}
               placeholderText="Check-in Date"
-              className=" xl:w-full w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
-              wrapperClassName=" xl:w-full w-full"
+              className="xl:w-full w-full bg-white p-3 focus:outline-none rounded-xl text-center border-2 border-gray-300"
+              wrapperClassName="xl:w-full w-full"
               dateFormat={`dd/MM/yyyy`}
             />
           </div>
-          <div className="portrait:hidden">
+          <div>
             <DatePicker
               selected={checkOut}
               onChange={handleCheckOutChange}
@@ -220,181 +256,145 @@ const SearchBar = ({ handler }: Props) => {
               minDate={checkIn ? new Date(checkIn.getTime() + 86400000) : undefined}
               maxDate={maxDate}
               placeholderText="Check-out Date"
-              className=" xl:w-full w-full bg-white p-3 focus:outline-none rounded border-2 border-gray-300"
+              className=" xl:w-full w-full bg-white p-3 focus:outline-none rounded-xl text-center border-2 border-gray-300"
               wrapperClassName=" xl:w-full w-full"
               dateFormat={`dd/MM/yyyy`}
             />
           </div>
-        </>
+        </div>
+      </div>
 
 
-          <div className=" landscape:hidden my-2 p-2.5 bg-white rounded-2xl shadow-sm ">
-<h1 className="text-2xl ml-2 font-bold poppins-medium mb-2">When</h1>
-            <div className="grid grid-cols-2 gap-2">
-              <div>
-                <DatePicker
-                  selected={checkIn}
-                  onChange={handleCheckInChange}
-                  selectsStart
-                  startDate={checkIn}
-                  endDate={checkOut}
-                  minDate={minDate}
-                  maxDate={maxDate}
-                  placeholderText="Check-in Date"
-                  className="xl:w-full w-full bg-white p-3 focus:outline-none rounded-xl text-center border-2 border-gray-300"
-                  wrapperClassName="xl:w-full w-full"
-                  dateFormat={`dd/MM/yyyy`}
-                />
-              </div>
-              <div>
-                <DatePicker
-                  selected={checkOut}
-                  onChange={handleCheckOutChange}
-                  selectsStart
-                  startDate={checkIn}
-                  endDate={checkOut}
-                  minDate={checkIn ? new Date(checkIn.getTime() + 86400000) : undefined}
-                  maxDate={maxDate}
-                  placeholderText="Check-out Date"
-                  className=" xl:w-full w-full bg-white p-3 focus:outline-none rounded-xl text-center border-2 border-gray-300"
-                  wrapperClassName=" xl:w-full w-full"
-                  dateFormat={`dd/MM/yyyy`}
-                />
-              </div>
+
+
+      <div className=" portrait:hidden grid grid-cols-1 bg-white p-2.5 gap-3 rounded border-2 h-full border-gray-300 relative guestpop" onClick={() => setShowGuestPop(true)}>
+        <div className="items-center flex justify-between mx-3">
+          No. of Guests:
+          <div className="flex gap-3 font-bold">
+            {adultCount + childCount + infantCount}
+
+          </div>
+        </div>
+        {showGuestPop && <div className="grid grid-cols-1 text-sm top-full h-max bg-white p-2.5 gap-3 rounded border-2 -bottom-28 w-max border-gray-300 absolute guestpop">
+          <div className="items-center gap-2 grid grid-cols-3 text-left ">
+            <span className=" col-span-2"><span className="text-sm"> Adults: </span> <span className="text-xs  text-gray-500">Ages 13 or above</span></span>
+            <div className="flex gap-3">
+              <button className={`text-xl text-center ${adultCount === 0 && `text-gray-500`}`} disabled={adultCount === 0} onClick={(event: FormEvent) => {
+                event.preventDefault(); setAdultCount(adultCount - 1); search.saveSearchValues(
+                  destination,
+                  checkIn,
+                  checkOut,
+                  adultCount,
+                  childCount,
+                  infantCount
+                );
+              }}><BiMinusCircle /></button>
+              {adultCount}
+              <button className=" text-xl text-center" onClick={(event: FormEvent) => {
+                event.preventDefault(); setAdultCount(adultCount + 1); search.saveSearchValues(
+                  destination,
+                  checkIn,
+                  checkOut,
+                  adultCount,
+                  childCount,
+                  infantCount
+                );
+              }}><BiPlusCircle /></button>
             </div>
           </div>
-          
-
-
-
-        <div className=" portrait:hidden grid grid-cols-1 bg-white p-2.5 gap-3 rounded border-2 h-full border-gray-300 relative guestpop" onClick={() => setShowGuestPop(true)}>
-          <div className="items-center flex justify-between mx-3">
-            No. of Guests:
-            <div className="flex gap-3 font-bold">
-              {adultCount + childCount + infantCount}
-
+          <div className="items-center gap-2 grid grid-cols-3 text-left ">
+            <span className=" col-span-2">  <span className="text-sm">Children: </span> <span className="text-xs  text-gray-500">Ages 4-12</span></span>
+            <div className="flex gap-3">
+              <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => {
+                event.preventDefault(); setChildCount(childCount - 1); search.saveSearchValues(
+                  destination,
+                  checkIn,
+                  checkOut,
+                  adultCount,
+                  childCount,
+                  infantCount
+                );
+              }}><BiMinusCircle /></button>
+              {childCount}
+              <button className=" text-xl text-center" onClick={(event: FormEvent) => {
+                event.preventDefault(); setChildCount(childCount + 1); search.saveSearchValues(
+                  destination,
+                  checkIn,
+                  checkOut,
+                  adultCount,
+                  childCount,
+                  infantCount
+                );
+              }}><BiPlusCircle /></button>
             </div>
           </div>
-          {showGuestPop && <div className="grid grid-cols-1 text-sm bg-white p-2.5 gap-3 rounded border-2 -bottom-28 w-full border-gray-300 absolute guestpop">
-            <div className="items-center flex justify-between">
-              Adults:
-              <div className="flex gap-3">
-                <button className={`text-xl text-center ${adultCount === 0 && `text-gray-500`}`} disabled={adultCount === 0} onClick={(event: FormEvent) => {
-                  event.preventDefault(); setAdultCount(adultCount - 1); search.saveSearchValues(
-                    destination,
-                    checkIn,
-                    checkOut,
-                    adultCount,
-                    childCount,
-                    infantCount
-                  );
-                }}><BiMinusCircle /></button>
-                {adultCount}
-                <button className=" text-xl text-center" onClick={(event: FormEvent) => {
-                  event.preventDefault(); setAdultCount(adultCount + 1); search.saveSearchValues(
-                    destination,
-                    checkIn,
-                    checkOut,
-                    adultCount,
-                    childCount,
-                    infantCount
-                  );
-                }}><BiPlusCircle /></button>
-              </div>
+
+
+          <div className="items-center gap-2 grid grid-cols-3 text-left ">
+            <span className=" col-span-2">  <span className="text-sm">Infant: </span> <span className="text-xs  text-gray-500">Under 4</span></span>
+            <div className="flex gap-3">
+              <button className={`text-xl text-center ${infantCount === 0 && `text-gray-500`}`} disabled={infantCount === 0} onClick={(event: FormEvent) => {
+                event.preventDefault(); setInfantCount(infantCount - 1); search.saveSearchValues(
+                  destination,
+                  checkIn,
+                  checkOut,
+                  adultCount,
+                  childCount,
+                  infantCount
+                );
+              }}><BiMinusCircle /></button>
+              {infantCount}
+              <button className=" text-xl text-center" onClick={(event: FormEvent) => {
+                event.preventDefault(); setInfantCount(infantCount + 1); search.saveSearchValues(
+                  destination,
+                  checkIn,
+                  checkOut,
+                  adultCount,
+                  childCount,
+                  infantCount
+                );
+              }}><BiPlusCircle /></button>
             </div>
-            <div className="items-center flex justify-between">
-              Children:
-              <div className="flex gap-3">
-                <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => {
-                  event.preventDefault(); setChildCount(childCount - 1); search.saveSearchValues(
-                    destination,
-                    checkIn,
-                    checkOut,
-                    adultCount,
-                    childCount,
-                    infantCount
-                  );
-                }}><BiMinusCircle /></button>
-                {childCount}
-                <button className=" text-xl text-center" onClick={(event: FormEvent) => {
-                  event.preventDefault(); setChildCount(childCount + 1); search.saveSearchValues(
-                    destination,
-                    checkIn,
-                    checkOut,
-                    adultCount,
-                    childCount,
-                    infantCount
-                  );
-                }}><BiPlusCircle /></button>
-              </div>
+          </div>
+        </div>}
+      </div>
+
+
+      <div className=" landscape:hidden my-2 mb-3 p-2.5 bg-white rounded-2xl shadow-sm ">
+        <h1 className="text-2xl ml-2 font-bold poppins-semibold">Who's Coming</h1>
+        <ul className="mx-2">
+
+          <li className="items-center flex justify-between border-b last:border-b-0 py-3">
+            <span className="flex flex-col"><span className="text-lg poppins-medium">Adults: </span><span className="text-xs text-gray-600 poppins-regular">Ages 13 and above</span></span>
+            <div className="flex gap-3">
+              <button className={`text-xl text-center ${adultCount === 0 && `text-gray-500`}`} disabled={adultCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setAdultCount(adultCount - 1) }}><BiMinusCircle /></button>
+              {adultCount}
+              <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setAdultCount(adultCount + 1) }}><BiPlusCircle /></button>
             </div>
-
-
-            <div className="items-center flex justify-between">
-              Infant:
-              <div className="flex gap-3">
-                <button className={`text-xl text-center ${infantCount === 0 && `text-gray-500`}`} disabled={infantCount === 0} onClick={(event: FormEvent) => {
-                  event.preventDefault(); setInfantCount(infantCount - 1); search.saveSearchValues(
-                    destination,
-                    checkIn,
-                    checkOut,
-                    adultCount,
-                    childCount,
-                    infantCount
-                  );
-                }}><BiMinusCircle /></button>
-                {infantCount}
-                <button className=" text-xl text-center" onClick={(event: FormEvent) => {
-                  event.preventDefault(); setInfantCount(infantCount + 1); search.saveSearchValues(
-                    destination,
-                    checkIn,
-                    checkOut,
-                    adultCount,
-                    childCount,
-                    infantCount
-                  );
-                }}><BiPlusCircle /></button>
-              </div>
+          </li>
+          <li className="items-center flex justify-between border-b last:border-b-0 py-3">
+          <span className="flex flex-col"><span className="text-lg poppins-medium">Children: </span><span className="text-xs text-gray-600 poppins-regular">Ages 4-12</span></span>
+            <div className="flex gap-3">
+              <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount - 1) }}><BiMinusCircle /></button>
+              {childCount}
+              <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount + 1) }}><BiPlusCircle /></button>
             </div>
-          </div>}
-        </div>
+          </li>
+          <li className="items-center flex justify-between border-b last:border-b-0 py-3">
+          <span className="flex flex-col"><span className="text-lg poppins-medium">Infant: </span><span className="text-xs text-gray-600 poppins-regular">Under 4</span></span>
+            <div className="flex gap-3">
+              <button className={`text-xl text-center ${infantCount === 0 && `text-gray-500`}`} disabled={infantCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setInfantCount(infantCount - 1) }}><BiMinusCircle /></button>
+              {infantCount}
+              <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setInfantCount(infantCount + 1) }}><BiPlusCircle /></button>
+            </div>
+          </li>
+        </ul>
+      </div>
 
 
- <div className=" landscape:hidden my-2 mb-3 p-2.5 bg-white rounded-2xl shadow-sm ">
-          <h1 className="text-2xl ml-2 font-bold poppins-medium">Who's Coming</h1>
-          <ul>
-
-            <li className="items-center flex justify-between border-b last:border-b-0 py-3">
-              <span className="text-lg poppins-regular">Adults:</span>
-              <div className="flex gap-3">
-                <button className={`text-xl text-center ${adultCount === 0 && `text-gray-500`}`} disabled={adultCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setAdultCount(adultCount - 1) }}><BiMinusCircle /></button>
-                {adultCount}
-                <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setAdultCount(adultCount + 1) }}><BiPlusCircle /></button>
-              </div>
-            </li>
-            <li className="items-center flex justify-between border-b last:border-b-0 py-3">
-              <span className="text-lg poppins-regular">Children:</span>
-              <div className="flex gap-3">
-                <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount - 1) }}><BiMinusCircle /></button>
-                {childCount}
-                <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount + 1) }}><BiPlusCircle /></button>
-              </div>
-            </li>
-            <li className="items-center flex justify-between border-b last:border-b-0 py-3">
-              <span className="text-lg poppins-regular">Infant:</span>
-              <div className="flex gap-3">
-                <button className={`text-xl text-center ${infantCount === 0 && `text-gray-500`}`} disabled={infantCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setInfantCount(infantCount - 1) }}><BiMinusCircle /></button>
-                {infantCount}
-                <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setInfantCount(infantCount + 1) }}><BiPlusCircle /></button>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        
 
       <div className="flex gap-3">
-        <button className={`w-full bg-yogvan text-white h-full p-3 poppins-medium text-xl ${!isMobile?`rounded-lg`:`rounded-xl`}`}>
+        <button className={`w-full bg-yogvan text-white h-full p-3 poppins-medium text-xl ${!isMobile ? `rounded-lg` : `rounded-xl`}`}>
           Search
         </button>
         <button
