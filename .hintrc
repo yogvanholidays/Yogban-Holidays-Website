@@ -23,6 +23,7 @@
     "button-type": "off",
     "typescript-config/consistent-casing": "off",
     "typescript-config/strict": "off",
-    "detect-css-reflows/paint": "off"
+    "detect-css-reflows/paint": "off",
+    "meta-viewport": "off"
   }
 }
