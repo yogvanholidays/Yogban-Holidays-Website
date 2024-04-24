@@ -393,7 +393,7 @@ const SearchBar = ({ handler }: Props) => {
 
 
 
-      <div className="grid grid-cols-3 text-center place-items-center gap-2">
+      <div>
         <button className={`w-full bg-yogvan text-white h-full p-3 poppins-medium text-xl ${!isMobile ? `rounded-lg` : `rounded-xl`}`}>
           Search
         </button>
