@@ -278,7 +278,7 @@ const SearchBar = ({ handler }: Props) => {
         {showGuestPop && <div className="grid grid-cols-1 text-sm top-full h-max bg-white p-2.5 gap-3 rounded border-2 -bottom-28 w-max border-gray-300 absolute guestpop">
           <div className="items-center gap-2 grid grid-cols-3 text-left ">
             <span className=" col-span-2"><span className="text-sm"> Adults: </span> <span className="text-xs  text-gray-500">Ages 13 or above</span></span>
-            <div className="flex gap-3">
+            <div className="grid grid-cols-3 text-center place-items-center gap-2">
               <button className={`text-xl text-center ${adultCount === 0 && `text-gray-500`}`} disabled={adultCount === 0} onClick={(event: FormEvent) => {
                 event.preventDefault(); setAdultCount(adultCount - 1); search.saveSearchValues(
                   destination,
@@ -304,7 +304,7 @@ const SearchBar = ({ handler }: Props) => {
           </div>
           <div className="items-center gap-2 grid grid-cols-3 text-left ">
             <span className=" col-span-2">  <span className="text-sm">Children: </span> <span className="text-xs  text-gray-500">Ages 4-12</span></span>
-            <div className="flex gap-3">
+            <div className="grid grid-cols-3 text-center place-items-center gap-2">
               <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => {
                 event.preventDefault(); setChildCount(childCount - 1); search.saveSearchValues(
                   destination,
@@ -332,7 +332,7 @@ const SearchBar = ({ handler }: Props) => {
 
           <div className="items-center gap-2 grid grid-cols-3 text-left ">
             <span className=" col-span-2">  <span className="text-sm">Infant: </span> <span className="text-xs  text-gray-500">Under 4</span></span>
-            <div className="flex gap-3">
+            <div className="grid grid-cols-3 text-center place-items-center gap-2">
               <button className={`text-xl text-center ${infantCount === 0 && `text-gray-500`}`} disabled={infantCount === 0} onClick={(event: FormEvent) => {
                 event.preventDefault(); setInfantCount(infantCount - 1); search.saveSearchValues(
                   destination,
@@ -365,24 +365,24 @@ const SearchBar = ({ handler }: Props) => {
         <ul className="mx-2">
 
           <li className="items-center flex justify-between border-b last:border-b-0 py-3">
-            <span className="flex flex-col"><span className="text-lg poppins-medium">Adults: </span><span className="text-xs text-gray-600 poppins-regular">Ages 13 and above</span></span>
-            <div className="flex gap-3">
+            <span className="flex flex-col"><span className="text-lg poppins-medium">Adults </span><span className="text-xs text-gray-600 poppins-regular">Ages 13 and above</span></span>
+            <div className="grid grid-cols-3 text-center place-items-center gap-2">
               <button className={`text-xl text-center ${adultCount === 0 && `text-gray-500`}`} disabled={adultCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setAdultCount(adultCount - 1) }}><BiMinusCircle /></button>
               {adultCount}
               <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setAdultCount(adultCount + 1) }}><BiPlusCircle /></button>
             </div>
           </li>
           <li className="items-center flex justify-between border-b last:border-b-0 py-3">
-          <span className="flex flex-col"><span className="text-lg poppins-medium">Children: </span><span className="text-xs text-gray-600 poppins-regular">Ages 4-12</span></span>
-            <div className="flex gap-3">
+          <span className="flex flex-col"><span className="text-lg poppins-medium">Children </span><span className="text-xs text-gray-600 poppins-regular">Ages 4-12</span></span>
+            <div className="grid grid-cols-3 text-center place-items-center gap-2">
               <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount - 1) }}><BiMinusCircle /></button>
               {childCount}
               <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount + 1) }}><BiPlusCircle /></button>
             </div>
           </li>
           <li className="items-center flex justify-between border-b last:border-b-0 py-3">
-          <span className="flex flex-col"><span className="text-lg poppins-medium">Infant: </span><span className="text-xs text-gray-600 poppins-regular">Under 4</span></span>
-            <div className="flex gap-3">
+          <span className="flex flex-col"><span className="text-lg poppins-medium">Infant </span><span className="text-xs text-gray-600 poppins-regular">Under 4</span></span>
+            <div className="grid grid-cols-3 text-center place-items-center gap-2">
               <button className={`text-xl text-center ${infantCount === 0 && `text-gray-500`}`} disabled={infantCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setInfantCount(infantCount - 1) }}><BiMinusCircle /></button>
               {infantCount}
               <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setInfantCount(infantCount + 1) }}><BiPlusCircle /></button>
@@ -393,7 +393,7 @@ const SearchBar = ({ handler }: Props) => {
 
 
 
-      <div className="flex gap-3">
+      <div className="grid grid-cols-3 text-center place-items-center gap-2">
         <button className={`w-full bg-yogvan text-white h-full p-3 poppins-medium text-xl ${!isMobile ? `rounded-lg` : `rounded-xl`}`}>
           Search
         </button>

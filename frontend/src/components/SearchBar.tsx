@@ -273,7 +273,7 @@ const SearchBar = ({ handler }: Props) => {
           <div className="flex p-2.5 w-max flex-col gap-2 shadow-2xl rounded-md bg-white absolute top-full right-0 guestSearchPopup">
             <div className="items-center gap-2 grid grid-cols-3 text-left">
             <span className=" col-span-2"><span className="text-sm poppins-medium"> Adults: </span> <span className="text-xs  text-gray-600">Ages 13 or above</span></span>
-              <div className="flex gap-2">
+              <div className="grid grid-cols-3 text-center place-items-center  gap-2">
                 <button className={`text-xl text-center ${adultCount === 0 && `text-gray-500`}`} disabled={adultCount === 0} onClick={(event: FormEvent) => {
                   event.preventDefault(); setAdultCount(adultCount - 1); search.saveSearchValues(
                     destination,
@@ -284,7 +284,7 @@ const SearchBar = ({ handler }: Props) => {
                     infantCount
                   );
                 }}><BiMinusCircle /></button>
-                {adultCount}
+                <span>{adultCount}</span>
                 <button className=" text-xl text-center" onClick={(event: FormEvent) => {
                   event.preventDefault(); setAdultCount(adultCount + 1); search.saveSearchValues(
                     destination,
@@ -299,7 +299,7 @@ const SearchBar = ({ handler }: Props) => {
             </div>
             <div className="items-center gap-2 grid grid-cols-3 text-left">
             <span className=" col-span-2">  <span className="text-sm poppins-medium">Children: </span> <span className="text-xs  text-gray-600">Ages 4-12</span></span>
-              <div className="flex gap-2">
+              <div className="grid grid-cols-3 text-center place-items-center  gap-2">
                 <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => {
                   event.preventDefault(); setChildCount(childCount - 1); search.saveSearchValues(
                     destination,
@@ -310,7 +310,7 @@ const SearchBar = ({ handler }: Props) => {
                     infantCount
                   );
                 }}><BiMinusCircle /></button>
-                {childCount}
+                <span>{childCount}</span>
                 <button className=" text-xl text-center" onClick={(event: FormEvent) => {
                   event.preventDefault(); setChildCount(childCount + 1); search.saveSearchValues(
                     destination,
@@ -325,7 +325,7 @@ const SearchBar = ({ handler }: Props) => {
             </div>
             <div className="items-center gap-2 grid grid-cols-3 text-left">
             <span className=" col-span-2">  <span className="text-sm poppins-medium">Infant: </span> <span className="text-xs  text-gray-600">Under 4</span></span>
-              <div className="flex gap-2">
+              <div className="grid grid-cols-3 text-center place-items-center gap-2">
                 <button className={`text-xl text-center ${infantCount === 0 && `text-gray-500`}`} disabled={infantCount === 0} onClick={(event: FormEvent) => {
                   event.preventDefault(); setInfantCount(infantCount - 1); search.saveSearchValues(
                     destination,
@@ -336,7 +336,7 @@ const SearchBar = ({ handler }: Props) => {
                     infantCount
                   );
                 }}><BiMinusCircle /></button>
-                {infantCount}
+                <span>{infantCount}</span>
                 <button className=" text-xl text-center" onClick={(event: FormEvent) => {
                   event.preventDefault(); setInfantCount(infantCount + 1); search.saveSearchValues(
                     destination,
