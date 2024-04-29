@@ -181,7 +181,7 @@ const SearchBar = ({ handler }: Props) => {
       </div>
     </motion.div>
 
-    {isBookingEngineShown && <div className="landscape:hidden  fixed px-1 left-0 right-0 bottom-0 top-0 overflow-y-scroll w-full bg-clip-padding backdrop-filter backdrop-blur-sm  bg-white z-[999999999999999999]">
+    {isBookingEngineShown && <div className="landscape:hidden overflow-x-hidden fixed px-1 left-0 right-0 bottom-0 top-0 overflow-y-scroll w-full bg-clip-padding backdrop-filter backdrop-blur-sm  bg-white z-[999999999999999999]">
         <div className="p-1 flex justify-end mr-6 mt-[5.5rem]" onClick={()=>setIsBookingEngineShown(false)}>
           <div className="outline rounded-full p-1">
           <GrClose/>
