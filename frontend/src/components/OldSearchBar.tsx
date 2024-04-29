@@ -170,7 +170,7 @@ const SearchBar = ({ handler }: Props) => {
 
 
   return (<div>
-    <motion.div onClick={()=>setIsBookingEngineShown(true)} className={`${isHomePage?``:`mt-[4.5rem]`} flex landscape:hidden gap-3 items-center px-4 py-2 h-auto -mt-6 bg-white rounded-full w-full  shadow-xl shadow-slate-300`}>
+    <motion.div onClick={()=>setIsBookingEngineShown(true)} className={`${isHomePage?``:`mt-[4.5rem]`} flex landscape:hidden gap-3 items-center px-4 py-2 h-auto  bg-white rounded-full w-full  shadow-xl shadow-slate-300`}>
       <BiSearch className="text-2xl"/>
       <div className="flex flex-col poppins-regular">
         <span className="font-bold ">
@@ -182,7 +182,7 @@ const SearchBar = ({ handler }: Props) => {
     </motion.div>
 
     {isBookingEngineShown && <div className="landscape:hidden overflow-x-hidden fixed px-1 left-0 right-0 bottom-0 top-0 overflow-y-scroll h-screen w-full bg-clip-padding backdrop-filter backdrop-blur-sm  bg-white z-[999999999999999999]">
-        <div className="p-1 flex justify-end mr-6 mt-[5.5rem]" onClick={()=>setIsBookingEngineShown(false)}>
+        <div className="p-1 flex justify-end mr-6 mt-[5rem]" onClick={()=>setIsBookingEngineShown(false)}>
           <div className="outline rounded-full p-1">
           <GrClose/>
           </div>
@@ -192,7 +192,7 @@ const SearchBar = ({ handler }: Props) => {
       onSubmit={handleSubmit}
       onReset={handleReset}
       className={ // ? "-mt-32 p-3 bg-gray-100 rounded-md grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4 "// landscape:shadow-none" //remove last part to revert searchbar positioning
-          ` poppins-regular ${isMobile ? `p-3 -m-2` : `p-3 gap-2`} bg-white grid grid-cols-1 lg:grid-cols-5 2xl:grid-cols-5 items-center gap-0` // landscape:shadow-none` //remove last part to revert searchbar positioning
+          ` poppins-regular ${isMobile ? `p-2.5 -mt-2` : `p-3 gap-1`} bg-white grid grid-cols-1 lg:grid-cols-5 2xl:grid-cols-5 items-center gap-0` // landscape:shadow-none` //remove last part to revert searchbar positioning
          
       }
       style={{ transition: "all 0.3s ease-in-out" }}
@@ -219,9 +219,9 @@ const SearchBar = ({ handler }: Props) => {
           </button>
         </div>
 
-        <div className=" landscape:hidden mb-2 p-2.5 bg-white rounded-2xl shadow-sm ">
+        <div className=" landscape:hidden mb-1 p-2  ">
           <h1 className="text-xl ml-2 font-bold poppins-semibold mb-2">Where are you going?</h1>
-          <div className="flex flex-row items-center flex-1 w-full bg-white p-3 rounded-xl border-2 border-gray-300 ">
+          <div className="flex flex-row items-center flex-1 w-full bg-white p-2 rounded-xl border-2 border-gray-300 ">
             <MdTravelExplore size={25} className="mr-2" />
             <input
               placeholder="Type... Rishikesh"
@@ -298,7 +298,7 @@ const SearchBar = ({ handler }: Props) => {
       </>
 
 
-      <div className=" landscape:hidden my-2 p-2.5 bg-white rounded-2xl shadow-sm ">
+      <div className=" landscape:hidden mb-1 p-2 ">
         <h1 className="text-2xl ml-2 font-bold poppins-semibold mb-2">When</h1>
         <div className="grid grid-cols-2 gap-2">
           <div>
@@ -311,7 +311,7 @@ const SearchBar = ({ handler }: Props) => {
               minDate={minDate}
               maxDate={maxDate}
               placeholderText="Check-in Date"
-              className="xl:w-full w-full bg-white p-3 focus:outline-none rounded-xl text-center border-2 border-gray-300"
+              className="xl:w-full w-full bg-white p-2 focus:outline-none rounded-xl text-center border-2 border-gray-300"
               wrapperClassName="xl:w-full w-full"
               dateFormat={`dd/MM/yyyy`}
             />
@@ -326,7 +326,7 @@ const SearchBar = ({ handler }: Props) => {
               minDate={checkIn ? new Date(checkIn.getTime() + 86400000) : undefined}
               maxDate={maxDate}
               placeholderText="Check-out Date"
-              className=" xl:w-full w-full bg-white p-3 focus:outline-none rounded-xl text-center border-2 border-gray-300"
+              className=" xl:w-full w-full bg-white p-2 focus:outline-none rounded-xl text-center border-2 border-gray-300"
               wrapperClassName=" xl:w-full w-full"
               dateFormat={`dd/MM/yyyy`}
             />
@@ -337,7 +337,7 @@ const SearchBar = ({ handler }: Props) => {
 
 
 
-      <div className=" portrait:hidden grid grid-cols-1 bg-white p-2.5 gap-3 rounded border-2 h-full border-gray-300 relative guestpop" onClick={() => setShowGuestPop(true)}>
+      <div className=" portrait:hidden grid grid-cols-1 bg-white p-2 gap-3 rounded border-2 h-full border-gray-300 relative guestpop" onClick={() => setShowGuestPop(true)}>
         <div className="items-center flex justify-between mx-3">
           No. of Guests:
           <div className="flex gap-3 font-bold">
@@ -430,7 +430,7 @@ const SearchBar = ({ handler }: Props) => {
       </div>
 
 
-      <div className="landscape:hidden my-2 mb-3 p-2.5 bg-white rounded-2xl shadow-sm">
+      <div className="landscape:hidden mb-1 p-2 ">
         <div className="flex justify-between items-center"
           onClick={() => setIsGuestExpanded(!isGuestExpanded)}
         >
@@ -463,7 +463,7 @@ const SearchBar = ({ handler }: Props) => {
               { label: "Children", ageRange: "Ages 4-12", count: childCount, setCount: setChildCount },
               { label: "Infants", ageRange: "Under 4", count: infantCount, setCount: setInfantCount },
             ].map((item, index) => (
-              <li key={index} className="items-center flex justify-between border-b last:border-b-0 py-3">
+              <li key={index} className="items-center flex justify-between border-b last:border-b-0 py-2">
                 <span className="flex flex-col">
                   <span className="text-lg poppins-medium">{item.label}</span>
                   <span className="text-xs text-gray-600 poppins-regular">{item.ageRange}</span>
