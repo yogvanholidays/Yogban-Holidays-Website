@@ -9,6 +9,8 @@ import { getDestinations } from "../api-client";
 import { GrClose } from "react-icons/gr";
 import { BiMinusCircle, BiPlusCircle } from "react-icons/bi";
 import { isMobile } from "react-device-detect";
+import { motion } from 'framer-motion';
+import { LuArrowDown } from "react-icons/lu";
 
 interface Props {
   handler: string;
@@ -29,6 +31,7 @@ const SearchBar = ({ handler }: Props) => {
   const [showPopup, setShowPopup] = useState(false);
   const [showGuestPop, setShowGuestPop] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [isGuestExpanded, setIsGuestExpanded] = useState(false);
 
   useEffect(() => {
     fetchDestinations();
@@ -114,6 +117,55 @@ const SearchBar = ({ handler }: Props) => {
   const handleCheckOutChange = (date: Date | null) => {
     setCheckOut(date as Date);
   };
+
+
+  const containerVariants = {
+    expanded: {
+      height: "auto",
+      opacity: 1,
+      transition: {
+        type: "tween",
+        duration: 0.5,
+        ease: "easeInOut"
+      }
+    },
+    collapsed: {
+      height: 0,
+      opacity: 0,
+      transition: {
+        type: "tween",
+        duration: 0.5,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const buttonVariants = {
+    hover: { scale: 1.2, transition: { duration: 0.2 } },
+    tap: { scale: 0.8 },
+  };
+
+
+  const arrowVariants = {
+    expanded: {
+      rotate: 180, // 90 degrees left
+      transition: {
+        type: "tween",
+        duration: 0.5,
+        ease: "easeInOut",
+      },
+    },
+    collapsed: {
+      rotate: 0, // Default position
+      transition: {
+        type: "tween",
+        duration: 0.5,
+        ease: "easeInOut",
+      },
+    },
+  };
+
+
 
   return (
     <form
@@ -360,35 +412,76 @@ const SearchBar = ({ handler }: Props) => {
       </div>
 
 
-      <div className=" landscape:hidden my-2 mb-3 p-2.5 bg-white rounded-2xl shadow-sm ">
-        <h1 className="text-2xl ml-2 font-bold poppins-semibold">Who's Coming</h1>
-        <ul className="mx-2">
+      <div className="landscape:hidden my-2 mb-3 p-2.5 bg-white rounded-2xl shadow-sm">
+        <div className="flex justify-between items-center"
+          onClick={() => setIsGuestExpanded(!isGuestExpanded)}
+        >
 
-          <li className="items-center flex justify-between border-b last:border-b-0 py-3">
-            <span className="flex flex-col"><span className="text-lg poppins-medium">Adults </span><span className="text-xs text-gray-600 poppins-regular">Ages 13 and above</span></span>
-            <div className="grid grid-cols-3 text-center place-items-center gap-2">
-              <button className={`text-xl text-center ${adultCount === 0 && `text-gray-500`}`} disabled={adultCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setAdultCount(adultCount - 1) }}><BiMinusCircle /></button>
-              {adultCount}
-              <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setAdultCount(adultCount + 1) }}><BiPlusCircle /></button>
-            </div>
-          </li>
-          <li className="items-center flex justify-between border-b last:border-b-0 py-3">
-          <span className="flex flex-col"><span className="text-lg poppins-medium">Children </span><span className="text-xs text-gray-600 poppins-regular">Ages 4-12</span></span>
-            <div className="grid grid-cols-3 text-center place-items-center gap-2">
-              <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount - 1) }}><BiMinusCircle /></button>
-              {childCount}
-              <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setChildCount(childCount + 1) }}><BiPlusCircle /></button>
-            </div>
-          </li>
-          <li className="items-center flex justify-between border-b last:border-b-0 py-3">
-          <span className="flex flex-col"><span className="text-lg poppins-medium">Infant </span><span className="text-xs text-gray-600 poppins-regular">Under 4</span></span>
-            <div className="grid grid-cols-3 text-center place-items-center gap-2">
-              <button className={`text-xl text-center ${infantCount === 0 && `text-gray-500`}`} disabled={infantCount === 0} onClick={(event: FormEvent) => { event.preventDefault(); setInfantCount(infantCount - 1) }}><BiMinusCircle /></button>
-              {infantCount}
-              <button className=" text-xl text-center" onClick={(event: FormEvent) => { event.preventDefault(); setInfantCount(infantCount + 1) }}><BiPlusCircle /></button>
-            </div>
-          </li>
-        </ul>
+          <h1
+            className="text-2xl ml-2 font-bold poppins-semibold"
+          >
+            Who's Coming
+          </h1>
+          {/* <LuArrowDown /> */}
+        <motion.div
+          variants={arrowVariants}
+          initial={isGuestExpanded ? "collapsed" : "expanded"}
+          animate={isGuestExpanded ? "expanded" : "collapsed"}
+        >
+          <LuArrowDown />
+        </motion.div>
+        </div>
+
+
+        <motion.div
+          className="overflow-hidden"
+          initial={isGuestExpanded ? "collapsed" : "expanded"}
+          animate={isGuestExpanded ? "expanded" : "collapsed"}
+          variants={containerVariants}
+        >
+          <ul className="mx-2">
+            {[
+              { label: "Adults", ageRange: "Ages 13 and above", count: adultCount, setCount: setAdultCount },
+              { label: "Children", ageRange: "Ages 4-12", count: childCount, setCount: setChildCount },
+              { label: "Infants", ageRange: "Under 4", count: infantCount, setCount: setInfantCount },
+            ].map((item, index) => (
+              <li key={index} className="items-center flex justify-between border-b last:border-b-0 py-3">
+                <span className="flex flex-col">
+                  <span className="text-lg poppins-medium">{item.label}</span>
+                  <span className="text-xs text-gray-600 poppins-regular">{item.ageRange}</span>
+                </span>
+                <div className="grid grid-cols-3 text-center place-items-center gap-2">
+                  <motion.button
+                    className={`text-xl text-center ${item.count === 0 ? "text-gray-500" : ""}`}
+                    disabled={item.count === 0}
+                    onClick={(event: FormEvent) => {
+                      event.preventDefault();
+                      item.setCount(item.count - 1);
+                    }}
+                    variants={buttonVariants}
+                    whileHover="hover"
+                    whileTap="tap"
+                  >
+                    <BiMinusCircle />
+                  </motion.button>
+                  {item.count}
+                  <motion.button
+                    className="text-xl text-center"
+                    onClick={(event: FormEvent) => {
+                      event.preventDefault();
+                      item.setCount(item.count + 1);
+                    }}
+                    variants={buttonVariants}
+                    whileHover="hover"
+                    whileTap="tap"
+                  >
+                    <BiPlusCircle />
+                  </motion.button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
       </div>
 
 

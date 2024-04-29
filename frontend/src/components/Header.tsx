@@ -123,11 +123,11 @@ const Header = ({ bgHandle }: Props) => {
         </span>
       </div>
       {isHomePage ? (
-        <Carousel className="w-auto h-[45rem] portrait:h-[25rem]">
+        <Carousel className="w-auto h-[45rem] portrait:h-[22rem]">
           {images.map((image, index) => (
             <Carousel.Item key={index}>
               <div
-                className="d-block w-screen object-cover relative h-[45rem] portrait:h-[25rem]"
+                className="d-block w-screen object-cover relative h-[45rem] portrait:h-[22rem]"
                 style={{
                   backgroundImage: `url(${
                     image.imageUrl || "https://via.placeholder.com/800x400"
