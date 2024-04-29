@@ -38,6 +38,7 @@ import RatingPage from "./components/RatingComponent";
 import { isMobile } from "react-device-detect";
 import Careers from "./pages/Careers";
 import Faqs from "./pages/FAQs";
+import ScrollToTop from "./ScrollToTop";
 
 
 function App() {
@@ -45,6 +46,8 @@ function App() {
   const isAdmin = (userEmail==='yogvan@admin.com')
   return (
     <Router>
+            <ScrollToTop />
+
       <Routes>
         <Route path="/" element={<Layout hiddenSearchBar="" page="HomePage"><Homepage/></Layout>} />
         {/* <Route path="/" element={<HomePage/>}/> */}
