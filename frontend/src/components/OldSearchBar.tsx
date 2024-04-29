@@ -170,7 +170,7 @@ const SearchBar = ({ handler }: Props) => {
 
 
   return (<div>
-    <motion.div onClick={() => setIsBookingEngineShown(true)} className={`${isHomePage ? `-mt-6` : `mt-16`} flex landscape:hidden gap-3 items-center px-4 py-2 h-auto  border bg-white rounded-full w-full  shadow-xl shadow-slate-300`}>
+    <motion.div onClick={() => setIsBookingEngineShown(true)} className={`${isHomePage ? `-mt-6` : `mt-16`} flex landscape:hidden gap-3 items-center px-4 py-2 h-auto  border bg-white rounded-full w-full  shadow-lg shadow-slate-300`}>
       <BiSearch className="text-2xl" />
       <div className="flex flex-col poppins-regular">
         <span className="font-bold ">

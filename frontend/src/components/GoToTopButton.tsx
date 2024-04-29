@@ -26,7 +26,7 @@ const GoToTopButton = () => {
 
   return (
     <button
-      className={`fixed bottom-4 right-4 z-50 bg-gray-800 hover:bg-black transition-all duration-200 text-white font-bold p-4 portrait:p-2 rounded-full ${isVisible ? 'block' : 'hidden'}`}
+      className={`fixed bottom-24 right-4 z-50 bg-gray-800 hover:bg-black transition-all duration-200 text-white font-bold p-3 portrait:p-1 rounded-full ${isVisible ? 'block' : 'hidden'}`}
       onClick={scrollToTop}
     >
       <FaArrowUp />
