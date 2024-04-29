@@ -220,7 +220,7 @@ const SearchBar = ({ handler }: Props) => {
           </div>
 
           <div className=" landscape:hidden mb-1 p-2  ">
-            <h1 className="text-xl ml-2 font-bold poppins-semibold mb-2">Where are you going?</h1>
+            <h1 className="text-2xl ml-2 font-bold poppins-semibold mb-2">Where</h1>
             <div className="flex flex-row items-center flex-1 w-full bg-white p-2 rounded-xl border-2 border-gray-300 ">
               <MdTravelExplore size={25} className="mr-2" />
               <input
@@ -438,7 +438,7 @@ const SearchBar = ({ handler }: Props) => {
             <h1
               className="text-2xl ml-2 font-bold poppins-semibold"
             >
-              Who's Coming
+              Who
             </h1>
             {/* <LuArrowDown /> */}
             {/* <motion.div
