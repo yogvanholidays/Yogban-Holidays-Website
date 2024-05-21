@@ -27,7 +27,7 @@ function Booking() {
     {
       enabled: !!hotelId,
     }
-  );
+  ); 
 
   const { data: currentUser } = useQuery(
     "fetchCurrentUser",

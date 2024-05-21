@@ -21,7 +21,7 @@ router.get("/me", verifyToken, async (req: Request, res: Response) => {
     res.status(500).json({ message: "something went wrong" });
   }
 });
-
+ 
 
 router.post(
   "/register",
