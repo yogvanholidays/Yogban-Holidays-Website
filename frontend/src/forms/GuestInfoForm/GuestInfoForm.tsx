@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import { useSearchContext } from "../../contexts/SearchContext";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 type Props = {
@@ -19,8 +19,8 @@ type GuestInfoFormData = {
 
 const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
   const search = useSearchContext();
-  const navigate = useNavigate();
-  
+  // const navigate = useNavigate();
+  console.log(hotelId)
 
   const {
     watch,
@@ -75,7 +75,11 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
       data.childCount,
       data.infantCount
     );
-    navigate(`/hotel/${hotelId}/booking`);
+    // navigate(`/hotel/${hotelId}/booking`);
+    const formattedCheckIn = data.checkIn.toISOString().split('T')[0];
+    const formattedCheckOut = data.checkOut.toISOString().split('T')[0];
+    const url = `https://bookings.simplotel.com/?propertyId=9166&checkIn=${formattedCheckIn}&checkOut=${formattedCheckOut}&adults=${data.adultCount}&children=${data.childCount}&promocode=`;
+    window.location.href = url;
   };
 
   return (
