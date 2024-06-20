@@ -3,7 +3,6 @@ import { useSearchContext } from "../contexts/SearchContext";
 import { MdTravelExplore } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useNavigate } from "react-router-dom";
 import { DestinationType } from "../../../backend/src/shared/types";
 import { getDestinations } from "../api-client";
 import { GrClose } from "react-icons/gr";
@@ -17,7 +16,6 @@ interface Props {
 }
 
 const SearchBar = ({ handler }: Props) => {
-  const navigate = useNavigate();
   const search = useSearchContext();
   const isHomePage = handler === "HomePage";
 
@@ -100,7 +98,11 @@ const SearchBar = ({ handler }: Props) => {
       childCount,
       infantCount
     );
-    navigate("/search");
+    const formattedCheckIn = checkIn.toISOString().split('T')[0];
+    const formattedCheckOut = checkOut.toISOString().split('T')[0];
+    const url = `https://bookings.simplotel.com/?propertyId=9166&checkIn=${formattedCheckIn}&checkOut=${formattedCheckOut}&adults=${adultCount}&children=${childCount}&promocode=`;
+    window.location.href = url;
+
   };
 
   const minDate = new Date();
@@ -373,7 +375,7 @@ const SearchBar = ({ handler }: Props) => {
               </div>
             </div>
             <div className="items-center gap-2 grid grid-cols-3 text-left ">
-              <span className=" col-span-2">  <span className="text-sm">Children: </span> <span className="text-xs  text-gray-500">Ages 4-12</span></span>
+              <span className=" col-span-2">  <span className="text-sm">Children: </span> <span className="text-xs  text-gray-500">Ages 0-12</span></span>
               <div className="grid grid-cols-3 text-center place-items-center gap-2">
                 <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => {
                   event.preventDefault(); setChildCount(childCount - 1); search.saveSearchValues(
@@ -400,7 +402,7 @@ const SearchBar = ({ handler }: Props) => {
             </div>
 
 
-            <div className="items-center gap-2 grid grid-cols-3 text-left ">
+            <div className="items-center gap-2 grid-cols-3 text-left hidden">
               <span className=" col-span-2">  <span className="text-sm">Infant: </span> <span className="text-xs  text-gray-500">Under 4</span></span>
               <div className="grid grid-cols-3 text-center place-items-center gap-2">
                 <button className={`text-xl text-center ${infantCount === 0 && `text-gray-500`}`} disabled={infantCount === 0} onClick={(event: FormEvent) => {
@@ -460,8 +462,8 @@ const SearchBar = ({ handler }: Props) => {
           <ul className="mx-2">
             {[
               { label: "Adults", ageRange: "Ages 13 and above", count: adultCount, setCount: setAdultCount },
-              { label: "Children", ageRange: "Ages 4-12", count: childCount, setCount: setChildCount },
-              { label: "Infants", ageRange: "Under 4", count: infantCount, setCount: setInfantCount },
+              { label: "Children", ageRange: "Ages 0-12", count: childCount, setCount: setChildCount },
+              // { label: "Infants", ageRange: "Under 4", count: infantCount, setCount: setInfantCount },
             ].map((item, index) => (
               <li key={index} className="items-center flex justify-between border-b last:border-b-0 py-2">
                 <span className="flex flex-col">
@@ -708,7 +710,7 @@ const SearchBar = ({ handler }: Props) => {
               </div>
             </div>
             <div className="items-center gap-2 grid grid-cols-3 text-left ">
-              <span className=" col-span-2">  <span className="text-sm">Children: </span> <span className="text-xs  text-gray-500">Ages 4-12</span></span>
+              <span className=" col-span-2">  <span className="text-sm">Children: </span> <span className="text-xs  text-gray-500">Ages 0-12</span></span>
               <div className="grid grid-cols-3 text-center place-items-center gap-2">
                 <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => {
                   event.preventDefault(); setChildCount(childCount - 1); search.saveSearchValues(
@@ -735,7 +737,7 @@ const SearchBar = ({ handler }: Props) => {
             </div>
 
 
-            <div className="items-center gap-2 grid grid-cols-3 text-left ">
+            <div className="items-center gap-2  grid-cols-3 text-left hidden">
               <span className=" col-span-2">  <span className="text-sm">Infant: </span> <span className="text-xs  text-gray-500">Under 4</span></span>
               <div className="grid grid-cols-3 text-center place-items-center gap-2">
                 <button className={`text-xl text-center ${infantCount === 0 && `text-gray-500`}`} disabled={infantCount === 0} onClick={(event: FormEvent) => {
@@ -795,8 +797,8 @@ const SearchBar = ({ handler }: Props) => {
           <ul className="mx-2">
             {[
               { label: "Adults", ageRange: "Ages 13 and above", count: adultCount, setCount: setAdultCount },
-              { label: "Children", ageRange: "Ages 4-12", count: childCount, setCount: setChildCount },
-              { label: "Infants", ageRange: "Under 4", count: infantCount, setCount: setInfantCount },
+              { label: "Children", ageRange: "Ages 0-12", count: childCount, setCount: setChildCount },
+              // { label: "Infants", ageRange: "Under 4", count: infantCount, setCount: setInfantCount },
             ].map((item, index) => (
               <li key={index} className="items-center flex justify-between border-b last:border-b-0 py-3">
                 <span className="flex flex-col">

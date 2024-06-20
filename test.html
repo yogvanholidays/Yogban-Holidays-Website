@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang = "en">
+<head>
+    <meta charset = "utf-8">
+    <title>Simplotel BE form</title>
+    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"> </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        #bookingForm .booking-form > div {
+            display: inline-block;
+            float: none;
+            vertical-align: bottom;
+        }
+        .abs_parent {
+            width: 80%;
+            margin: auto;
+        }
+        #bookingForm .form-group.date-parameter-block {
+            width: 19%;
+            padding: 0 6px;
+        }
+        #bookingForm .adult-wrapper,
+        #bookingForm .child-wrapper{
+            width:8%;
+            padding:0 6px;
+        }
+        #bookingForm .form-group.promo-block {
+            width: 15%;
+            padding: 0 6px;
+        }
+        #bookingForm .form-group.min-price-wrapper {
+            position: absolute;
+        }
+        #bookingForm .adult-wrapper select, #bookingForm .child-wrapper select {
+            padding: 5px 10px;
+            height: 40px;
+        }
+        #bookingForm .form-control {
+            font-size: 14px;
+            height: 34px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: none;
+        }
+        #bookingForm .btn-wrapper input.btn.btn-full-width {
+            height: 40px;
+            padding: 0 10px;
+        }
+        #bookingForm .date-parameter-block .fa.fa-calendar:before {
+            content: "\f073";
+        }
+        #bookingForm .dp-holder {
+            width: 100%;
+            border: 1px solid rgb(153, 153, 153);
+            position: relative;
+            height: 37px;
+            border-radius: 0px;
+            background-color: rgb(255, 255, 255);
+        }
+        #bookingForm .dp-holder .form-control {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background-color: transparent;
+            z-index: 1;
+        }
+        #bookingForm .dp-holder span {
+            float: right;
+            margin-top: 11px;
+            margin-right: 10px;
+        }
+        #bookingForm .dp-holder input {
+            border: none;
+        }
+        #bookingForm .btn-wrapper {margin-left: 10px;}
+        #booking-form {
+            position: relative;
+            padding: 10px 20px 35px;
+            float: none;
+            text-align: center;
+            margin: 0 auto;
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $(function() {
+                var minDate = new Date();
+                $(".arrival-date-input").datepicker({
+                    minDate:minDate,
+                    dateFormat:'yy-mm-dd',
+                });
+                $(".departure-date-input").datepicker({
+                    dateFormat:'yy-mm-dd',
+                });
+            });
+            $('.arrival-date-input').change(function() {
+                startDate = $(this).datepicker('getDate');
+                $('#check_in').val(moment(startDate).format('YYYY-MM-DD'));
+                $(".departure-date-input").datepicker("option", "minDate", startDate);
+            });
+            $('.departure-date-input').change(function() {
+                endDate = $(this).datepicker('getDate');
+                $('#check_out').val(moment(endDate).format('YYYY-MM-DD'));
+                $(".arrival-date-input").datepicker("option", "maxDate", endDate);
+            });
+        });
+        /* Handling booking engine events */
+    </script>
+</head>
+   <body>
+       <div class="abs_parent">
+        <div class="clearfix booking-form booking-form-vc-desktop" id="bookingForm">
+          <form action="https://bookings.simplotel.com" class="form booking-form" data-engine="simplotel" data-group_id="" data-hotel_id="" id="booking-form" method="GET" style="" target="_parent">
+        <div class="">
+            <input id="simp_form_hotel_id" name="propertyId" type="hidden" value="9166" /> <!-- CHANGE HERE - HOTEL-ID -->
+        </div>
+            <div class="form-group date-parameter-block right-padd vc_tohide">
+                <label for="">Check In</label>
+                <div class="dp-holder"><input class="arrival-date-input form-control " data-meta="" id="dp1655285129744" name="" type="text" value="" readonly="" /><span class="fa fa-calendar"></span></div>
+            </div>
+            <div class=""><input class="" data-meta="" id="check_in" name="checkIn" type="hidden" value="" /></div>
+            <div class="form-group date-parameter-block left-padd vc_tohide">
+                <label for="">Check Out</label>
+                <div class="dp-holder"><input class="departure-date-input form-control " data-meta="" id="dp1655285129745" name="" type="text" value="" readonly="" /><span class="fa fa-calendar"></span></div>
+            </div>
+            <div class=""><input class="" data-meta="" id="check_out" name="checkOut" type="hidden" value="" /></div>
+            <div class="adult-wrapper">
+                <div class="form-group adult-block tohide booking-form-left">
+                    <div>
+                        <label for="Adult">Adults</label>
+                        <span>
+                            <select class="form-control" data-meta="1" id="adults_id" name="adults">
+                                <option selected="" value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="child-wrapper">
+                <div class="form-group child-block tohide booking-form-right">
+                    <div>
+                        <label for="Child">Children</label>
+                        <span>
+                            <select class="form-control" data-meta="0" id="children_id" name="children">
+                                <option selected="" value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group promo-block text-field tohide">
+                <label for="Promo">Promo Code</label>
+                <div class="tb-holder"><input class="form-control" data-meta="" id="" name="promocode" type="text" value="" /></div>
+            </div>
+          <div class="btn-wrapper">
+                <div class="form-group check-btn-holder"><input class="btn btn-full-width" data-meta="" id="" name="" type="submit" value="Book Now" /></div>
+            </div>
+        </form>
+    </div>
+</div>
+   </body>
+</html>

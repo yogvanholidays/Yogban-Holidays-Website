@@ -3,7 +3,7 @@ import { useSearchContext } from "../contexts/SearchContext";
 import { MdTravelExplore } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { DestinationType } from "../../../backend/src/shared/types";
 import { getDestinations } from "../api-client";
 import { BiMinusCircle, BiPlusCircle, BiSearch } from "react-icons/bi";
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const SearchBar = ({ handler }: Props) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const search = useSearchContext();
   const isHomePage = handler === "HomePage";
 
@@ -117,7 +117,11 @@ const SearchBar = ({ handler }: Props) => {
       childCount,
       infantCount
     );
-    navigate("/search");
+    // navigate("/search");
+    const formattedCheckIn = checkIn.toISOString().split('T')[0];
+    const formattedCheckOut = checkOut.toISOString().split('T')[0];
+    const url = `https://bookings.simplotel.com/?propertyId=9166&checkIn=${formattedCheckIn}&checkOut=${formattedCheckOut}&adults=${adultCount}&children=${childCount}&promocode=`;
+    window.location.href = url;
   };
 
   const minDate = new Date();
@@ -298,7 +302,7 @@ const SearchBar = ({ handler }: Props) => {
               </div>
             </div>
             <div className="items-center gap-2 grid grid-cols-3 text-left">
-            <span className=" col-span-2">  <span className="text-sm poppins-medium">Children: </span> <span className="text-xs  text-gray-600">Ages 4-12</span></span>
+            <span className=" col-span-2">  <span className="text-sm poppins-medium">Children: </span> <span className="text-xs  text-gray-600">Ages 0-12</span></span>
               <div className="grid grid-cols-3 text-center place-items-center  gap-2">
                 <button className={`text-xl text-center ${childCount === 0 && `text-gray-500`}`} disabled={childCount === 0} onClick={(event: FormEvent) => {
                   event.preventDefault(); setChildCount(childCount - 1); search.saveSearchValues(
@@ -323,7 +327,7 @@ const SearchBar = ({ handler }: Props) => {
                 }}><BiPlusCircle /></button>
               </div>
             </div>
-            <div className="items-center gap-2 grid grid-cols-3 text-left">
+            <div className="items-center gap-2 grid-cols-3 text-left hidden">
             <span className=" col-span-2">  <span className="text-sm poppins-medium">Infant: </span> <span className="text-xs  text-gray-600">Under 4</span></span>
               <div className="grid grid-cols-3 text-center place-items-center gap-2">
                 <button className={`text-xl text-center ${infantCount === 0 && `text-gray-500`}`} disabled={infantCount === 0} onClick={(event: FormEvent) => {
