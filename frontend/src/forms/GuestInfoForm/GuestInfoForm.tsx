@@ -160,23 +160,23 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
                 {errors.adultCount.message}
               </span>
             )}
-            <label className="items-center flex">
-              Infant:
-              <input
-                className="w-full p-1 focus:outline-none font-bold"
-                type="number"
-                min={0}
-                max={20}
-                {...register("infantCount", {
-                  valueAsNumber: true,
-                })}
-              />
-            </label>
-            {errors.adultCount && (
-              <span className="text-red-500 font-semibold text-sm">
-                {errors.adultCount.message}
-              </span>
-            )}
+           {/* <label className="items-center flex">
+             Infant:
+             <input
+               className="w-full p-1 focus:outline-none font-bold"
+               type="number"
+               min={0}
+               max={20}
+               {...register("infantCount", {
+                 valueAsNumber: true,
+               })}
+             />
+           </label>
+           {errors.adultCount && (
+             <span className="text-red-500 font-semibold text-sm">
+               {errors.adultCount.message}
+             </span>
+           )} */}
           </div>
             <button className="bg-black text-white h-full p-2 font-bold hover:bg-gray-800 text-xl">
               Book Now
