@@ -84,7 +84,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
 
   return (
     <div className="flex flex-col p-4 bg-yogvan-light rounded-lg gap-4">
-      <h3 className="text-md font-bold">₹{pricePerNight}</h3>
+      <h3 className="text-md font-bold">₹{pricePerNight} per night</h3>
       <form
         onSubmit={
           // isLoggedIn ? 
@@ -93,7 +93,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
         }
       >
         <div className="grid grid-cols-1 gap-4 items-center">
-          <div>
+          <div className="hidden">
             <DatePicker
               required
               selected={checkIn}
@@ -109,7 +109,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
               dateFormat={`dd/MM/yyyy`}
             />
           </div>
-          <div>
+          <div className="hidden">
             <DatePicker
               required
               selected={checkOut}
@@ -125,7 +125,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
               dateFormat={`dd/MM/yyyy`}
             />
           </div>
-          <div className="flex bg-white px-2 py-1 gap-2 text-sm">
+          <div className="hidden bg-white px-2 py-1 gap-2 text-sm">
             <label className="items-center flex">
               Adults:
               <input
@@ -160,23 +160,6 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
                 {errors.adultCount.message}
               </span>
             )}
-           {/* <label className="items-center flex">
-             Infant:
-             <input
-               className="w-full p-1 focus:outline-none font-bold"
-               type="number"
-               min={0}
-               max={20}
-               {...register("infantCount", {
-                 valueAsNumber: true,
-               })}
-             />
-           </label>
-           {errors.adultCount && (
-             <span className="text-red-500 font-semibold text-sm">
-               {errors.adultCount.message}
-             </span>
-           )} */}
           </div>
             <button className="bg-black text-white h-full p-2 font-bold hover:bg-gray-800 text-xl">
               Book Now
