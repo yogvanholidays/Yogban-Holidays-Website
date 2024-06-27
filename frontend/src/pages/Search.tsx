@@ -17,8 +17,8 @@ const Search = () => {
   const [selectedHotelTypes, setSelectedHotelTypes] = useState<string[]>([]);
   // const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
   // const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
-  const [selectedFacilities, ] = useState<string[]>([]);
-  const [selectedAmenities, ] = useState<string[]>([]);
+  const [selectedFacilities,] = useState<string[]>([]);
+  const [selectedAmenities,] = useState<string[]>([]);
   const [selectedPrice, setSelectedPrice] = useState<number | undefined>();
   const [sortOption, setSortOption] = useState<string>("");
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
@@ -142,15 +142,18 @@ const Search = () => {
 
             {isMobile && (<button
               onClick={handleToggleFilters}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md"
+              className="bg-yogvan text-white px-4 py-2 rounded-md"
             >
               Filters
             </button>)}
           </div>
         </div>
+        <div className="grid grid-cols-1 gap-2.5">
+
         {hotelData?.data.map((hotel) => (
           <SearchResultsCard hotel={hotel} key={hotel._id} />
         ))}
+        </div>
         <div>
           <Pagination
             page={hotelData?.pagination.page || 1}
