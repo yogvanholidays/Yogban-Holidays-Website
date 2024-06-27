@@ -7,6 +7,7 @@ import GuestInfoForm from "../forms/GuestInfoForm/GuestInfoForm";
 import Carousel from 'react-bootstrap/Carousel';
 import { IoArrowBack } from "react-icons/io5";
 import { useState } from "react";
+import { BiCheckSquare } from "react-icons/bi";
 
 const Detail = () => {
   const { hotelId } = useParams();
@@ -66,15 +67,27 @@ const Detail = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6">
+      <div className="grid grid-cols-1 gap-6">
         <div className="whitespace-pre-line">
-          <span className=" text-wrap max-w-20">{hotel.description}</span>
-          <p className="font-semibold text-xl my-2">Amenities:</p>
-          <div className="flex flex-wrap gap-2">
+          <span className=" text-wrap max-w-20 text-sm">{hotel.description}</span>
 
-            {hotel.amenities.map((amenity, index) => (
-              <span key={index} className=" bg-gray-800 text-white px-3 py-1.5 rounded-full">
+
+
+
+          <p className="font-semibold text-xl my-2">Amenities:</p>
+          <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-2">
+          {/* <div className="flex flex-wrap gap-2"> */}
+
+            {hotel.amenities.sort((a, b) => a.length - b.length).map((amenity, index) => (
+              <span className=" items-center flex">
+                <span className="text-lg">
+
+              <BiCheckSquare/>
+                </span>
+              <span key={index} className="  text-black px-3 py-1.5 rounded-full">
+              {/* <span key={index} className=" bg-gray-800 text-white px-3 py-1.5 rounded-full"> */}
                 {amenity}
+              </span>
               </span>
             ))}
           </div>
@@ -86,7 +99,7 @@ const Detail = () => {
           />
         </div>
       </div>
-      {(hotel.bookingdotcom || hotel.airbnb || hotel.makemytrip || hotel.googleTravels || hotel.agoda) &&
+      {(hotel.bookingdotcom!= '' || hotel.airbnb!= '' || hotel.makemytrip!= '' || hotel.googleTravels!= '' || hotel.agoda!= '') &&
 
         <div>
           <p className="font-semibold text-lg my-2">Visit Property at:</p>

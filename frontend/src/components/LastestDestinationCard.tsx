@@ -30,11 +30,12 @@ const LatestDestinationCard = ({ hotel }: Props) => {
         <span
           className={
             isMobile
-              ? "text-white font-semibold tracking-tight text-md"
-              : "text-white font-bold tracking-tight text-2xl"
+              ? "text-white font-semibold tracking-tight text-xs"
+              : "text-white font-bold tracking-tight text-lg"
           }
         >
-          {hotel.name}, {hotel.city}
+          {hotel.name}
+          {/* , {hotel.city} */}
         </span>
       </div>
     </Link>

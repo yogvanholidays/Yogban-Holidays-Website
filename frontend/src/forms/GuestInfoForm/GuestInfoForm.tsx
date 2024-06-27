@@ -20,7 +20,7 @@ type GuestInfoFormData = {
 const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
   const search = useSearchContext();
   // const navigate = useNavigate();
-  console.log(hotelId)
+  console.log(hotelId, pricePerNight)
 
   const {
     watch,
@@ -83,8 +83,8 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
   };
 
   return (
-    <div className="flex flex-col p-4 bg-yogvan-light rounded-lg gap-4">
-      <h3 className="text-md font-bold">₹{pricePerNight} per night</h3>
+    <div className="flex flex-col rounded-lg gap-4">
+      {/* <h3 className="text-md font-bold">₹{pricePerNight} per night</h3> */}
       <form
         onSubmit={
           // isLoggedIn ? 
@@ -125,7 +125,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
               dateFormat={`dd/MM/yyyy`}
             />
           </div>
-          <div className="hidden bg-white px-2 py-1 gap-2 text-sm">
+          <div className="hidden bg-white px-2 py-1 text-sm">
             <label className="items-center flex">
               Adults:
               <input
@@ -161,7 +161,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
               </span>
             )}
           </div>
-            <button className="bg-black text-white h-full p-2 font-bold hover:bg-gray-800 text-xl">
+            <button className="bg-yogvan text-white h-full p-2 font-bold hover:bg-yogvan-dark text-xl rounded-lg">
               Book Now
             </button>
           {/* {isLoggedIn ? (

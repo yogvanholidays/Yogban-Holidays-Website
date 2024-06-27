@@ -27,8 +27,8 @@ const BlogDetailsPage = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">{blog.title}</h1>
-      <img src={blog.thumbnailImageUrl} alt={blog.title} className="rounded-lg mb-4" />
+      <h1 className="text-3xl font-bold mb-4 text-center">{blog.title}</h1>
+      <img src={blog.thumbnailImageUrl} alt={blog.title} className="rounded-lg mb-4 mx-auto w-full landscape:object-cover landscape:h-96" />
       <p className="text-lg font-semibold">Author: {blog.author}</p>
       <p className="text-lg font-semibold">Publish Date: {blog.publishDate}</p>
       <p className="mt-4">{blog.content}</p>
