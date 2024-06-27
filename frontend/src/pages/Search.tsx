@@ -150,9 +150,9 @@ const Search = () => {
         </div>
         <div className="grid grid-cols-1 gap-2.5">
 
-        {hotelData?.data.map((hotel) => (
-          <SearchResultsCard hotel={hotel} key={hotel._id} />
-        ))}
+          {hotelData?.data.map((hotel) => (
+            <SearchResultsCard hotel={hotel} key={hotel._id} />
+          ))}
         </div>
         <div>
           <Pagination

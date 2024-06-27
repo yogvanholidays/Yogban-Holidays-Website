@@ -7,14 +7,14 @@ type Props = {
 
 const SearchResultsCard = ({ hotel }: Props) => {
   return (<>
-    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-300 rounded-lg p-8 gap-8 portrait:hidden">
+    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-300 rounded-lg p-4 gap-8 portrait:hidden">
       <div className="w-full h-[300px]">
         <img
           src={hotel.imageUrls[0]}
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center rounded"
         />
       </div>
-      <div className="grid grid-rows-[1fr_2fr_1fr]">
+      <div className="grid grid-cols-1">
         <div>
           <div className="flex items-center">
             <span className="flex">
@@ -64,7 +64,7 @@ const SearchResultsCard = ({ hotel }: Props) => {
       <div className="w-full h-[300px]">
         <img
           src={hotel.imageUrls[0]}
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center rounded" 
         />
       </div>
       <div className="flex flex-col gap-2.5">
