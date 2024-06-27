@@ -53,7 +53,7 @@ const Detail = () => {
             <img
               src={image}
               alt={`Slide ${index}`}
-              className="rounded-md w-full h-auto object-cover object-center"
+              className="rounded-md w-full portrait:h-60 object-cover object-center landscape:h-[35rem]"
             />
           </Carousel.Item>
         ))}
