@@ -67,27 +67,27 @@ const Detail = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-6">
-        <div className="whitespace-pre-line">
-          <span className=" text-wrap max-w-20 text-sm">{hotel.description}</span>
+      <div className="grid grid-cols-1 gap-3 ">
+        <div className="whitespace-pre-line -mt-2">
+          <span className=" text-wrap text-sm">{hotel.description}</span>
 
 
 
 
           <p className="font-semibold text-xl my-2">Amenities:</p>
           <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-2">
-          {/* <div className="flex flex-wrap gap-2"> */}
+            {/* <div className="flex flex-wrap gap-2"> */}
 
             {hotel.amenities.sort((a, b) => a.length - b.length).map((amenity, index) => (
               <span className=" items-center flex">
                 <span className="text-lg">
 
-              <BiCheckSquare/>
+                  <BiCheckSquare />
                 </span>
-              <span key={index} className="  text-black px-3 py-1.5 rounded-full">
-              {/* <span key={index} className=" bg-gray-800 text-white px-3 py-1.5 rounded-full"> */}
-                {amenity}
-              </span>
+                <span key={index} className="  text-black px-3 py-1.5 rounded-full">
+                  {/* <span key={index} className=" bg-gray-800 text-white px-3 py-1.5 rounded-full"> */}
+                  {amenity}
+                </span>
               </span>
             ))}
           </div>
@@ -99,7 +99,7 @@ const Detail = () => {
           />
         </div>
       </div>
-      {(hotel.bookingdotcom!= '' || hotel.airbnb!= '' || hotel.makemytrip!= '' || hotel.googleTravels!= '' || hotel.agoda!= '') &&
+      {(hotel.bookingdotcom != '' || hotel.airbnb != '' || hotel.makemytrip != '' || hotel.googleTravels != '' || hotel.agoda != '') &&
 
         <div>
           <p className="font-semibold text-lg my-2">Visit Property at:</p>
