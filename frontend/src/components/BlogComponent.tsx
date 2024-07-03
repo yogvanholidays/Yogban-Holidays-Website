@@ -35,11 +35,11 @@ function PickABlog() {
     <div >
       <div className="overflow-x-auto max-w-screen-xl mx-auto ">
         <div className="mb-2">
-          <div className="flex justify-between items-center text-center">
+          <div className="flex justify-between items-center text-center mb-2">
             <h1 className="font-bold text-3xl text-center mt-2 poppins-semibold">Our Blogs</h1>
             <Link
               to="/blogs"
-              className="px-4 py-2 rounded-lg bg-yogvan hover:bg-yogvan-dark text-white flex items-center text-center justify-center content-center portrait:hidden"
+              className="px-4 py-2 rounded-lg bg-yogvan hover:bg-yogvan-dark text-white flex items-center text-center justify-center content-center portrait:hidden mr-2"
             >
               <span className="font font-medium text-xl">View More</span>
             </Link>

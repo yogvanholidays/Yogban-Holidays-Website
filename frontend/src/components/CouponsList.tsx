@@ -32,7 +32,7 @@ const Coupons = () => {
   return (
     <section id="coupons">
     {/* <section className="space-y-3 my-6" id="coupons"> */}
-      <h1 className="text-2xl lg:text-3xl font-bold mb-2 poppins-semibold">OFFERS FOR YOU</h1>
+      <h1 className="text-2xl lg:text-3xl font-bold mb-2 poppins-semibold">Offers For You</h1>
       {/* <h1 className="text-2xl font-semibold mb-2 italic poppins-semibold-italic">OFFERS FOR YOU</h1> */}
       <div className="flex overflow-x-scroll space-x-6">
         {coupons.map((coupon, index) => (
