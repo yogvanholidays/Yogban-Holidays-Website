@@ -19,7 +19,7 @@ const Home = () => {
 
 
   return (
-    <section className="space-y-3 mb-12">
+    <section className="space-y-3 mb-6">
       <div className="flex justify-between items-center">
       <div>
 

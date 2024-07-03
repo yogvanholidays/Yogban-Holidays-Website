@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
 
-    <div className="space-y-1 mb-12 portrait:-mt-10">
+    <div className="space-y-1 mb-6 landscape:-mt-10 portrait:-mt-10">
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-3xl font-bold poppins-semibold">Best Rated</h2>

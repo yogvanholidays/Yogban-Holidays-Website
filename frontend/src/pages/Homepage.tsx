@@ -15,8 +15,10 @@ function Homepage() {
         <BestRatedComponent/>
         <LatestAddedComponent/>
         {/* <ListPropertyComponent/> */}
-        <ReviewHeaderComponent/>
+        <div className="grid landscape:grid-cols-2 grid-cols-1 gap-3 mb-6">
         <CouponsList/>
+        <ReviewHeaderComponent/>
+        </div>
         <BlogComponent/>
     </div>
   )

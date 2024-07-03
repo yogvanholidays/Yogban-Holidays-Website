@@ -31,8 +31,8 @@ function ReviewHeaderComponent() {
   return (
     <div>
       <div>
-        <h3 className="text-2xl lg:text-3xl font-bold mb-4 poppins-semibold">View Guest's Reviews on</h3>
-        <div className="grid grid-cols-2 portrait:grid-cols-1  gap-5">
+        <h3 className="text-2xl lg:text-3xl font-bold mb-2 poppins-semibold">View Guest's Reviews on</h3>
+        <div className="grid grid-cols-2 portrait:grid-cols-1 gap-5">
           <div className="flex gap-4 items-center content-center ">
             <a
               // href="https://www.google.com/travel/hotels/entity/CgoItcn-yIWol_RmEAE/reviews?q=YOGVAN%20HOLIDAYS&g2lb=2503771%2C2503781%2C4284970%2C4291517%2C4814050%2C4874190%2C4893075%2C4965990%2C72277293%2C72302247%2C72317059%2C72406588%2C72414906%2C72421566%2C72458066%2C72462234%2C72470440%2C72470899%2C72471280%2C72472051%2C72473841%2C72481458%2C72483525%2C72484736%2C72485656%2C72485658%2C72486593%2C72494250%2C72498532%2C72513422%2C72513513%2C72523972&hl=en-IN&gl=in&cs=1&ssta=1&ts=CAEaSQorEicyJTB4MzkwOTE3NmFhODk5MzJmOToweDY2ZTg1ZDQwNTkxZmE0YjUaABIaEhQKBwjoDxAEGAgSBwjoDxAEGAkYATICEAAqCQoFOgNJTlIaAA&qs=CAE4AkIJCbWkH1lAXehmQgkJtaQfWUBd6GY&ap=MAA&ictx=111&utm_campaign=sharing&utm_medium=link&utm_source=htls
