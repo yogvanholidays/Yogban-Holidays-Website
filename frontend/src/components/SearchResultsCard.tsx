@@ -50,7 +50,7 @@ const SearchResultsCard = ({ hotel }: Props) => {
               </span>
             </div>
             <div className="flex flex-col items-end gap-1">
-              <span className="font-bold">₹{hotel.pricePerNight} per night</span>
+              {/* <span className="font-bold">₹{hotel.pricePerNight} per night</span> */}
               <Link
                 to={`/detail/${hotel._id}`}
                 className=" text-white h-full p-2 font-bold text-xl max-w-fit transition-all duration-200 hover:bg-yogvan-dark rounded-md bg-yogvan"
@@ -105,7 +105,7 @@ const SearchResultsCard = ({ hotel }: Props) => {
         </div> */}
         </div>
         <div className="grid grid-cols-1 gap-1.5">
-          <span className="font-bold">₹{hotel.pricePerNight} per night</span>
+          {/* <span className="font-bold">₹{hotel.pricePerNight} per night</span> */}
           <button
             // to={`/detail/${hotel._id}`}
             className=" text-white h-full w-full p-2 font-bold text-xl transition-all duration-200 hover:bg-yogvan-dark rounded-md bg-yogvan"

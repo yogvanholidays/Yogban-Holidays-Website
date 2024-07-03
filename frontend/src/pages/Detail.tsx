@@ -36,7 +36,7 @@ const Detail = () => {
   return (
     <div className="space-y-6 rounded-md p-6 bg-white shadow-md">
       <div className="flex items-center space-x-2">
-        <Link to="/search" className="text-blue-500">
+        <Link to="/" className="text-blue-500">
           <IoArrowBack className="text-lg" />
         </Link>
         <span className="flex">
@@ -69,7 +69,9 @@ const Detail = () => {
 
       <div className="grid grid-cols-1 gap-3 ">
         <div className="whitespace-pre-line -mt-2">
-          <span className=" text-wrap text-sm">{hotel.description}</span>
+          <p className=" text-wrap text-sm text-justify" 
+          // style={{textAlign:'justify', textJustify:'inter-word'}}
+          >{hotel.description}</p>
 
 
 
@@ -136,8 +138,8 @@ const Detail = () => {
 
       <div className="space-y-4">
         {hotel.reviews && (
-          <div>
-            <h2 className="text-xl font-bold">Reviews</h2>
+          <div className="flex gap-2 justify-between landscape:items-center portrait:flex-col">
+            <h2 className="text-3xl portrait:text-2xl font-bold">Reviews</h2>
 
             <div className="flex space-x-2 portrait:text-xs overflow-x-scroll">
               <button
