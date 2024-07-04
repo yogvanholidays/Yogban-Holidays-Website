@@ -162,7 +162,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
             )}
           </div>
             <button className="bg-yogvan text-white h-full p-2 font-bold hover:bg-yogvan-dark text-xl rounded-lg">
-              Book Now
+              Select Now
             </button>
           {/* {isLoggedIn ? (
             <button className="bg-black text-white h-full p-2 font-bold hover:bg-gray-800 text-xl">
