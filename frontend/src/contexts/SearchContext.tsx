@@ -15,7 +15,7 @@ type SearchContext = {
     checkOut: Date,
     adultCount: number,
     childCount: number,
-    infantCount:number,
+    infantCount: number,
   ) => void;
 };
 
