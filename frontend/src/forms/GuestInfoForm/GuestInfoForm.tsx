@@ -78,7 +78,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
     // navigate(`/hotel/${hotelId}/booking`);
     const formattedCheckIn = data.checkIn.toISOString().split('T')[0];
     const formattedCheckOut = data.checkOut.toISOString().split('T')[0];
-    const url = `https://bookings.yogvanholidayapartments.com/?propertyId=9166&checkIn=${formattedCheckIn}&checkOut=${formattedCheckOut}&adults=${data.adultCount}&children=${data.childCount}&promocode=&triggerSearch=true`;
+    const url = `https://bookings.yogvanholidays.com/?propertyId=9166&checkIn=${formattedCheckIn}&checkOut=${formattedCheckOut}&adults=${data.adultCount}&children=${data.childCount}&promocode=&triggerSearch=true`;
     window.location.href = url;
   };
 

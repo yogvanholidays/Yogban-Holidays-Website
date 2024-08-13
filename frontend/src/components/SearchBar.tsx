@@ -120,7 +120,7 @@ const SearchBar = ({ handler }: Props) => {
     // navigate("/search");
     const formattedCheckIn = checkIn.toISOString().split('T')[0];
     const formattedCheckOut = checkOut.toISOString().split('T')[0];
-    const url = `https://bookings.yogvanholidayapartments.com/?propertyId=9166&checkIn=${formattedCheckIn}&checkOut=${formattedCheckOut}&adults=${adultCount}&children=${childCount}&promocode=&triggerSearch=true`;
+    const url = `https://bookings.yogvanholidays.com/?propertyId=9166&checkIn=${formattedCheckIn}&checkOut=${formattedCheckOut}&adults=${adultCount}&children=${childCount}&promocode=&triggerSearch=true`;
     window.location.href = url;
   };
 
