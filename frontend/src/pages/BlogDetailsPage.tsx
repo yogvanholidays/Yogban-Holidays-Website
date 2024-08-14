@@ -26,7 +26,7 @@ const BlogDetailsPage = () => {
     event.preventDefault();
     const formattedCheckIn = checkIn.toISOString().split('T')[0];
     const formattedCheckOut = checkOut.toISOString().split('T')[0];
-    const url = `https://bookings.yogvanholidayapartments.com/?propertyId=9166&checkIn=${formattedCheckIn}&checkOut=${formattedCheckOut}&adults=${adultCount}&children=${childCount}&promocode=`;
+    const url = `https://bookings.yogvanholidays.com/?propertyId=9166&checkIn=${formattedCheckIn}&checkOut=${formattedCheckOut}&adults=${adultCount}&children=${childCount}&promocode=`;
     window.location.href = url;
   };
 
