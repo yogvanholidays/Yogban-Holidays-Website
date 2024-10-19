@@ -184,7 +184,7 @@ const Detail = () => {
             </div>
           </div>
         )}
-        <div className="flex gap-4 overflow-x-scroll scroll-smooth">
+        {/* <div className="flex gap-4 overflow-x-scroll scroll-smooth">
           {filteredReviews &&
             filteredReviews.map((review: any, index: any) => (
               <div
@@ -221,7 +221,7 @@ const Detail = () => {
                 <p className="mt-2 text-xs">{review.review}</p>
               </div>
             ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );
