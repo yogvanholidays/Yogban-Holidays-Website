@@ -136,7 +136,7 @@ const Detail = () => {
         </div>
       }
 
-      <div className="space-y-4">
+      {/* <div className="space-y-4">
         {hotel.reviews && (
           <div className="flex gap-2 justify-between landscape:items-center portrait:flex-col">
             <h2 className="text-3xl portrait:text-2xl font-bold">Reviews</h2>
@@ -184,7 +184,7 @@ const Detail = () => {
             </div>
           </div>
         )}
-        {/* <div className="flex gap-4 overflow-x-scroll scroll-smooth">
+        <div className="flex gap-4 overflow-x-scroll scroll-smooth">
           {filteredReviews &&
             filteredReviews.map((review: any, index: any) => (
               <div
@@ -221,8 +221,8 @@ const Detail = () => {
                 <p className="mt-2 text-xs">{review.review}</p>
               </div>
             ))}
-        </div> */}
-      </div>
+        </div>
+      </div> */}
     </div>
   );
 };
