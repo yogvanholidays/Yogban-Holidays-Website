@@ -136,7 +136,7 @@ const Detail = () => {
         </div>
       }
 
-      {/* <div className="space-y-4">
+      <div className="space-y-4 hidden">
         {hotel.reviews && (
           <div className="flex gap-2 justify-between landscape:items-center portrait:flex-col">
             <h2 className="text-3xl portrait:text-2xl font-bold">Reviews</h2>
@@ -222,7 +222,7 @@ const Detail = () => {
               </div>
             ))}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
